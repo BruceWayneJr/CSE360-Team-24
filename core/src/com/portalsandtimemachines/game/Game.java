@@ -18,6 +18,7 @@ public class Game extends ApplicationAdapter {
 	OrthographicCamera camera;
 	
 	private Sprite boardSprite;
+	private float boardsize;
 	
 	@Override
 	public void create () {
@@ -28,10 +29,12 @@ public class Game extends ApplicationAdapter {
 		camera.setToOrtho(false, 1024, 768);
 		viewport = new FitViewport(1024, 768, camera);
 		
+		boardsize = 768;
+		
 		boardSprite = new Sprite(boardBackground);
 		boardSprite.setOriginCenter();
-		boardSprite.setSize(512, 512);
-		boardSprite.setPosition(1024/2 - 512/2, 768 - 512);
+		boardSprite.setSize(boardsize, boardsize);
+		boardSprite.setPosition(1024/2 - boardsize/2, 0); // 0 may need to be set as screenHeight/2 - boardsize/2
 	}
 
 	public void resize(int width, int height) {
