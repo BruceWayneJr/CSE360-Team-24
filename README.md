@@ -1,5 +1,5 @@
 # CSE360-Team-24
-Portals 
+<b>Portals</b> 
 
 Its an exciting dice game which is played between 2 or more players having numbered gridded squares.
 The number "portals" and "bounty Tile" are displayed on the checkered board. The objective of the game is for each 
