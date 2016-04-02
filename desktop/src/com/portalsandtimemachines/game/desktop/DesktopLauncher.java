@@ -10,7 +10,7 @@ public class DesktopLauncher {
 		config.title = "Portals and Time Machines";
 		config.width = 1024;
 		config.height = 768;
-//		config.useGL30 = true;
+//		config.resizable = false;
 		new LwjglApplication(new Game(), config);
 	}
 }
