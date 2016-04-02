@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Rectangle;
+//import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -23,7 +23,7 @@ public class Game extends ApplicationAdapter {
 	OrthographicCamera camera;
 	
 	private Sprite boardSprite;
-	private float boardsize;
+	private float boardSize;
 	private float numberOfSpacesPerRow;
 	private float windowWidth;
 	private Array<Vector2> boardTransforms;
@@ -44,29 +44,37 @@ public class Game extends ApplicationAdapter {
 		// Initialize viewport size to camera size
 		viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
 		// helper variable for board size
-		boardsize = camera.viewportHeight;
+		boardSize = camera.viewportHeight;
 		numberOfSpacesPerRow = 10;
 		windowWidth = camera.viewportWidth;
 
 		// Sprite to help with board texture transformation
 		boardSprite = new Sprite(boardBackground);
 		boardSprite.setOriginCenter();
-		boardSprite.setSize(boardsize, boardsize);
-		boardSprite.setPosition(Gdx.graphics.getWidth()/2 - boardsize/2, 0); // 0 may need to be set as screenHeight/2 - boardsize/2
+		boardSprite.setSize(boardSize, boardSize);
+		boardSprite.setPosition(Gdx.graphics.getWidth()/2 - boardSize/2, 0); // 0 may need to be set as screenHeight/2 - boardsize/2
 		
+		// Used to draw shapes on screen
 		shapeRenderer = new ShapeRenderer();
 		
+		// ArrayList to hold centers of the spaces
 		boardTransforms = new Array<Vector2>(100);
+		boardTransforms = calculateTransforms(boardSize, numberOfSpacesPerRow, windowWidth);
 		
+	}
+
+	public Array<Vector2> calculateTransforms(float boardSize, float numberOfSpacesPerRow, float windowWidth){
+		Array<Vector2> temporaryArray = new Array<Vector2>(100);
 		for(int i = 0; i < 10; i++){ // Horizontal movement
 			for(int j = 0; j < 10; j++){ // Vertical movement
 //				Vector2 transform = new Vector2(768/10 * i, 768/10 * j);
-				boardTransforms.add(new Vector2(768/10 * i + ((boardsize/numberOfSpacesPerRow)/2) + ((windowWidth - boardsize)/2), 
-						boardsize/numberOfSpacesPerRow * j + ((boardsize/numberOfSpacesPerRow)/2)));
+				temporaryArray.add(new Vector2(boardSize/numberOfSpacesPerRow * i + ((boardSize/numberOfSpacesPerRow)/2) + ((windowWidth - boardSize)/2), 
+						boardSize/numberOfSpacesPerRow * j + ((boardSize/numberOfSpacesPerRow)/2)));
 			}
 		}
+		return temporaryArray;
 	}
-
+	
 	public void resize(int width, int height) {
 	    viewport.update(width, height);
 	}
@@ -89,5 +97,12 @@ public class Game extends ApplicationAdapter {
 			shapeRenderer.circle(transform.x, transform.y, 5);
 		}
 		shapeRenderer.end();
+	}
+	
+	@Override
+	public void dispose(){
+		boardBackground.dispose();
+		shapeRenderer.dispose();
+		batch.dispose();
 	}
 }
