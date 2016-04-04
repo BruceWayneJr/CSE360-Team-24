@@ -93,9 +93,9 @@ public class Game extends ApplicationAdapter {
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(1, 0, 0, 1);
-		for(Vector2 transform: boardTransforms){
-			shapeRenderer.circle(transform.x, transform.y, 5);
-		}
+//		for(Vector2 transform: boardTransforms){
+//			shapeRenderer.circle(transform.x, transform.y, 5);
+//		}
 		shapeRenderer.end();
 	}
 	
