@@ -2,6 +2,7 @@ package com.portalsandtimemachines.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,6 +28,8 @@ public class Game extends ApplicationAdapter {
 	private float numberOfSpacesPerRow;
 	private float windowWidth;
 	private Array<Vector2> boardTransforms;
+	
+	private int index = 0;
 	
 	ShapeRenderer shapeRenderer;
 	
@@ -66,10 +69,19 @@ public class Game extends ApplicationAdapter {
 	public Array<Vector2> calculateTransforms(float boardSize, float numberOfSpacesPerRow, float windowWidth){
 		Array<Vector2> temporaryArray = new Array<Vector2>(100);
 		for(int i = 0; i < 10; i++){ // Horizontal movement
-			for(int j = 0; j < 10; j++){ // Vertical movement
-//				Vector2 transform = new Vector2(768/10 * i, 768/10 * j);
-				temporaryArray.add(new Vector2(boardSize/numberOfSpacesPerRow * i + ((boardSize/numberOfSpacesPerRow)/2) + ((windowWidth - boardSize)/2), 
-						boardSize/numberOfSpacesPerRow * j + ((boardSize/numberOfSpacesPerRow)/2)));
+			if(i % 2 == 0){
+				for(int j = 0; j < 10; j++){ // Vertical movement
+					//Vector2 transform = new Vector2(768/10 * i, 768/10 * j);
+					temporaryArray.add(new Vector2(boardSize/numberOfSpacesPerRow * j + ((boardSize/numberOfSpacesPerRow)/2) + ((windowWidth - boardSize)/2), 
+							boardSize/numberOfSpacesPerRow * i + ((boardSize/numberOfSpacesPerRow)/2)));
+				}
+			}
+			else{
+				for(int j = 9; j >= 0; j--){ // Vertical movement
+					//Vector2 transform = new Vector2(768/10 * i, 768/10 * j);
+					temporaryArray.add(new Vector2(boardSize/numberOfSpacesPerRow * j + ((boardSize/numberOfSpacesPerRow)/2) + ((windowWidth - boardSize)/2), 
+							boardSize/numberOfSpacesPerRow * i + ((boardSize/numberOfSpacesPerRow)/2)));
+				}
 			}
 		}
 		return temporaryArray;
@@ -96,7 +108,17 @@ public class Game extends ApplicationAdapter {
 //		for(Vector2 transform: boardTransforms){
 //			shapeRenderer.circle(transform.x, transform.y, 5);
 //		}
+		shapeRenderer.circle(boardTransforms.get(index).x, boardTransforms.get(index).y, 5);
 		shapeRenderer.end();
+		
+		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
+			if(index < 99){
+				index++;
+			}
+			else{
+				index = 0;
+			}
+		}
 	}
 	
 	@Override
