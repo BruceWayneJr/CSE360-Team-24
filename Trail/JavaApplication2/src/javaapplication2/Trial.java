@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication1;
+package javaapplication2;
 
 import java.util.Random;
 
@@ -48,8 +48,7 @@ class Trial {
                 }
                 else
                 {
-                    orientation = "DOWN";
-                    flag = 1;
+                    orientation = "DOWN";flag = 1;
                 }
             }
             
@@ -66,7 +65,6 @@ class Trial {
                 {
                     sum = portal - moving;
                 }
-                
                 if(sum < 99 && sum > 2)
                 {
                     moving_spaces = moving;
