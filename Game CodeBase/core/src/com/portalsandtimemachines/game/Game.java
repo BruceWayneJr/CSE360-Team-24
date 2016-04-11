@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.Array;
 public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture boardBackground;
+	Texture gamePieceTexture;
 	
 	private Viewport viewport;
 	OrthographicCamera camera;
@@ -28,10 +29,13 @@ public class Game extends ApplicationAdapter {
 	private float numberOfSpacesPerRow;
 	private float windowWidth;
 	private Array<Vector2> boardTransforms;
+	private Array<GamePiece> gamePieces;
 	
 	private int index = 0;
 	
 	ShapeRenderer shapeRenderer;
+	
+	GamePiece gamePiece;
 	
 	@Override
 	public void create () {
@@ -39,6 +43,7 @@ public class Game extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		// Checkered background texture
 		boardBackground = new Texture("10x10_checkered_board.png");
+		gamePieceTexture = new Texture("GamePiece.png");
 		
 		// Camera to manage viewport and  view matricies
 		camera = new OrthographicCamera();
@@ -64,6 +69,7 @@ public class Game extends ApplicationAdapter {
 		boardTransforms = new Array<Vector2>(100);
 		boardTransforms = calculateTransforms(boardSize, numberOfSpacesPerRow, windowWidth);
 		
+		gamePiece = new GamePiece(0, gamePieceTexture, boardTransforms.get(0));
 	}
 
 	public Array<Vector2> calculateTransforms(float boardSize, float numberOfSpacesPerRow, float windowWidth){
@@ -100,6 +106,7 @@ public class Game extends ApplicationAdapter {
 		
 		batch.begin();
 		boardSprite.draw(batch);
+		gamePiece.draw(batch);
 		batch.end();
 		
 		shapeRenderer.setProjectionMatrix(camera.combined);
@@ -108,7 +115,7 @@ public class Game extends ApplicationAdapter {
 //		for(Vector2 transform: boardTransforms){
 //			shapeRenderer.circle(transform.x, transform.y, 5);
 //		}
-		shapeRenderer.circle(boardTransforms.get(index).x, boardTransforms.get(index).y, 5);
+//		shapeRenderer.circle(boardTransforms.get(index).x, boardTransforms.get(index).y, 5);
 		shapeRenderer.end();
 		
 		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
@@ -118,6 +125,8 @@ public class Game extends ApplicationAdapter {
 			else{
 				index = 0;
 			}
+			
+			gamePiece.animateToPosition(boardTransforms.get(index));
 		}
 	}
 	
