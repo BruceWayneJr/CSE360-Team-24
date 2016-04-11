@@ -16,7 +16,8 @@ public class JavaApplication2 {
      */
     public static void main(String[] args) {
         Trial obj = new Trial();
-        obj.set_portals();
+        obj.init();
+        obj.print();
         // TODO code application logic here
     }
     

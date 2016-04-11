@@ -5,84 +5,85 @@
  */
 package javaapplication2;
 
-import java.util.Random;
+import java.util.*;
 
 /**
  *
  * @author Ashwin Murthy
  */
-class Trial {
+class Trial 
+{
+    HashMap<Integer, List<Integer>> hmap = new HashMap<>();
+    
+    
+    void init()
+    {
+        for( int i = 0;i < 8;i++)
+        {
+            set_portals();
+        }
+  
+    }
+    
+    void print()
+    {
+        for(int key : hmap.keySet())
+        {
+            System.out.println(key + " : " +hmap.get(key));
+        }
+    }
+    
     void set_portals()
     {
         Random rand = new Random();
-        int min = 2;
-        int max = 99;
-        String orientation = "";
+        int portal_pos;
+        int orientation;
         int moving_spaces = 0;
         int final_pos = 0;
-        int portal_pos = 0;
+        
         int flag = 0;
         
-        while(flag == 0)
+        portal_pos = rand.nextInt((99 - 2) + 1) + 2;
+ 
+        while(hmap.containsKey(portal_pos))
         {
-            int portal = rand.nextInt((max - min) + 1) + min;
-            portal_pos = portal;
-            if(portal < 10 && portal > 2 )
-            {
-                orientation = "UP";
-                flag = 1;
-            }
-            else if(portal < 99 && portal > 90)
-            {
-                orientation = "DOWN";
-                flag = 1;
-            }
-            else
-            {
-                int temp = rand.nextInt((1 - 0) + 1) + 0;
-                System.out.println("temp : 1\n ");
-                if(temp == 0)
-                {
-                    orientation = "UP";
-                    flag = 1;
-                }
-                else
-                {
-                    orientation = "DOWN";flag = 1;
-                }
-            }
+            portal_pos = rand.nextInt((99 - 2) + 1) + 2;
+        }
             
-            int check = 0;
-            while(check == 0)
+        if(portal_pos < 10 && portal_pos > 2 )
+            orientation = 1;
+        else if(portal_pos >= 99 || portal_pos <= 90) 
+        {
+            int temp = rand.nextInt((1 - 0) + 1) + 0;
+            if(temp == 0)
+                orientation = 1;
+            else
+                orientation = -1;
+        } else
+            orientation = -1;
+            
+        int check = 0;
+        while(check == 0)
+        {
+            int moving = rand.nextInt((30 - 5) + 1) + 5;
+            int sum;
+            if(orientation == 1)
+                sum = portal_pos + moving;
+            else
+                sum = portal_pos - moving;
+            if(sum < 99 && sum > 2)
             {
-                int moving = rand.nextInt((30 - 5) + 1) + 5;
-                int sum;
-                if("UP".equals(orientation))
-                {
-                    sum = moving + portal;
-                }
-                else
-                {
-                    sum = portal - moving;
-                }
-                if(sum < 99 && sum > 2)
-                {
-                    moving_spaces = moving;
-                    final_pos = sum;
-                    check = 1;
-                    flag = 1;
-                }
+                moving_spaces = moving;
+                final_pos = sum;
+                check = 1;
             }
         }
-        System.out.println("Portal position : ");
-        System.out.println(portal_pos);
-        System.out.println("String Orientation : ");
-        System.out.println(orientation);
-        System.out.println("Moving Space : ");
-        System.out.println(moving_spaces);
         
-        System.out.println("Final position : ");
+        List<Integer> myList = new ArrayList<>();
+        myList.add(orientation);
+        myList.add(moving_spaces);
+        myList.add(final_pos);
+        hmap.put(portal_pos,myList);
         
-        System.out.println(final_pos);
     }
 }
