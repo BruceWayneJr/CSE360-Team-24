@@ -5,10 +5,12 @@
  */
 package javaapplication2;
 
-/**
+/** Function simply used to test the functionalities of the Trial class.
+ *  Will be removed in the later stages of the project.
  *
  * @author Ashwin Murthy
  */
+
 public class JavaApplication2 {
 
     /**
@@ -16,8 +18,8 @@ public class JavaApplication2 {
      */
     public static void main(String[] args) {
         Trial obj = new Trial();
-        obj.init();
-        obj.print();
+        obj.init();                 // Function called to set the initial position nd attributes of the portals.
+        obj.print();                // Function called to print out the details regarding the protals.
         // TODO code application logic here
     }
     

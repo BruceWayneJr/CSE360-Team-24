@@ -21,7 +21,7 @@ class Trial
     */
     void init()
     {
-        for( int i = 0;i < 8;i++)
+        for( int i = 0;i < 8;i++)           // There will be 8 portals in the Game board.
         {
             set_portals();
         }
