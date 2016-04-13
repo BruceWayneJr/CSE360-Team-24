@@ -115,7 +115,7 @@ public class Game extends ApplicationAdapter {
 //		for(Vector2 transform: boardTransforms){
 //			shapeRenderer.circle(transform.x, transform.y, 5);
 //		}
-//		shapeRenderer.circle(boardTransforms.get(index).x, boardTransforms.get(index).y, 5);
+		shapeRenderer.circle(boardTransforms.get(index).x, boardTransforms.get(index).y, 5);
 		shapeRenderer.end();
 		
 		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
@@ -126,7 +126,7 @@ public class Game extends ApplicationAdapter {
 				index = 0;
 			}
 			
-			gamePiece.animateToPosition(boardTransforms.get(index));
+			gamePiece.moveToPosition(boardTransforms.get(index));
 		}
 	}
 	
