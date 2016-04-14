@@ -19,7 +19,13 @@ public class JavaApplication2 {
     public static void main(String[] args) {
         Trial obj = new Trial();
         obj.init();                 // Function called to set the initial position nd attributes of the portals.
-        obj.print();                // Function called to print out the details regarding the protals.
+        obj.print(); 
+        int b[] = obj.lets_see();
+        for(int i = 0; i < b.length; i++)
+        {
+            System.out.println(b[i]);
+        }
+        // Function called to print out the details regarding the protals.
         // TODO code application logic here
     }
     

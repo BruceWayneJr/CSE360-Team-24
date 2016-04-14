@@ -14,6 +14,8 @@ import java.util.*;
 class Trial 
 {
     HashMap<Integer, List<Integer>> hmap = new HashMap<>();
+    int[] A = new int[8];
+    int i = 0;
     
     /* Function that sets the position of the portals for the 
     * duration of the game.
@@ -40,7 +42,10 @@ class Trial
         }
     }
     
-    
+    int[] lets_see()
+    {
+        return A;
+    }
     /* Function that computes the position of each portal in the game board and their c
     *  corresponding attributes. Their attributes correspod to information such as 
     *  whether the portal will push down(-1) or up(+1), how many squares will the pawn 
@@ -97,6 +102,8 @@ class Trial
         myList.add(moving_spaces);
         myList.add(final_pos);
         hmap.put(portal_pos,myList);
+        A[i] = portal_pos;
+        i++;
         
     }
     
