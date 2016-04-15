@@ -27,6 +27,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
+
 import javax.swing.*;
 
 public class Game extends ApplicationAdapter{
@@ -65,6 +67,7 @@ public class Game extends ApplicationAdapter{
 	Stage gamestage; 	
 	Skin gameskin;
 	TextButton rollDice;
+	GameBoard obj = new GameBoard();
 	
 	@Override
 	public void create () {
@@ -159,7 +162,7 @@ public class Game extends ApplicationAdapter{
 		
 		// Draw portalSprite at the 44th space
 		// Simply for testing purposes.
-		GameBoard obj = new GameBoard();
+		
 		obj.init();
 		int[] temp = obj.portal_positions(); 
 		int i = 0;
@@ -192,7 +195,10 @@ public class Game extends ApplicationAdapter{
 		
 		rollDice.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				JOptionPane.showMessageDialog(null,"Clicked");
+				Random rand = new Random();
+				int temp = rand.nextInt((6 - 1) + 1) + 1;
+				moving_piece(temp);
+				JOptionPane.showMessageDialog(null,"Clicked " + temp);
 //				rollDice.setText("Starting new game");
 			}
 		});
@@ -256,14 +262,27 @@ public class Game extends ApplicationAdapter{
 //		shapeRenderer.circle(boardTransforms.get(index).x, boardTransforms.get(index).y, 5);
 //		shapeRenderer.end();
 		
-		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
-			if(index < 99){
-				index++;
-			}
-			else{
-				index = 0;
-			}
-			
+//		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
+//			if(index < 99){
+//				index++;
+//			}
+//			else{
+//				index = 0;
+//			}
+//			
+//			gamePiece.moveToPosition(boardTransforms.get(index));
+//		}
+	}
+	
+	
+	public void moving_piece(int value)
+	{
+		index = index + value;
+		gamePiece.moveToPosition(boardTransforms.get(index));
+		
+		if(obj.check_portal(index) != 0)
+		{
+			index = index + obj.check_portal(index);
 			gamePiece.moveToPosition(boardTransforms.get(index));
 		}
 	}
