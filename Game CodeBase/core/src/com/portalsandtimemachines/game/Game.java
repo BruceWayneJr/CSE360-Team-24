@@ -229,6 +229,7 @@ public class Game extends ApplicationAdapter{
 			public void changed (ChangeEvent event, Actor actor) {
 				int temp = rand.nextInt((6 - 1) + 1) + 1;
 				moving_piece(temp);
+				
 //				JOptionPane.showMessageDialog(null,"Clicked " + temp);
 //				rollDice.setText("Starting new game");
 			}
@@ -295,20 +296,7 @@ public class Game extends ApplicationAdapter{
 //		shapeRenderer.circle(boardTransforms.get(index).x, boardTransforms.get(index).y, 5);
 //		shapeRenderer.end();
 		
-		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
-//			if(index < 99){
-//				index++;
-//			}
-//			else{
-//				index = 0;
-//			}
-//			Random rand = new Random();
-//			int temp = rand.nextInt(99);
-//			
-//			gamePiece.moveToPosition(boardTransforms.get(temp));
-//			moving_piece(43);
-			gamePiece.setAlpha();
-		}
+
 	}
 	
 	

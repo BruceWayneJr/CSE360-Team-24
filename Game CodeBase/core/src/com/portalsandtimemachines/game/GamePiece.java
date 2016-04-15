@@ -74,14 +74,5 @@ public class GamePiece {
 		secondDestination = secondaryPosition;
 	}
 	
-	public void setAlpha(){
-		if(show){
-			show = false;
-			sprite.setColor(0, 0, 0, 0);
-		}
-		else{
-			show = true;
-			sprite.setColor(1, 1, 1, 1);
-		}
-	}
+
 }
