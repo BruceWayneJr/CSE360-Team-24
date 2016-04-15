@@ -36,13 +36,16 @@ public class Game extends ApplicationAdapter{
 	Texture boardBackground;
 	Texture gamePieceTexture;
 	Texture portalTexture;
+	Texture timemachineTexture;
 	
 	private Viewport viewport;
 	OrthographicCamera camera;
 	
 	private Sprite boardSprite;
 	
-	
+	private Sprite timemachineSprite1;
+	private Sprite timemachineSprite2;
+	private Sprite timemachineSprite3;
 	
 	private Sprite portalSprite1;
 	private Sprite portalSprite2;
@@ -79,6 +82,7 @@ public class Game extends ApplicationAdapter{
 		boardBackground = new Texture("10x10_checkered_board.png");
 		gamePieceTexture = new Texture("GamePiece.png");
 		portalTexture = new Texture("brunswick-spiral-black-white.png");
+		timemachineTexture = new Texture("Time-Machine.png");
 		
 		BitmapFont bfont=new BitmapFont();
 //		bfont.scale(1);
@@ -121,6 +125,17 @@ public class Game extends ApplicationAdapter{
 		boardSprite.setSize(boardSize, boardSize);
 		boardSprite.setPosition(Gdx.graphics.getWidth()/2 - boardSize/2, 0); // 0 may need to be set as screenHeight/2 - boardsize/2
 
+		timemachineSprite1 = new Sprite(timemachineTexture);
+		timemachineSprite1.setOriginCenter();
+		timemachineSprite1.setSize(32, 32);
+		
+		timemachineSprite2 = new Sprite(timemachineTexture);
+		timemachineSprite2.setOriginCenter();
+		timemachineSprite2.setSize(32, 32);
+		
+		timemachineSprite3 = new Sprite(timemachineTexture);
+		timemachineSprite3.setOriginCenter();
+		timemachineSprite3.setSize(32, 32);
 		
 		portalSprite1 = new Sprite(portalTexture);
 		portalSprite1.setOriginCenter();
@@ -280,11 +295,11 @@ public class Game extends ApplicationAdapter{
 		index = index + value;
 		gamePiece.moveToPosition(boardTransforms.get(index));
 		
-//		if(obj.check_portal(index) != 0)
-//		{
-//			index = index + obj.check_portal(index);
-//			gamePiece.moveToPosition(boardTransforms.get(index));
-//		}
+		if(obj.check_portal(index) != 0)
+		{
+			index = index + obj.check_portal(index);
+			gamePiece.moveToPosition(boardTransforms.get(index));
+		}
 	}
 	
 	@Override
