@@ -280,11 +280,11 @@ public class Game extends ApplicationAdapter{
 		index = index + value;
 		gamePiece.moveToPosition(boardTransforms.get(index));
 		
-		if(obj.check_portal(index) != 0)
-		{
-			index = index + obj.check_portal(index);
-			gamePiece.moveToPosition(boardTransforms.get(index));
-		}
+//		if(obj.check_portal(index) != 0)
+//		{
+//			index = index + obj.check_portal(index);
+//			gamePiece.moveToPosition(boardTransforms.get(index));
+//		}
 	}
 	
 	@Override
