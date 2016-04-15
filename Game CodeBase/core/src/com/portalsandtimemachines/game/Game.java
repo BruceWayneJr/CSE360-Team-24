@@ -288,7 +288,7 @@ public class Game extends ApplicationAdapter{
 		if(obj.check_portal(index) != 0)
 		{
 			index = index + obj.check_portal(index);
-			gamePiece.moveToPosition(boardTransforms.get(index));
+			gamePiece.secondaryMove(boardTransforms.get(index));
 		}
 	}
 	

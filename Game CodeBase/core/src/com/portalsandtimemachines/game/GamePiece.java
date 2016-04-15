@@ -24,7 +24,7 @@ public class GamePiece {
 		sprite.setOriginCenter();
 		sprite.setSize(32, 32);
 		sprite.setPosition(position.x, position.y);
-		moveSpeed = 500;
+		moveSpeed = 250;
 		moving = false;
 		destination = destination.Zero;
 		secondDestination = secondDestination.Zero; 
@@ -47,7 +47,6 @@ public class GamePiece {
 	public void moveToPosition(Vector2 newPosition){
 		destination = newPosition;
 		moving = true;
-//		System.out.println("At: "+ sprite.getX() + ", " + sprite.getY() + "  Moving to: " + newPosition);
 	}
 	
 	private void move(float deltaTime){
@@ -55,16 +54,18 @@ public class GamePiece {
 		float currentY = sprite.getY();
 		Vector2 transform = new Vector2(currentX, currentY);
 		
-//		System.out.println(transform);
-		
 		if(transform.dst(destination) <= 5){
 			sprite.setPosition(destination.x, destination.y);
 			moving = false;
-//			System.out.println("Move ended");
+			destination = destination.Zero;
+			if(secondDestination != secondDestination.Zero){
+				destination = secondDestination;
+				moving = true;
+				secondDestination = secondDestination.Zero;
+			}
 		}
 		else{
 			Vector2 direction = transform.sub(destination).nor();
-//			sprite.setPosition(currentX - direction.x * moveSpeed * deltaTime, currentY - direction.y * moveSpeed * deltaTime);
 			sprite.translate(-direction.x * moveSpeed * deltaTime, -direction.y * moveSpeed * deltaTime);
 		}
 	}
