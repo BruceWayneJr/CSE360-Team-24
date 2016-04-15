@@ -179,8 +179,14 @@ public class Game extends ApplicationAdapter{
 		// Simply for testing purposes.
 		
 		obj.init();
+		obj.init_time_machine();
 		int[] temp = obj.portal_positions(); 
 		int i = 0;
+		int[] tm_temp = obj.TM_positions();
+		int j = 0;
+		
+		
+		
 		
 		portalSprite1.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
 		i++;
@@ -299,6 +305,10 @@ public class Game extends ApplicationAdapter{
 		{
 			index = index + obj.check_portal(index);
 			gamePiece.moveToPosition(boardTransforms.get(index));
+		}
+		else if(obj.check_TM(index) != 0)
+		{
+			
 		}
 	}
 	
