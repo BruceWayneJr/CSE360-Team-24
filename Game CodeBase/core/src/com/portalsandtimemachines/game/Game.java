@@ -5,7 +5,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -15,8 +19,18 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
-public class Game extends ApplicationAdapter {
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Game extends ApplicationAdapter{
 	SpriteBatch batch;
 	Texture boardBackground;
 	Texture gamePieceTexture;
@@ -36,16 +50,45 @@ public class Game extends ApplicationAdapter {
 	ShapeRenderer shapeRenderer;
 	
 	GamePiece gamePiece;
+	Stage gamestage; 	
+	Skin gameskin;
+	TextButton rollDice;
 	
 	@Override
 	public void create () {
 		// Sprite batch to store all sprites before sending to GPU
 		batch = new SpriteBatch();
+		gamestage = new Stage();
+		gameskin = new Skin();
 		// Checkered background texture
 		boardBackground = new Texture("10x10_checkered_board.png");
 		gamePieceTexture = new Texture("GamePiece.png");
 		
-		// Camera to manage viewport and  view matricies
+		BitmapFont bfont=new BitmapFont();
+//		bfont.scale(1);
+		gameskin.add("default",bfont);
+		
+		Pixmap pixmap = new Pixmap(100, 50, Format.RGBA8888);
+		pixmap.setColor(Color.GREEN);
+		pixmap.fill();
+		gameskin.add("white", new Texture(pixmap));
+
+		Gdx.input.setInputProcessor(gamestage);
+        
+        TextButtonStyle textButtonStyle = new TextButtonStyle();
+		textButtonStyle.up = gameskin.newDrawable("white", Color.DARK_GRAY);
+		textButtonStyle.down = gameskin.newDrawable("white", Color.DARK_GRAY);
+		textButtonStyle.checked = gameskin.newDrawable("white", Color.BLUE);
+		textButtonStyle.over = gameskin.newDrawable("white", Color.LIGHT_GRAY);
+		
+		textButtonStyle.font = gameskin.getFont("default");
+
+		gameskin.add("default", textButtonStyle);
+		
+		rollDice = new TextButton("Roll Dice", gameskin);
+		gamestage.addActor(rollDice);
+		
+	    // Camera to manage viewport and  view matricies
 		camera = new OrthographicCamera();
 		// Initialize camera to window size
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -62,7 +105,7 @@ public class Game extends ApplicationAdapter {
 		boardSprite.setSize(boardSize, boardSize);
 		boardSprite.setPosition(Gdx.graphics.getWidth()/2 - boardSize/2, 0); // 0 may need to be set as screenHeight/2 - boardsize/2
 		
-		// Used to draw shapes on screen
+		// Used to draw shapes on screen 
 		shapeRenderer = new ShapeRenderer();
 		
 		// ArrayList to hold centers of the spaces
@@ -70,6 +113,12 @@ public class Game extends ApplicationAdapter {
 		boardTransforms = calculateTransforms(boardSize, numberOfSpacesPerRow, windowWidth);
 		
 		gamePiece = new GamePiece(0, gamePieceTexture, boardTransforms.get(0));
+		rollDice.addListener(new ChangeListener() {
+			public void changed (ChangeEvent event, Actor actor) {
+				JOptionPane.showMessageDialog(null,"Clicked");
+//				rollDice.setText("Starting new game");
+			}
+		});
 	}
 
 	public Array<Vector2> calculateTransforms(float boardSize, float numberOfSpacesPerRow, float windowWidth){
@@ -103,6 +152,8 @@ public class Game extends ApplicationAdapter {
 		batch.setProjectionMatrix(camera.combined);
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+		gamestage.draw();
 		
 		batch.begin();
 		boardSprite.draw(batch);
