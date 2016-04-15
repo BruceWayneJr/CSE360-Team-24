@@ -12,9 +12,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-//import com.badlogic.gdx.math.Rectangle;
+//import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+//import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -34,11 +33,13 @@ public class Game extends ApplicationAdapter{
 	SpriteBatch batch;
 	Texture boardBackground;
 	Texture gamePieceTexture;
+	Texture portalTexture;
 	
 	private Viewport viewport;
 	OrthographicCamera camera;
 	
 	private Sprite boardSprite;
+	private Sprite portalSprite;
 	private float boardSize;
 	private float numberOfSpacesPerRow;
 	private float windowWidth;
@@ -47,7 +48,7 @@ public class Game extends ApplicationAdapter{
 	
 	private int index = 0;
 	
-	ShapeRenderer shapeRenderer;
+//	ShapeRenderer shapeRenderer;
 	
 	GamePiece gamePiece;
 	Stage gamestage; 	
@@ -63,6 +64,7 @@ public class Game extends ApplicationAdapter{
 		// Checkered background texture
 		boardBackground = new Texture("10x10_checkered_board.png");
 		gamePieceTexture = new Texture("GamePiece.png");
+		portalTexture = new Texture("brunswick-spiral-black-white.png");
 		
 		BitmapFont bfont=new BitmapFont();
 //		bfont.scale(1);
@@ -105,12 +107,19 @@ public class Game extends ApplicationAdapter{
 		boardSprite.setSize(boardSize, boardSize);
 		boardSprite.setPosition(Gdx.graphics.getWidth()/2 - boardSize/2, 0); // 0 may need to be set as screenHeight/2 - boardsize/2
 		
+		portalSprite = new Sprite(portalTexture);
+		portalSprite.setOriginCenter();
+		portalSprite.setSize(32, 32);
+		
 		// Used to draw shapes on screen 
-		shapeRenderer = new ShapeRenderer();
+//		shapeRenderer = new ShapeRenderer();
 		
 		// ArrayList to hold centers of the spaces
 		boardTransforms = new Array<Vector2>(100);
 		boardTransforms = calculateTransforms(boardSize, numberOfSpacesPerRow, windowWidth);
+		
+		// Draw portalSprite at the 44th space
+		portalSprite.setPosition(boardTransforms.get(43).x - 32, boardTransforms.get(43).y);
 		
 		gamePiece = new GamePiece(0, gamePieceTexture, boardTransforms.get(0));
 		rollDice.addListener(new ChangeListener() {
@@ -157,17 +166,18 @@ public class Game extends ApplicationAdapter{
 		
 		batch.begin();
 		boardSprite.draw(batch);
+		portalSprite.draw(batch);
 		gamePiece.draw(batch);
 		batch.end();
 		
-		shapeRenderer.setProjectionMatrix(camera.combined);
-		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(1, 0, 0, 1);
+//		shapeRenderer.setProjectionMatrix(camera.combined);
+//		shapeRenderer.begin(ShapeType.Filled);
+//		shapeRenderer.setColor(1, 0, 0, 1);
 //		for(Vector2 transform: boardTransforms){
 //			shapeRenderer.circle(transform.x, transform.y, 5);
 //		}
-		shapeRenderer.circle(boardTransforms.get(index).x, boardTransforms.get(index).y, 5);
-		shapeRenderer.end();
+//		shapeRenderer.circle(boardTransforms.get(index).x, boardTransforms.get(index).y, 5);
+//		shapeRenderer.end();
 		
 		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
 			if(index < 99){
@@ -184,7 +194,7 @@ public class Game extends ApplicationAdapter{
 	@Override
 	public void dispose(){
 		boardBackground.dispose();
-		shapeRenderer.dispose();
+//		shapeRenderer.dispose();
 		batch.dispose();
 	}
 }
