@@ -73,6 +73,8 @@ public class Game extends ApplicationAdapter{
 	Skin gameskin;
 	TextButton rollDice;
 	GameBoard obj = new GameBoard();
+	int[] temp;
+	int[] tm_temp;
 	
 	@Override
 	public void create () {
@@ -130,6 +132,7 @@ public class Game extends ApplicationAdapter{
 		timemachineSprite1 = new Sprite(timemachineTexture);
 		timemachineSprite1.setOriginCenter();
 		timemachineSprite1.setSize(32, 32);
+		timemachineSprite1.setColor(0,0,0,0);
 		
 		timemachineSprite2 = new Sprite(timemachineTexture);
 		timemachineSprite2.setOriginCenter();
@@ -182,13 +185,19 @@ public class Game extends ApplicationAdapter{
 		
 		obj.init();
 		obj.init_time_machine();
-		int[] temp = obj.portal_positions(); 
+		temp = obj.portal_positions(); 
 		int i = 0;
-		int[] tm_temp = obj.TM_positions();
+		tm_temp = obj.TM_positions();
 		int j = 0;
 		
+		timemachineSprite1.setPosition(boardTransforms.get(tm_temp[j]).x - 32, boardTransforms.get(tm_temp[j]).y);
+		j++;
 		
+		timemachineSprite2.setPosition(boardTransforms.get(tm_temp[j]).x - 32, boardTransforms.get(tm_temp[j]).y);
+		j++;
 		
+		timemachineSprite3.setPosition(boardTransforms.get(tm_temp[j]).x - 32, boardTransforms.get(tm_temp[j]).y);
+		j++;
 		
 		portalSprite1.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
 		i++;
@@ -262,7 +271,9 @@ public class Game extends ApplicationAdapter{
 		
 		batch.begin();
 		boardSprite.draw(batch);
-		
+		timemachineSprite1.draw(batch);
+		timemachineSprite2.draw(batch);
+		timemachineSprite3.draw(batch);
 		portalSprite1.draw(batch);
 		portalSprite2.draw(batch);
 		portalSprite3.draw(batch);
@@ -305,16 +316,14 @@ public class Game extends ApplicationAdapter{
 	{
 		index = index + value;
 		gamePiece.moveToPosition(boardTransforms.get(index));
+		timemachineSprite1.setColor(1,1,1,1);
 		
 		if(obj.check_portal(index) != 0)
 		{
 			index = index + obj.check_portal(index);
 			gamePiece.secondaryMove(boardTransforms.get(index));
 		}
-		else if(obj.check_TM(index) != 0)
-		{
-			
-		}
+
 	}
 	
 	@Override
