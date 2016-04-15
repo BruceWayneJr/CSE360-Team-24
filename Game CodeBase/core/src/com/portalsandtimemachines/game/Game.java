@@ -39,7 +39,18 @@ public class Game extends ApplicationAdapter{
 	OrthographicCamera camera;
 	
 	private Sprite boardSprite;
-	private Sprite portalSprite;
+	
+	
+	
+	private Sprite portalSprite1;
+	private Sprite portalSprite2;
+	private Sprite portalSprite3;
+	private Sprite portalSprite4;
+	private Sprite portalSprite5;
+	private Sprite portalSprite6;
+	private Sprite portalSprite7;
+	private Sprite portalSprite8;
+	
 	private float boardSize;
 	private float numberOfSpacesPerRow;
 	private float windowWidth;
@@ -106,11 +117,39 @@ public class Game extends ApplicationAdapter{
 		boardSprite.setOriginCenter();
 		boardSprite.setSize(boardSize, boardSize);
 		boardSprite.setPosition(Gdx.graphics.getWidth()/2 - boardSize/2, 0); // 0 may need to be set as screenHeight/2 - boardsize/2
+
 		
-		portalSprite = new Sprite(portalTexture);
-		portalSprite.setOriginCenter();
-		portalSprite.setSize(32, 32);
+		portalSprite1 = new Sprite(portalTexture);
+		portalSprite1.setOriginCenter();
+		portalSprite1.setSize(32, 32);
 		
+		portalSprite2 = new Sprite(portalTexture);
+		portalSprite2.setOriginCenter();
+		portalSprite2.setSize(32, 32);
+		
+		portalSprite3 = new Sprite(portalTexture);
+		portalSprite3.setOriginCenter();
+		portalSprite3.setSize(32, 32);
+		
+		portalSprite4 = new Sprite(portalTexture);
+		portalSprite4.setOriginCenter();
+		portalSprite4.setSize(32, 32);
+		
+		portalSprite5 = new Sprite(portalTexture);
+		portalSprite5.setOriginCenter();
+		portalSprite5.setSize(32, 32);
+		
+		portalSprite6 = new Sprite(portalTexture);
+		portalSprite6.setOriginCenter();
+		portalSprite6.setSize(32, 32);
+		
+		portalSprite7 = new Sprite(portalTexture);
+		portalSprite7.setOriginCenter();
+		portalSprite7.setSize(32, 32);
+		
+		portalSprite8 = new Sprite(portalTexture);
+		portalSprite8.setOriginCenter();
+		portalSprite8.setSize(32, 32);		
 		// Used to draw shapes on screen 
 //		shapeRenderer = new ShapeRenderer();
 		
@@ -119,9 +158,38 @@ public class Game extends ApplicationAdapter{
 		boardTransforms = calculateTransforms(boardSize, numberOfSpacesPerRow, windowWidth);
 		
 		// Draw portalSprite at the 44th space
-		portalSprite.setPosition(boardTransforms.get(43).x - 32, boardTransforms.get(43).y);
+		// Simply for testing purposes.
+		GameBoard obj = new GameBoard();
+		obj.init();
+		int[] temp = obj.portal_positions(); 
+		int i = 0;
+		
+		portalSprite1.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
+		i++;
+		
+		portalSprite2.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
+		i++;
+		
+		portalSprite3.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
+		i++;
+		
+		portalSprite4.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
+		i++;
+		
+		portalSprite5.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
+		i++;
+		
+		portalSprite6.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
+		i++;
+		
+		portalSprite7.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
+		i++;
+		
+		portalSprite8.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
+		i++;
 		
 		gamePiece = new GamePiece(0, gamePieceTexture, boardTransforms.get(0));
+		
 		rollDice.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
 				JOptionPane.showMessageDialog(null,"Clicked");
@@ -166,7 +234,16 @@ public class Game extends ApplicationAdapter{
 		
 		batch.begin();
 		boardSprite.draw(batch);
-		portalSprite.draw(batch);
+		
+		portalSprite1.draw(batch);
+		portalSprite2.draw(batch);
+		portalSprite3.draw(batch);
+		portalSprite4.draw(batch);
+		portalSprite5.draw(batch);
+		portalSprite6.draw(batch);
+		portalSprite7.draw(batch);
+		portalSprite8.draw(batch);
+		
 		gamePiece.draw(batch);
 		batch.end();
 		
