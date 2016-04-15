@@ -72,6 +72,8 @@ public class Game extends ApplicationAdapter{
 	@Override
 	public void create () {
 		// Sprite batch to store all sprites before sending to GPU
+		String name = JOptionPane.showInputDialog("What is your name?");
+        JOptionPane.showMessageDialog(null, "Hello " + name + '!');
 		batch = new SpriteBatch();
 		gamestage = new Stage();
 		gameskin = new Skin();
@@ -277,13 +279,21 @@ public class Game extends ApplicationAdapter{
 	
 	public void moving_piece(int value)
 	{
-		index = index + value;
-		gamePiece.moveToPosition(boardTransforms.get(index));
+		
+		if((index+value) < 98)
+		{
+			index = index + value;
+			gamePiece.moveToPosition(boardTransforms.get(index));
 		
 		if(obj.check_portal(index) != 0)
 		{
 			index = index + obj.check_portal(index);
 			gamePiece.moveToPosition(boardTransforms.get(index));
+		}
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null,"You Win!");
 		}
 	}
 	
