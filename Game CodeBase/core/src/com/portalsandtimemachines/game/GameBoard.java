@@ -121,7 +121,7 @@ public class GameBoard {
 	                }
 	            }
 	        }
-	        return 0;                                  //  If the square does not have a portal associatd with it.
+	        return -1;                                  //  If the square does not have a portal associatd with it.
 	    }
 	    
 	    
