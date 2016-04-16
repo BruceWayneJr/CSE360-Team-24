@@ -119,7 +119,7 @@ public class GameBoardTest {
 		int[] temp = testobj.timeMachine_positions();
 		for(int i = 0; i < temp.length;i++)
 		{
-			assertNotEquals(0,temp[i]);
+			assertNotEquals(1,temp[i]);
 		}
 	}
 
