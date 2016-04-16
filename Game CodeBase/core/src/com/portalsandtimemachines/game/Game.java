@@ -56,6 +56,8 @@ public class Game extends ApplicationAdapter{
 	private Sprite portalSprite7;
 	private Sprite portalSprite8;
 	
+	private Dice dice;
+	
 	private float boardSize;
 	private float numberOfSpacesPerRow;
 	private float windowWidth;
@@ -97,6 +99,8 @@ public class Game extends ApplicationAdapter{
 
 		Gdx.input.setInputProcessor(gamestage);
         
+		dice = new Dice();
+		
         TextButtonStyle textButtonStyle = new TextButtonStyle();
 		textButtonStyle.up = gameskin.newDrawable("white", Color.DARK_GRAY);
 		textButtonStyle.down = gameskin.newDrawable("white", Color.DARK_GRAY);
@@ -273,6 +277,7 @@ public class Game extends ApplicationAdapter{
 		portalSprite8.draw(batch);
 		
 		gamePiece.draw(batch);
+		dice.draw(batch);
 		batch.end();
 		
 //		shapeRenderer.setProjectionMatrix(camera.combined);
@@ -296,7 +301,8 @@ public class Game extends ApplicationAdapter{
 //			
 //			gamePiece.moveToPosition(boardTransforms.get(temp));
 //			moving_piece(43);
-			gamePiece.setAlpha();
+//			gamePiece.setAlpha();
+			dice.changeAnimate();
 		}
 	}
 	
