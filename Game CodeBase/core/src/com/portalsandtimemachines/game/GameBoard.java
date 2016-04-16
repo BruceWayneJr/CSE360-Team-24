@@ -2,6 +2,12 @@ package com.portalsandtimemachines.game;
 
 import java.util.*;
 
+/**
+ * 
+ *  @author Team24 for CSE 360 Spring 2016
+ *  @version 1.1 April 15,2016
+ *
+ */
 public class GameBoard {
 
 		// portals
