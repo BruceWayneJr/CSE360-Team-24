@@ -10,6 +10,15 @@ public class GameBoardTest {
 		assertNotNull(testobj);
 		assertEquals("Status:", "Initializing the portal values", "Initializing the portal values");
 	}
+	
+	@Test
+	public void testInit_numberofportalscheck() {
+		GameBoard testobj = new GameBoard();
+		assertNotNull(testobj);
+		assertEquals("Status:", "Initializing the portal values", "Initializing the portal values");
+		int[] temp = testobj.portal_positions();
+		assertNotNull(temp);
+	}
 
 	@Test
 	public void testRoll_die() {
@@ -24,6 +33,9 @@ public class GameBoardTest {
 		
 		assertFalse(outOfBounds); 
 	}
+	
+	
+	
 
 	@Test
 	public void testPrint() {
@@ -63,6 +75,16 @@ public class GameBoardTest {
 	}
 
 	@Test
+	public void testInit_numberoftime_machine() {
+//		fail("Not yet implemented");
+		GameBoard testobj = new GameBoard();
+		assertNotNull(testobj);
+		assertEquals("Status:", "Initializing the Time Machine values", "Initializing the Time Machine values");
+//		int[] temp = testobj.timeMachine_positions();
+//		assertEquals(3,temp.length);
+	}
+	
+	@Test
 	public void testTM_positions() {
 //		fail("Not yet implemented");
 		GameBoard testobj = new GameBoard();
@@ -71,6 +93,21 @@ public class GameBoardTest {
 		assertNotNull(temp);
 		
 	}
+	
+	@Test
+	public void testTM_positionsnotatzero() {
+//		fail("Not yet implemented");
+		GameBoard testobj = new GameBoard();
+		testobj.init_time_machine();
+		int[] temp = testobj.timeMachine_positions();
+		for(int i = 0; i < temp.length;i++)
+		{
+			assertNotEquals(0,temp[i]);
+		}
+		
+	}
+
+
 
 
 	@Test

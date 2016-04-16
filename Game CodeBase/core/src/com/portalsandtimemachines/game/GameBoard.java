@@ -194,11 +194,11 @@ public class GameBoard {
 	        int moving_spaces = 0;
 	        int final_pos = 0;
 	        
-	        timeMachine_pos = rand.nextInt((99 - 12) + 1) + 2;
+	        timeMachine_pos = rand.nextInt((99 - 12) + 1) + 12;
 	 
 	        while(timeMachine_hashMap.containsKey(timeMachine_pos) || portals_hashMap.containsKey(timeMachine_pos))         // If the position already exist in the map and it don't clash with portal.
 	        {
-	            timeMachine_pos = rand.nextInt((99 - 12) + 1) + 2;
+	            timeMachine_pos = rand.nextInt((99 - 12) + 1) + 12;
 	        }
 	            
 	        orientation = 1;
