@@ -60,6 +60,18 @@ public class GameBoardTest {
 		
 	}
 
+	@Test
+	public void testportal_positionsnotathundred() {
+//		fail("Not yet implemented");
+		GameBoard testobj = new GameBoard();
+		testobj.init_time_machine();
+		int[] temp = testobj.portal_positions();
+		for(int i = 0; i < temp.length;i++)
+		{
+			assertNotEquals(100,temp[i]);
+		}
+	}
+
 	/**
 	 * checking for the portal in the out of board range.
 	 */
@@ -119,7 +131,7 @@ public class GameBoardTest {
 		int[] temp = testobj.timeMachine_positions();
 		for(int i = 0; i < temp.length;i++)
 		{
-			assertNotEquals(1,temp[i]);
+			assertNotEquals(100,temp[i]);
 		}
 	}
 
