@@ -198,34 +198,34 @@ public class Game extends ApplicationAdapter{
 		tm_temp = obj.TM_positions();
 		int j = 0;
 		
-		timemachineSprite1.setPosition(boardTransforms.get(tm_temp[j]).x - 32, boardTransforms.get(tm_temp[j]).y);
+		timemachineSprite1.setPosition(boardTransforms.get(tm_temp[j] ).x - 32, boardTransforms.get(tm_temp[j]).y);
 		j++;
 		
-		timemachineSprite2.setPosition(boardTransforms.get(tm_temp[j]).x - 32, boardTransforms.get(tm_temp[j]).y);
+		timemachineSprite2.setPosition(boardTransforms.get(tm_temp[j] ).x - 32, boardTransforms.get(tm_temp[j]).y);
 		j++;
 		
-		timemachineSprite3.setPosition(boardTransforms.get(tm_temp[j]).x - 32, boardTransforms.get(tm_temp[j]).y);
+		timemachineSprite3.setPosition(boardTransforms.get(tm_temp[j] ).x - 32, boardTransforms.get(tm_temp[j]).y);
 		j++;
 		
-		portalSprite1.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
+		portalSprite1.setPosition(boardTransforms.get(temp[i] ).x - 32, boardTransforms.get(temp[i]).y);
 		i++;
 		
-		portalSprite2.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
+		portalSprite2.setPosition(boardTransforms.get(temp[i] ).x - 32, boardTransforms.get(temp[i]).y);
 		i++;
 		
-		portalSprite3.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
+		portalSprite3.setPosition(boardTransforms.get(temp[i] ).x - 32, boardTransforms.get(temp[i]).y);
 		i++;
 		
 		portalSprite4.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
 		i++;
 		
-		portalSprite5.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
+		portalSprite5.setPosition(boardTransforms.get(temp[i] ).x - 32, boardTransforms.get(temp[i]).y);
 		i++;
 		
-		portalSprite6.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
+		portalSprite6.setPosition(boardTransforms.get(temp[i] ).x - 32, boardTransforms.get(temp[i]).y);
 		i++;
 		
-		portalSprite7.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
+		portalSprite7.setPosition(boardTransforms.get(temp[i] ).x - 32, boardTransforms.get(temp[i]).y);
 		i++;
 		
 		portalSprite8.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
@@ -237,6 +237,7 @@ public class Game extends ApplicationAdapter{
 			public void changed (ChangeEvent event, Actor actor) {
 				Random rand = new Random();
 				int temp = rand.nextInt((6 - 1) + 1) + 1;
+				dice.showNumber(temp);
 				moving_piece(temp);
 //				JOptionPane.showMessageDialog(null,"Clicked " + temp);
 //				rollDice.setText("Starting new game");
@@ -317,7 +318,7 @@ public class Game extends ApplicationAdapter{
 //			moving_piece(43);
 //			gamePiece.setAlpha();
 //			dice.changeAnimate();
-			dice.showNumber(6);
+//			dice.showNumber(6);
 		}
 	}
 	
@@ -325,70 +326,75 @@ public class Game extends ApplicationAdapter{
 	public void moving_piece(int value)
 	{
 		
-//		if(TM == 0)
-//		{
-//			index = index + value;
-//			gamePiece.moveToPosition(boardTransforms.get(index));
-//		}
-//		else if( TM == 1)
-//		{
-//			if(TM_count > 0 && index < final_pos )
-//			{
-//				TM_count--;
-//				index = index + value;
-//				if(TM_count == 0 && index <final_pos)
-//				{
-//					TM = 0;
-//					index = 0;
-//					gamePiece.moveToPosition(boardTransforms.get(index));
-//				}
-//				else
-//				{
-//					gamePiece.moveToPosition(boardTransforms.get(index));
-//				}
-//			}
-//			else if(TM_count == 0 && index < final_pos)
-//			{
-//				TM = 0;
-//				index = 0;
-//				gamePiece.moveToPosition(boardTransforms.get(index));
-//			}
-//			else if(TM_count >= 0 && index >= final_pos)
-//			{
-//				TM = 0;
-//				index = index + value;
-//				gamePiece.moveToPosition(boardTransforms.get(index));
-//			}
-//		}
-		
-		
-		index = index + value;
-		gamePiece.moveToPosition(boardTransforms.get(index));
-		
-		if(obj.check_portal(index) != 0)
+		if(TM == 0)
 		{
-			index = index + obj.check_portal(index);
+			index = index + value;
 			gamePiece.moveToPosition(boardTransforms.get(index));
 		}
+		else if( TM == 1)
+		{
+			if(TM_count > 0 && index < final_pos )
+			{
+				TM_count--;
+				index = index + value;
+				if(TM_count == 0 && index <final_pos)
+				{
+					TM = 0;
+					index = 0;
+					gamePiece.moveToPosition(boardTransforms.get(index));
+				}
+				else
+				{
+					gamePiece.moveToPosition(boardTransforms.get(index));
+				}
+			}
+			else if(TM_count == 0 && index < final_pos)
+			{
+				TM = 0;
+				index = 0;
+				gamePiece.moveToPosition(boardTransforms.get(index));
+			}
+			else if(TM_count >= 0 && index >= final_pos)
+			{
+				TM = 0;
+				index = index + value;
+				gamePiece.moveToPosition(boardTransforms.get(index));
+			}
+		}
+		
 //		
-//		if(obj.check_TM(index) != 0)
-//		{
-//			TM_count = 2;
-//			TM = 1;
-//			if(index == tm_temp[0])
-//			{
-//				timemachineSprite1.setColor(1,1,1,1);
-//			}
-//			else if(index == tm_temp[1])
-//			{
-//				timemachineSprite2.setColor(1,1,1,1);
-//			}
-//			else
-//			{
-//				timemachineSprite3.setColor(1,1,1,1);
-//			}
-//			final_pos = obj.check_TM(index);
-//		}
+//		index = index + value;
+//		gamePiece.moveToPosition(boardTransforms.get(index));
+
+		System.out.println(index +" "+ value);
+		int ret = obj.check_portal(index);
+		if(ret != 0)
+		{
+			index = index + ret;
+//			if(index )
+			System.out.println("Hi ");
+			gamePiece.secondaryMove(boardTransforms.get(index));
+		}
+//		
+		if(obj.check_TM(index) != 0)
+		{
+			System.out.println(" time machine");
+			TM_count = 2;
+			TM = 1;
+			if(index == tm_temp[0])
+			{
+				timemachineSprite1.setColor(1,1,1,1);
+			}
+			else if(index == tm_temp[1])
+			{
+				timemachineSprite2.setColor(1,1,1,1);
+			}
+			else
+			{
+				timemachineSprite3.setColor(1,1,1,1);
+			}
+			final_pos = obj.check_TM(index);
+		}
 	}
 	
 	@Override

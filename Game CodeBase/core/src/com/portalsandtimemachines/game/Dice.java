@@ -46,8 +46,8 @@ public class Dice {
     		currentFrame = rollAnimation.getKeyFrame(stateTime, true);
     	}
         batch.draw(currentFrame, 
-        		Gdx.graphics.getWidth()/2 - (diceSheet.getWidth() / FRAME_COLS),
-        		Gdx.graphics.getHeight()/2 - (diceSheet.getHeight() / FRAME_COLS));
+        		Gdx.graphics.getWidth()/10 - (diceSheet.getWidth() / FRAME_COLS),
+        		Gdx.graphics.getHeight()/10 - (diceSheet.getHeight() / FRAME_COLS));
     }
     
     void showNumber(float number){

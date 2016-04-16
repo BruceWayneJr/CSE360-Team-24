@@ -62,7 +62,6 @@ public class GamePiece {
 				destination = secondDestination;
 				moving = true;
 				secondDestination = secondDestination.Zero;
-				//Summa
 			}
 		}
 		else{
