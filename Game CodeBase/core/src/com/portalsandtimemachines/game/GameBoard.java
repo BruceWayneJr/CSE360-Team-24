@@ -25,7 +25,7 @@ public class GameBoard {
 	        {
 	            set_portals();
 	        }
-	  
+	        System.out.println("Initializing the portal values");
 	    }
 	    
 	    int roll_die()
