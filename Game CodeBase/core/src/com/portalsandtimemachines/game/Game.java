@@ -265,9 +265,11 @@ public class Game extends ApplicationAdapter{
 				dice.showNumber(temp);
 
 				moving_piece(temp);
-				if(index > 98)
-				JOptionPane.showMessageDialog(null,"Congrats " + playername + "! You Won!!");
+				if(index > 98) {
+					JOptionPane.showMessageDialog(null,"Congrats " + playername + "! You Won!!");
 //				rollDice.setText("Starting new game");
+					Gdx.app.exit();
+				}
 			}
 		});
 	}
