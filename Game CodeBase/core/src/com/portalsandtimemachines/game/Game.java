@@ -100,8 +100,7 @@ public class Game extends ApplicationAdapter{
 	@Override
 	public void create () {
 		// Sprite batch to store all sprites before sending to GPU
-
-		String playername = JOptionPane.showInputDialog("Please enter your usename: ");
+		playername = JOptionPane.showInputDialog("Please enter your usename: ");
 		while(playername.isEmpty())
 		{
 			playername = JOptionPane.showInputDialog("Please enter your username: ");
@@ -264,9 +263,10 @@ public class Game extends ApplicationAdapter{
 				
 				int temp = obj.roll_die();
 				dice.showNumber(temp);
+
 				moving_piece(temp);
 				if(index > 98)
-				JOptionPane.showMessageDialog(null,"You Won!");
+				JOptionPane.showMessageDialog(null,"Congrats " + playername + "! You Won!!");
 //				rollDice.setText("Starting new game");
 			}
 		});
