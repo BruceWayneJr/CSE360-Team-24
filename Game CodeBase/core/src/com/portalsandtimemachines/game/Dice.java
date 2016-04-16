@@ -8,6 +8,13 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/**
+ * 	This class contains the method for handling the dice its display etc.
+ * 
+ *  @author Team24 for CSE 360 Spring 2016
+ *  @version 1.1 April 15,2016
+ *
+ */
 public class Dice {
 	private static final int FRAME_COLS = 6;
 	private static final int FRAME_ROWS = 1;
@@ -17,9 +24,14 @@ public class Dice {
     TextureRegion currentFrame;
     float stateTime;
     boolean animate;
-    private Random rand;
+    @SuppressWarnings("unused")
+	private Random rand;
     private float animationSpeed;
-    
+   
+    /**
+     * constructor used for creation of the dice object and 
+     * displaying it on the board where it animates randomly.
+     */
     Dice(){
     	rand = new Random();
     	diceSheet = new Texture("dice.png");
@@ -39,6 +51,12 @@ public class Dice {
     	animate = true;
     }
     
+    /**
+     * Function is used for drawing the dice on the board
+     * 
+     * @param batch the dice object passed as param which is to be displayed.
+     */
+    
     void draw(SpriteBatch batch){
     	if(animate){
     		stateTime += Gdx.graphics.getDeltaTime();
@@ -50,6 +68,11 @@ public class Dice {
         		Gdx.graphics.getHeight()/10 - (diceSheet.getHeight() / FRAME_COLS));
     }
     
+    /**
+     * Function used for displaying the number on the dice.
+     * 
+     * @param number the number that is to be displayed on the screen.
+     */
     void showNumber(float number){
     	animate = false;
     	number -= 1;
@@ -57,9 +80,19 @@ public class Dice {
     	currentFrame = rollAnimation.getKeyFrame(number, false);
     }
     
+    /**
+     * Function used for reseting the animate variable.
+     */
     void changeAnimate(){
     	animate = !animate;
     }
+    
+    /**
+     * Function which returns the time which is used for the purpose of movement
+     * of dice.
+     * 
+     * @return int returns the time for the purpose of moving the dice.
+     */
     
     int getStateTimeAsIndex(){
     	return (int)stateTime % FRAME_COLS;

@@ -31,6 +31,14 @@ import java.util.Random;
 
 import javax.swing.*;
 
+/**
+ * This class holds all the functions that is used for the running the game.
+ * 
+ *  @author Team24 for CSE 360 Spring 2016
+ *  @version 1.1 April 15,2016
+ *  
+ */
+@SuppressWarnings("unused")
 public class Game extends ApplicationAdapter{
 	SpriteBatch batch;
 	Texture boardBackground;
@@ -75,13 +83,20 @@ public class Game extends ApplicationAdapter{
 	
 	String playername;
 	GameBoard obj = new GameBoard();
-	int[] temp;
-	int[] tm_temp;
-	static int TM_count = 0;
-	static int TM = 0;
+	
+	
+	int[] temporary_PortalsPosition;
+	int[] temporary_TimeMachinePosition;
+	static int timeMachine_counter = 0;
+	static int time_machine_flag = 0;
 	static int final_pos = 0;
 
-	
+	/**
+	 * This function is used for the purpose of drawing the board and
+	 * setting up other board pieces initially.
+	 * 
+	 *  @param none
+	 */
 	@Override
 	public void create () {
 		// Sprite batch to store all sprites before sending to GPU
@@ -199,43 +214,44 @@ public class Game extends ApplicationAdapter{
 		
 		obj.init();
 		obj.init_time_machine();
-		temp = obj.portal_positions(); 
-		int i = 0;
-		tm_temp = obj.TM_positions();
-		int j = 0;
 		
-		timemachineSprite1.setPosition(boardTransforms.get(tm_temp[j] ).x - 32, boardTransforms.get(tm_temp[j]).y);
-		j++;
+		temporary_PortalsPosition = obj.portal_positions(); 
+		int i_index = 0;
+		temporary_TimeMachinePosition = obj.timeMachine_positions();
+		int j_index = 0;
 		
-		timemachineSprite2.setPosition(boardTransforms.get(tm_temp[j] ).x - 32, boardTransforms.get(tm_temp[j]).y);
-		j++;
+		timemachineSprite1.setPosition(boardTransforms.get(temporary_TimeMachinePosition[j_index] ).x - 32, boardTransforms.get(temporary_TimeMachinePosition[j_index]).y);
+		j_index++;
 		
-		timemachineSprite3.setPosition(boardTransforms.get(tm_temp[j] ).x - 32, boardTransforms.get(tm_temp[j]).y);
-		j++;
+		timemachineSprite2.setPosition(boardTransforms.get(temporary_TimeMachinePosition[j_index] ).x - 32, boardTransforms.get(temporary_TimeMachinePosition[j_index]).y);
+		j_index++;
 		
-		portalSprite1.setPosition(boardTransforms.get(temp[i] ).x - 32, boardTransforms.get(temp[i]).y);
-		i++;
+		timemachineSprite3.setPosition(boardTransforms.get(temporary_TimeMachinePosition[j_index] ).x - 32, boardTransforms.get(temporary_TimeMachinePosition[j_index]).y);
+		j_index++;
 		
-		portalSprite2.setPosition(boardTransforms.get(temp[i] ).x - 32, boardTransforms.get(temp[i]).y);
-		i++;
+		portalSprite1.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, boardTransforms.get(temporary_PortalsPosition[i_index]).y);
+		i_index++;
 		
-		portalSprite3.setPosition(boardTransforms.get(temp[i] ).x - 32, boardTransforms.get(temp[i]).y);
-		i++;
+		portalSprite2.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, boardTransforms.get(temporary_PortalsPosition[i_index]).y);
+		i_index++;
 		
-		portalSprite4.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
-		i++;
+		portalSprite3.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, boardTransforms.get(temporary_PortalsPosition[i_index]).y);
+		i_index++;
 		
-		portalSprite5.setPosition(boardTransforms.get(temp[i] ).x - 32, boardTransforms.get(temp[i]).y);
-		i++;
+		portalSprite4.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index]).x - 32, boardTransforms.get(temporary_PortalsPosition[i_index]).y);
+		i_index++;
 		
-		portalSprite6.setPosition(boardTransforms.get(temp[i] ).x - 32, boardTransforms.get(temp[i]).y);
-		i++;
+		portalSprite5.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, boardTransforms.get(temporary_PortalsPosition[i_index]).y);
+		i_index++;
 		
-		portalSprite7.setPosition(boardTransforms.get(temp[i] ).x - 32, boardTransforms.get(temp[i]).y);
-		i++;
+		portalSprite6.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, boardTransforms.get(temporary_PortalsPosition[i_index]).y);
+		i_index++;
 		
-		portalSprite8.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
-		i++;
+		portalSprite7.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, boardTransforms.get(temporary_PortalsPosition[i_index]).y);
+		i_index++;
+		
+		portalSprite8.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index]).x - 32, boardTransforms.get(temporary_PortalsPosition[i_index]).y);
+		i_index++;
 		
 		gamePiece = new GamePiece(0, gamePieceTexture, boardTransforms.get(0));
 		
@@ -250,7 +266,16 @@ public class Game extends ApplicationAdapter{
 			}
 		});
 	}
-
+	
+	
+	/**
+	 * This function handles the movement of the pawn in a proper order on the board.
+	 * 
+	 * @param boardSize		size of the board is passed.
+	 * @param numberOfSpacesPerRow	passing the number of spaces in the row.
+	 * @param windowWidth	passing the window width for manipulation as parameter.
+	 * @return	Array<Vector2> which is the movement that it should follow.
+	 */
 	public Array<Vector2> calculateTransforms(float boardSize, float numberOfSpacesPerRow, float windowWidth){
 		Array<Vector2> temporaryArray = new Array<Vector2>(100);
 		for(int i = 0; i < 10; i++){ // Horizontal movement
@@ -272,10 +297,20 @@ public class Game extends ApplicationAdapter{
 		return temporaryArray;
 	}
 	
+	/**
+	 * Function that is used for the purpose resizing the board.
+	 * 
+	 * @param width used for altering the width.
+	 * @param height used for altering the height.
+	 */
 	public void resize(int width, int height) {
 	    viewport.update(width, height);
 	}
 	
+	/**
+	 * This is the main function that is used for rendering the UI of the application.
+	 * 
+	 */
 	@Override
 	public void render () {
 		camera.update();
@@ -329,40 +364,65 @@ public class Game extends ApplicationAdapter{
 	}
 	
 	
-	public void moving_piece(int value)
+	/**
+	 * This function is used for moving the pawn on the board.
+	 * 
+	 * @param value_tomove	value of which the pawn is to be moved.
+	 */
+	public void moving_piece(int value_tomove)
 	{
-		if((index+value) > 98 )
+		if((index+value_tomove) > 98 )
 		{
 			JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 		}
 		else
 		{
-		if(TM == 0)
-		{
-			index = index + value;
-			if(index >= 99)
+			if(time_machine_flag == 0)
 			{
-				gamePiece.moveToPosition(boardTransforms.get(99));
-			}
-			else
-			{
-				gamePiece.moveToPosition(boardTransforms.get(index));
-			}
-		}
-		else if( TM == 1)
-		{
-			if(TM_count > 0 && index < final_pos )
-			{
-				TM_count--;
-				index = index + value;
-				if(TM_count == 0 && index <final_pos)
+				index = index + value_tomove;
+				if(index >= 99)
 				{
-					TM = 0;
-					index = 0;
-					gamePiece.moveToPosition(boardTransforms.get(index));
+					gamePiece.moveToPosition(boardTransforms.get(99));
 				}
 				else
 				{
+					gamePiece.moveToPosition(boardTransforms.get(index));
+				}
+			}
+			else if( time_machine_flag == 1)
+			{
+				if(timeMachine_counter > 0 && index < final_pos )
+				{
+					timeMachine_counter--;
+					index = index + value_tomove;
+					if(timeMachine_counter == 0 && index <final_pos)
+					{
+						time_machine_flag = 0;
+						index = 0;
+						gamePiece.moveToPosition(boardTransforms.get(index));
+					}
+					else
+					{
+						if(index >= 99)
+						{
+							gamePiece.moveToPosition(boardTransforms.get(99));
+						}
+						else
+						{
+							gamePiece.moveToPosition(boardTransforms.get(index));
+						}
+					}
+				}
+				else if(timeMachine_counter == 0 && index < final_pos)
+				{
+					time_machine_flag = 0;
+					index = 0;
+					gamePiece.moveToPosition(boardTransforms.get(index));
+				}
+				else if(timeMachine_counter >= 0 && index >= final_pos)
+				{
+					time_machine_flag = 0;
+					index = index + value_tomove;
 					if(index >= 99)
 					{
 						gamePiece.moveToPosition(boardTransforms.get(99));
@@ -373,83 +433,64 @@ public class Game extends ApplicationAdapter{
 					}
 				}
 			}
-			else if(TM_count == 0 && index < final_pos)
+	//		index = index + value;
+	//		gamePiece.moveToPosition(boardTransforms.get(index));
+	//		System.out.println(index +" "+ value_tomove);
+
+			int ret = obj.check_portal(index);
+			if(ret != 0)
 			{
-				TM = 0;
-				index = 0;
-				gamePiece.moveToPosition(boardTransforms.get(index));
-			}
-			else if(TM_count >= 0 && index >= final_pos)
-			{
-				TM = 0;
-				index = index + value;
+				index = index + ret;
+	//			if(index )
+				System.out.println("Portal ");
 				if(index >= 99)
 				{
-					gamePiece.moveToPosition(boardTransforms.get(99));
+					gamePiece.secondaryMove(boardTransforms.get(99));
 				}
 				else
 				{
-					gamePiece.moveToPosition(boardTransforms.get(index));
+					gamePiece.secondaryMove(boardTransforms.get(index));
+					if(obj.check_portal(index) != 0)
+					{
+						index = index + obj.check_portal(index);
+						System.out.println("Portal ");
+						if(index >= 99)
+						{
+							gamePiece.secondaryMove(boardTransforms.get(99));
+						}
+						else
+						{
+							gamePiece.secondaryMove(boardTransforms.get(index));
+						}
+					}
 				}
 			}
-		}
-		
-//		
-//		index = index + value;
-//		gamePiece.moveToPosition(boardTransforms.get(index));
-
-		System.out.println(index +" "+ value);
-		int ret = obj.check_portal(index);
-		if(ret != 0)
-		{
-			index = index + ret;
-//			if(index )
-			System.out.println("Portal ");
-			if(index >= 99)
+	//		
+			if(obj.check_TimeMachine(index) != 0)
 			{
-				gamePiece.secondaryMove(boardTransforms.get(99));
-			}
-			else
-			{
-				gamePiece.secondaryMove(boardTransforms.get(index));
-				if(obj.check_portal(index) != 0)
+	//			System.out.println(" time machine");
+				timeMachine_counter = 2;
+				time_machine_flag = 1;
+				if(index == temporary_TimeMachinePosition[0])
 				{
-					index = index + obj.check_portal(index);
-					System.out.println("Portal ");
-					if(index >= 99)
-					{
-						gamePiece.secondaryMove(boardTransforms.get(99));
-					}
-					else
-					{
-						gamePiece.secondaryMove(boardTransforms.get(index));
-					}
+					timemachineSprite1.setColor(1,1,1,1);
 				}
+				else if(index == temporary_TimeMachinePosition[1])
+				{
+					timemachineSprite2.setColor(1,1,1,1);
+				}
+				else
+				{
+					timemachineSprite3.setColor(1,1,1,1);
+				}
+				final_pos = obj.check_TimeMachine(index);
 			}
-		}
-//		
-		if(obj.check_TM(index) != 0)
-		{
-			System.out.println(" time machine");
-			TM_count = 2;
-			TM = 1;
-			if(index == tm_temp[0])
-			{
-				timemachineSprite1.setColor(1,1,1,1);
-			}
-			else if(index == tm_temp[1])
-			{
-				timemachineSprite2.setColor(1,1,1,1);
-			}
-			else
-			{
-				timemachineSprite3.setColor(1,1,1,1);
-			}
-			final_pos = obj.check_TM(index);
-		}
 		}
 	}
 	
+	/**
+	 * This function is used for disposing the board.
+	 */
 	@Override
 	public void dispose(){
 		boardBackground.dispose();
