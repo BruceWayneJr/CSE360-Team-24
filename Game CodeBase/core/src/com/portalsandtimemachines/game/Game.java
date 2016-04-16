@@ -393,6 +393,7 @@ public class Game extends ApplicationAdapter{
 			}
 			else if( time_machine_flag == 1)
 			{
+				index = index + value_tomove;
 				if(timeMachine_counter > 0 && index < final_pos )
 				{
 					timeMachine_counter--;
