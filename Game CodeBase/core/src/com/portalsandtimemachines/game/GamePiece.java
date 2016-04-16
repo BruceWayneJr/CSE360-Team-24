@@ -11,8 +11,12 @@ public class GamePiece {
 	public int owner;
 	public boolean moving;
 	public float moveSpeed;
+	public int locationIndex;
+	
+	public boolean show;
 	
 	private Vector2 destination;
+	private Vector2 secondDestination;
 	
 	public GamePiece(int playerNumber, Texture texture, Vector2 position){
 		owner = playerNumber;
@@ -20,8 +24,12 @@ public class GamePiece {
 		sprite.setOriginCenter();
 		sprite.setSize(32, 32);
 		sprite.setPosition(position.x, position.y);
-		moveSpeed = 500;
+		moveSpeed = 250;
 		moving = false;
+		destination = destination.Zero;
+		secondDestination = secondDestination.Zero; 
+		locationIndex = 0;
+		show = true;
 	}
 	
 	public void draw(SpriteBatch batch){
@@ -30,6 +38,10 @@ public class GamePiece {
 		}
 		sprite.setOriginCenter();
 		sprite.draw(batch);
+	}
+	
+	public void setLocationIndex(int newIndex){
+		locationIndex = newIndex;
 	}
 	
 	public void moveToPosition(Vector2 newPosition){
@@ -45,12 +57,22 @@ public class GamePiece {
 		if(transform.dst(destination) <= 5){
 			sprite.setPosition(destination.x, destination.y);
 			moving = false;
-//			System.out.println("Move ended");
+			destination = destination.Zero;
+			if(secondDestination != secondDestination.Zero){
+				destination = secondDestination;
+				moving = true;
+				secondDestination = secondDestination.Zero;
+			}
 		}
 		else{
 			Vector2 direction = transform.sub(destination).nor();
-//			sprite.setPosition(currentX - direction.x * moveSpeed * deltaTime, currentY - direction.y * moveSpeed * deltaTime);
 			sprite.translate(-direction.x * moveSpeed * deltaTime, -direction.y * moveSpeed * deltaTime);
 		}
 	}
+	
+	public void secondaryMove(Vector2 secondaryPosition){
+		secondDestination = secondaryPosition;
+	}
+	
+
 }

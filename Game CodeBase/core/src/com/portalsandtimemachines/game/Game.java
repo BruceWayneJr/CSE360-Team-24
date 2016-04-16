@@ -36,13 +36,16 @@ public class Game extends ApplicationAdapter{
 	Texture boardBackground;
 	Texture gamePieceTexture;
 	Texture portalTexture;
+	Texture timemachineTexture;
 	
 	private Viewport viewport;
 	OrthographicCamera camera;
 	
 	private Sprite boardSprite;
 	
-	
+	private Sprite timemachineSprite1;
+	private Sprite timemachineSprite2;
+	private Sprite timemachineSprite3;
 	
 	private Sprite portalSprite1;
 	private Sprite portalSprite2;
@@ -61,6 +64,8 @@ public class Game extends ApplicationAdapter{
 	
 	private int index = 0;
 	
+	private Random rand = new Random();
+	
 //	ShapeRenderer shapeRenderer;
 	
 	GamePiece gamePiece;
@@ -68,6 +73,8 @@ public class Game extends ApplicationAdapter{
 	Skin gameskin;
 	TextButton rollDice;
 	GameBoard obj = new GameBoard();
+	int[] temp;
+	int[] tm_temp;
 	
 	@Override
 	public void create () {
@@ -83,6 +90,7 @@ public class Game extends ApplicationAdapter{
 		boardBackground = new Texture("10x10_checkered_board.png");
 		gamePieceTexture = new Texture("GamePiece.png");
 		portalTexture = new Texture("brunswick-spiral-black-white.png");
+		timemachineTexture = new Texture("Time-Machine.png");
 		
 		BitmapFont bfont=new BitmapFont();
 //		bfont.scale(1);
@@ -125,6 +133,18 @@ public class Game extends ApplicationAdapter{
 		boardSprite.setSize(boardSize, boardSize);
 		boardSprite.setPosition(Gdx.graphics.getWidth()/2 - boardSize/2, 0); // 0 may need to be set as screenHeight/2 - boardsize/2
 
+		timemachineSprite1 = new Sprite(timemachineTexture);
+		timemachineSprite1.setOriginCenter();
+		timemachineSprite1.setSize(32, 32);
+		timemachineSprite1.setColor(0,0,0,0);
+		
+		timemachineSprite2 = new Sprite(timemachineTexture);
+		timemachineSprite2.setOriginCenter();
+		timemachineSprite2.setSize(32, 32);
+		
+		timemachineSprite3 = new Sprite(timemachineTexture);
+		timemachineSprite3.setOriginCenter();
+		timemachineSprite3.setSize(32, 32);
 		
 		portalSprite1 = new Sprite(portalTexture);
 		portalSprite1.setOriginCenter();
@@ -156,7 +176,7 @@ public class Game extends ApplicationAdapter{
 		
 		portalSprite8 = new Sprite(portalTexture);
 		portalSprite8.setOriginCenter();
-		portalSprite8.setSize(32, 32);		
+		portalSprite8.setSize(32, 32);
 		// Used to draw shapes on screen 
 //		shapeRenderer = new ShapeRenderer();
 		
@@ -168,8 +188,20 @@ public class Game extends ApplicationAdapter{
 		// Simply for testing purposes.
 		
 		obj.init();
-		int[] temp = obj.portal_positions(); 
+		obj.init_time_machine();
+		temp = obj.portal_positions(); 
 		int i = 0;
+		tm_temp = obj.TM_positions();
+		int j = 0;
+		
+		timemachineSprite1.setPosition(boardTransforms.get(tm_temp[j]).x - 32, boardTransforms.get(tm_temp[j]).y);
+		j++;
+		
+		timemachineSprite2.setPosition(boardTransforms.get(tm_temp[j]).x - 32, boardTransforms.get(tm_temp[j]).y);
+		j++;
+		
+		timemachineSprite3.setPosition(boardTransforms.get(tm_temp[j]).x - 32, boardTransforms.get(tm_temp[j]).y);
+		j++;
 		
 		portalSprite1.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
 		i++;
@@ -199,10 +231,10 @@ public class Game extends ApplicationAdapter{
 		
 		rollDice.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				Random rand = new Random();
 				int temp = rand.nextInt((6 - 1) + 1) + 1;
 				moving_piece(temp);
-				JOptionPane.showMessageDialog(null,"Clicked " + temp);
+				
+//				JOptionPane.showMessageDialog(null,"Clicked " + temp);
 //				rollDice.setText("Starting new game");
 			}
 		});
@@ -244,7 +276,9 @@ public class Game extends ApplicationAdapter{
 		
 		batch.begin();
 		boardSprite.draw(batch);
-		
+		timemachineSprite1.draw(batch);
+		timemachineSprite2.draw(batch);
+		timemachineSprite3.draw(batch);
 		portalSprite1.draw(batch);
 		portalSprite2.draw(batch);
 		portalSprite3.draw(batch);
@@ -266,37 +300,38 @@ public class Game extends ApplicationAdapter{
 //		shapeRenderer.circle(boardTransforms.get(index).x, boardTransforms.get(index).y, 5);
 //		shapeRenderer.end();
 		
-//		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
-//			if(index < 99){
-//				index++;
-//			}
-//			else{
-//				index = 0;
-//			}
-//			
-//			gamePiece.moveToPosition(boardTransforms.get(index));
-//		}
+
 	}
 	
 	
 	public void moving_piece(int value)
 	{
+<<<<<<< HEAD
 		
 		if((index+value) < 98)
 		{
 			index = index + value;
 			gamePiece.moveToPosition(boardTransforms.get(index));
+=======
+		index = index + value;
+		gamePiece.moveToPosition(boardTransforms.get(index));
+		timemachineSprite1.setColor(1,1,1,1);
+>>>>>>> origin/master
 		
 		if(obj.check_portal(index) != 0)
 		{
 			index = index + obj.check_portal(index);
-			gamePiece.moveToPosition(boardTransforms.get(index));
+			gamePiece.secondaryMove(boardTransforms.get(index));
 		}
+<<<<<<< HEAD
 		}
 		else
 		{
 			JOptionPane.showMessageDialog(null,"You Win!");
 		}
+=======
+
+>>>>>>> origin/master
 	}
 	
 	@Override
