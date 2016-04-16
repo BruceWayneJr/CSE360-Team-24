@@ -27,8 +27,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Random;
-
 import javax.swing.*;
 
 public class Game extends ApplicationAdapter{
@@ -72,9 +70,12 @@ public class Game extends ApplicationAdapter{
 	Stage gamestage; 	
 	Skin gameskin;
 	TextButton rollDice;
+<<<<<<< HEAD
 	GameBoard obj = new GameBoard();
 	int[] temp;
 	int[] tm_temp;
+=======
+>>>>>>> parent of d7b8e53... Configuring the piece movement
 	
 	@Override
 	public void create () {
@@ -186,7 +187,7 @@ public class Game extends ApplicationAdapter{
 		
 		// Draw portalSprite at the 44th space
 		// Simply for testing purposes.
-		
+		GameBoard obj = new GameBoard();
 		obj.init();
 		obj.init_time_machine();
 		temp = obj.portal_positions(); 
@@ -231,10 +232,14 @@ public class Game extends ApplicationAdapter{
 		
 		rollDice.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
+<<<<<<< HEAD
 				int temp = rand.nextInt((6 - 1) + 1) + 1;
 				moving_piece(temp);
 				
 //				JOptionPane.showMessageDialog(null,"Clicked " + temp);
+=======
+				JOptionPane.showMessageDialog(null,"Clicked");
+>>>>>>> parent of d7b8e53... Configuring the piece movement
 //				rollDice.setText("Starting new game");
 			}
 		});
@@ -300,38 +305,14 @@ public class Game extends ApplicationAdapter{
 //		shapeRenderer.circle(boardTransforms.get(index).x, boardTransforms.get(index).y, 5);
 //		shapeRenderer.end();
 		
+<<<<<<< HEAD
 
 	}
 	
 	
 	public void moving_piece(int value)
 	{
-<<<<<<< HEAD
-		
-		if((index+value) < 98)
-		{
-			index = index + value;
-			gamePiece.moveToPosition(boardTransforms.get(index));
-=======
-		index = index + value;
-		gamePiece.moveToPosition(boardTransforms.get(index));
-		timemachineSprite1.setColor(1,1,1,1);
->>>>>>> origin/master
-		
-		if(obj.check_portal(index) != 0)
-		{
-			index = index + obj.check_portal(index);
-			gamePiece.secondaryMove(boardTransforms.get(index));
-		}
-<<<<<<< HEAD
-		}
-		else
-		{
-			JOptionPane.showMessageDialog(null,"You Win!");
-		}
-=======
 
->>>>>>> origin/master
 	}
 	
 	@Override
