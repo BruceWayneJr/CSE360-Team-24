@@ -87,14 +87,16 @@ public class Game extends ApplicationAdapter{
 		// Sprite batch to store all sprites before sending to GPU
 		// =JOptionPane.showInputDialog("Please enter your usename: ");
 //		while(playername.isEmpty())
-//			playername=JOptionPane.showInputDialog("Please enter your username: ");
+//		{
+//			playername = JOptionPane.showInputDialog("Please enter your username: ");
+//		}
 //		JOptionPane.showMessageDialog(null, "Hello " + playername + '!');
 		batch = new SpriteBatch();
 		gamestage = new Stage();
 		gameskin = new Skin();
 		// Checkered background texture
 		boardBackground = new Texture("10x10_checkered_board.png");
-		gamePieceTexture = new Texture("GamePiece.png");
+		gamePieceTexture = new Texture("Chess-Game.png");
 		portalTexture = new Texture("brunswick-spiral-black-white.png");
 		timemachineTexture = new Texture("Time-Machine.png");
 		
@@ -312,20 +314,7 @@ public class Game extends ApplicationAdapter{
 //		shapeRenderer.circle(boardTransforms.get(index).x, boardTransforms.get(index).y, 5);
 //		shapeRenderer.end();
 		
-		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
-//			if(index < 99){
-//				index++;
-//			}
-//			else{
-//				index = 0;
-//			}
-//			
-//			gamePiece.moveToPosition(boardTransforms.get(temp));
-//			moving_piece(43);
-//			gamePiece.setAlpha();
-//			dice.changeAnimate();
-//			dice.showNumber(6);
-		}
+
 	}
 	
 	
@@ -337,51 +326,8 @@ public class Game extends ApplicationAdapter{
 		}
 		else
 		{
-		if(TM == 0)
-		{
-			index = index + value;
-			if(index >= 99)
+			if(TM == 0)
 			{
-				gamePiece.moveToPosition(boardTransforms.get(99));
-			}
-			else
-			{
-				gamePiece.moveToPosition(boardTransforms.get(index));
-			}
-		}
-		else if( TM == 1)
-		{
-			if(TM_count > 0 && index < final_pos )
-			{
-				TM_count--;
-				index = index + value;
-				if(TM_count == 0 && index <final_pos)
-				{
-					TM = 0;
-					index = 0;
-					gamePiece.moveToPosition(boardTransforms.get(index));
-				}
-				else
-				{
-					if(index >= 99)
-					{
-						gamePiece.moveToPosition(boardTransforms.get(99));
-					}
-					else
-					{
-						gamePiece.moveToPosition(boardTransforms.get(index));
-					}
-				}
-			}
-			else if(TM_count == 0 && index < final_pos)
-			{
-				TM = 0;
-				index = 0;
-				gamePiece.moveToPosition(boardTransforms.get(index));
-			}
-			else if(TM_count >= 0 && index >= final_pos)
-			{
-				TM = 0;
 				index = index + value;
 				if(index >= 99)
 				{
@@ -392,61 +338,104 @@ public class Game extends ApplicationAdapter{
 					gamePiece.moveToPosition(boardTransforms.get(index));
 				}
 			}
-		}
-		
-//		
-//		index = index + value;
-//		gamePiece.moveToPosition(boardTransforms.get(index));
-
-		System.out.println(index +" "+ value);
-		int ret = obj.check_portal(index);
-		if(ret != 0)
-		{
-			index = index + ret;
-//			if(index )
-			System.out.println("Portal ");
-			if(index >= 99)
+			else if( TM == 1)
 			{
-				gamePiece.secondaryMove(boardTransforms.get(99));
-			}
-			else
-			{
-				gamePiece.secondaryMove(boardTransforms.get(index));
-				if(obj.check_portal(index) != 0)
+				if(TM_count > 0 && index < final_pos )
 				{
-					index = index + obj.check_portal(index);
-					System.out.println("Portal ");
-					if(index >= 99)
+					TM_count--;
+					index = index + value;
+					if(TM_count == 0 && index <final_pos)
 					{
-						gamePiece.secondaryMove(boardTransforms.get(99));
+						TM = 0;
+						index = 0;
+						gamePiece.moveToPosition(boardTransforms.get(index));
 					}
 					else
 					{
-						gamePiece.secondaryMove(boardTransforms.get(index));
+						if(index >= 99)
+						{
+							gamePiece.moveToPosition(boardTransforms.get(99));
+						}
+						else
+						{
+							gamePiece.moveToPosition(boardTransforms.get(index));
+						}
+					}
+				}
+				else if(TM_count == 0 && index < final_pos)
+				{
+					TM = 0;
+					index = 0;
+					gamePiece.moveToPosition(boardTransforms.get(index));
+				}
+				else if(TM_count >= 0 && index >= final_pos)
+				{
+					TM = 0;
+					index = index + value;
+					if(index >= 99)
+					{
+						gamePiece.moveToPosition(boardTransforms.get(99));
+					}
+					else
+					{
+						gamePiece.moveToPosition(boardTransforms.get(index));
 					}
 				}
 			}
-		}
-//		
-		if(obj.check_TM(index) != 0)
-		{
-			System.out.println(" time machine");
-			TM_count = 2;
-			TM = 1;
-			if(index == tm_temp[0])
+			
+	//		
+	//		index = index + value;
+	//		gamePiece.moveToPosition(boardTransforms.get(index));
+	
+			System.out.println(index +" "+ value);
+			int ret = obj.check_portal(index);
+			if(ret != 0)
 			{
-				timemachineSprite1.setColor(1,1,1,1);
+				index = index + ret;
+	//			if(index )
+				System.out.println("Portal ");
+				if(index >= 99)
+				{
+					gamePiece.secondaryMove(boardTransforms.get(99));
+				}
+				else
+				{
+					gamePiece.secondaryMove(boardTransforms.get(index));
+					if(obj.check_portal(index) != 0)
+					{
+						index = index + obj.check_portal(index);
+						System.out.println("Portal ");
+						if(index >= 99)
+						{
+							gamePiece.secondaryMove(boardTransforms.get(99));
+						}
+						else
+						{
+							gamePiece.secondaryMove(boardTransforms.get(index));
+						}
+					}
+				}
 			}
-			else if(index == tm_temp[1])
+	//		
+			if(obj.check_TM(index) != 0)
 			{
-				timemachineSprite2.setColor(1,1,1,1);
+				System.out.println(" time machine");
+				TM_count = 2;
+				TM = 1;
+				if(index == tm_temp[0])
+				{
+					timemachineSprite1.setColor(1,1,1,1);
+				}
+				else if(index == tm_temp[1])
+				{
+					timemachineSprite2.setColor(1,1,1,1);
+				}
+				else
+				{
+					timemachineSprite3.setColor(1,1,1,1);
+				}
+				final_pos = obj.check_TM(index);
 			}
-			else
-			{
-				timemachineSprite3.setColor(1,1,1,1);
-			}
-			final_pos = obj.check_TM(index);
-		}
 		}
 	}
 	
