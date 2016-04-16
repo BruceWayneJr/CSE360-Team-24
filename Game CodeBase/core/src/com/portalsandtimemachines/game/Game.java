@@ -83,6 +83,10 @@ public class Game extends ApplicationAdapter{
 	@Override
 	public void create () {
 		// Sprite batch to store all sprites before sending to GPU
+		String playername;// =JOptionPane.showInputDialog("Please enter your usename: ");
+		while(playername.isEmpty())
+			playername=JOptionPane.showInputDialog("Please enter your usename: ");
+		JOptionPane.showMessageDialog(null, "Hello " + playername + '!');
 		batch = new SpriteBatch();
 		gamestage = new Stage();
 		gameskin = new Skin();
@@ -325,7 +329,12 @@ public class Game extends ApplicationAdapter{
 	
 	public void moving_piece(int value)
 	{
-		
+		if((index+value) > 98 )
+		{
+			JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+		}
+		else
+		{
 		if(TM == 0)
 		{
 			index = index + value;
@@ -394,6 +403,7 @@ public class Game extends ApplicationAdapter{
 				timemachineSprite3.setColor(1,1,1,1);
 			}
 			final_pos = obj.check_TM(index);
+		}
 		}
 	}
 	
