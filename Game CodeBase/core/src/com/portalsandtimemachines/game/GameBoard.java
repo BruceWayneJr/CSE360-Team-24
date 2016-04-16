@@ -27,7 +27,7 @@ public class GameBoard {
 	        {
 	            set_portals();
 	        }
-	  
+	        System.out.println("Initializing the portal values");
 	    }
 	    
 	    int roll_die()
@@ -164,6 +164,7 @@ public class GameBoard {
 	        {
 	            set_timemachine();
 	        }
+	        System.out.println("Initializing the Time Machine values");
 	    }
 	    
 	    
