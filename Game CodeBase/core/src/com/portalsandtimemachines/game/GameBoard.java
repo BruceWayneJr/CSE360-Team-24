@@ -175,9 +175,8 @@ public class GameBoard {
 	     */
 	    int[] timeMachine_positions()
 	    {
-	    	System.out.println("Returning the positions of the Timemachine");
+	    	
 	        return timeMachine_array;
-	        
 	    }
 	    
 	   /** Function that computes the position of each time-machine in the game board and their
