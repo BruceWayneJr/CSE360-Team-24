@@ -378,9 +378,9 @@ public class Game extends ApplicationAdapter{
 	{
 
 		
-			if(TM == 0)
+			if(time_machine_flag == 0)
 			{
-				index = index + value;
+				index = index + value_tomove;
 				if(index > 98)
 				{
 					gamePiece.moveToPosition(boardTransforms.get(99));
@@ -427,8 +427,8 @@ public class Game extends ApplicationAdapter{
 					time_machine_flag = 0;
 					if(index > 98)
 
-					TM = 0;
-					index = index + value;
+						time_machine_flag = 0;
+					index = index + value_tomove;
 					if(index > 98)
 					{
 						gamePiece.moveToPosition(boardTransforms.get(99));
