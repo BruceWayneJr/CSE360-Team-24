@@ -100,10 +100,14 @@ public class Game extends ApplicationAdapter{
 	@Override
 	public void create () {
 		// Sprite batch to store all sprites before sending to GPU
-		// =JOptionPane.showInputDialog("Please enter your usename: ");
-//		while(playername.isEmpty())
-//			playername=JOptionPane.showInputDialog("Please enter your username: ");
-//		JOptionPane.showMessageDialog(null, "Hello " + playername + '!');
+
+		String playername = JOptionPane.showInputDialog("Please enter your usename: ");
+		while(playername.isEmpty())
+		{
+			playername = JOptionPane.showInputDialog("Please enter your username: ");
+		}
+		JOptionPane.showMessageDialog(null, "Hello " + playername + '!' + "\nWelcome to Portals & Time-Machines" );
+		
 		batch = new SpriteBatch();
 		gamestage = new Stage();
 		gameskin = new Skin();
@@ -261,7 +265,8 @@ public class Game extends ApplicationAdapter{
 				int temp = obj.roll_die();
 				dice.showNumber(temp);
 				moving_piece(temp);
-//				JOptionPane.showMessageDialog(null,"Clicked " + temp);
+				if(index > 98)
+				JOptionPane.showMessageDialog(null,"You Won!");
 //				rollDice.setText("Starting new game");
 			}
 		});
@@ -371,18 +376,15 @@ public class Game extends ApplicationAdapter{
 	 */
 	public void moving_piece(int value_tomove)
 	{
-		index = index + value_tomove;
-		if((index) > 99 )
-		{
-			JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
-		}
-		else
-		{
-			if(time_machine_flag == 0)
+
+		
+			if(TM == 0)
 			{
-				if(index >= 99)
+				index = index + value;
+				if(index > 98)
 				{
 					gamePiece.moveToPosition(boardTransforms.get(99));
+					//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 				}
 				else
 				{
@@ -402,9 +404,10 @@ public class Game extends ApplicationAdapter{
 					}
 					else
 					{
-						if(index >= 99)
+						if(index > 98)
 						{
 							gamePiece.moveToPosition(boardTransforms.get(99));
+							//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 						}
 						else
 						{
@@ -420,10 +423,16 @@ public class Game extends ApplicationAdapter{
 				}
 				else if(timeMachine_counter >= 0 && index >= final_pos)
 				{
+
 					time_machine_flag = 0;
-					if(index >= 99)
+					if(index > 98)
+
+					TM = 0;
+					index = index + value;
+					if(index > 98)
 					{
 						gamePiece.moveToPosition(boardTransforms.get(99));
+						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 					}
 					else
 					{
@@ -441,9 +450,10 @@ public class Game extends ApplicationAdapter{
 				index = index + ret;
 	//			if(index )
 				System.out.println("Portal ");
-				if(index >= 99)
+				if(index > 98)
 				{
 					gamePiece.secondaryMove(boardTransforms.get(99));
+					//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 				}
 				else
 				{
@@ -452,9 +462,10 @@ public class Game extends ApplicationAdapter{
 					{
 						index = index + obj.check_portal(index);
 						System.out.println("Portal ");
-						if(index >= 99)
+						if(index > 98)
 						{
 							gamePiece.secondaryMove(boardTransforms.get(99));
+							//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 						}
 						else
 						{
@@ -483,7 +494,10 @@ public class Game extends ApplicationAdapter{
 				}
 				final_pos = obj.check_timeMachine(index);
 			}
-		}
+			//if(index > 98)
+				//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+			
+		
 	}
 	
 	/**
