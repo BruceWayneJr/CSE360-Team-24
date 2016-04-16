@@ -340,8 +340,9 @@ public class Game extends ApplicationAdapter{
 				if(TM_count == 0 && index <final_pos)
 				{
 					TM = 0;
-					index = 0;
 					gamePiece.moveToPosition(boardTransforms.get(index));
+					index = 0;
+					gamePiece.secondaryMove(boardTransforms.get(index));
 				}
 				else
 				{
@@ -351,8 +352,9 @@ public class Game extends ApplicationAdapter{
 			else if(TM_count == 0 && index < final_pos)
 			{
 				TM = 0;
-				index = 0;
 				gamePiece.moveToPosition(boardTransforms.get(index));
+				index = 0;
+				gamePiece.secondaryMove(boardTransforms.get(index));
 			}
 			else if(TM_count >= 0 && index >= final_pos)
 			{
@@ -375,6 +377,8 @@ public class Game extends ApplicationAdapter{
 			System.out.println("Hi ");
 			gamePiece.secondaryMove(boardTransforms.get(index));
 		}
+//		System.out.println(tm_temp[0]+" "+tm_temp[1]+" "+tm_temp[2]+" ");
+		
 //		
 		if(obj.check_TM(index) != 0)
 		{

@@ -177,7 +177,7 @@ public class GameBoard {
 	        int check = 0;
 	        while(check == 0)                           // Flag to check whether the resulting square is within range of the Game board.
 	        {
-	            int moving = rand.nextInt(4) + 4;
+	            int moving = rand.nextInt(7) + 4;
 	            int sum = 0;
 	            sum = TM_pos + moving;
 	            
