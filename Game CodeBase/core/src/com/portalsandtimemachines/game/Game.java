@@ -72,6 +72,8 @@ public class Game extends ApplicationAdapter{
 	Stage gamestage; 	
 	Skin gameskin;
 	TextButton rollDice;
+	
+	String playername;
 	GameBoard obj = new GameBoard();
 	int[] temp;
 	int[] tm_temp;
@@ -83,10 +85,10 @@ public class Game extends ApplicationAdapter{
 	@Override
 	public void create () {
 		// Sprite batch to store all sprites before sending to GPU
-		String playername;// =JOptionPane.showInputDialog("Please enter your usename: ");
-		while(playername.isEmpty())
-			playername=JOptionPane.showInputDialog("Please enter your usename: ");
-		JOptionPane.showMessageDialog(null, "Hello " + playername + '!');
+		// =JOptionPane.showInputDialog("Please enter your usename: ");
+//		while(playername.isEmpty())
+//			playername=JOptionPane.showInputDialog("Please enter your username: ");
+//		JOptionPane.showMessageDialog(null, "Hello " + playername + '!');
 		batch = new SpriteBatch();
 		gamestage = new Stage();
 		gameskin = new Skin();
