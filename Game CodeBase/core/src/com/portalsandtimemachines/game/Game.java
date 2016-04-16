@@ -109,7 +109,7 @@ public class Game extends ApplicationAdapter{
 		gameskin = new Skin();
 		// Checkered background texture
 		boardBackground = new Texture("10x10_checkered_board.png");
-		gamePieceTexture = new Texture("GamePiece.png");
+		gamePieceTexture = new Texture("Chess-Game.png");
 		portalTexture = new Texture("brunswick-spiral-black-white.png");
 		timemachineTexture = new Texture("Time-Machine.png");
 		
