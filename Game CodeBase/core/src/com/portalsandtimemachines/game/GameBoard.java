@@ -22,6 +22,12 @@ public class GameBoard {
 	  
 	    }
 	    
+	    int roll_die()
+	    {
+	    	Random rand = new Random();
+	    	return rand.nextInt((6 - 1) + 1) + 1;
+	    }
+	    
 	    /* Function that displays the information regarding all the portals. 
 	    *  Used by developers for verification.
 	    * @param none
