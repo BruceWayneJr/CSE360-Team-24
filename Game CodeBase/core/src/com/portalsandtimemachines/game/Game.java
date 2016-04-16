@@ -71,6 +71,12 @@ public class Game extends ApplicationAdapter{
 	Skin gameskin;
 	TextButton rollDice;
 	GameBoard obj = new GameBoard();
+	int[] temp;
+	int[] tm_temp;
+	static int TM_count = 0;
+	static int TM = 0;
+	static int final_pos = 0;
+
 	
 	@Override
 	public void create () {
@@ -180,13 +186,19 @@ public class Game extends ApplicationAdapter{
 		
 		obj.init();
 		obj.init_time_machine();
-		int[] temp = obj.portal_positions(); 
+		temp = obj.portal_positions(); 
 		int i = 0;
-		int[] tm_temp = obj.TM_positions();
+		tm_temp = obj.TM_positions();
 		int j = 0;
 		
+		timemachineSprite1.setPosition(boardTransforms.get(tm_temp[j]).x - 32, boardTransforms.get(tm_temp[j]).y);
+		j++;
 		
+		timemachineSprite2.setPosition(boardTransforms.get(tm_temp[j]).x - 32, boardTransforms.get(tm_temp[j]).y);
+		j++;
 		
+		timemachineSprite3.setPosition(boardTransforms.get(tm_temp[j]).x - 32, boardTransforms.get(tm_temp[j]).y);
+		j++;
 		
 		portalSprite1.setPosition(boardTransforms.get(temp[i]).x - 32, boardTransforms.get(temp[i]).y);
 		i++;
@@ -261,7 +273,9 @@ public class Game extends ApplicationAdapter{
 		
 		batch.begin();
 		boardSprite.draw(batch);
-		
+		timemachineSprite1.draw(batch);
+		timemachineSprite2.draw(batch);
+		timemachineSprite3.draw(batch);
 		portalSprite1.draw(batch);
 		portalSprite2.draw(batch);
 		portalSprite3.draw(batch);
@@ -298,17 +312,54 @@ public class Game extends ApplicationAdapter{
 	
 	public void moving_piece(int value)
 	{
-		index = index + value;
-		gamePiece.moveToPosition(boardTransforms.get(index));
+		
+		if(TM == 0)
+		{
+			index = index + value;
+			gamePiece.moveToPosition(boardTransforms.get(index));
+		}
+		else if( TM == 1)
+		{
+			if(TM_count > 0 && index < final_pos )
+			{
+				TM_count--;
+				index = index + value;
+				if(TM_count == 0 && index <final_pos)
+				{
+					TM = 0;
+					index = 0;
+					gamePiece.moveToPosition(boardTransforms.get(index));
+				}
+				else
+				{
+					gamePiece.moveToPosition(boardTransforms.get(index));
+				}
+			}
+			else if(TM_count == 0 && index < final_pos)
+			{
+				TM = 0;
+				index = 0;
+				gamePiece.moveToPosition(boardTransforms.get(index));
+			}
+			else if(TM_count >= 0 && index >= final_pos)
+			{
+				TM = 0;
+				index = index + value;
+				gamePiece.moveToPosition(boardTransforms.get(index));
+			}
+		}
 		
 		if(obj.check_portal(index) != 0)
 		{
 			index = index + obj.check_portal(index);
 			gamePiece.moveToPosition(boardTransforms.get(index));
 		}
-		else if(obj.check_TM(index) != 0)
+		
+		if(obj.check_TM(index) != 0)
 		{
-			
+			TM_count = 2;
+			TM = 1;
+			final_pos = obj.check_TM(index);
 		}
 	}
 	

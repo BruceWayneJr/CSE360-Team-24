@@ -148,11 +148,12 @@ public class GameBoard {
 	    
 	    int[] TM_positions()
 	    {
+	    	
 	        return B;
 	    }
-	    /* Function that computes the position of each portal in the game board and their c
-	    *  corresponding attributes. Their attributes correspod to information such as 
-	    *  whether the portal will push down(-1) or up(+1), how many squares will the pawn 
+	    /* Function that computes the position of each time-machine in the game board and their
+	    *  corresponding attributes. Their attributes correspond to information such as 
+	    *  whether the portal will push up(+1), how many squares will the pawn 
 	    *  be moved and final square in which the pawn will land.
 	    * @param none
 	    */
@@ -166,7 +167,7 @@ public class GameBoard {
 	        
 	        TM_pos = rand.nextInt((99 - 12) + 1) + 2;
 	 
-	        while(hmap1.containsKey(TM_pos) || hmap.containsKey(TM_pos))         // If the position already exist in the map.
+	        while(hmap1.containsKey(TM_pos) || hmap.containsKey(TM_pos))         // If the position already exist in the map and it don't clash with portal.
 	        {
 	            TM_pos = rand.nextInt((99 - 12) + 1) + 2;
 	        }
@@ -176,7 +177,7 @@ public class GameBoard {
 	        int check = 0;
 	        while(check == 0)                           // Flag to check whether the resulting square is within range of the Game board.
 	        {
-	            int moving = rand.nextInt(4) + 7;
+	            int moving = rand.nextInt(4) + 4;
 	            int sum = 0;
 	            sum = TM_pos + moving;
 	            
@@ -196,9 +197,9 @@ public class GameBoard {
 	        j++;
 	    }
 	    
-	    /* Function that checks whether the passed square number has a portal 
+	    /* Function that checks whether the passed square number has a time-machine 
 	    *  associated with it. If it is true then the function returns the 
-	    *  square number to which the pawn needs to be moved, else it returns -1.
+	    *  square number to which the pawn needs to be moved, else it returns 0.
 	    *  
 	    * @param position of the square.
 	    */
@@ -212,11 +213,11 @@ public class GameBoard {
 	                if(key == pos)
 	                {
 	                    temp = hmap1.get(pos);
-	                    return temp.get(2);             // Returns the position to which the pwan needs to be moved.
+	                    return temp.get(2);             // Returns the position to which the pawn needs to be moved.
 	                }
 	            }
 	        }
-	        return 0;                                  //  If the square does not have a portal associatd with it.
+	        return 0;                                  //  If the square does not have a portal associated with it.
 	    }
 	
 }
