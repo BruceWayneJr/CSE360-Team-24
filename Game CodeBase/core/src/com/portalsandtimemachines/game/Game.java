@@ -138,14 +138,17 @@ public class Game extends ApplicationAdapter{
 		timemachineSprite1 = new Sprite(timemachineTexture);
 		timemachineSprite1.setOriginCenter();
 		timemachineSprite1.setSize(32, 32);
+		timemachineSprite1.setColor(0,0,0,0);
 		
 		timemachineSprite2 = new Sprite(timemachineTexture);
 		timemachineSprite2.setOriginCenter();
 		timemachineSprite2.setSize(32, 32);
+		timemachineSprite2.setColor(0,0,0,0);
 		
 		timemachineSprite3 = new Sprite(timemachineTexture);
 		timemachineSprite3.setOriginCenter();
 		timemachineSprite3.setSize(32, 32);
+		timemachineSprite3.setColor(0,0,0,0);
 		
 		portalSprite1 = new Sprite(portalTexture);
 		portalSprite1.setOriginCenter();
@@ -320,54 +323,70 @@ public class Game extends ApplicationAdapter{
 	public void moving_piece(int value)
 	{
 		
-		if(TM == 0)
-		{
-			index = index + value;
-			gamePiece.moveToPosition(boardTransforms.get(index));
-		}
-		else if( TM == 1)
-		{
-			if(TM_count > 0 && index < final_pos )
-			{
-				TM_count--;
-				index = index + value;
-				if(TM_count == 0 && index <final_pos)
-				{
-					TM = 0;
-					index = 0;
-					gamePiece.moveToPosition(boardTransforms.get(index));
-				}
-				else
-				{
-					gamePiece.moveToPosition(boardTransforms.get(index));
-				}
-			}
-			else if(TM_count == 0 && index < final_pos)
-			{
-				TM = 0;
-				index = 0;
-				gamePiece.moveToPosition(boardTransforms.get(index));
-			}
-			else if(TM_count >= 0 && index >= final_pos)
-			{
-				TM = 0;
-				index = index + value;
-				gamePiece.moveToPosition(boardTransforms.get(index));
-			}
-		}
+//		if(TM == 0)
+//		{
+//			index = index + value;
+//			gamePiece.moveToPosition(boardTransforms.get(index));
+//		}
+//		else if( TM == 1)
+//		{
+//			if(TM_count > 0 && index < final_pos )
+//			{
+//				TM_count--;
+//				index = index + value;
+//				if(TM_count == 0 && index <final_pos)
+//				{
+//					TM = 0;
+//					index = 0;
+//					gamePiece.moveToPosition(boardTransforms.get(index));
+//				}
+//				else
+//				{
+//					gamePiece.moveToPosition(boardTransforms.get(index));
+//				}
+//			}
+//			else if(TM_count == 0 && index < final_pos)
+//			{
+//				TM = 0;
+//				index = 0;
+//				gamePiece.moveToPosition(boardTransforms.get(index));
+//			}
+//			else if(TM_count >= 0 && index >= final_pos)
+//			{
+//				TM = 0;
+//				index = index + value;
+//				gamePiece.moveToPosition(boardTransforms.get(index));
+//			}
+//		}
+		
+		
+		index = index + value;
+		gamePiece.moveToPosition(boardTransforms.get(index));
 		
 		if(obj.check_portal(index) != 0)
 		{
 			index = index + obj.check_portal(index);
 			gamePiece.moveToPosition(boardTransforms.get(index));
 		}
-		
-		if(obj.check_TM(index) != 0)
-		{
-			TM_count = 2;
-			TM = 1;
-			final_pos = obj.check_TM(index);
-		}
+//		
+//		if(obj.check_TM(index) != 0)
+//		{
+//			TM_count = 2;
+//			TM = 1;
+//			if(index == tm_temp[0])
+//			{
+//				timemachineSprite1.setColor(1,1,1,1);
+//			}
+//			else if(index == tm_temp[1])
+//			{
+//				timemachineSprite2.setColor(1,1,1,1);
+//			}
+//			else
+//			{
+//				timemachineSprite3.setColor(1,1,1,1);
+//			}
+//			final_pos = obj.check_TM(index);
+//		}
 	}
 	
 	@Override
