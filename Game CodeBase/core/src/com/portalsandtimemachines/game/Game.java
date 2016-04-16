@@ -73,7 +73,9 @@ public class Game extends ApplicationAdapter{
 	public void create () {
 		// Sprite batch to store all sprites before sending to GPU
 		String name = JOptionPane.showInputDialog("What is your name?");
-        JOptionPane.showMessageDialog(null, "Hello " + name + '!');
+		while(name.isEmpty())
+			name = JOptionPane.showInputDialog("Please enter your name");
+		JOptionPane.showMessageDialog(null, "Hello " + name + '!');
 		batch = new SpriteBatch();
 		gamestage = new Stage();
 		gameskin = new Skin();
