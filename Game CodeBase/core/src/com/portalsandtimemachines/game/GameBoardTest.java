@@ -60,6 +60,10 @@ public class GameBoardTest {
 		
 	}
 
+	/**
+	 * Check whether the portals are not created beyond square 100.
+	 */
+	
 	@Test
 	public void testportal_positionsnotathundred() {
 //		fail("Not yet implemented");
