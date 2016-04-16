@@ -235,7 +235,7 @@ public class Game extends ApplicationAdapter{
 				Random rand = new Random();
 				int temp = rand.nextInt((6 - 1) + 1) + 1;
 				moving_piece(temp);
-				JOptionPane.showMessageDialog(null,"Clicked " + temp);
+//				JOptionPane.showMessageDialog(null,"Clicked " + temp);
 //				rollDice.setText("Starting new game");
 			}
 		});
