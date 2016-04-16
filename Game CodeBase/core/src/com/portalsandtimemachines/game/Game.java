@@ -27,6 +27,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
+
 import javax.swing.*;
 
 public class Game extends ApplicationAdapter{
@@ -62,35 +64,23 @@ public class Game extends ApplicationAdapter{
 	
 	private int index = 0;
 	
-	private Random rand = new Random();
-	
 //	ShapeRenderer shapeRenderer;
 	
 	GamePiece gamePiece;
 	Stage gamestage; 	
 	Skin gameskin;
 	TextButton rollDice;
-<<<<<<< HEAD
 	GameBoard obj = new GameBoard();
 	int[] temp;
 	int[] tm_temp;
-<<<<<<< HEAD
 	static int TM_count = 0;
 	static int TM = 0;
 	static int final_pos = 0;
 
-=======
-=======
->>>>>>> parent of d7b8e53... Configuring the piece movement
->>>>>>> origin/master
 	
 	@Override
 	public void create () {
 		// Sprite batch to store all sprites before sending to GPU
-		String name = JOptionPane.showInputDialog("Please enter your name");
-		while(name.isEmpty())
-			name = JOptionPane.showInputDialog("Please enter your name");
-		JOptionPane.showMessageDialog(null, "Hello " + name + '!');
 		batch = new SpriteBatch();
 		gamestage = new Stage();
 		gameskin = new Skin();
@@ -144,7 +134,6 @@ public class Game extends ApplicationAdapter{
 		timemachineSprite1 = new Sprite(timemachineTexture);
 		timemachineSprite1.setOriginCenter();
 		timemachineSprite1.setSize(32, 32);
-		timemachineSprite1.setColor(0,0,0,0);
 		
 		timemachineSprite2 = new Sprite(timemachineTexture);
 		timemachineSprite2.setOriginCenter();
@@ -184,7 +173,7 @@ public class Game extends ApplicationAdapter{
 		
 		portalSprite8 = new Sprite(portalTexture);
 		portalSprite8.setOriginCenter();
-		portalSprite8.setSize(32, 32);
+		portalSprite8.setSize(32, 32);		
 		// Used to draw shapes on screen 
 //		shapeRenderer = new ShapeRenderer();
 		
@@ -194,7 +183,7 @@ public class Game extends ApplicationAdapter{
 		
 		// Draw portalSprite at the 44th space
 		// Simply for testing purposes.
-		GameBoard obj = new GameBoard();
+		
 		obj.init();
 		obj.init_time_machine();
 		temp = obj.portal_positions(); 
@@ -239,14 +228,10 @@ public class Game extends ApplicationAdapter{
 		
 		rollDice.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-<<<<<<< HEAD
+				Random rand = new Random();
 				int temp = rand.nextInt((6 - 1) + 1) + 1;
 				moving_piece(temp);
-				
-//				JOptionPane.showMessageDialog(null,"Clicked " + temp);
-=======
-				JOptionPane.showMessageDialog(null,"Clicked");
->>>>>>> parent of d7b8e53... Configuring the piece movement
+				JOptionPane.showMessageDialog(null,"Clicked " + temp);
 //				rollDice.setText("Starting new game");
 			}
 		});
@@ -312,14 +297,21 @@ public class Game extends ApplicationAdapter{
 //		shapeRenderer.circle(boardTransforms.get(index).x, boardTransforms.get(index).y, 5);
 //		shapeRenderer.end();
 		
-<<<<<<< HEAD
-
+//		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
+//			if(index < 99){
+//				index++;
+//			}
+//			else{
+//				index = 0;
+//			}
+//			
+//			gamePiece.moveToPosition(boardTransforms.get(index));
+//		}
 	}
 	
 	
 	public void moving_piece(int value)
 	{
-<<<<<<< HEAD
 		
 		if(TM == 0)
 		{
@@ -369,9 +361,6 @@ public class Game extends ApplicationAdapter{
 			TM = 1;
 			final_pos = obj.check_TM(index);
 		}
-=======
-
->>>>>>> origin/master
 	}
 	
 	@Override
