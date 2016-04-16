@@ -67,7 +67,7 @@ public class GameBoardTest {
 //		fail("Not yet implemented");
 		GameBoard testobj = new GameBoard();
 		testobj.init_time_machine();
-		int[] temp = testobj.TM_positions();
+		int[] temp = testobj.timeMachine_positions();
 		assertNotNull(temp);
 		
 	}
@@ -78,7 +78,7 @@ public class GameBoardTest {
 //		fail("Not yet implemented");
 		GameBoard testobj = new GameBoard();
 		testobj.init_time_machine();
-		assertEquals(0,testobj.check_TM(150));
+		assertEquals(0,testobj.check_timeMachine(150));
 	}
 
 }
