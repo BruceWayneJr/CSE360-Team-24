@@ -371,7 +371,8 @@ public class Game extends ApplicationAdapter{
 	 */
 	public void moving_piece(int value_tomove)
 	{
-		if((index+value_tomove) > 98 )
+		index = index + value_tomove;
+		if((index) > 99 )
 		{
 			JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 		}
@@ -379,7 +380,6 @@ public class Game extends ApplicationAdapter{
 		{
 			if(time_machine_flag == 0)
 			{
-				index = index + value_tomove;
 				if(index >= 99)
 				{
 					gamePiece.moveToPosition(boardTransforms.get(99));
@@ -394,7 +394,6 @@ public class Game extends ApplicationAdapter{
 				if(timeMachine_counter > 0 && index < final_pos )
 				{
 					timeMachine_counter--;
-					index = index + value_tomove;
 					if(timeMachine_counter == 0 && index <final_pos)
 					{
 						time_machine_flag = 0;
@@ -422,7 +421,6 @@ public class Game extends ApplicationAdapter{
 				else if(timeMachine_counter >= 0 && index >= final_pos)
 				{
 					time_machine_flag = 0;
-					index = index + value_tomove;
 					if(index >= 99)
 					{
 						gamePiece.moveToPosition(boardTransforms.get(99));
