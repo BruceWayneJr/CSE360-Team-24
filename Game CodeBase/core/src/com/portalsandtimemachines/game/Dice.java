@@ -18,6 +18,7 @@ public class Dice {
     float stateTime;
     boolean animate;
     private Random rand;
+    private float animationSpeed;
     
     Dice(){
     	rand = new Random();
@@ -32,25 +33,28 @@ public class Dice {
     			rollFrames[index++] = temp[i][j];
     		}
     	}
-    	rollAnimation = new Animation(0.05f, rollFrames);
+    	animationSpeed = 0.05f;
+    	rollAnimation = new Animation(animationSpeed, rollFrames);
     	stateTime = 0f;
     	animate = true;
     }
     
     void draw(SpriteBatch batch){
     	if(animate){
-//    		stateTime += Gdx.graphics.getDeltaTime();
-    		stateTime = rand.nextInt(5) * 0.05f;
+    		stateTime += Gdx.graphics.getDeltaTime();
+//    		stateTime = rand.nextInt(5) * animationSpeed;
+    		currentFrame = rollAnimation.getKeyFrame(stateTime, true);
     	}
-    	currentFrame = rollAnimation.getKeyFrame(stateTime, true);
         batch.draw(currentFrame, 
         		Gdx.graphics.getWidth()/2 - (diceSheet.getWidth() / FRAME_COLS),
         		Gdx.graphics.getHeight()/2 - (diceSheet.getHeight() / FRAME_COLS));
     }
     
-    void showNumber(float index){
+    void showNumber(float number){
     	animate = false;
-    	currentFrame = rollAnimation.getKeyFrame(index - 1, false);
+    	number -= 1;
+    	number *= animationSpeed;
+    	currentFrame = rollAnimation.getKeyFrame(number, false);
     }
     
     void changeAnimate(){

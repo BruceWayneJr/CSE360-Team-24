@@ -235,7 +235,7 @@ public class Game extends ApplicationAdapter{
 				Random rand = new Random();
 				int temp = rand.nextInt((6 - 1) + 1) + 1;
 				moving_piece(temp);
-				JOptionPane.showMessageDialog(null,"Clicked " + temp);
+//				JOptionPane.showMessageDialog(null,"Clicked " + temp);
 //				rollDice.setText("Starting new game");
 			}
 		});
@@ -302,7 +302,7 @@ public class Game extends ApplicationAdapter{
 //		shapeRenderer.circle(boardTransforms.get(index).x, boardTransforms.get(index).y, 5);
 //		shapeRenderer.end();
 		
-//		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
+		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
 //			if(index < 99){
 //				index++;
 //			}
@@ -313,7 +313,9 @@ public class Game extends ApplicationAdapter{
 //			gamePiece.moveToPosition(boardTransforms.get(temp));
 //			moving_piece(43);
 //			gamePiece.setAlpha();
-			dice.changeAnimate();
+//			dice.changeAnimate();
+			dice.showNumber(6);
+		}
 	}
 	
 	
