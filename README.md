@@ -27,6 +27,10 @@ Running the Project
 -	Right click the desktop project, Run As -> Java Application.
 -	Select DesktopLauncher.java
 
+  -or-
+  
+- Right click DesktopLauncher.java from 'Portals-and-Timemachines-desktop' folder in package explorer, Run As -> Java Application.
+
 Code files:
 
 -	Game.java
