@@ -13,13 +13,6 @@ public class GameBoard {
 	    * duration of the game.
 	    * @param none
 	    */
-	    
-	    int roll_dice()
-	    {
-	    	Random rand = new Random();
-	    	return rand.nextInt((6 - 1) + 1) + 1;
-	    }
-	    
 	    void init()
 	    {
 	        for( int i = 0;i < 8;i++)           // There will be 8 portals in the Game board.

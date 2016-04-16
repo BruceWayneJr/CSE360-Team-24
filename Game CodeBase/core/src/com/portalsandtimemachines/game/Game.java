@@ -235,7 +235,8 @@ public class Game extends ApplicationAdapter{
 		
 		rollDice.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				int temp = obj.roll_dice();
+				Random rand = new Random();
+				int temp = rand.nextInt((6 - 1) + 1) + 1;
 				dice.showNumber(temp);
 				moving_piece(temp);
 //				JOptionPane.showMessageDialog(null,"Clicked " + temp);
@@ -328,14 +329,7 @@ public class Game extends ApplicationAdapter{
 		if(TM == 0)
 		{
 			index = index + value;
-			if(index >= 99)
-			{
-				gamePiece.moveToPosition(boardTransforms.get(99));
-			}
-			else
-			{
-				gamePiece.moveToPosition(boardTransforms.get(index));
-			}
+			gamePiece.moveToPosition(boardTransforms.get(index));
 		}
 		else if( TM == 1)
 		{
@@ -351,15 +345,7 @@ public class Game extends ApplicationAdapter{
 				}
 				else
 				{
-					if(index >= 99)
-					{
-						gamePiece.moveToPosition(boardTransforms.get(99));
-						
-					}
-					else
-					{
-						gamePiece.moveToPosition(boardTransforms.get(index));
-					}
+					gamePiece.moveToPosition(boardTransforms.get(index));
 				}
 			}
 			else if(TM_count == 0 && index < final_pos)
@@ -372,14 +358,7 @@ public class Game extends ApplicationAdapter{
 			{
 				TM = 0;
 				index = index + value;
-				if(index >= 99)
-				{
-					gamePiece.moveToPosition(boardTransforms.get(99));
-				}
-				else
-				{
-					gamePiece.moveToPosition(boardTransforms.get(index));
-				}
+				gamePiece.moveToPosition(boardTransforms.get(index));
 			}
 		}
 		
@@ -392,32 +371,11 @@ public class Game extends ApplicationAdapter{
 		if(ret != 0)
 		{
 			index = index + ret;
+//			if(index )
 			System.out.println("Hi ");
-			
-			if(index >= 99)
-			{
-				gamePiece.secondaryMove(boardTransforms.get(99));
-			}
-			else
-			{
-				gamePiece.secondaryMove(boardTransforms.get(index));
-				if(obj.check_portal(index) != 0)
-				{
-					index = index + ret;
-					System.out.println("Hi ");
-					
-					if(index >= 99)
-					{
-						gamePiece.secondaryMove(boardTransforms.get(99));
-					}
-					else
-					{
-						gamePiece.secondaryMove(boardTransforms.get(index));
-					}
-				}
-			}
+			gamePiece.secondaryMove(boardTransforms.get(index));
 		}
-
+//		
 		if(obj.check_TM(index) != 0)
 		{
 			System.out.println(" time machine");
