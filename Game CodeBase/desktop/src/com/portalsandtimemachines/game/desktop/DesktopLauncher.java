@@ -20,7 +20,7 @@ public class DesktopLauncher {
 		config.title = "Portals and Time Machines"; 									// Title of the dice game.
 		config.width = 1024;
 		config.height = 768;
-//		config.resizable = false;
+		config.resizable = false;
 		new LwjglApplication(new Game(), config);                                       // Application run.  
 	}
 }
