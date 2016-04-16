@@ -8,6 +8,32 @@ square) helped or hindered by the portals.
 
 Trello link - https://trello.com/b/o6AiO1BM/cse360-team-24
 
+This project requires installation of Gradle. The steps to install Gradle in Eclipse is explained below,
+
+Installing Gradle
+
+-	Open Eclipse, click Help -> Eclipse Marketplace
+-	Type in ‘gradle’ in the find text box and click Search
+-	Click Install from the search results for gradle
+
+Importing the Project
+
+-	Go to File -> Import -> Gradle -> Gradle Project
+-	Click Browse and navigate to the root folder of your project, then click Build Model.
+-	Select all the projects and click Finish. 
+
+Running the Project
+
+-	Right click the desktop project, Run As -> Java Application.
+-	Select DesktopLauncher.java
+
+Code files:
+
+-	Game.java
+-	GameBoard.java
+-	GamePiece.java
+-	DesktopLauncher.java
+
 Team - 24 - Members:    
 Ashwin Murthy     
 Balaji Chandrasekaran    
