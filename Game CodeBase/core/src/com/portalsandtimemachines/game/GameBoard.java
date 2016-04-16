@@ -112,11 +112,11 @@ public class GameBoard {
 	                check = 1;
 	            }
 	        }
-	        List<Integer> temp_List = new ArrayList<Integer>();
-	        temp_List.add(orientation);
-	        temp_List.add(moving_spaces);
-	        temp_List.add(final_pos);
-	        portals_hashMap.put(portal_pos,temp_List);
+	        List<Integer> temp_list = new ArrayList<Integer>();
+	        temp_list.add(orientation);
+	        temp_list.add(moving_spaces);
+	        temp_list.add(final_pos);
+	        portals_hashMap.put(portal_pos,temp_list);
 	        portal_array[i_index] = portal_pos;
 	        i_index++;
 	    }
@@ -217,11 +217,11 @@ public class GameBoard {
 	                check = 1;
 	            }
 	        }
-	        List<Integer> temp_List = new ArrayList<Integer>();
-	        temp_List.add(orientation);
-	        temp_List.add(moving_spaces);
-	        temp_List.add(final_pos);
-	        timeMachine_hashMap.put(timeMachine_pos,temp_List);
+	        List<Integer> temp_list = new ArrayList<Integer>();
+	        temp_list.add(orientation);
+	        temp_list.add(moving_spaces);
+	        temp_list.add(final_pos);
+	        timeMachine_hashMap.put(timeMachine_pos,temp_list);
 	        timeMachine_array[j_index] = timeMachine_pos;
 	        j_index++;
 	    }
@@ -232,7 +232,7 @@ public class GameBoard {
 	    *  
 	    *  @param position of the square.
 	    */
-	    int check_TimeMachine(int position)
+	    int check_timeMachine(int position)
 	    {
 	        if(timeMachine_hashMap.containsKey(position))
 	        {

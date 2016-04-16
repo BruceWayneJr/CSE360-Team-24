@@ -466,7 +466,7 @@ public class Game extends ApplicationAdapter{
 				}
 			}
 	//		
-			if(obj.check_TimeMachine(index) != 0)
+			if(obj.check_timeMachine(index) != 0)
 			{
 	//			System.out.println(" time machine");
 				timeMachine_counter = 2;
@@ -483,7 +483,7 @@ public class Game extends ApplicationAdapter{
 				{
 					timemachineSprite3.setColor(1,1,1,1);
 				}
-				final_pos = obj.check_TimeMachine(index);
+				final_pos = obj.check_timeMachine(index);
 			}
 		}
 	}
