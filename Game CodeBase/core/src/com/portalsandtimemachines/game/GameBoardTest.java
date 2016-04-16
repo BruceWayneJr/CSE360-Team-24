@@ -83,7 +83,8 @@ public class GameBoardTest {
 	public void testCheck_portal() {
 		GameBoard testobj = new GameBoard();
 		testobj.init();
-		assertEquals(0,testobj.check_portal(150));
+		for(int i = 101; i < 200; i++)
+			assertEquals(0,testobj.check_portal(i));
 		
 	}
 
@@ -149,7 +150,10 @@ public class GameBoardTest {
 //		fail("Not yet implemented");
 		GameBoard testobj = new GameBoard();
 		testobj.init_time_machine();
-		assertEquals(0,testobj.check_timeMachine(150));
+		for(int i = 101; i < 200; i++)
+		{
+			assertEquals(0,testobj.check_timeMachine(i));
+		}
 	}
 
 }
