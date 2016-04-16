@@ -155,6 +155,7 @@ public class GameBoard {
 	        {
 	            set_time_machine();
 	        }
+	        System.out.println("Initializing the Time Machine values");
 	    }
 	    
 	    

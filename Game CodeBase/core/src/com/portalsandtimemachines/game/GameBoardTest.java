@@ -27,42 +27,58 @@ public class GameBoardTest {
 
 	@Test
 	public void testPrint() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
+		GameBoard testobj = new GameBoard();
+		testobj.init();
+		int[] temp = testobj.portal_positions();
+		assertEquals(temp.length,8);
+		
+		
 	}
 
 	@Test
 	public void testPortal_positions() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
+		GameBoard testobj = new GameBoard();
+		testobj.init();
+		int[] temp = testobj.portal_positions();
+		assertNotNull(temp);
 	}
 
-	@Test
-	public void testSet_portals() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testCheck_portal() {
-		fail("Not yet implemented");
+		GameBoard testobj = new GameBoard();
+		testobj.init();
+		assertEquals(0,testobj.check_portal(150));
+		
 	}
 
 	@Test
 	public void testInit_time_machine() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
+		GameBoard testobj = new GameBoard();
+		assertNotNull(testobj);
+		assertEquals("Status:", "Initializing the Time Machine values", "Initializing the Time Machine values");
 	}
 
 	@Test
 	public void testTM_positions() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
+		GameBoard testobj = new GameBoard();
+		testobj.init_time_machine();
+		int[] temp = testobj.TM_positions();
+		assertNotNull(temp);
+		
 	}
 
-	@Test
-	public void testSet_time_machine() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testCheck_TM() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
+		GameBoard testobj = new GameBoard();
+		testobj.init_time_machine();
+		assertEquals(0,testobj.check_TM(150));
 	}
 
 }
