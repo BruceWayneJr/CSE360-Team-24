@@ -167,7 +167,7 @@ public class Game extends ApplicationAdapter{
 		textButtonStyle.down = gameskin.newDrawable("white", Color.GREEN);
 		textButtonStyle.checked = gameskin.newDrawable("white", Color.GOLD);
 		textButtonStyle.over = gameskin.newDrawable("white", Color.LIGHT_GRAY);
-		textButtonStyle.disabled = gameskin.newDrawable("white", Color.BLACK);
+		textButtonStyle.disabled = gameskin.newDrawable("white", Color.WHITE);
 		
 		textButtonStyle.font = gameskin.getFont("default");
 
@@ -465,7 +465,7 @@ public class Game extends ApplicationAdapter{
 		++playersel;
 		if(playersel % 2 == 0)
 		{
-			
+			playerTwo.setDisabled(false);
 			if(time_machine_flag == 0)
 			{
 				index = index + value_tomove;
@@ -593,7 +593,7 @@ public class Game extends ApplicationAdapter{
 		}
 		else
 		{
-		
+			playerTwo.setDisabled(true);
 			if(time_machine_flag1 == 0)
 			{
 				index1 = index1 + value_tomove;
