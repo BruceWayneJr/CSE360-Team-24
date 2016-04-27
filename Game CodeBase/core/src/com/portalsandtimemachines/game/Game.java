@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 //import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 //import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
@@ -20,10 +21,11 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -103,6 +105,12 @@ public class Game extends ApplicationAdapter{
 	TextButton Pawn_Two;
 	TextButton useCard;
 	
+	Texture cardImgOne,cardImgTwo,cardImgThree,cardImgFour;
+	ImageButton cardOne;
+	ImageButton cardTwo;
+	ImageButton cardThree;
+	ImageButton cardFour;
+	
 	String playername;
 	GameBoard obj = new GameBoard();
 	
@@ -152,6 +160,14 @@ public class Game extends ApplicationAdapter{
 		timemachineTexture = new Texture("Time-Machine.png");
 		bountyTexture = new Texture("bounty.png");
 		
+		cardImgOne = new Texture("Kill.gif");
+		cardImgTwo = new Texture("Drag2.jpg");
+		cardImgThree = new Texture("reverse.jpg");
+		cardImgFour = new Texture("swap.jpg");
+		TextureRegion cOne = new TextureRegion(cardImgOne);
+		TextureRegion cTwo = new TextureRegion(cardImgTwo);
+		TextureRegion cThree = new TextureRegion(cardImgThree);
+		TextureRegion cFour = new TextureRegion(cardImgFour);
 		
 		BitmapFont bfont=new BitmapFont();
 //		bfont.scale(1);
@@ -200,12 +216,53 @@ public class Game extends ApplicationAdapter{
 		useCard = new TextButton("Use Card",gameskin);
 		useCard.setPosition(0, 150);
 		
+		
+		ImageButtonStyle style = new ImageButtonStyle();
+		style.imageUp = new TextureRegionDrawable(cOne);
+		style.imageDown = new TextureRegionDrawable(cOne);
+		
+		ImageButtonStyle style1 = new ImageButtonStyle();
+		style.imageUp = new TextureRegionDrawable(cTwo);
+		style.imageDown = new TextureRegionDrawable(cTwo);
+		
+		ImageButtonStyle style2 = new ImageButtonStyle();
+		style.imageUp = new TextureRegionDrawable(cThree);
+		style.imageDown = new TextureRegionDrawable(cThree);
+		
+		ImageButtonStyle style3 = new ImageButtonStyle();
+		style.imageUp = new TextureRegionDrawable(cFour);
+		style.imageDown = new TextureRegionDrawable(cFour);
+		
+		cardOne = new ImageButton(style);
+		cardOne.setSize(50, 75);
+		cardOne.setPosition(Gdx.graphics.getWidth()-100, Gdx.graphics.getHeight()-500);
+		
+		cardTwo = new ImageButton(style1);
+		cardTwo.setSize(50, 75);
+		cardTwo.setPosition(Gdx.graphics.getWidth()-100, Gdx.graphics.getHeight()-400);
+		
+		cardThree = new ImageButton(style2);
+		cardThree.setSize(50, 75);
+		cardThree.setPosition(Gdx.graphics.getWidth()-100, Gdx.graphics.getHeight()-300);
+		
+		cardFour = new ImageButton(style3);
+		cardFour.setSize(50, 75);
+		cardFour.setPosition(Gdx.graphics.getWidth()-100, Gdx.graphics.getHeight()-200);
+		
+//		cardOne = new ImageButton;
+		
 		gamestage.addActor(rollDice);
 		gamestage.addActor(playerOne);
 		gamestage.addActor(playerTwo);
 		gamestage.addActor(Pawn_One);
 		gamestage.addActor(Pawn_Two);
 		gamestage.addActor(useCard);
+		
+		gamestage.addActor(cardOne);
+		gamestage.addActor(cardTwo);
+		gamestage.addActor(cardThree);
+		gamestage.addActor(cardFour);
+		
 		
 	    // Camera to manage viewport and  view matrices
 		camera = new OrthographicCamera();

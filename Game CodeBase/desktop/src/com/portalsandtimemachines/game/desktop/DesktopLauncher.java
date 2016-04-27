@@ -18,9 +18,10 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Portals and Time Machines"; 									// Title of the dice game.
-		config.width = 1024;
-		config.height = 768;
+		config.width = 1920;
+		config.height = 1080;
 		config.resizable = false;
+		config.fullscreen = false;
 		new LwjglApplication(new Game(), config);                                       // Application run.  
 	}
 }
