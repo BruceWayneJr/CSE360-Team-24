@@ -118,6 +118,7 @@ public class Game extends ApplicationAdapter{
 	int[] temporary_PortalsPosition;
 	int[] temporary_TimeMachinePosition;
 	int[] bounty_positions;
+	
 	static int timeMachine_counter = 0;
 	static int time_machine_flag = 0;
 	static int final_pos = 0;
