@@ -27,6 +27,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 import java.util.Random;
 
 import javax.swing.*;
@@ -71,6 +72,10 @@ public class Game extends ApplicationAdapter{
 	
 	private Dice dice;
 	
+//	DB Connect
+	HashMap dbValues = new HashMap();
+	DBGameConnect dbGame;
+
 	private float boardSize;
 	private float numberOfSpacesPerRow;
 	private float windowWidth;
@@ -114,12 +119,19 @@ public class Game extends ApplicationAdapter{
 	public void create () {
 		// Sprite batch to store all sprites before sending to GPU
 		playername = JOptionPane.showInputDialog("Please enter your usename: ");
+		
+		
 		while(playername.isEmpty())
 		{
 			playername = JOptionPane.showInputDialog("Please enter your username: ");
 		}
 		JOptionPane.showMessageDialog(null, "Hello " + playername + '!' + "\nWelcome to Portals & Time-Machines" );
 		
+		dbValues.put("pname",playername);
+		
+		dbGame = new DBGameConnect();
+		dbGame.dbConnect(dbValues);
+	
 		batch = new SpriteBatch();
 		gamestage = new Stage();
 		gameskin = new Skin();
