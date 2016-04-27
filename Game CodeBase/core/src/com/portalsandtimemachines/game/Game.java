@@ -119,7 +119,10 @@ public class Game extends ApplicationAdapter{
 	TextButton Pawn_Two;
 	TextButton useCard;
 	
-	Texture cardImgOne,cardImgTwo,cardImgThree,cardImgFour;
+	Texture cardImgOne;
+	Texture cardImgTwo;
+	Texture cardImgThree;
+	Texture cardImgFour;
 	ImageButton cardOne;
 	ImageButton cardTwo;
 	ImageButton cardThree;
@@ -225,10 +228,10 @@ public class Game extends ApplicationAdapter{
 		timemachineTexture = new Texture("Time-Machine.png");
 		bountyTexture = new Texture("bounty.png");
 		
-		cardImgOne = new Texture("Kill.gif");
-		cardImgTwo = new Texture("Drag2.jpg");
-		cardImgThree = new Texture("reverse.jpg");
-		cardImgFour = new Texture("swap.jpg");
+		cardImgOne = new Texture("Kill.png");
+		cardImgTwo = new Texture("Drag2.png");
+		cardImgThree = new Texture("reverse.png");
+		cardImgFour = new Texture("swap.png");
 		TextureRegion cOne = new TextureRegion(cardImgOne);
 		TextureRegion cTwo = new TextureRegion(cardImgTwo);
 		TextureRegion cThree = new TextureRegion(cardImgThree);
@@ -289,34 +292,34 @@ public class Game extends ApplicationAdapter{
 		style.imageDown = new TextureRegionDrawable(cOne);
 		
 		ImageButtonStyle style1 = new ImageButtonStyle();
-		style.imageUp = new TextureRegionDrawable(cTwo);
-		style.imageDown = new TextureRegionDrawable(cTwo);
+		style1.imageUp = new TextureRegionDrawable(cTwo);
+		style1.imageDown = new TextureRegionDrawable(cTwo);
 		
 		ImageButtonStyle style2 = new ImageButtonStyle();
-		style.imageUp = new TextureRegionDrawable(cThree);
-		style.imageDown = new TextureRegionDrawable(cThree);
+		style2.imageUp = new TextureRegionDrawable(cThree);
+		style2.imageDown = new TextureRegionDrawable(cThree);
 		
 		ImageButtonStyle style3 = new ImageButtonStyle();
-		style.imageUp = new TextureRegionDrawable(cFour);
-		style.imageDown = new TextureRegionDrawable(cFour);
+		style3.imageUp = new TextureRegionDrawable(cFour);
+		style3.imageDown = new TextureRegionDrawable(cFour);
 		
 		cardOne = new ImageButton(style);
-		cardOne.setSize(50, 75);
-		cardOne.setPosition(Gdx.graphics.getWidth()-100, Gdx.graphics.getHeight()-500);
+		cardOne.setSize(101, 153);
+		cardOne.setPosition(Gdx.graphics.getWidth()-100, 600);
 		
 		cardTwo = new ImageButton(style1);
-		cardTwo.setSize(50, 75);
-		cardTwo.setPosition(Gdx.graphics.getWidth()-100, Gdx.graphics.getHeight()-400);
+		cardTwo.setSize(101, 153);
+		cardTwo.setPosition(Gdx.graphics.getWidth()-100, 400);
 		
 		cardThree = new ImageButton(style2);
-		cardThree.setSize(50, 75);
-		cardThree.setPosition(Gdx.graphics.getWidth()-100, Gdx.graphics.getHeight()-300);
+		cardThree.setSize(101, 153);
+		cardThree.setPosition(Gdx.graphics.getWidth()-100, 200);
 		
 		cardFour = new ImageButton(style3);
-		cardFour.setSize(50, 75);
-		cardFour.setPosition(Gdx.graphics.getWidth()-100, Gdx.graphics.getHeight()-200);
+		cardFour.setSize(101,153);
+		cardFour.setPosition(Gdx.graphics.getWidth()-100, 0);
 		
-//		cardOne = new ImageButton;
+
 		
 		gamestage.addActor(rollDice);
 		gamestage.addActor(playerOne);
@@ -328,7 +331,7 @@ public class Game extends ApplicationAdapter{
 		gamestage.addActor(cardOne);
 		gamestage.addActor(cardTwo);
 		gamestage.addActor(cardThree);
-		gamestage.addActor(cardFour);
+		gamestage.addActor(cardFour);		
 		
 		
 	    // Camera to manage viewport and  view matrices
