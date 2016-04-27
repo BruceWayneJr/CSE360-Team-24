@@ -86,13 +86,27 @@ public class Game extends ApplicationAdapter{
 	private Array<GamePiece> gamePieces;
 	
 	private int index = 0;
+	private int index2 = 0;
 	private int index1 = 0;
+	private int index12 = 0;
+	private int index3 = 0;
+	private int index31 = 0;
+	private int index4 = 0;
+	private int index41 = 0;
 	
 //	ShapeRenderer shapeRenderer;
 	
 	GamePiece gamePiece;
 	GamePiece gamePiece1;
+	GamePiece gamePiece2;
+	GamePiece gamePiece12;
 	
+	String playername;
+	String playername1;
+	String playername2;
+	String playername3;
+	
+	int noofplayer = 0;
 	
 	Stage gamestage; 	
 	Skin gameskin;
@@ -110,8 +124,7 @@ public class Game extends ApplicationAdapter{
 	ImageButton cardTwo;
 	ImageButton cardThree;
 	ImageButton cardFour;
-	
-	String playername;
+
 	GameBoard obj = new GameBoard();
 	
 	
@@ -126,6 +139,14 @@ public class Game extends ApplicationAdapter{
 	static int timeMachine_counter1 = 0;
 	static int time_machine_flag1 = 0;
 	static int final_pos1 = 0;
+	
+	static int timeMachine_counter2 = 0;
+	static int time_machine_flag2 = 0;
+	static int final_pos2 = 0;
+	
+	static int timeMachine_counter12 = 0;
+	static int time_machine_flag12 = 0;
+	static int final_pos12 = 0;
 	/**
 	 * This function is used for the purpose of drawing the board and
 	 * setting up other board pieces initially.
@@ -135,14 +156,57 @@ public class Game extends ApplicationAdapter{
 	@Override
 	public void create () {
 		// Sprite batch to store all sprites before sending to GPU
-		playername = JOptionPane.showInputDialog("Please enter your usename: ");
+		int i = 0;
 		
-		
-		while(playername.isEmpty())
+		noofplayer = Integer.parseInt(JOptionPane.showInputDialog("Please enter the number of players"));
+
+		while(noofplayer > 4 || noofplayer < 1)
 		{
-			playername = JOptionPane.showInputDialog("Please enter your username: ");
+			noofplayer = Integer.parseInt(JOptionPane.showInputDialog("Please enter the correct number of players"));
 		}
-		JOptionPane.showMessageDialog(null, "Hello " + playername + '!' + "\nWelcome to Portals & Time-Machines" );
+		
+		i = noofplayer;
+		
+
+		while(i > 0)
+		{
+			switch (i)
+			{
+				case 1:
+					playername = JOptionPane.showInputDialog("Please enter your usename for user "+i+" : ");
+					while(playername.isEmpty())
+					{
+						playername = JOptionPane.showInputDialog("Please enter your username for user "+i+" : ");
+					}
+					JOptionPane.showMessageDialog(null, "Hello " + playername + '!' + "\nWelcome to Portals & Time-Machines" );
+					break;
+				case 2:
+					playername1 = JOptionPane.showInputDialog("Please enter your usename for user "+i+" : ");
+					while(playername1.isEmpty())
+					{
+						playername1 = JOptionPane.showInputDialog("Please enter your username for user "+i+" : ");
+					}
+					JOptionPane.showMessageDialog(null, "Hello " + playername1 + '!' + "\nWelcome to Portals & Time-Machines" );
+					break;
+				case 3:
+					playername2 = JOptionPane.showInputDialog("Please enter your usename for user "+i+" : ");
+					while(playername2.isEmpty())
+					{
+						playername2 = JOptionPane.showInputDialog("Please enter your username for user "+i+" : ");
+					}
+					JOptionPane.showMessageDialog(null, "Hello " + playername2 + '!' + "\nWelcome to Portals & Time-Machines" );
+					break;
+				case 4:
+					playername3 = JOptionPane.showInputDialog("Please enter your usename for user "+i+" : ");
+					while(playername3.isEmpty())
+					{
+						playername3 = JOptionPane.showInputDialog("Please enter your username for user "+i+" : ");
+					}
+					JOptionPane.showMessageDialog(null, "Hello " + playername3 + '!' + "\nWelcome to Portals & Time-Machines" );
+					break;
+			}
+			--i;
+		}
 		
 		dbValues.put("pname",playername);
 		
@@ -408,20 +472,27 @@ public class Game extends ApplicationAdapter{
 		
 		
 		gamePiece = new GamePiece(0, gamePieceTexture, boardTransforms.get(0));
-		gamePiece1 = new GamePiece(1, gamePieceTexture1, boardTransforms.get(0));
+		gamePiece2 = new GamePiece(0, gamePieceTexture1, boardTransforms.get(0));
+		gamePiece1 = new GamePiece(1, gamePieceTexture, boardTransforms.get(0));
+		gamePiece12 = new GamePiece(1, gamePieceTexture1, boardTransforms.get(0));
 		
 		rollDice.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
 				
 				int temp = obj.roll_die();
 				dice.showNumber(temp);
-				
-				
 				moving_piece(temp);
-				if(index > 98) {
+				
+				if(index > 98 && index2 > 98) {
 					JOptionPane.showMessageDialog(null,"Congrats " + playername + "! You Won!!");
 //				rollDice.setText("Starting new game");
 					Gdx.app.exit();
+				}
+				else if(index1 > 98 && index12 > 98)
+				{
+					JOptionPane.showMessageDialog(null,"Congrats " + playername1 + "! You Won!!");
+//					rollDice.setText("Starting new game");
+						Gdx.app.exit();
 				}
 			}
 		});
@@ -529,6 +600,8 @@ public class Game extends ApplicationAdapter{
 	}
 	
 	int playersel = 0;
+	int pawnsel = 0;
+	int pawnsel1 = 0;
 	
 	/**
 	 * This function is used for moving the pawn on the board.
@@ -543,57 +616,11 @@ public class Game extends ApplicationAdapter{
 		{
 			playerTwo.setDisabled(false);
 			playerOne.setDisabled(true);
-			if(time_machine_flag == 0)
+			++pawnsel;
+			if(pawnsel % 2 == 0)
 			{
-				index = index + value_tomove;
-				if(index > 98)
+				if(time_machine_flag == 0)
 				{
-					gamePiece.moveToPosition(boardTransforms.get(99));
-					//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
-				}
-				else
-				{
-					gamePiece.moveToPosition(boardTransforms.get(index));
-				}
-			}
-			else if( time_machine_flag == 1)
-			{
-				index = index + value_tomove;
-				if(timeMachine_counter > 0 && index < final_pos )
-				{
-					timeMachine_counter--;
-					if(timeMachine_counter == 0 && index <final_pos)
-					{
-						time_machine_flag = 0;
-						index = 0;
-						gamePiece.moveToPosition(boardTransforms.get(index));
-					}
-					else
-					{
-						if(index > 98)
-						{
-							gamePiece.moveToPosition(boardTransforms.get(99));
-							//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
-						}
-						else
-						{
-							gamePiece.moveToPosition(boardTransforms.get(index));
-						}
-					}
-				}
-				else if(timeMachine_counter == 0 && index < final_pos)
-				{
-					time_machine_flag = 0;
-					index = 0;
-					gamePiece.moveToPosition(boardTransforms.get(index));
-				}
-				else if(timeMachine_counter >= 0 && index >= final_pos)
-				{
-
-					time_machine_flag = 0;
-					if(index > 98)
-
-						time_machine_flag = 0;
 					index = index + value_tomove;
 					if(index > 98)
 					{
@@ -605,124 +632,253 @@ public class Game extends ApplicationAdapter{
 						gamePiece.moveToPosition(boardTransforms.get(index));
 					}
 				}
-			}
-	//		index = index + value;
-	//		gamePiece.moveToPosition(boardTransforms.get(index));
-	//		System.out.println(index +" "+ value_tomove);
-
-			int ret = obj.check_portal(index);
-			int bounty_ret = obj.check_bounty(index);
-			if(ret != 0)
-			{
-				index = ret;
-	//			if(index )
-				System.out.println("Portal ");
-				if(index > 98)
+				else if( time_machine_flag == 1)
 				{
-					gamePiece.secondaryMove(boardTransforms.get(99));
-					//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
-				}
-				else
-				{
-					gamePiece.secondaryMove(boardTransforms.get(index));
-					if(obj.check_portal(index) != 0)
+					index = index + value_tomove;
+					if(timeMachine_counter > 0 && index < final_pos )
 					{
-						index = index + obj.check_portal(index);
-						System.out.println("Portal ");
+						timeMachine_counter--;
+						if(timeMachine_counter == 0 && index <final_pos)
+						{
+							time_machine_flag = 0;
+							index = 0;
+							gamePiece.moveToPosition(boardTransforms.get(index));
+						}
+						else
+						{
+							if(index > 98)
+							{
+								gamePiece.moveToPosition(boardTransforms.get(99));
+								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+							}
+							else
+							{
+								gamePiece.moveToPosition(boardTransforms.get(index));
+							}
+						}
+					}
+					else if(timeMachine_counter == 0 && index < final_pos)
+					{
+						time_machine_flag = 0;
+						index = 0;
+						gamePiece.moveToPosition(boardTransforms.get(index));
+					}
+					else if(timeMachine_counter >= 0 && index >= final_pos)
+					{
+	
+						time_machine_flag = 0;
+						if(index > 98)
+	
+							time_machine_flag = 0;
+						index = index + value_tomove;
 						if(index > 98)
 						{
-							gamePiece.secondaryMove(boardTransforms.get(99));
+							gamePiece.moveToPosition(boardTransforms.get(99));
 							//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 						}
 						else
 						{
-							gamePiece.secondaryMove(boardTransforms.get(index));
+							gamePiece.moveToPosition(boardTransforms.get(index));
 						}
 					}
 				}
-			}
-			else if(bounty_ret == 1)
-			{
-//				JOptionPane.showMessageDialog(null,"You have won a Bounty Card");
-			}
-	//		
-			if(obj.check_timeMachine(index) != 0)
-			{
-	//			System.out.println(" time machine");
-				timeMachine_counter = 2;
-				time_machine_flag = 1;
-				if(index == temporary_TimeMachinePosition[0])
+		//		index = index + value;
+		//		gamePiece.moveToPosition(boardTransforms.get(index));
+		//		System.out.println(index +" "+ value_tomove);
+	
+				int ret = obj.check_portal(index);
+				int bounty_ret = obj.check_bounty(index);
+				if(ret != 0)
 				{
-					timemachineSprite1.setColor(1,1,1,1);
-				}
-				else if(index == temporary_TimeMachinePosition[1])
-				{
-					timemachineSprite2.setColor(1,1,1,1);
-				}
-				else
-				{
-					timemachineSprite3.setColor(1,1,1,1);
-				}
-				final_pos = obj.check_timeMachine(index);
-			}
-			//if(index > 98)
-				//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
-		}
-		else
-		{
-			playerTwo.setDisabled(true);
-			playerOne.setDisabled(false);
-			if(time_machine_flag1 == 0)
-			{
-				index1 = index1 + value_tomove;
-				if(index1 > 98)
-				{
-					gamePiece1.moveToPosition(boardTransforms.get(99));
-					//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
-				}
-				else
-				{
-					gamePiece1.moveToPosition(boardTransforms.get(index1));
-				}
-			}
-			else if( time_machine_flag1 == 1)
-			{
-				index1 = index1 + value_tomove;
-				if(timeMachine_counter1 > 0 && index1 < final_pos1 )
-				{
-					timeMachine_counter1--;
-					if(timeMachine_counter1 == 0 && index1 <final_pos1)
+					index = ret;
+		//			if(index )
+					System.out.println("Portal ");
+					if(index > 98)
 					{
-						time_machine_flag1 = 0;
-						index1 = 0;
-						gamePiece1.moveToPosition(boardTransforms.get(index1));
+						gamePiece.secondaryMove(boardTransforms.get(99));
+						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 					}
 					else
 					{
-						if(index1 > 98)
+						gamePiece.secondaryMove(boardTransforms.get(index));
+						if(obj.check_portal(index) != 0)
 						{
-							gamePiece1.moveToPosition(boardTransforms.get(99));
+							index = index + obj.check_portal(index);
+							System.out.println("Portal ");
+							if(index > 98)
+							{
+								gamePiece.secondaryMove(boardTransforms.get(99));
+								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+							}
+							else
+							{
+								gamePiece.secondaryMove(boardTransforms.get(index));
+							}
+						}
+					}
+				}
+				else if(bounty_ret == 1)
+				{
+	//				JOptionPane.showMessageDialog(null,"You have won a Bounty Card");
+				}
+		//		
+				if(obj.check_timeMachine(index) != 0)
+				{
+		//			System.out.println(" time machine");
+					timeMachine_counter = 2;
+					time_machine_flag = 1;
+					if(index == temporary_TimeMachinePosition[0])
+					{
+						timemachineSprite1.setColor(1,1,1,1);
+					}
+					else if(index == temporary_TimeMachinePosition[1])
+					{
+						timemachineSprite2.setColor(1,1,1,1);
+					}
+					else
+					{
+						timemachineSprite3.setColor(1,1,1,1);
+					}
+					final_pos = obj.check_timeMachine(index);
+				}
+			}//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			else
+			{
+				if(time_machine_flag2 == 0)
+				{
+					index2 = index2 + value_tomove;
+					if(index2 > 98)
+					{
+						gamePiece2.moveToPosition(boardTransforms.get(99));
+						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+					}
+					else
+					{
+						gamePiece2.moveToPosition(boardTransforms.get(index2));
+					}
+				}
+				else if( time_machine_flag2 == 1)
+				{
+					index2 = index2 + value_tomove;
+					if(timeMachine_counter2 > 0 && index2 < final_pos2 )
+					{
+						timeMachine_counter2--;
+						if(timeMachine_counter2 == 0 && index2 <final_pos2)
+						{
+							time_machine_flag2 = 0;
+							index2 = 0;
+							gamePiece2.moveToPosition(boardTransforms.get(index2));
+						}
+						else
+						{
+							if(index2 > 98)
+							{
+								gamePiece2.moveToPosition(boardTransforms.get(99));
+								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+							}
+							else
+							{
+								gamePiece2.moveToPosition(boardTransforms.get(index2));
+							}
+						}
+					}
+					else if(timeMachine_counter2 == 0 && index2 < final_pos2)
+					{
+						time_machine_flag2 = 0;
+						index2 = 0;
+						gamePiece2.moveToPosition(boardTransforms.get(index2));
+					}
+					else if(timeMachine_counter2 >= 0 && index2 >= final_pos2)
+					{
+	
+						time_machine_flag2 = 0;
+						if(index2 > 98)
+							time_machine_flag2 = 0;
+						index2 = index2 + value_tomove;
+						if(index2 > 98)
+						{
+							gamePiece2.moveToPosition(boardTransforms.get(99));
 							//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 						}
 						else
 						{
-							gamePiece1.moveToPosition(boardTransforms.get(index1));
+							gamePiece2.moveToPosition(boardTransforms.get(index2));
 						}
 					}
 				}
-				else if(timeMachine_counter1 == 0 && index1 < final_pos1)
+		//		index = index + value;
+		//		gamePiece.moveToPosition(boardTransforms.get(index));
+		//		System.out.println(index +" "+ value_tomove);
+	
+				int ret = obj.check_portal(index2);
+				int bounty_ret = obj.check_bounty(index2);
+				if(ret != 0)
 				{
-					time_machine_flag1 = 0;
-					index1 = 0;
-					gamePiece1.moveToPosition(boardTransforms.get(index1));
+					index2 = ret;
+		//			if(index )
+					System.out.println("Portal ");
+					if(index2 > 98)
+					{
+						gamePiece2.secondaryMove(boardTransforms.get(99));
+						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+					}
+					else
+					{
+						gamePiece2.secondaryMove(boardTransforms.get(index2));
+						if(obj.check_portal(index2) != 0)
+						{
+							index2 = index2 + obj.check_portal(index2);
+							System.out.println("Portal ");
+							if(index2 > 98)
+							{
+								gamePiece2.secondaryMove(boardTransforms.get(99));
+								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+							}
+							else
+							{
+								gamePiece2.secondaryMove(boardTransforms.get(index2));
+							}
+						}
+					}
 				}
-				else if(timeMachine_counter1 >= 0 && index1 >= final_pos1)
+				else if(bounty_ret == 1)
 				{
-
-					time_machine_flag1 = 0;
-					if(index1 > 98)
-
-						time_machine_flag1 = 0;
+	//				JOptionPane.showMessageDialog(null,"You have won a Bounty Card");
+				}
+		//		
+				if(obj.check_timeMachine(index2) != 0)
+				{
+		//			System.out.println(" time machine");
+					timeMachine_counter2 = 2;
+					time_machine_flag2 = 1;
+					if(index2 == temporary_TimeMachinePosition[0])
+					{
+						timemachineSprite1.setColor(1,1,1,1);
+					}
+					else if(index2 == temporary_TimeMachinePosition[1])
+					{
+						timemachineSprite2.setColor(1,1,1,1);
+					}
+					else
+					{
+						timemachineSprite3.setColor(1,1,1,1);
+					}
+					final_pos2 = obj.check_timeMachine(index2);
+				}
+				
+			}
+			//if(index > 98)
+				//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+		}//********************************************************************************
+		else
+		{
+			++pawnsel1;
+			playerTwo.setDisabled(true);
+			playerOne.setDisabled(false);
+			if(pawnsel % 2 == 0)
+			{
+				if(time_machine_flag1 == 0)
+				{
 					index1 = index1 + value_tomove;
 					if(index1 > 98)
 					{
@@ -734,64 +890,239 @@ public class Game extends ApplicationAdapter{
 						gamePiece1.moveToPosition(boardTransforms.get(index1));
 					}
 				}
-			}
-	//		index = index + value;
-	//		gamePiece.moveToPosition(boardTransforms.get(index));
-	//		System.out.println(index +" "+ value_tomove);
-			int bounty_ret = obj.check_bounty(index);
-			int ret = obj.check_portal(index1);
-			if(ret != 0)
-			{
-				index1 = ret;
-	//			if(index )
-				System.out.println("Portal ");
-				if(index1 > 98)
+				else if( time_machine_flag1 == 1)
 				{
-					gamePiece1.secondaryMove(boardTransforms.get(99));
-					//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
-				}
-				else
-				{
-					gamePiece1.secondaryMove(boardTransforms.get(index1));
-					if(obj.check_portal(index1) != 0)
+					index1 = index1 + value_tomove;
+					if(timeMachine_counter1 > 0 && index1 < final_pos1 )
 					{
-						index1 = index1 + obj.check_portal(index1);
-						System.out.println("Portal ");
+						timeMachine_counter1--;
+						if(timeMachine_counter1 == 0 && index1 <final_pos1)
+						{
+							time_machine_flag1 = 0;
+							index1 = 0;
+							gamePiece1.moveToPosition(boardTransforms.get(index1));
+						}
+						else
+						{
+							if(index1 > 98)
+							{
+								gamePiece1.moveToPosition(boardTransforms.get(99));
+								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+							}
+							else
+							{
+								gamePiece1.moveToPosition(boardTransforms.get(index1));
+							}
+						}
+					}
+					else if(timeMachine_counter1 == 0 && index1 < final_pos1)
+					{
+						time_machine_flag1 = 0;
+						index1 = 0;
+						gamePiece1.moveToPosition(boardTransforms.get(index1));
+					}
+					else if(timeMachine_counter1 >= 0 && index1 >= final_pos1)
+					{
+	
+						time_machine_flag1 = 0;
+						if(index1 > 98)
+	
+							time_machine_flag1 = 0;
+						index1 = index1 + value_tomove;
 						if(index1 > 98)
 						{
-							gamePiece1.secondaryMove(boardTransforms.get(99));
+							gamePiece1.moveToPosition(boardTransforms.get(99));
 							//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 						}
 						else
 						{
-							gamePiece1.secondaryMove(boardTransforms.get(index1));
+							gamePiece1.moveToPosition(boardTransforms.get(index1));
 						}
 					}
 				}
-			}
-			else if(bounty_ret == 1)
+		//		index = index + value;
+		//		gamePiece.moveToPosition(boardTransforms.get(index));
+		//		System.out.println(index +" "+ value_tomove);
+				int bounty_ret = obj.check_bounty(index);
+				int ret = obj.check_portal(index1);
+				if(ret != 0)
+				{
+					index1 = ret;
+		//			if(index )
+					System.out.println("Portal ");
+					if(index1 > 98)
+					{
+						gamePiece1.secondaryMove(boardTransforms.get(99));
+						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+					}
+					else
+					{
+						gamePiece1.secondaryMove(boardTransforms.get(index1));
+						if(obj.check_portal(index1) != 0)
+						{
+							index1 = index1 + obj.check_portal(index1);
+							System.out.println("Portal ");
+							if(index1 > 98)
+							{
+								gamePiece1.secondaryMove(boardTransforms.get(99));
+								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+							}
+							else
+							{
+								gamePiece1.secondaryMove(boardTransforms.get(index1));
+							}
+						}
+					}
+				}
+				else if(bounty_ret == 1)
+				{
+	//				JOptionPane.showMessageDialog(null,"You have won a Bounty Card");
+				}
+		//		
+				if(obj.check_timeMachine(index1) != 0)
+				{
+		//			System.out.println(" time machine");
+					timeMachine_counter1 = 2;
+					time_machine_flag1 = 1;
+					if(index1 == temporary_TimeMachinePosition[0])
+					{
+						timemachineSprite1.setColor(1,1,1,1);
+					}
+					else if(index1 == temporary_TimeMachinePosition[1])
+					{
+						timemachineSprite2.setColor(1,1,1,1);
+					}
+					else
+					{
+						timemachineSprite3.setColor(1,1,1,1);
+					}
+					final_pos1 = obj.check_timeMachine(index1);
+				}
+			}//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+			else
 			{
-//				JOptionPane.showMessageDialog(null,"You have won a Bounty Card");
-			}
-	//		
-			if(obj.check_timeMachine(index1) != 0)
-			{
-	//			System.out.println(" time machine");
-				timeMachine_counter1 = 2;
-				time_machine_flag1 = 1;
-				if(index1 == temporary_TimeMachinePosition[0])
+				if(time_machine_flag12 == 0)
 				{
-					timemachineSprite1.setColor(1,1,1,1);
+					index12 = index12 + value_tomove;
+					if(index12 > 98)
+					{
+						gamePiece12.moveToPosition(boardTransforms.get(99));
+						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+					}
+					else
+					{
+						gamePiece12.moveToPosition(boardTransforms.get(index12));
+					}
 				}
-				else if(index1 == temporary_TimeMachinePosition[1])
+				else if( time_machine_flag12 == 1)
 				{
-					timemachineSprite2.setColor(1,1,1,1);
+					index12 = index12 + value_tomove;
+					if(timeMachine_counter12 > 0 && index12 < final_pos12 )
+					{
+						timeMachine_counter12--;
+						if(timeMachine_counter12 == 0 && index12 <final_pos12)
+						{
+							time_machine_flag12 = 0;
+							index12 = 0;
+							gamePiece12.moveToPosition(boardTransforms.get(index12));
+						}
+						else
+						{
+							if(index12 > 98)
+							{
+								gamePiece12.moveToPosition(boardTransforms.get(99));
+								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+							}
+							else
+							{
+								gamePiece12.moveToPosition(boardTransforms.get(index12));
+							}
+						}
+					}
+					else if(timeMachine_counter12 == 0 && index12 < final_pos12)
+					{
+						time_machine_flag12 = 0;
+						index12 = 0;
+						gamePiece12.moveToPosition(boardTransforms.get(index12));
+					}
+					else if(timeMachine_counter12 >= 0 && index12 >= final_pos12)
+					{
+	
+						time_machine_flag12 = 0;
+						if(index12 > 98)
+	
+							time_machine_flag12 = 0;
+						index1 = index12 + value_tomove;
+						if(index12 > 98)
+						{
+							gamePiece12.moveToPosition(boardTransforms.get(99));
+							//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+						}
+						else
+						{
+							gamePiece12.moveToPosition(boardTransforms.get(index12));
+						}
+					}
 				}
-				else
+		//		index = index + value;
+		//		gamePiece.moveToPosition(boardTransforms.get(index));
+		//		System.out.println(index +" "+ value_tomove);
+				int bounty_ret = obj.check_bounty(index12);
+				int ret = obj.check_portal(index12);
+				if(ret != 0)
 				{
-					timemachineSprite3.setColor(1,1,1,1);
+					index12 = ret;
+		//			if(index )
+					System.out.println("Portal ");
+					if(index12 > 98)
+					{
+						gamePiece12.secondaryMove(boardTransforms.get(99));
+						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+					}
+					else
+					{
+						gamePiece12.secondaryMove(boardTransforms.get(index12));
+						if(obj.check_portal(index12) != 0)
+						{
+							index12 = index12 + obj.check_portal(index12);
+							System.out.println("Portal ");
+							if(index1 > 98)
+							{
+								gamePiece12.secondaryMove(boardTransforms.get(99));
+								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+							}
+							else
+							{
+								gamePiece12.secondaryMove(boardTransforms.get(index12));
+							}
+						}
+					}
 				}
-				final_pos1 = obj.check_timeMachine(index1);
+				else if(bounty_ret == 1)
+				{
+	//				JOptionPane.showMessageDialog(null,"You have won a Bounty Card");
+				}
+		//		
+				if(obj.check_timeMachine(index12) != 0)
+				{
+		//			System.out.println(" time machine");
+					timeMachine_counter12 = 2;
+					time_machine_flag12 = 1;
+					if(index12 == temporary_TimeMachinePosition[0])
+					{
+						timemachineSprite1.setColor(1,1,1,1);
+					}
+					else if(index12 == temporary_TimeMachinePosition[1])
+					{
+						timemachineSprite2.setColor(1,1,1,1);
+					}
+					else
+					{
+						timemachineSprite3.setColor(1,1,1,1);
+					}
+					final_pos12 = obj.check_timeMachine(index12);
+				}
+				
 			}
 			//if(index > 98)
 				//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
