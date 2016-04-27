@@ -47,10 +47,12 @@ Code files:
 -	GamePiece.java
 -	DesktopLauncher.java
 
-Team - 24 - Members:    
-Ashwin Murthy     
-Balaji Chandrasekaran    
-Christopher Lavoy   
-Naveen Kumar Subbiah    
-Sriram Poondi Chinappa    
+<h3>Team - 24 - Members:</h3>    
+<ul>
+    <li>Ashwin Murthy</li>     
+    <li>Balaji Chandrasekaran</li>    
+    <li>Christopher Lavoy</li>
+    <li>Naveen Kumar Subbiah</li>    
+    <li>Sriram Poondi Chinappa</li>
+</ul>
 
