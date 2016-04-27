@@ -479,8 +479,8 @@ public class Game extends ApplicationAdapter{
 		
 		
 		gamePiece = new GamePiece(0, gamePieceTexture, boardTransforms.get(0));
-		gamePiece2 = new GamePiece(0, gamePieceTexture1, boardTransforms.get(0));
-		gamePiece1 = new GamePiece(1, gamePieceTexture, boardTransforms.get(0));
+		gamePiece2 = new GamePiece(0, gamePieceTexture, boardTransforms.get(0));
+		gamePiece1 = new GamePiece(1, gamePieceTexture1, boardTransforms.get(0));
 		gamePiece12 = new GamePiece(1, gamePieceTexture1, boardTransforms.get(0));
 		
 		rollDice.addListener(new ChangeListener() {
@@ -578,6 +578,8 @@ public class Game extends ApplicationAdapter{
 		
 		gamePiece.draw(batch);
 		gamePiece1.draw(batch);
+		gamePiece12.draw(batch);
+		gamePiece2.draw(batch);
 		dice.draw(batch);
 		batch.end();
 		
@@ -882,7 +884,7 @@ public class Game extends ApplicationAdapter{
 			++pawnsel1;
 			playerTwo.setDisabled(true);
 			playerOne.setDisabled(false);
-			if(pawnsel % 2 == 0)
+			if(pawnsel1 % 2 == 0)
 			{
 				if(time_machine_flag1 == 0)
 				{
