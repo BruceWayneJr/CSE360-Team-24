@@ -928,37 +928,40 @@ public class Game extends ApplicationAdapter{
 			if(cardkill2 == 1)
 			{
 				cardOne.setVisible(true);
-//				cardOne.addListener(new ChangeListener() 
-//				{	
-//					public void changed (ChangeEvent event, Actor actor) 
-//					{
-//						index = 0;
-//						index2 = 0;
-//						gamePiece.moveToPosition(boardTransforms.get(index));
-//						gamePiece2.moveToPosition(boardTransforms.get(index2));
-////						cardOne.setVisible(false);
-//					}
-//				});
+//				
 			}
 			else if(cardswap2 == 1)
 			{
 				cardTwo.setVisible(true);
-//				cardTwo.addListener(new ChangeListener() 
-//				{	
-//					public void changed (ChangeEvent event, Actor actor) 
-//					{
-//						index1 = index;
-//						index12 = index2;
-//						gamePiece1.moveToPosition(boardTransforms.get(index1));
-//						gamePiece12.moveToPosition(boardTransforms.get(index12));
-////						cardTwo.setVisible(false);
-//					}
-//				});
+//				
 			}
 			else if(cardrev2 == 1)
 			{
 				cardThree.setVisible(true);
 			}
+			
+			cardOne.addListener(new ChangeListener() 
+			{	
+				public void changed (ChangeEvent event, Actor actor) 
+				{
+					index = 0;
+					index2 = 0;
+					gamePiece.moveToPosition(boardTransforms.get(index));
+					gamePiece2.moveToPosition(boardTransforms.get(index2));
+//							cardOne.setVisible(false);
+				}
+			});
+			cardTwo.addListener(new ChangeListener() 
+			{	
+				public void changed (ChangeEvent event, Actor actor) 
+				{
+					index1 = index;
+					index12 = index2;
+					gamePiece1.moveToPosition(boardTransforms.get(index1));
+					gamePiece12.moveToPosition(boardTransforms.get(index12));
+//							cardTwo.setVisible(false);
+				}
+			});
 			//if(index > 98)
 				//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 		}//********************************************************************************
@@ -1245,38 +1248,38 @@ public class Game extends ApplicationAdapter{
 			if(cardkill1 == 1)
 			{
 				cardOne.setVisible(true);
-//				cardOne.addListener(new ChangeListener() 
-//				{	
-//					public void changed (ChangeEvent event, Actor actor) 
-//					{
-//						index1 = 0;
-//						index12 = 0;
-//						gamePiece1.moveToPosition(boardTransforms.get(index1));
-//						gamePiece12.moveToPosition(boardTransforms.get(index12));
-////						cardOne.setVisible(false);
-//					}
-//				});
 			}
 			else if(cardswap1 == 1)
 			{
 				cardTwo.setVisible(true);
-//				cardOne.addListener(new ChangeListener() 
-//				{	
-//					public void changed (ChangeEvent event, Actor actor) 
-//					{
-//						index = index1;
-//						index2 = index12;
-//						gamePiece.moveToPosition(boardTransforms.get(index));
-//						gamePiece2.moveToPosition(boardTransforms.get(index2));
-////						cardTwo.setVisible(false);
-//					}
-//				});
-				
 			}
 			else if(cardrev1 == 1)
 			{
 				cardThree.setVisible(true);
 			}
+			
+			cardOne.addListener(new ChangeListener() 
+			{	
+				public void changed (ChangeEvent event, Actor actor) 
+				{
+					index = index1;
+					index2 = index12;
+					gamePiece.moveToPosition(boardTransforms.get(index));
+					gamePiece2.moveToPosition(boardTransforms.get(index2));
+//					cardTwo.setVisible(false);
+				}
+			});
+			cardOne.addListener(new ChangeListener() 
+			{	
+				public void changed (ChangeEvent event, Actor actor) 
+				{
+					index1 = 0;
+					index12 = 0;
+					gamePiece1.moveToPosition(boardTransforms.get(index1));
+					gamePiece12.moveToPosition(boardTransforms.get(index12));
+//							cardOne.setVisible(false);
+				}
+			});
 			
 		}
 		
