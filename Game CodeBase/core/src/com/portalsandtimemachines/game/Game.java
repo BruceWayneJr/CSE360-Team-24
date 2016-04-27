@@ -110,11 +110,23 @@ public class Game extends ApplicationAdapter{
 	
 	int noofplayer = 0;
 	
+	int cardkill1 = 0;
+	int cardswap1 = 0;
+	int cardrev1 = 0;
+	
+	
+
+	int cardkill2 = 0;
+	int cardswap2 = 0;
+	int cardrev2 = 0;
+	
+	
 	Stage gamestage; 	
 	Skin gameskin;
 	Skin gameskinp;
 	
 	TextButton rollDice;
+	
 	TextButton playerOne;
 	TextButton Pawn_One;
 	TextButton playerTwo;
@@ -136,6 +148,7 @@ public class Game extends ApplicationAdapter{
 	int[] temporary_PortalsPosition;
 	int[] temporary_TimeMachinePosition;
 	int[] bounty_positions;
+	int temp;
 	
 	static int timeMachine_counter = 0;
 	static int time_machine_flag = 0;
@@ -310,19 +323,23 @@ public class Game extends ApplicationAdapter{
 		cardOne = new ImageButton(style);
 		cardOne.setSize(101, 153);
 		cardOne.setPosition(Gdx.graphics.getWidth()-100, 600);
+		cardOne.setVisible(false);
+		
 		
 		cardTwo = new ImageButton(style1);
 		cardTwo.setSize(101, 153);
 		cardTwo.setPosition(Gdx.graphics.getWidth()-100, 400);
+		cardTwo.setVisible(false);
 		
 		cardThree = new ImageButton(style2);
 		cardThree.setSize(101, 153);
 		cardThree.setPosition(Gdx.graphics.getWidth()-100, 200);
+		cardThree.setVisible(false);
 		
 		cardFour = new ImageButton(style3);
 		cardFour.setSize(101,153);
 		cardFour.setPosition(Gdx.graphics.getWidth()-100, 0);
-		
+		cardFour.setVisible(false);
 
 		
 		gamestage.addActor(rollDice);
@@ -483,13 +500,15 @@ public class Game extends ApplicationAdapter{
 		gamePiece1 = new GamePiece(1, gamePieceTexture1, boardTransforms.get(0));
 		gamePiece12 = new GamePiece(1, gamePieceTexture1, boardTransforms.get(0));
 		
-		rollDice.addListener(new ChangeListener() {
-			public void changed (ChangeEvent event, Actor actor) {
-				
-				int temp = obj.roll_die();
+		rollDice.addListener(new ChangeListener() 
+		{	
+			public void changed (ChangeEvent event, Actor actor) 
+			{
+			
+				temp = obj.roll_die();
 				dice.showNumber(temp);
-				moving_piece(temp);
-				
+				++flag;
+				moving_piece(temp, flag);
 				if(index > 98 && index2 > 98) {
 					JOptionPane.showMessageDialog(null,"Congrats " + playername + "! You Won!!");
 //				rollDice.setText("Starting new game");
@@ -609,23 +628,28 @@ public class Game extends ApplicationAdapter{
 	}
 	
 	int playersel = 0;
-	int pawnsel = 0;
-	int pawnsel1 = 0;
-	
+	int pawnsel;
+	int pawnsel1;
+	int flag;
 	/**
 	 * This function is used for moving the pawn on the board.
 	 * 
 	 * @param value_tomove	value of which the pawn is to be moved.
 	 */
-	public void moving_piece(int value_tomove)
+	public void moving_piece(int value_tomove, int pawnsol)
 	{
+		Random rand = new Random();
 
+		pawnsel = pawnsol;
 		++playersel;
 		if(playersel % 2 == 0)
 		{
 			playerTwo.setDisabled(false);
 			playerOne.setDisabled(true);
-			++pawnsel;
+			
+			
+			
+			
 			if(pawnsel % 2 == 0)
 			{
 				if(time_machine_flag == 0)
@@ -728,7 +752,19 @@ public class Game extends ApplicationAdapter{
 				}
 				else if(bounty_ret == 1)
 				{
-	//				JOptionPane.showMessageDialog(null,"You have won a Bounty Card");
+					int common = rand.nextInt((3 - 1) + 1) + 1;
+					if(common % 3 == 0)
+					{
+						cardrev2 = 1;
+					}
+					else if(common % 3 == 1)
+					{
+						cardkill2 = 1;
+					}
+					else
+					{
+						cardswap2 = 1;
+					}
 				}
 		//		
 				if(obj.check_timeMachine(index) != 0)
@@ -852,7 +888,19 @@ public class Game extends ApplicationAdapter{
 				}
 				else if(bounty_ret == 1)
 				{
-	//				JOptionPane.showMessageDialog(null,"You have won a Bounty Card");
+					int common = rand.nextInt((3 - 1) + 1) + 1;
+					if(common % 3 == 0)
+					{
+						cardrev2 = 1;
+					}
+					else if(common % 3 == 1)
+					{
+						cardkill2 = 1;
+					}
+					else
+					{
+						cardswap2 = 1;
+					}
 				}
 		//		
 				if(obj.check_timeMachine(index2) != 0)
@@ -876,14 +924,49 @@ public class Game extends ApplicationAdapter{
 				}
 				
 			}
+			
+			if(cardkill2 == 1)
+			{
+				cardOne.setVisible(true);
+//				cardOne.addListener(new ChangeListener() 
+//				{	
+//					public void changed (ChangeEvent event, Actor actor) 
+//					{
+//						index = 0;
+//						index2 = 0;
+//						gamePiece.moveToPosition(boardTransforms.get(index));
+//						gamePiece2.moveToPosition(boardTransforms.get(index2));
+////						cardOne.setVisible(false);
+//					}
+//				});
+			}
+			else if(cardswap2 == 1)
+			{
+				cardTwo.setVisible(true);
+//				cardTwo.addListener(new ChangeListener() 
+//				{	
+//					public void changed (ChangeEvent event, Actor actor) 
+//					{
+//						index1 = index;
+//						index12 = index2;
+//						gamePiece1.moveToPosition(boardTransforms.get(index1));
+//						gamePiece12.moveToPosition(boardTransforms.get(index12));
+////						cardTwo.setVisible(false);
+//					}
+//				});
+			}
+			else if(cardrev2 == 1)
+			{
+				cardThree.setVisible(true);
+			}
 			//if(index > 98)
 				//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 		}//********************************************************************************
 		else
 		{
-			++pawnsel1;
 			playerTwo.setDisabled(true);
 			playerOne.setDisabled(false);
+			
 			if(pawnsel1 % 2 == 0)
 			{
 				if(time_machine_flag1 == 0)
@@ -985,7 +1068,19 @@ public class Game extends ApplicationAdapter{
 				}
 				else if(bounty_ret == 1)
 				{
-	//				JOptionPane.showMessageDialog(null,"You have won a Bounty Card");
+					int common = rand.nextInt((3 - 1) + 1) + 1;
+					if(common % 3 == 0)
+					{
+						cardrev1 = 1;
+					}
+					else if(common % 3 == 1)
+					{
+						cardkill1 = 1;
+					}
+					else
+					{
+						cardswap1 = 1;
+					}
 				}
 		//		
 				if(obj.check_timeMachine(index1) != 0)
@@ -1109,7 +1204,19 @@ public class Game extends ApplicationAdapter{
 				}
 				else if(bounty_ret == 1)
 				{
-	//				JOptionPane.showMessageDialog(null,"You have won a Bounty Card");
+					int common = rand.nextInt((3 - 1) + 1) + 1;
+					if(common % 3 == 0)
+					{
+						cardrev1 = 1;
+					}
+					else if(common % 3 == 1)
+					{
+						cardkill1 = 1;
+					}
+					else
+					{
+						cardswap1 = 1;
+					}
 				}
 		//		
 				if(obj.check_timeMachine(index12) != 0)
@@ -1135,6 +1242,41 @@ public class Game extends ApplicationAdapter{
 			}
 			//if(index > 98)
 				//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+			if(cardkill1 == 1)
+			{
+				cardOne.setVisible(true);
+//				cardOne.addListener(new ChangeListener() 
+//				{	
+//					public void changed (ChangeEvent event, Actor actor) 
+//					{
+//						index1 = 0;
+//						index12 = 0;
+//						gamePiece1.moveToPosition(boardTransforms.get(index1));
+//						gamePiece12.moveToPosition(boardTransforms.get(index12));
+////						cardOne.setVisible(false);
+//					}
+//				});
+			}
+			else if(cardswap1 == 1)
+			{
+				cardTwo.setVisible(true);
+//				cardOne.addListener(new ChangeListener() 
+//				{	
+//					public void changed (ChangeEvent event, Actor actor) 
+//					{
+//						index = index1;
+//						index2 = index12;
+//						gamePiece.moveToPosition(boardTransforms.get(index));
+//						gamePiece2.moveToPosition(boardTransforms.get(index2));
+////						cardTwo.setVisible(false);
+//					}
+//				});
+				
+			}
+			else if(cardrev1 == 1)
+			{
+				cardThree.setVisible(true);
+			}
 			
 		}
 		
