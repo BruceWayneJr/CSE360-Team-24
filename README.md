@@ -6,11 +6,14 @@ The number "portals" and "bounty Tile" are displayed on the checkered board. The
 player to navigate all their "pawns", according to the die roll from the start(bottom square) to the finish(top 
 square) helped or hindered by the portals.
 
-Trello link - https://trello.com/b/o6AiO1BM/cse360-team-24
+Trello link 
+
+    - https://trello.com/b/o6AiO1BM/cse360-team-24
 
 
 Dependency Installation: 
-  libgdx library  
+
+  libgdx library
   
     - https://libgdx.badlogicgames.com/documentation.html 
 
