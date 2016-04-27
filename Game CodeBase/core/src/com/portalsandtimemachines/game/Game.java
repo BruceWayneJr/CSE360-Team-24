@@ -522,6 +522,7 @@ public class Game extends ApplicationAdapter{
 				}
 			}
 		});
+		
 	}
 	
 	
