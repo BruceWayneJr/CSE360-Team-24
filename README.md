@@ -8,6 +8,10 @@ square) helped or hindered by the portals.
 
 Trello link - https://trello.com/b/o6AiO1BM/cse360-team-24
 
+
+Dependency Installation: 
+  libgdx library  
+    - https://libgdx.badlogicgames.com/documentation.html 
 This project requires installation of Gradle. The steps to install Gradle in Eclipse is explained below,
 
 Installing Gradle
