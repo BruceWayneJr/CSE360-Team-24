@@ -73,10 +73,14 @@ public class Game extends ApplicationAdapter{
 	private Array<GamePiece> gamePieces;
 	
 	private int index = 0;
+	private int index1 = 0;
 	
 //	ShapeRenderer shapeRenderer;
 	
 	GamePiece gamePiece;
+	GamePiece gamePiece1;
+	
+	
 	Stage gamestage; 	
 	Skin gameskin;
 	TextButton rollDice;
@@ -91,6 +95,9 @@ public class Game extends ApplicationAdapter{
 	static int time_machine_flag = 0;
 	static int final_pos = 0;
 
+	static int timeMachine_counter1 = 0;
+	static int time_machine_flag1 = 0;
+	static int final_pos1 = 0;
 	/**
 	 * This function is used for the purpose of drawing the board and
 	 * setting up other board pieces initially.
@@ -142,7 +149,7 @@ public class Game extends ApplicationAdapter{
 		rollDice = new TextButton("Roll Dice", gameskin);
 		gamestage.addActor(rollDice);
 		
-	    // Camera to manage viewport and  view matricies
+	    // Camera to manage viewport and  view matrices
 		camera = new OrthographicCamera();
 		// Initialize camera to window size
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -257,6 +264,7 @@ public class Game extends ApplicationAdapter{
 		i_index++;
 		
 		gamePiece = new GamePiece(0, gamePieceTexture, boardTransforms.get(0));
+		gamePiece1 = new GamePiece(1, gamePieceTexture, boardTransforms.get(0));
 		
 		rollDice.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
@@ -342,6 +350,7 @@ public class Game extends ApplicationAdapter{
 		portalSprite8.draw(batch);
 		
 		gamePiece.draw(batch);
+		gamePiece1.draw(batch);
 		dice.draw(batch);
 		batch.end();
 		
@@ -370,6 +379,7 @@ public class Game extends ApplicationAdapter{
 		}
 	}
 	
+	int playersel = 0;
 	
 	/**
 	 * This function is used for moving the pawn on the board.
@@ -379,7 +389,10 @@ public class Game extends ApplicationAdapter{
 	public void moving_piece(int value_tomove)
 	{
 
-		
+		++playersel;
+		if(playersel % 2 == 0)
+		{
+			
 			if(time_machine_flag == 0)
 			{
 				index = index + value_tomove;
@@ -499,7 +512,131 @@ public class Game extends ApplicationAdapter{
 			}
 			//if(index > 98)
 				//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+		}
+		else
+		{
+		
+			if(time_machine_flag1 == 0)
+			{
+				index1 = index1 + value_tomove;
+				if(index1 > 98)
+				{
+					gamePiece1.moveToPosition(boardTransforms.get(99));
+					//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+				}
+				else
+				{
+					gamePiece1.moveToPosition(boardTransforms.get(index1));
+				}
+			}
+			else if( time_machine_flag1 == 1)
+			{
+				index1 = index1 + value_tomove;
+				if(timeMachine_counter1 > 0 && index1 < final_pos1 )
+				{
+					timeMachine_counter1--;
+					if(timeMachine_counter1 == 0 && index1 <final_pos1)
+					{
+						time_machine_flag1 = 0;
+						index1 = 0;
+						gamePiece1.moveToPosition(boardTransforms.get(index1));
+					}
+					else
+					{
+						if(index1 > 98)
+						{
+							gamePiece1.moveToPosition(boardTransforms.get(99));
+							//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+						}
+						else
+						{
+							gamePiece1.moveToPosition(boardTransforms.get(index1));
+						}
+					}
+				}
+				else if(timeMachine_counter1 == 0 && index1 < final_pos1)
+				{
+					time_machine_flag1 = 0;
+					index1 = 0;
+					gamePiece1.moveToPosition(boardTransforms.get(index1));
+				}
+				else if(timeMachine_counter1 >= 0 && index1 >= final_pos1)
+				{
+
+					time_machine_flag1 = 0;
+					if(index1 > 98)
+
+						time_machine_flag1 = 0;
+					index1 = index1 + value_tomove;
+					if(index1 > 98)
+					{
+						gamePiece1.moveToPosition(boardTransforms.get(99));
+						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+					}
+					else
+					{
+						gamePiece1.moveToPosition(boardTransforms.get(index1));
+					}
+				}
+			}
+	//		index = index + value;
+	//		gamePiece.moveToPosition(boardTransforms.get(index));
+	//		System.out.println(index +" "+ value_tomove);
+
+			int ret = obj.check_portal(index1);
+			if(ret != 0)
+			{
+				index1 = index1 + ret;
+	//			if(index )
+				System.out.println("Portal ");
+				if(index1 > 98)
+				{
+					gamePiece1.secondaryMove(boardTransforms.get(99));
+					//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+				}
+				else
+				{
+					gamePiece1.secondaryMove(boardTransforms.get(index1));
+					if(obj.check_portal(index1) != 0)
+					{
+						index1 = index1 + obj.check_portal(index1);
+						System.out.println("Portal ");
+						if(index1 > 98)
+						{
+							gamePiece1.secondaryMove(boardTransforms.get(99));
+							//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
+						}
+						else
+						{
+							gamePiece1.secondaryMove(boardTransforms.get(index1));
+						}
+					}
+				}
+			}
+	//		
+			if(obj.check_timeMachine(index1) != 0)
+			{
+	//			System.out.println(" time machine");
+				timeMachine_counter1 = 2;
+				time_machine_flag1 = 1;
+				if(index1 == temporary_TimeMachinePosition[0])
+				{
+					timemachineSprite1.setColor(1,1,1,1);
+				}
+				else if(index1 == temporary_TimeMachinePosition[1])
+				{
+					timemachineSprite2.setColor(1,1,1,1);
+				}
+				else
+				{
+					timemachineSprite3.setColor(1,1,1,1);
+				}
+				final_pos1 = obj.check_timeMachine(index1);
+			}
+			//if(index > 98)
+				//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 			
+		}
 		
 	}
 	
