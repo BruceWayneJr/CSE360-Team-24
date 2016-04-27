@@ -44,6 +44,7 @@ public class Game extends ApplicationAdapter{
 	SpriteBatch batch;
 	Texture boardBackground;
 	Texture gamePieceTexture;
+	Texture gamePieceTexture1;
 	Texture portalTexture;
 	Texture timemachineTexture;
 	Texture bountyTexture;
@@ -142,6 +143,7 @@ public class Game extends ApplicationAdapter{
 		// Checkered background texture
 		boardBackground = new Texture("10x10_checkered_board.png");
 		gamePieceTexture = new Texture("Chess-Game.png");
+		gamePieceTexture1 = new Texture("Green_piece.png");
 		portalTexture = new Texture("brunswick-spiral-black-white.png");
 		timemachineTexture = new Texture("Time-Machine.png");
 		bountyTexture = new Texture("bounty.png");
@@ -330,13 +332,14 @@ public class Game extends ApplicationAdapter{
 		
 		
 		gamePiece = new GamePiece(0, gamePieceTexture, boardTransforms.get(0));
-		gamePiece1 = new GamePiece(1, gamePieceTexture, boardTransforms.get(0));
+		gamePiece1 = new GamePiece(1, gamePieceTexture1, boardTransforms.get(0));
 		
 		rollDice.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
 				
 				int temp = obj.roll_die();
 				dice.showNumber(temp);
+				
 
 				moving_piece(temp);
 				if(index > 98) {
