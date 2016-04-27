@@ -26,6 +26,7 @@ public class GamePiece {
 	
 	private Vector2 destination;
 	private Vector2 secondDestination;
+	private Vector2 offset;
 	
 	/**
 	 * Function used for setting up the game pieces i.e the portals, players etc.
@@ -35,7 +36,7 @@ public class GamePiece {
 	 * @param position		used for positioning in the board.
 	 */
 	@SuppressWarnings("static-access")
-	public GamePiece(int playerNumber, Texture texture, Vector2 position){  // this function is used for setting up the game piece on the board.
+	public GamePiece(int playerNumber, Texture texture, Vector2 position, Vector2 newOffset){  // this function is used for setting up the game piece on the board.
 		owner = playerNumber;
 		sprite  = new Sprite(texture);
 		sprite.setOriginCenter();
@@ -47,6 +48,7 @@ public class GamePiece {
 		secondDestination = secondDestination.Zero; 
 		locationIndex = 0;
 		show = true;
+		offset = newOffset;
 	}
 	
 	/**
@@ -77,7 +79,8 @@ public class GamePiece {
 	 * @param newPosition position to which to be moved.
 	 */
 	public void moveToPosition(Vector2 newPosition){
-		destination = newPosition;
+		destination = newPosition.add(offset);
+//		destination = destination.add(offset);
 		moving = true;
 	}
 	
