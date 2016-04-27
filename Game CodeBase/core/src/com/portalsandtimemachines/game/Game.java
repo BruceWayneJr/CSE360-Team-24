@@ -208,6 +208,7 @@ public class Game extends ApplicationAdapter{
 		
 		playerOne = new TextButton("Player 1", gameskin);
 		playerOne.setPosition(0, 700);
+		playerOne.setDisabled(true);
 		
 		playerTwo = new TextButton("Player 2", gameskin);
 		playerTwo.setPosition(0, 600);
@@ -215,6 +216,7 @@ public class Game extends ApplicationAdapter{
 		
 		useCard = new TextButton("Use Card",gameskin);
 		useCard.setPosition(0, 150);
+		useCard.setDisabled(true);
 		
 		
 		ImageButtonStyle style = new ImageButtonStyle();
@@ -413,7 +415,7 @@ public class Game extends ApplicationAdapter{
 				int temp = obj.roll_die();
 				dice.showNumber(temp);
 				
-
+				
 				moving_piece(temp);
 				if(index > 98) {
 					JOptionPane.showMessageDialog(null,"Congrats " + playername + "! You Won!!");
@@ -539,6 +541,7 @@ public class Game extends ApplicationAdapter{
 		if(playersel % 2 == 0)
 		{
 			playerTwo.setDisabled(false);
+			playerOne.setDisabled(true);
 			if(time_machine_flag == 0)
 			{
 				index = index + value_tomove;
@@ -667,6 +670,7 @@ public class Game extends ApplicationAdapter{
 		else
 		{
 			playerTwo.setDisabled(true);
+			playerOne.setDisabled(false);
 			if(time_machine_flag1 == 0)
 			{
 				index1 = index1 + value_tomove;
