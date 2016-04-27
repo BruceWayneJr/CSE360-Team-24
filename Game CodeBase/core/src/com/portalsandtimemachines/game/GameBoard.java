@@ -138,6 +138,8 @@ public class GameBoard {
 	                if(key == position)
 	                {
 	                    temp_list = portals_hashMap.get(position);
+	                    System.out.println("Coding");
+	                    System.out.println(temp_list.get(2));
 	                    return temp_list.get(2);             // Returns the position to which the pwan needs to be moved.
 	                }
 	            }

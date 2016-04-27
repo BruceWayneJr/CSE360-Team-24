@@ -514,7 +514,7 @@ public class Game extends ApplicationAdapter{
 			int bounty_ret = obj.check_bounty(index);
 			if(ret != 0)
 			{
-				index = index + ret;
+				index = ret;
 	//			if(index )
 				System.out.println("Portal ");
 				if(index > 98)
@@ -543,7 +543,7 @@ public class Game extends ApplicationAdapter{
 			}
 			else if(bounty_ret == 1)
 			{
-				
+//				JOptionPane.showMessageDialog(null,"You have won a Bounty Card");
 			}
 	//		
 			if(obj.check_timeMachine(index) != 0)
@@ -637,11 +637,11 @@ public class Game extends ApplicationAdapter{
 	//		index = index + value;
 	//		gamePiece.moveToPosition(boardTransforms.get(index));
 	//		System.out.println(index +" "+ value_tomove);
-
+			int bounty_ret = obj.check_bounty(index);
 			int ret = obj.check_portal(index1);
 			if(ret != 0)
 			{
-				index1 = index1 + ret;
+				index1 = ret;
 	//			if(index )
 				System.out.println("Portal ");
 				if(index1 > 98)
@@ -667,6 +667,10 @@ public class Game extends ApplicationAdapter{
 						}
 					}
 				}
+			}
+			else if(bounty_ret == 1)
+			{
+//				JOptionPane.showMessageDialog(null,"You have won a Bounty Card");
 			}
 	//		
 			if(obj.check_timeMachine(index1) != 0)
