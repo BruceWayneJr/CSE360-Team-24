@@ -45,11 +45,16 @@ public class Game extends ApplicationAdapter{
 	Texture gamePieceTexture;
 	Texture portalTexture;
 	Texture timemachineTexture;
+	Texture bountyTexture;
 	
 	private Viewport viewport;
 	OrthographicCamera camera;
 	
 	private Sprite boardSprite;
+	
+	private Sprite bountySprite1;
+	private Sprite bountySprite2;
+	private Sprite bountySprite3;
 	
 	private Sprite timemachineSprite1;
 	private Sprite timemachineSprite2;
@@ -91,6 +96,7 @@ public class Game extends ApplicationAdapter{
 	
 	int[] temporary_PortalsPosition;
 	int[] temporary_TimeMachinePosition;
+	int[] bounty_positions;
 	static int timeMachine_counter = 0;
 	static int time_machine_flag = 0;
 	static int final_pos = 0;
@@ -122,6 +128,8 @@ public class Game extends ApplicationAdapter{
 		gamePieceTexture = new Texture("Chess-Game.png");
 		portalTexture = new Texture("brunswick-spiral-black-white.png");
 		timemachineTexture = new Texture("Time-Machine.png");
+		bountyTexture = new Texture("bounty.png");
+		
 		
 		BitmapFont bfont=new BitmapFont();
 //		bfont.scale(1);
@@ -212,6 +220,19 @@ public class Game extends ApplicationAdapter{
 		portalSprite8 = new Sprite(portalTexture);
 		portalSprite8.setOriginCenter();
 		portalSprite8.setSize(32, 32);		
+		
+		
+		bountySprite1 = new Sprite(bountyTexture);
+		bountySprite1.setOriginCenter();
+		bountySprite1.setSize(32, 32);
+		
+		bountySprite2 = new Sprite(bountyTexture);
+		bountySprite2.setOriginCenter();
+		bountySprite2.setSize(32, 32);
+		
+		bountySprite3 = new Sprite(bountyTexture);
+		bountySprite3.setOriginCenter();
+		bountySprite3.setSize(32, 32);
 		// Used to draw shapes on screen 
 //		shapeRenderer = new ShapeRenderer();
 		
@@ -224,11 +245,14 @@ public class Game extends ApplicationAdapter{
 		
 		obj.init();
 		obj.init_time_machine();
+		obj.init_bounty();
 		
 		temporary_PortalsPosition = obj.portal_positions(); 
 		int i_index = 0;
 		temporary_TimeMachinePosition = obj.timeMachine_positions();
 		int j_index = 0;
+		bounty_positions = obj.bounty_positions();
+		int k_index = 0;
 		
 		timemachineSprite1.setPosition(boardTransforms.get(temporary_TimeMachinePosition[j_index] ).x - 32, boardTransforms.get(temporary_TimeMachinePosition[j_index]).y);
 		j_index++;
@@ -262,6 +286,16 @@ public class Game extends ApplicationAdapter{
 		
 		portalSprite8.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index]).x - 32, boardTransforms.get(temporary_PortalsPosition[i_index]).y);
 		i_index++;
+		
+		bountySprite1.setPosition(boardTransforms.get(bounty_positions[k_index]).x - 32, boardTransforms.get(bounty_positions[k_index]).y);
+		k_index++;
+		
+		bountySprite2.setPosition(boardTransforms.get(bounty_positions[k_index]).x - 32, boardTransforms.get(bounty_positions[k_index]).y);
+		k_index++;
+		
+		bountySprite3.setPosition(boardTransforms.get(bounty_positions[k_index]).x - 32, boardTransforms.get(bounty_positions[k_index]).y);
+		k_index++;
+		
 		
 		gamePiece = new GamePiece(0, gamePieceTexture, boardTransforms.get(0));
 		gamePiece1 = new GamePiece(1, gamePieceTexture, boardTransforms.get(0));
@@ -348,6 +382,10 @@ public class Game extends ApplicationAdapter{
 		portalSprite6.draw(batch);
 		portalSprite7.draw(batch);
 		portalSprite8.draw(batch);
+		
+		bountySprite1.draw(batch);
+		bountySprite2.draw(batch);
+		bountySprite3.draw(batch);
 		
 		gamePiece.draw(batch);
 		gamePiece1.draw(batch);

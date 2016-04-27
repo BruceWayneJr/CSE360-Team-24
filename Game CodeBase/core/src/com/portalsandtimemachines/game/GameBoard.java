@@ -145,8 +145,55 @@ public class GameBoard {
 	        return 0;                                  //  If the square does not have a portal associatd with it.
 	    }
 	    
+	   
+	    int[] bounty_array = new int[3];
+	    int k_index;
+	    void init_bounty()
+	    {
+	    	for( int i_index = 0; i_index < 3; i_index++ )
+	    	{
+	    		set_bounty();
+	    	}
+	    	System.out.println("Initializing the Bounty Positions values");
+	    }
 	    
 	    
+	    int[] bounty_positions()
+	    {
+	    	return bounty_array;
+	    }
+	    
+	    
+	    void set_bounty()
+	    {
+	    	Random rand = new Random();
+	    	int flag = 0;
+	    	int position;
+	    	position = rand.nextInt((89 - 12) + 1) + 12;
+	    	while(flag == 0)
+	    	{
+	    		flag = 1;
+	    		position = rand.nextInt((89 - 12) + 1) + 12;
+	    		for(int check_index = 0; check_index < 8; check_index++)
+	    		{
+	    			if(position == portal_array[check_index])
+	    			{
+	    				flag = 0;
+	    			}
+	    		}
+	    		
+	    		for(int check_index = 0; check_index < 3; check_index++)
+	    		{
+	    			if(position == timeMachine_array[check_index])
+	    			{
+	    				flag = 0;
+	    			}
+	    		}
+	    	}
+	    	
+	    	bounty_array[k_index] = position;
+	    	k_index++;
+	    }
 	    
 	    
 	    HashMap<Integer, List<Integer>> timeMachine_hashMap = new HashMap<Integer, List<Integer>>();
