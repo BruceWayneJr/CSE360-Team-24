@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.*;
@@ -141,6 +142,8 @@ public class Game extends ApplicationAdapter{
 	ImageButton cardTwo;
 	ImageButton cardThree;
 	ImageButton cardFour;
+	
+	private Label label;
 
 	GameBoard obj = new GameBoard();
 	
@@ -319,6 +322,14 @@ public class Game extends ApplicationAdapter{
 		ImageButtonStyle style3 = new ImageButtonStyle();
 		style3.imageUp = new TextureRegionDrawable(cFour);
 		style3.imageDown = new TextureRegionDrawable(cFour);
+		
+		LabelStyle labelStyle = new LabelStyle(bfont, Color.WHITE);
+		label = new Label("WELCOME!", labelStyle);
+		label.setPosition(10, 200);
+		label.setWrap(true);
+		label.setWidth(100);
+		label.setText("You just activated my trap card!");
+		label.setColor(Color.RED);
 		
 		cardOne = new ImageButton(style);
 		cardOne.setSize(101, 153);
@@ -601,6 +612,7 @@ public class Game extends ApplicationAdapter{
 		gamePiece12.draw(batch);
 		gamePiece2.draw(batch);
 		dice.draw(batch);
+		label.draw(batch, 1);
 		batch.end();
 		
 //		shapeRenderer.setProjectionMatrix(camera.combined);

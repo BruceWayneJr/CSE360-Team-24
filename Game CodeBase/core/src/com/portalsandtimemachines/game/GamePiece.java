@@ -38,17 +38,17 @@ public class GamePiece {
 	@SuppressWarnings("static-access")
 	public GamePiece(int playerNumber, Texture texture, Vector2 position, Vector2 newOffset){  // this function is used for setting up the game piece on the board.
 		owner = playerNumber;
+		offset = newOffset;
 		sprite  = new Sprite(texture);
 		sprite.setOriginCenter();
 		sprite.setSize(32, 32);
-		sprite.setPosition(position.x, position.y);
+		sprite.setPosition(position.x + offset.x, position.y + offset.y);
 		moveSpeed = 250;
 		moving = false;
 		destination = destination.Zero;
 		secondDestination = secondDestination.Zero; 
 		locationIndex = 0;
 		show = true;
-		offset = newOffset;
 	}
 	
 	/**
@@ -79,8 +79,8 @@ public class GamePiece {
 	 * @param newPosition position to which to be moved.
 	 */
 	public void moveToPosition(Vector2 newPosition){
-		destination = newPosition.add(offset);
-//		destination = destination.add(offset);
+		destination = newPosition;
+		destination = destination.add(offset);
 		moving = true;
 	}
 	
@@ -119,6 +119,7 @@ public class GamePiece {
 	 */
 	public void secondaryMove(Vector2 secondaryPosition){                        // This function is used for moving the pawn when it hit a portal or in case of time machine fail.
 		secondDestination = secondaryPosition;
+		secondDestination.add(offset);
 	}
 	
 
