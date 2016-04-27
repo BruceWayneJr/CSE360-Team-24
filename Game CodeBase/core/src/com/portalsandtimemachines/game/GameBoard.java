@@ -195,6 +195,17 @@ public class GameBoard {
 	    	k_index++;
 	    }
 	    
+	    int check_bounty(int position)
+	    {
+	    	for(int k_index = 0; k_index < 3; k_index++)
+	    	{
+	    		if(position == bounty_array[k_index])
+	    		{
+	    			return 1;
+	    		}
+	    	}
+	    	return 0;
+	    }
 	    
 	    HashMap<Integer, List<Integer>> timeMachine_hashMap = new HashMap<Integer, List<Integer>>();
 	    int[] timeMachine_array = new int[8];

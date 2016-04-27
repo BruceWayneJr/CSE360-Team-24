@@ -499,6 +499,7 @@ public class Game extends ApplicationAdapter{
 	//		System.out.println(index +" "+ value_tomove);
 
 			int ret = obj.check_portal(index);
+			int bounty_ret = obj.check_bounty(index);
 			if(ret != 0)
 			{
 				index = index + ret;
@@ -527,6 +528,10 @@ public class Game extends ApplicationAdapter{
 						}
 					}
 				}
+			}
+			else if(bounty_ret == 1)
+			{
+				
 			}
 	//		
 			if(obj.check_timeMachine(index) != 0)
