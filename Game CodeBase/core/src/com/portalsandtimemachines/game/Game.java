@@ -94,10 +94,13 @@ public class Game extends ApplicationAdapter{
 	
 	Stage gamestage; 	
 	Skin gameskin;
+	Skin gameskinp;
 	
 	TextButton rollDice;
 	TextButton playerOne;
+	TextButton Pawn_One;
 	TextButton playerTwo;
+	TextButton Pawn_Two;
 	TextButton useCard;
 	
 	String playername;
@@ -140,6 +143,7 @@ public class Game extends ApplicationAdapter{
 		batch = new SpriteBatch();
 		gamestage = new Stage();
 		gameskin = new Skin();
+		gameskinp = new Skin();
 		// Checkered background texture
 		boardBackground = new Texture("10x10_checkered_board.png");
 		gamePieceTexture = new Texture("Chess-Game.png");
@@ -154,7 +158,7 @@ public class Game extends ApplicationAdapter{
 		gameskin.add("default",bfont);
 		
 		Pixmap pixmap = new Pixmap(100, 50, Format.RGBA8888);
-		pixmap.setColor(Color.GREEN);
+		pixmap.setColor(Color.WHITE);
 		pixmap.fill();
 		gameskin.add("white", new Texture(pixmap));
 
@@ -163,11 +167,13 @@ public class Game extends ApplicationAdapter{
 		dice = new Dice();
 		
         TextButtonStyle textButtonStyle = new TextButtonStyle();
-		textButtonStyle.up = gameskin.newDrawable("white", Color.GREEN);
-		textButtonStyle.down = gameskin.newDrawable("white", Color.GREEN);
-		textButtonStyle.checked = gameskin.newDrawable("white", Color.GOLD);
+        textButtonStyle.fontColor =  Color.BLACK;
+		textButtonStyle.up = gameskin.newDrawable("white", Color.WHITE);
+		textButtonStyle.down = gameskin.newDrawable("white", Color.WHITE);
+		textButtonStyle.checked = gameskin.newDrawable("white", Color.WHITE);
 		textButtonStyle.over = gameskin.newDrawable("white", Color.LIGHT_GRAY);
-		textButtonStyle.disabled = gameskin.newDrawable("white", Color.WHITE);
+		textButtonStyle.disabled = gameskin.newDrawable("white", Color.BLACK);
+
 		
 		textButtonStyle.font = gameskin.getFont("default");
 
@@ -176,19 +182,29 @@ public class Game extends ApplicationAdapter{
 		rollDice = new TextButton("Roll Dice", gameskin);
 		rollDice.setPosition(0, 0);
 		
-		playerTwo = new TextButton("Player 2", gameskin);
-		playerTwo.setPosition(0, 150);
-		playerTwo.setDisabled(true);
+
+		
+		Pawn_One = new TextButton("Pawn 1", gameskin);
+		Pawn_One.setPosition(0, 350);
+		
+		Pawn_Two = new TextButton("Pawn 2", gameskin);
+		Pawn_Two.setPosition(0, 250);
 		
 		playerOne = new TextButton("Player 1", gameskin);
-		playerOne.setPosition(0, 250);
+		playerOne.setPosition(0, 700);
+		
+		playerTwo = new TextButton("Player 2", gameskin);
+		playerTwo.setPosition(0, 600);
+		playerTwo.setDisabled(true);
 		
 		useCard = new TextButton("Use Card",gameskin);
-		useCard.setPosition(0, 350);
+		useCard.setPosition(0, 150);
 		
 		gamestage.addActor(rollDice);
 		gamestage.addActor(playerOne);
 		gamestage.addActor(playerTwo);
+		gamestage.addActor(Pawn_One);
+		gamestage.addActor(Pawn_Two);
 		gamestage.addActor(useCard);
 		
 	    // Camera to manage viewport and  view matrices
