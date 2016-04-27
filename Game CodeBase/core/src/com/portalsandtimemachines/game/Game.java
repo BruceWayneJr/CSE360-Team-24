@@ -47,6 +47,8 @@ public class Game extends ApplicationAdapter{
 	Texture boardBackground;
 	Texture gamePieceTexture;
 	Texture gamePieceTexture1;
+	Texture gamePieceTexture21;
+	Texture gamePieceTexture22;
 	Texture portalTexture;
 	Texture timemachineTexture;
 	Texture bountyTexture;
@@ -224,6 +226,8 @@ public class Game extends ApplicationAdapter{
 		boardBackground = new Texture("10x10_checkered_board.png");
 		gamePieceTexture = new Texture("Chess-Game.png");
 		gamePieceTexture1 = new Texture("Green_piece.png");
+		gamePieceTexture21 = new Texture("Orange_piece.png");
+		gamePieceTexture22 = new Texture("Red_piece.png");
 		portalTexture = new Texture("brunswick-spiral-black-white.png");
 		timemachineTexture = new Texture("Time-Machine.png");
 		bountyTexture = new Texture("bounty.png");
