@@ -14,6 +14,9 @@ public class DBGameConnect {
 		String password = "cse360";
 		
 		String playerName = (String) dbInput.get("pname");
+		
+		
+		
 		String insertQuery = "INSERT INTO `scorecard` (`Player_Name`, `Games_Won`, `Games_Played`, `Win_Rate`) VALUES ("+ "'"+playerName +"'"+", '0', '1', '0')";
 		System.out.println(insertQuery);
 		System.out.println("Loading driver...");

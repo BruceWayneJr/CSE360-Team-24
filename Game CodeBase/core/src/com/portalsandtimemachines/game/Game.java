@@ -93,7 +93,11 @@ public class Game extends ApplicationAdapter{
 	
 	Stage gamestage; 	
 	Skin gameskin;
+	
 	TextButton rollDice;
+	TextButton playerOne;
+	TextButton playerTwo;
+	TextButton useCard;
 	
 	String playername;
 	GameBoard obj = new GameBoard();
@@ -157,17 +161,33 @@ public class Game extends ApplicationAdapter{
 		dice = new Dice();
 		
         TextButtonStyle textButtonStyle = new TextButtonStyle();
-		textButtonStyle.up = gameskin.newDrawable("white", Color.DARK_GRAY);
-		textButtonStyle.down = gameskin.newDrawable("white", Color.DARK_GRAY);
-		textButtonStyle.checked = gameskin.newDrawable("white", Color.BLUE);
+		textButtonStyle.up = gameskin.newDrawable("white", Color.GREEN);
+		textButtonStyle.down = gameskin.newDrawable("white", Color.GREEN);
+		textButtonStyle.checked = gameskin.newDrawable("white", Color.GOLD);
 		textButtonStyle.over = gameskin.newDrawable("white", Color.LIGHT_GRAY);
+		textButtonStyle.disabled = gameskin.newDrawable("white", Color.BLACK);
 		
 		textButtonStyle.font = gameskin.getFont("default");
 
 		gameskin.add("default", textButtonStyle);
 		
 		rollDice = new TextButton("Roll Dice", gameskin);
+		rollDice.setPosition(0, 0);
+		
+		playerTwo = new TextButton("Player 2", gameskin);
+		playerTwo.setPosition(0, 150);
+		playerTwo.setDisabled(true);
+		
+		playerOne = new TextButton("Player 1", gameskin);
+		playerOne.setPosition(0, 250);
+		
+		useCard = new TextButton("Use Card",gameskin);
+		useCard.setPosition(0, 350);
+		
 		gamestage.addActor(rollDice);
+		gamestage.addActor(playerOne);
+		gamestage.addActor(playerTwo);
+		gamestage.addActor(useCard);
 		
 	    // Camera to manage viewport and  view matrices
 		camera = new OrthographicCamera();
