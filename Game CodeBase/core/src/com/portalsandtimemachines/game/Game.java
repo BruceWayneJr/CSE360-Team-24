@@ -19,6 +19,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.*;
@@ -329,7 +331,7 @@ public class Game extends ApplicationAdapter{
 		label.setPosition(10, 200);
 		label.setWrap(true);
 		label.setWidth(100);
-		label.setText("You just activated my trap card!");
+		label.setText("Welcome to portals and time machines!");
 		label.setColor(Color.RED);
 		
 		diceHasBeenRolled = false;
@@ -338,22 +340,57 @@ public class Game extends ApplicationAdapter{
 		cardOne.setSize(101, 153);
 		cardOne.setPosition(Gdx.graphics.getWidth()-100, 600);
 		cardOne.setVisible(false);
-		
+		cardOne.addListener(new ChangeListener()
+		{
+			@Override
+			public void changed(ChangeEvent event, Actor actor) 
+			{
+				// TODO Put stuff here
+				
+			}	
+		});
 		
 		cardTwo = new ImageButton(style1);
 		cardTwo.setSize(101, 153);
 		cardTwo.setPosition(Gdx.graphics.getWidth()-100, 400);
 		cardTwo.setVisible(false);
+		cardTwo.addListener(new ChangeListener()
+		{
+			@Override
+			public void changed(ChangeEvent event, Actor actor) 
+			{
+				// TODO Put stuff here
+				
+			}	
+		});
 		
 		cardThree = new ImageButton(style2);
 		cardThree.setSize(101, 153);
 		cardThree.setPosition(Gdx.graphics.getWidth()-100, 200);
 		cardThree.setVisible(false);
+		cardThree.addListener(new ChangeListener()
+		{
+			@Override
+			public void changed(ChangeEvent event, Actor actor) 
+			{
+				// TODO Put stuff here
+				
+			}	
+		});
 		
 		cardFour = new ImageButton(style3);
 		cardFour.setSize(101,153);
 		cardFour.setPosition(Gdx.graphics.getWidth()-100, 0);
 		cardFour.setVisible(false);
+		cardFour.addListener(new ChangeListener()
+		{
+			@Override
+			public void changed(ChangeEvent event, Actor actor) 
+			{
+				// TODO Put stuff here
+				
+			}	
+		});
 
 		
 		gamestage.addActor(rollDice);
@@ -519,8 +556,17 @@ public class Game extends ApplicationAdapter{
 			public void changed (ChangeEvent event, Actor actor) 
 			{
 				if(!diceHasBeenRolled){
-					temp = obj.roll_die();
-					dice.showNumber(temp);
+					dice.changeAnimate();
+					float delay = 0.5f; // seconds
+
+					Timer.schedule(new Task(){
+					    @Override
+					    public void run() {
+					    	temp = obj.roll_die();
+							dice.showNumber(temp);
+					    }
+					}, delay);
+					
 					++flag;
 //					moving_piece(temp, flag);
 					diceHasBeenRolled = true;
@@ -546,7 +592,7 @@ public class Game extends ApplicationAdapter{
 			{
 				if(diceHasBeenRolled){
 					diceHasBeenRolled = false;
-					moving_piece(temp, flag);
+					moving_piece(temp, 1);
 				}
 			}
 		});
@@ -557,7 +603,7 @@ public class Game extends ApplicationAdapter{
 			{
 				if(diceHasBeenRolled){
 					diceHasBeenRolled = false;
-					moving_piece(temp, flag);
+					moving_piece(temp, 2);
 				}
 			}
 		});
