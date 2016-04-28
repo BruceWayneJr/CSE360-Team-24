@@ -120,7 +120,7 @@ public class Game extends ApplicationAdapter{
 	
 
 	int cardkill2 = 0;
-	int cardswap2 = 0;
+	int cardswap2 = 1;
 	int cardrev2 = 0;
 	
 	
@@ -374,6 +374,9 @@ public class Game extends ApplicationAdapter{
 			}	
 		});
 		
+		int temp_move1;
+		int temp_move2;
+		
 		cardTwo = new ImageButton(style1);
 		cardTwo.setSize(101, 153);
 		cardTwo.setPosition(Gdx.graphics.getWidth()-100, 400);
@@ -382,8 +385,43 @@ public class Game extends ApplicationAdapter{
 			@Override
 			public void changed(ChangeEvent event, Actor actor) 
 			{
+				int temp_move1;
+				int temp_move2;
 				// TODO Put stuff here
-				
+				if(cardswap1 == 1)
+				{
+					temp_move1 = index;
+					temp_move2 = index2;
+					gamePiece1.moveToPosition(boardTransforms.get(temp_move1));
+					gamePiece12.moveToPosition(boardTransforms.get(temp_move2));
+					index = index1;
+					index2 = index12;
+					gamePiece.moveToPosition(boardTransforms.get(index));
+					gamePiece2.moveToPosition(boardTransforms.get(index2));
+					index1 = temp_move1; 
+					index12 = temp_move2;
+					cardswap1 = 0;
+				}
+				else if(cardswap2 == 1)
+				{
+					System.out.println("Inside the function");
+					temp_move1 = index1;
+					temp_move2 = index12;
+					gamePiece.moveToPosition(boardTransforms.get(temp_move1));
+					gamePiece2.moveToPosition(boardTransforms.get(temp_move2));
+					
+					index1 = index;
+					index12 = index2;
+					gamePiece1.moveToPosition(boardTransforms.get(index1));
+					gamePiece12.moveToPosition(boardTransforms.get(index12));
+					index = temp_move1; 
+					index2 = temp_move2;
+					cardswap2 = 0;
+				}
+				else
+				{
+					System.out.println("Nobody has the card");
+				}
 				
 			}	
 		});
