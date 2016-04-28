@@ -113,7 +113,7 @@ public class Game extends ApplicationAdapter{
 	
 	int noofplayer = 0;
 	
-	int cardkill1 = 0;
+	int cardkill1 = 1;
 	int cardswap1 = 0;
 	int cardrev1 = 0;
 	
@@ -350,6 +350,26 @@ public class Game extends ApplicationAdapter{
 			public void changed(ChangeEvent event, Actor actor) 
 			{
 				// TODO Put stuff here
+				if(cardkill1 == 1)
+				{
+					index1 = 0;
+					index12 = 0;
+					gamePiece1.moveToPosition(boardTransforms.get(index1));
+					gamePiece12.moveToPosition(boardTransforms.get(index12));
+					cardkill1 = 0;
+				}
+				else if(cardkill2 == 1)
+				{
+					index = 0;
+					index2 = 0;
+					gamePiece.moveToPosition(boardTransforms.get(index));
+					gamePiece2.moveToPosition(boardTransforms.get(index2));
+					cardkill2 = 0;
+				}
+				else
+				{
+					System.out.println("Nobody has the card");
+				}
 				
 			}	
 		});
