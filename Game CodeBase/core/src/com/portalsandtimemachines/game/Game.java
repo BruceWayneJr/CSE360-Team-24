@@ -113,7 +113,7 @@ public class Game extends ApplicationAdapter{
 	
 	int noofplayer = 0;
 	
-	int cardkill1 = 1;
+	int cardkill1 = 0;
 	int cardswap1 = 0;
 	int cardrev1 = 0;
 	
@@ -805,13 +805,45 @@ public class Game extends ApplicationAdapter{
 	{
 		Random rand = new Random();
 
+		
+		
 		pawnsel = pawnsol;
 		pawnsel1 = pawnsol;
 		++playersel;
 		if(playersel % 2 == 0)
 		{
+			
 			playerTwo.setDisabled(false);
 			playerOne.setDisabled(true);
+			
+			if(cardkill2 == 1)
+			{
+				cardOne.setVisible(true);
+			}
+			else
+			{
+				cardOne.setVisible(false);
+			}
+			
+			if(cardswap2 == 1)
+			{
+				System.out.println("Inside Player 2 - Swap Card");
+				cardTwo.setVisible(true);
+			}
+			else
+			{
+				cardTwo.setVisible(false);
+			}
+			
+			if(cardrev2 == 1)
+			{
+				cardThree.setVisible(true);
+			}
+			else
+			{
+				cardTwo.setVisible(false);
+			}
+			
 			if(pawnsel % 2 == 0)
 			{
 				if(time_machine_flag == 0)
@@ -1087,30 +1119,7 @@ public class Game extends ApplicationAdapter{
 				
 			}
 			
-			if(cardkill2 == 1)
-			{
-				cardOne.setVisible(true);
-			}
-			else
-			{
-				cardOne.setVisible(false);
-			}
-			if(cardswap2 == 1)
-			{
-				cardTwo.setVisible(true);
-			}
-			else
-			{
-				cardTwo.setVisible(false);
-			}
-			if(cardrev2 == 1)
-			{
-				cardThree.setVisible(true);
-			}
-			else
-			{
-				cardTwo.setVisible(false);
-			}
+
 			
 //			cardOne.addListener(new ChangeListener() 
 //			{	
@@ -1141,6 +1150,32 @@ public class Game extends ApplicationAdapter{
 		{
 			playerTwo.setDisabled(true);
 			playerOne.setDisabled(false);
+			
+			if(cardkill1 == 1)
+			{
+				cardOne.setVisible(true);
+			}
+			else
+			{
+				cardOne.setVisible(false);
+			}
+			
+			if(cardswap1 == 1)
+			{
+				cardTwo.setVisible(true);
+			}else
+			{
+				cardTwo.setVisible(false);
+			}
+			
+			if(cardrev1 == 1)
+			{
+				cardThree.setVisible(true);
+			}
+			else
+			{
+				cardThree.setVisible(false);
+			}
 			
 			if(pawnsel1 % 2 == 0)
 			{
@@ -1417,29 +1452,7 @@ public class Game extends ApplicationAdapter{
 			}
 			//if(index > 98)
 				//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
-			if(cardkill1 == 1)
-			{
-				cardOne.setVisible(true);
-			}
-			else
-			{
-				cardOne.setVisible(false);
-			}
-			if(cardswap1 == 1)
-			{
-				cardTwo.setVisible(true);
-			}else
-			{
-				cardTwo.setVisible(false);
-			}
-			if(cardrev1 == 1)
-			{
-				cardThree.setVisible(true);
-			}
-			else
-			{
-				cardThree.setVisible(false);
-			}
+
 			
 //			cardOne.addListener(new ChangeListener() 
 //			{	
