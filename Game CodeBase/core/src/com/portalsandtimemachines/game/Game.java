@@ -353,6 +353,7 @@ public class Game extends ApplicationAdapter{
 				
 			}	
 		});
+		cardOne.setVisible(false);
 		
 		cardTwo = new ImageButton(style1);
 		cardTwo.setSize(101, 153);
@@ -367,6 +368,7 @@ public class Game extends ApplicationAdapter{
 				
 			}	
 		});
+		cardTwo.setVisible(false);
 		
 		cardThree = new ImageButton(style2);
 		cardThree.setSize(101, 153);
@@ -380,6 +382,7 @@ public class Game extends ApplicationAdapter{
 				
 			}	
 		});
+		cardThree.setVisible(false);
 		
 		cardFour = new ImageButton(style3);
 		cardFour.setSize(101,153);
@@ -393,7 +396,7 @@ public class Game extends ApplicationAdapter{
 				
 			}	
 		});
-
+		cardFour.setVisible(false);
 		
 		gamestage.addActor(rollDice);
 		gamestage.addActor(playerOne);
@@ -663,6 +666,18 @@ public class Game extends ApplicationAdapter{
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+//		if(!playerOne.isDisabled()){ // Player one's turn
+//			if(cardrev1 == 1){
+//				cardThree.setVisible(true);
+//			}
+//			if(cardkill1 == 1){
+//				cardOne.setVisible(true);
+//			}
+//			if(cardswap1 == 1){
+//				cardTwo.setVisible(true);
+//			}
+//		}
+		
 		gamestage.draw();
 		
 		batch.begin();
@@ -700,7 +715,7 @@ public class Game extends ApplicationAdapter{
 //		shapeRenderer.circle(boardTransforms.get(index).x, boardTransforms.get(index).y, 5);
 //		shapeRenderer.end();
 		
-		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
+//		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
 //			if(index < 99){
 //				index++;
 //			}
@@ -713,7 +728,7 @@ public class Game extends ApplicationAdapter{
 //			gamePiece.setAlpha();
 //			dice.changeAnimate();
 //			dice.showNumber(6);
-		}
+//		}
 	}
 	
 	int playersel = 0;
@@ -1014,16 +1029,26 @@ public class Game extends ApplicationAdapter{
 			if(cardkill2 == 1)
 			{
 				cardOne.setVisible(true);
-//				
 			}
-			else if(cardswap2 == 1)
+			else
+			{
+				cardOne.setVisible(false);
+			}
+			if(cardswap2 == 1)
 			{
 				cardTwo.setVisible(true);
-//				
 			}
-			else if(cardrev2 == 1)
+			else
+			{
+				cardTwo.setVisible(false);
+			}
+			if(cardrev2 == 1)
 			{
 				cardThree.setVisible(true);
+			}
+			else
+			{
+				cardTwo.setVisible(false);
 			}
 			
 //			cardOne.addListener(new ChangeListener() 
@@ -1335,13 +1360,24 @@ public class Game extends ApplicationAdapter{
 			{
 				cardOne.setVisible(true);
 			}
-			else if(cardswap1 == 1)
+			else
+			{
+				cardOne.setVisible(false);
+			}
+			if(cardswap1 == 1)
 			{
 				cardTwo.setVisible(true);
+			}else
+			{
+				cardTwo.setVisible(false);
 			}
-			else if(cardrev1 == 1)
+			if(cardrev1 == 1)
 			{
 				cardThree.setVisible(true);
+			}
+			else
+			{
+				cardThree.setVisible(false);
 			}
 			
 //			cardOne.addListener(new ChangeListener() 
