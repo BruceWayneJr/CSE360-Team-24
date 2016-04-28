@@ -621,7 +621,7 @@ public class Game extends ApplicationAdapter{
 				if(!diceHasBeenRolled){
 					dice.changeAnimate();
 					float delay = 0.5f; // seconds
-
+					label.setText("Press either Paw 1 or Pawn 2");
 					Timer.schedule(new Task(){
 					    @Override
 					    public void run() {
@@ -655,7 +655,9 @@ public class Game extends ApplicationAdapter{
 			{
 				if(diceHasBeenRolled){
 					diceHasBeenRolled = false;
+					
 					moving_piece(temp, 1);
+					label.setText("Press the Die for the next turn");
 				}
 			}
 		});
@@ -667,6 +669,7 @@ public class Game extends ApplicationAdapter{
 				if(diceHasBeenRolled){
 					diceHasBeenRolled = false;
 					moving_piece(temp, 2);
+					label.setText("Press the Die for the next turn");
 				}
 			}
 		});
