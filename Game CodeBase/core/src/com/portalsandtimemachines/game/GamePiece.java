@@ -81,7 +81,6 @@ public class GamePiece {
 	public void moveToPosition(Vector2 newPosition){
 		destination.x = newPosition.x;
 		destination.y = newPosition.y + offset;
-		System.out.println("old: " + newPosition.y + " new: " + newPosition.y + (offset));
 		moving = true;
 	}
 	

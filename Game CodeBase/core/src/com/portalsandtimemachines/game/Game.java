@@ -566,46 +566,60 @@ public class Game extends ApplicationAdapter{
 		bounty_positions = obj.bounty_positions();
 		int k_index = 0;
 		
-		timemachineSprite1.setPosition(boardTransforms.get(temporary_TimeMachinePosition[j_index] ).x - 32, boardTransforms.get(temporary_TimeMachinePosition[j_index]).y);
+		timemachineSprite1.setPosition(boardTransforms.get(temporary_TimeMachinePosition[j_index] ).x - 32, 
+				boardTransforms.get(temporary_TimeMachinePosition[j_index]).y);
 		j_index++;
 		
-		timemachineSprite2.setPosition(boardTransforms.get(temporary_TimeMachinePosition[j_index] ).x - 32, boardTransforms.get(temporary_TimeMachinePosition[j_index]).y);
+		timemachineSprite2.setPosition(boardTransforms.get(temporary_TimeMachinePosition[j_index] ).x - 32, 
+				boardTransforms.get(temporary_TimeMachinePosition[j_index]).y);
 		j_index++;
 		
-		timemachineSprite3.setPosition(boardTransforms.get(temporary_TimeMachinePosition[j_index] ).x - 32, boardTransforms.get(temporary_TimeMachinePosition[j_index]).y);
+		timemachineSprite3.setPosition(boardTransforms.get(temporary_TimeMachinePosition[j_index] ).x - 32, 
+				boardTransforms.get(temporary_TimeMachinePosition[j_index]).y);
 		j_index++;
 		
-		portalSprite1.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, boardTransforms.get(temporary_PortalsPosition[i_index]).y);
+		portalSprite1.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, 
+				boardTransforms.get(temporary_PortalsPosition[i_index]).y);
 		i_index++;
 		
-		portalSprite2.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, boardTransforms.get(temporary_PortalsPosition[i_index]).y);
+		portalSprite2.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, 
+				boardTransforms.get(temporary_PortalsPosition[i_index]).y);
 		i_index++;
 		
-		portalSprite3.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, boardTransforms.get(temporary_PortalsPosition[i_index]).y);
+		portalSprite3.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, 
+				boardTransforms.get(temporary_PortalsPosition[i_index]).y);
 		i_index++;
 		
-		portalSprite4.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index]).x - 32, boardTransforms.get(temporary_PortalsPosition[i_index]).y);
+		portalSprite4.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index]).x - 32, 
+				boardTransforms.get(temporary_PortalsPosition[i_index]).y);
 		i_index++;
 		
-		portalSprite5.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, boardTransforms.get(temporary_PortalsPosition[i_index]).y);
+		portalSprite5.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, 
+				boardTransforms.get(temporary_PortalsPosition[i_index]).y);
 		i_index++;
 		
-		portalSprite6.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, boardTransforms.get(temporary_PortalsPosition[i_index]).y);
+		portalSprite6.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, 
+				boardTransforms.get(temporary_PortalsPosition[i_index]).y);
 		i_index++;
 		
-		portalSprite7.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, boardTransforms.get(temporary_PortalsPosition[i_index]).y);
+		portalSprite7.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index] ).x - 32, 
+				boardTransforms.get(temporary_PortalsPosition[i_index]).y);
 		i_index++;
 		
-		portalSprite8.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index]).x - 32, boardTransforms.get(temporary_PortalsPosition[i_index]).y);
+		portalSprite8.setPosition(boardTransforms.get(temporary_PortalsPosition[i_index]).x - 32, 
+				boardTransforms.get(temporary_PortalsPosition[i_index]).y);
 		i_index++;
 		
-		bountySprite1.setPosition(boardTransforms.get(bounty_positions[k_index]).x - 32, boardTransforms.get(bounty_positions[k_index]).y);
+		bountySprite1.setPosition(boardTransforms.get(bounty_positions[k_index]).x - 32, 
+				boardTransforms.get(bounty_positions[k_index]).y);
 		k_index++;
 		
-		bountySprite2.setPosition(boardTransforms.get(bounty_positions[k_index]).x - 32, boardTransforms.get(bounty_positions[k_index]).y);
+		bountySprite2.setPosition(boardTransforms.get(bounty_positions[k_index]).x - 32, 
+				boardTransforms.get(bounty_positions[k_index]).y);
 		k_index++;
 		
-		bountySprite3.setPosition(boardTransforms.get(bounty_positions[k_index]).x - 32, boardTransforms.get(bounty_positions[k_index]).y);
+		bountySprite3.setPosition(boardTransforms.get(bounty_positions[k_index]).x - 32, 
+				boardTransforms.get(bounty_positions[k_index]).y);
 		k_index++;
 		
 		
@@ -655,7 +669,6 @@ public class Game extends ApplicationAdapter{
 			{
 				if(diceHasBeenRolled){
 					diceHasBeenRolled = false;
-					
 					moving_piece(temp, 1);
 					label.setText("Press the Die for the next turn");
 				}
@@ -673,7 +686,6 @@ public class Game extends ApplicationAdapter{
 				}
 			}
 		});
-		
 	}
 	
 	
@@ -727,18 +739,6 @@ public class Game extends ApplicationAdapter{
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-//		if(!playerOne.isDisabled()){ // Player one's turn
-//			if(cardrev1 == 1){
-//				cardThree.setVisible(true);
-//			}
-//			if(cardkill1 == 1){
-//				cardOne.setVisible(true);
-//			}
-//			if(cardswap1 == 1){
-//				cardTwo.setVisible(true);
-//			}
-//		}
-		
 		gamestage.draw();
 		
 		batch.begin();
@@ -766,30 +766,6 @@ public class Game extends ApplicationAdapter{
 		dice.draw(batch);
 		label.draw(batch, 1);
 		batch.end();
-		
-//		shapeRenderer.setProjectionMatrix(camera.combined);
-//		shapeRenderer.begin(ShapeType.Filled);
-//		shapeRenderer.setColor(1, 0, 0, 1);
-//		for(Vector2 transform: boardTransforms){
-//			shapeRenderer.circle(transform.x, transform.y, 5);
-//		}
-//		shapeRenderer.circle(boardTransforms.get(index).x, boardTransforms.get(index).y, 5);
-//		shapeRenderer.end();
-		
-//		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
-//			if(index < 99){
-//				index++;
-//			}
-//			else{
-//				index = 0;
-//			}
-//			
-//			gamePiece.moveToPosition(boardTransforms.get(temp));
-//			moving_piece(43);
-//			gamePiece.setAlpha();
-//			dice.changeAnimate();
-//			dice.showNumber(6);
-//		}
 	}
 	
 	int playersel = 0;
@@ -805,14 +781,11 @@ public class Game extends ApplicationAdapter{
 	{
 		Random rand = new Random();
 
-		
-		
 		pawnsel = pawnsol;
 		pawnsel1 = pawnsol;
 		++playersel;
 		if(playersel % 2 == 0)
 		{
-			
 			playerTwo.setDisabled(false);
 			playerOne.setDisabled(true);
 			
@@ -841,7 +814,7 @@ public class Game extends ApplicationAdapter{
 			}
 			else
 			{
-				cardTwo.setVisible(false);
+				cardThree.setVisible(false);
 			}
 			
 			if(pawnsel % 2 == 0)
@@ -1163,7 +1136,8 @@ public class Game extends ApplicationAdapter{
 			if(cardswap1 == 1)
 			{
 				cardTwo.setVisible(true);
-			}else
+			}
+			else
 			{
 				cardTwo.setVisible(false);
 			}
