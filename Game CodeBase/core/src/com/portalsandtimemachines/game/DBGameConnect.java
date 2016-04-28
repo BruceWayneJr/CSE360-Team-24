@@ -18,7 +18,7 @@ public class DBGameConnect {
 		String pName;
 		int gPlay;
 		String tempName = "";
-		String[] playerName = (String[]) dbInput.get("pname");
+		ArrayList<String> playerName = (ArrayList<String>) dbInput.get("pname");
 		ResultSet rs;
 		System.out.println("Loading driver...");
 
@@ -45,14 +45,14 @@ public class DBGameConnect {
 		    	gPlay = rs.getInt("Games_Played");
 		    }
 		    else {
-		    	if(playerName.length > 1) {
-		    		for(int i=0; i<playerName.length; i++) {
-		    			insertQuery = "INSERT INTO `scorecard` (`Player_Name`, `Games_Won`, `Games_Played`, `Win_Rate`) VALUES ("+ "'"+ playerName[i] +"'"+", '0', '1', '0')";
+		    	if(playerName.size() > 1) {
+		    		for(int i=0; i<playerName.size(); i++) {
+		    			insertQuery = "INSERT INTO `scorecard` (`Player_Name`, `Games_Won`, `Games_Played`, `Win_Rate`) VALUES ("+ "'"+ playerName.get(i) +"'"+", '0', '1', '0')";
 		    			stmt.executeQuery(insertQuery);
 		    		}
 		    	}
 		    	else {
-		    		insertQuery = "INSERT INTO `scorecard` (`Player_Name`, `Games_Won`, `Games_Played`, `Win_Rate`) VALUES ("+ "'"+ playerName[0] +"'"+", '0', '1', '0')";
+		    		insertQuery = "INSERT INTO `scorecard` (`Player_Name`, `Games_Won`, `Games_Played`, `Win_Rate`) VALUES ("+ "'"+ playerName.get(0) +"'"+", '0', '1', '0')";
 		    		stmt.executeQuery(insertQuery);
 		    	}
 		    }

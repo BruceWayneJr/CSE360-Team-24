@@ -152,7 +152,7 @@ public class Game extends ApplicationAdapter{
 	int[] temporary_PortalsPosition;
 	int[] temporary_TimeMachinePosition;
 	int[] bounty_positions;
-	ArrayList<String> playerNames;
+	ArrayList<String> playerNames = new ArrayList<String>();
 	int temp;
 	
 	static int timeMachine_counter = 0;
@@ -237,8 +237,8 @@ public class Game extends ApplicationAdapter{
 		
 		dbValues.put("pname",playerNames);
 		
-		dbGame = new DBGameConnect();
-		dbGame.dbConnect(dbValues);
+//		dbGame = new DBGameConnect();
+//		dbGame.dbConnect(dbValues);
 	
 		batch = new SpriteBatch();
 		gamestage = new Stage();
