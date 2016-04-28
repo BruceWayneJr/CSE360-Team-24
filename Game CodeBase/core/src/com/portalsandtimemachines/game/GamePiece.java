@@ -26,7 +26,7 @@ public class GamePiece {
 	
 	private Vector2 destination;
 	private Vector2 secondDestination;
-	private Vector2 offset;
+	private float offset;
 	
 	/**
 	 * Function used for setting up the game pieces i.e the portals, players etc.
@@ -36,13 +36,13 @@ public class GamePiece {
 	 * @param position		used for positioning in the board.
 	 */
 	@SuppressWarnings("static-access")
-	public GamePiece(int playerNumber, Texture texture, Vector2 position, Vector2 newOffset){  // this function is used for setting up the game piece on the board.
+	public GamePiece(int playerNumber, Texture texture, Vector2 position, float newOffset){  // this function is used for setting up the game piece on the board.
 		owner = playerNumber;
 		offset = newOffset;
 		sprite  = new Sprite(texture);
 		sprite.setOriginCenter();
 		sprite.setSize(32, 32);
-		sprite.setPosition(position.x + offset.x, position.y + offset.y);
+		sprite.setPosition(position.x, position.y + offset);
 		moveSpeed = 250;
 		moving = false;
 		destination = destination.Zero;
@@ -79,8 +79,9 @@ public class GamePiece {
 	 * @param newPosition position to which to be moved.
 	 */
 	public void moveToPosition(Vector2 newPosition){
-		destination = newPosition;
-		destination = destination.add(offset);
+		destination.x = newPosition.x;
+		destination.y = newPosition.y + offset;
+		System.out.println("old: " + newPosition.y + " new: " + newPosition.y + (offset));
 		moving = true;
 	}
 	
@@ -118,8 +119,9 @@ public class GamePiece {
 	 * @param secondaryPosition function to be moved when condition not satisfied.
 	 */
 	public void secondaryMove(Vector2 secondaryPosition){                        // This function is used for moving the pawn when it hit a portal or in case of time machine fail.
-		secondDestination = secondaryPosition;
-		secondDestination.add(offset);
+		secondDestination.x = secondaryPosition.x;
+		secondDestination.y = secondaryPosition.y + offset;
+//		secondDestination.y += offset;
 	}
 	
 

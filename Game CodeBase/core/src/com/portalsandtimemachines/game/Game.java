@@ -571,10 +571,10 @@ public class Game extends ApplicationAdapter{
 		k_index++;
 		
 		
-		gamePiece = new GamePiece(0, gamePieceTexture, boardTransforms.get(0), new Vector2(0,0));
-		gamePiece2 = new GamePiece(0, gamePieceTexture, boardTransforms.get(0), new Vector2(0,0));
-		gamePiece1 = new GamePiece(1, gamePieceTexture1, boardTransforms.get(0), new Vector2(0, -15));
-		gamePiece12 = new GamePiece(1, gamePieceTexture1, boardTransforms.get(0), new Vector2(0, -15));
+		gamePiece = new GamePiece(0, gamePieceTexture, boardTransforms.get(0), 0);
+		gamePiece2 = new GamePiece(0, gamePieceTexture, boardTransforms.get(0), 0);
+		gamePiece1 = new GamePiece(1, gamePieceTexture1, boardTransforms.get(0), -15f);
+		gamePiece12 = new GamePiece(1, gamePieceTexture1, boardTransforms.get(0), -15f);
 		
 		rollDice.addListener(new ChangeListener() 
 		{	
