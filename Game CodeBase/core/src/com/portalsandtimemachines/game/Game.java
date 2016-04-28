@@ -144,6 +144,7 @@ public class Game extends ApplicationAdapter{
 	ImageButton cardFour;
 	
 	private Label label;
+	private boolean diceHasBeenRolled;
 
 	GameBoard obj = new GameBoard();
 	
@@ -331,6 +332,8 @@ public class Game extends ApplicationAdapter{
 		label.setText("You just activated my trap card!");
 		label.setColor(Color.RED);
 		
+		diceHasBeenRolled = false;
+		
 		cardOne = new ImageButton(style);
 		cardOne.setSize(101, 153);
 		cardOne.setPosition(Gdx.graphics.getWidth()-100, 600);
@@ -515,21 +518,46 @@ public class Game extends ApplicationAdapter{
 		{	
 			public void changed (ChangeEvent event, Actor actor) 
 			{
-			
-				temp = obj.roll_die();
-				dice.showNumber(temp);
-				++flag;
-				moving_piece(temp, flag);
-				if(index > 98 && index2 > 98) {
-					JOptionPane.showMessageDialog(null,"Congrats " + playername + "! You Won!!");
-//				rollDice.setText("Starting new game");
-					Gdx.app.exit();
-				}
-				else if(index1 > 98 && index12 > 98)
-				{
-					JOptionPane.showMessageDialog(null,"Congrats " + playername1 + "! You Won!!");
+				if(!diceHasBeenRolled){
+					temp = obj.roll_die();
+					dice.showNumber(temp);
+					++flag;
+//					moving_piece(temp, flag);
+					diceHasBeenRolled = true;
+					if(index > 98 && index2 > 98) {
+						JOptionPane.showMessageDialog(null,"Congrats " + playername + "! You Won!!");
 //					rollDice.setText("Starting new game");
 						Gdx.app.exit();
+					}
+					else if(index1 > 98 && index12 > 98)
+					{
+						JOptionPane.showMessageDialog(null,"Congrats " + playername1 + "! You Won!!");
+//						rollDice.setText("Starting new game");
+							Gdx.app.exit();
+					}
+				}
+			}
+		});
+		
+		Pawn_One.addListener(new ChangeListener()
+		{
+			@Override
+			public void changed(ChangeEvent event, Actor actor) 
+			{
+				if(diceHasBeenRolled){
+					diceHasBeenRolled = false;
+					moving_piece(temp, flag);
+				}
+			}
+		});
+		Pawn_Two.addListener(new ChangeListener()
+		{
+			@Override
+			public void changed(ChangeEvent event, Actor actor) 
+			{
+				if(diceHasBeenRolled){
+					diceHasBeenRolled = false;
+					moving_piece(temp, flag);
 				}
 			}
 		});
@@ -953,28 +981,28 @@ public class Game extends ApplicationAdapter{
 				cardThree.setVisible(true);
 			}
 			
-			cardOne.addListener(new ChangeListener() 
-			{	
-				public void changed (ChangeEvent event, Actor actor) 
-				{
-					index = 0;
-					index2 = 0;
-					gamePiece.moveToPosition(boardTransforms.get(index));
-					gamePiece2.moveToPosition(boardTransforms.get(index2));
-//							cardOne.setVisible(false);
-				}
-			});
-			cardTwo.addListener(new ChangeListener() 
-			{	
-				public void changed (ChangeEvent event, Actor actor) 
-				{
-					index1 = index;
-					index12 = index2;
-					gamePiece1.moveToPosition(boardTransforms.get(index1));
-					gamePiece12.moveToPosition(boardTransforms.get(index12));
-//							cardTwo.setVisible(false);
-				}
-			});
+//			cardOne.addListener(new ChangeListener() 
+//			{	
+//				public void changed (ChangeEvent event, Actor actor) 
+//				{
+//					index = 0;
+//					index2 = 0;
+//					gamePiece.moveToPosition(boardTransforms.get(index));
+//					gamePiece2.moveToPosition(boardTransforms.get(index2));
+////							cardOne.setVisible(false);
+//				}
+//			});
+//			cardTwo.addListener(new ChangeListener() 
+//			{	
+//				public void changed (ChangeEvent event, Actor actor) 
+//				{
+//					index1 = index;
+//					index12 = index2;
+//					gamePiece1.moveToPosition(boardTransforms.get(index1));
+//					gamePiece12.moveToPosition(boardTransforms.get(index12));
+////							cardTwo.setVisible(false);
+//				}
+//			});
 			//if(index > 98)
 				//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 		}//********************************************************************************
@@ -1271,28 +1299,28 @@ public class Game extends ApplicationAdapter{
 				cardThree.setVisible(true);
 			}
 			
-			cardOne.addListener(new ChangeListener() 
-			{	
-				public void changed (ChangeEvent event, Actor actor) 
-				{
-					index = index1;
-					index2 = index12;
-					gamePiece.moveToPosition(boardTransforms.get(index));
-					gamePiece2.moveToPosition(boardTransforms.get(index2));
-//					cardTwo.setVisible(false);
-				}
-			});
-			cardOne.addListener(new ChangeListener() 
-			{	
-				public void changed (ChangeEvent event, Actor actor) 
-				{
-					index1 = 0;
-					index12 = 0;
-					gamePiece1.moveToPosition(boardTransforms.get(index1));
-					gamePiece12.moveToPosition(boardTransforms.get(index12));
-//							cardOne.setVisible(false);
-				}
-			});
+//			cardOne.addListener(new ChangeListener() 
+//			{	
+//				public void changed (ChangeEvent event, Actor actor) 
+//				{
+//					index = index1;
+//					index2 = index12;
+//					gamePiece.moveToPosition(boardTransforms.get(index));
+//					gamePiece2.moveToPosition(boardTransforms.get(index2));
+////					cardTwo.setVisible(false);
+//				}
+//			});
+//			cardOne.addListener(new ChangeListener() 
+//			{	
+//				public void changed (ChangeEvent event, Actor actor) 
+//				{
+//					index1 = 0;
+//					index12 = 0;
+//					gamePiece1.moveToPosition(boardTransforms.get(index1));
+//					gamePiece12.moveToPosition(boardTransforms.get(index12));
+////							cardOne.setVisible(false);
+//				}
+//			});
 			
 		}
 		
