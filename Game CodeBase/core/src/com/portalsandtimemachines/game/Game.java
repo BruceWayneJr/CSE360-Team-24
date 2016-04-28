@@ -152,7 +152,7 @@ public class Game extends ApplicationAdapter{
 	int[] temporary_PortalsPosition;
 	int[] temporary_TimeMachinePosition;
 	int[] bounty_positions;
-	String[] playerNames;
+	ArrayList<String> playerNames;
 	int temp;
 	
 	static int timeMachine_counter = 0;
@@ -201,7 +201,7 @@ public class Game extends ApplicationAdapter{
 					{
 						playername = JOptionPane.showInputDialog("Please enter your username for user "+i+" : ");
 					}
-					playerNames[i] = playername;
+					playerNames.add(playername);
 					JOptionPane.showMessageDialog(null, "Hello " + playername + '!' + "\nWelcome to Portals & Time-Machines" );
 					break;
 				case 2:
@@ -210,7 +210,7 @@ public class Game extends ApplicationAdapter{
 					{
 						playername1 = JOptionPane.showInputDialog("Please enter your username for user "+i+" : ");
 					}
-					playerNames[i] = playername1;
+					playerNames.add(playername1);
 					JOptionPane.showMessageDialog(null, "Hello " + playername1 + '!' + "\nWelcome to Portals & Time-Machines" );
 					break;
 				case 3:
@@ -219,7 +219,7 @@ public class Game extends ApplicationAdapter{
 					{
 						playername2 = JOptionPane.showInputDialog("Please enter your username for user "+i+" : ");
 					}
-					playerNames[i] = playername2;
+					playerNames.add(playername2);
 					JOptionPane.showMessageDialog(null, "Hello " + playername2 + '!' + "\nWelcome to Portals & Time-Machines" );
 					break;
 				case 4:
@@ -228,7 +228,7 @@ public class Game extends ApplicationAdapter{
 					{
 						playername3 = JOptionPane.showInputDialog("Please enter your username for user "+i+" : ");
 					}
-					playerNames[i] = playername3;
+					playerNames.add(playername3);
 					JOptionPane.showMessageDialog(null, "Hello " + playername3 + '!' + "\nWelcome to Portals & Time-Machines" );
 					break;
 			}
@@ -237,8 +237,8 @@ public class Game extends ApplicationAdapter{
 		
 		dbValues.put("pname",playerNames);
 		
-//		dbGame = new DBGameConnect();
-//		dbGame.dbConnect(dbValues);
+		dbGame = new DBGameConnect();
+		dbGame.dbConnect(dbValues);
 	
 		batch = new SpriteBatch();
 		gamestage = new Stage();
