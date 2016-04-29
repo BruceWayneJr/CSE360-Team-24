@@ -868,6 +868,7 @@ public class Game extends ApplicationAdapter{
 				}
 				else if( time_machine_flag == 1)
 				{
+					label.setText("Time machine is still active. Move away from it..!!!!");
 					index = index + value_tomove;
 					if(timeMachine_counter > 0 && index < final_pos )
 					{
@@ -953,6 +954,7 @@ public class Game extends ApplicationAdapter{
 				}
 				else if(bounty_ret == 1)
 				{
+					label.setText("You stepped on the bounty square. You will receive a bounty card drawn at random!");
 					int common = rand.nextInt((3 - 1) + 1) + 1;
 					if(common % 3 == 0)
 					{
@@ -971,6 +973,7 @@ public class Game extends ApplicationAdapter{
 				if(obj.check_timeMachine(index) != 0)
 				{
 		//			System.out.println(" time machine");
+					label.setText("Oops !! You stepped over a time machine. You will have to move 8 sqaures within 2 turns or you will pushed to the beginning..");
 					timeMachine_counter = 2;
 					time_machine_flag = 1;
 					if(index == temporary_TimeMachinePosition[0])
@@ -1005,6 +1008,7 @@ public class Game extends ApplicationAdapter{
 				}
 				else if( time_machine_flag2 == 1)
 				{
+					label.setText("Time machine is still active. Move away from it..!!!!");
 					index2 = index2 + value_tomove;
 					if(timeMachine_counter2 > 0 && index2 < final_pos2 )
 					{
@@ -1089,6 +1093,7 @@ public class Game extends ApplicationAdapter{
 				}
 				else if(bounty_ret == 1)
 				{
+					label.setText("You stepped on the bounty square. You will receive a bounty card drawn at random!");
 					int common = rand.nextInt((3 - 1) + 1) + 1;
 					if(common % 3 == 0)
 					{
@@ -1107,6 +1112,7 @@ public class Game extends ApplicationAdapter{
 				if(obj.check_timeMachine(index2) != 0)
 				{
 		//			System.out.println(" time machine");
+					label.setText("Oops !! You stepped over a time machine. You will have to move 8 sqaures within 2 turns or you will pushed to the beginning..");
 					timeMachine_counter2 = 2;
 					time_machine_flag2 = 1;
 					if(index2 == temporary_TimeMachinePosition[0])
@@ -1202,6 +1208,7 @@ public class Game extends ApplicationAdapter{
 				}
 				else if( time_machine_flag1 == 1)
 				{
+					label.setText("Time machine is still active. Move away from it..!!!!");
 					index1 = index1 + value_tomove;
 					if(timeMachine_counter1 > 0 && index1 < final_pos1 )
 					{
@@ -1286,6 +1293,7 @@ public class Game extends ApplicationAdapter{
 				}
 				else if(bounty_ret == 1)
 				{
+					label.setText("You stepped on the bounty square. You will receive a bounty card drawn at random!");
 					int common = rand.nextInt((3 - 1) + 1) + 1;
 					if(common % 3 == 0)
 					{
@@ -1304,6 +1312,7 @@ public class Game extends ApplicationAdapter{
 				if(obj.check_timeMachine(index1) != 0)
 				{
 		//			System.out.println(" time machine");
+					label.setText("Oops !! You stepped over a time machine. You will have to move 8 sqaures within 2 turns or you will pushed to the beginning..");
 					timeMachine_counter1 = 2;
 					time_machine_flag1 = 1;
 					if(index1 == temporary_TimeMachinePosition[0])
@@ -1338,6 +1347,7 @@ public class Game extends ApplicationAdapter{
 				}
 				else if( time_machine_flag12 == 1)
 				{
+					label.setText("Time machine is still active. Move away from it..!!!!");
 					index12 = index12 + value_tomove;
 					if(timeMachine_counter12 > 0 && index12 < final_pos12 )
 					{
@@ -1422,6 +1432,7 @@ public class Game extends ApplicationAdapter{
 				}
 				else if(bounty_ret == 1)
 				{
+					label.setText("You stepped on the bounty square. You will receive a bounty card drawn at random!");
 					int common = rand.nextInt((3 - 1) + 1) + 1;
 					if(common % 3 == 0)
 					{
@@ -1440,6 +1451,7 @@ public class Game extends ApplicationAdapter{
 				if(obj.check_timeMachine(index12) != 0)
 				{
 		//			System.out.println(" time machine");
+					label.setText("Oops !! You stepped over a time machine. You will have to move 8 sqaures within 2 turns or you will pushed to the beginning..");
 					timeMachine_counter12 = 2;
 					time_machine_flag12 = 1;
 					if(index12 == temporary_TimeMachinePosition[0])
