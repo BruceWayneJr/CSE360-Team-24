@@ -58,7 +58,7 @@ public class GamePiece {
 	 */
 	public void draw(SpriteBatch batch){
 		if(moving){
-			move(Gdx.graphics.getDeltaTime());
+			this.move(Gdx.graphics.getDeltaTime());
 		}
 		sprite.setOriginCenter();
 		sprite.draw(batch);
@@ -123,5 +123,7 @@ public class GamePiece {
 //		secondDestination.y += offset;
 	}
 	
-
+	public void setPosition(Vector2 newPosition){
+		sprite.setPosition(newPosition.x, newPosition.y + offset);
+	}
 }

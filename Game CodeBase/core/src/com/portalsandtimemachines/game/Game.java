@@ -400,31 +400,53 @@ public class Game extends ApplicationAdapter{
 					index1 = index;
 					index12 = index2;
 					gamePiece.moveToPosition(boardTransforms.get(index));
+//					gamePiece.setPosition(boardTransforms.get(index));
 					gamePiece2.moveToPosition(boardTransforms.get(index2));
+//					gamePiece2.setPosition(boardTransforms.get(index2));
 //					index1 = temp_move1; 
 //					index12 = temp_move2;
 					cardswap1 = 0;
 				}
 				else if(cardswap2 == 1)
 				{
+					System.out.println("index " + index);
+					System.out.println("bT[index]: " + boardTransforms.get(index));
+					System.out.println("index1 " + index1);
+					System.out.println("bT[index1]: " + boardTransforms.get(index1));
+					System.out.println("index2 " + index2);
+					System.out.println("bT[index2]: " + boardTransforms.get(index2));
+					System.out.println("index12 " + index12);
+					System.out.println("bT[index12]: " + boardTransforms.get(index12));
+					
 //					System.out.println("Inside the function");
-//					temp_move1 = index1;
-//					temp_move2 = index12;
-//					gamePiece.moveToPosition(boardTransforms.get(temp_move1));
-//					gamePiece2.moveToPosition(boardTransforms.get(temp_move2));
+					temp_move1 = index1;
+					temp_move2 = index12;
 					
 					index1 = index;
 					index12 = index2;
 					
-					System.out.println("index " + index);
-					System.out.println("index1 " + index1);
-					System.out.println("index2 " + index2);
-					System.out.println("index12 " + index12);
+					index = temp_move1; 
+					index2 = temp_move2;
 					
-					gamePiece1.moveToPosition(boardTransforms.get(index1));
-					gamePiece12.moveToPosition(boardTransforms.get(index12));
-//					index = temp_move1; 
-//					index2 = temp_move2;
+//					gamePiece.moveToPosition(boardTransforms.get(temp_move1));
+//					gamePiece2.moveToPosition(boardTransforms.get(temp_move2));
+//					gamePiece1.moveToPosition(boardTransforms.get(index1));
+//					gamePiece12.moveToPosition(boardTransforms.get(index12));
+					
+					gamePiece.setPosition(boardTransforms.get(temp_move1));
+					gamePiece2.setPosition(boardTransforms.get(temp_move2));
+					gamePiece1.setPosition(boardTransforms.get(index1));
+					gamePiece12.setPosition(boardTransforms.get(index12));
+					
+					System.out.println("index " + index);
+					System.out.println("bT[index]: " + boardTransforms.get(index));
+					System.out.println("index1 " + index1);
+					System.out.println("bT[index1]: " + boardTransforms.get(index1));
+					System.out.println("index2 " + index2);
+					System.out.println("bT[index2]: " + boardTransforms.get(index2));
+					System.out.println("index12 " + index12);
+					System.out.println("bT[index12]: " + boardTransforms.get(index12));
+					
 					cardswap2 = 0;
 				}
 				else
