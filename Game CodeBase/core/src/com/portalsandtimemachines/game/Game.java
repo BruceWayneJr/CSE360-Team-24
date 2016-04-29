@@ -875,6 +875,7 @@ public class Game extends ApplicationAdapter{
 						timeMachine_counter--;
 						if(timeMachine_counter == 0 && index <final_pos)
 						{
+							label.setText("Oops..!!!, Time is Up. The pawn restarts.");
 							time_machine_flag = 0;
 							index = 0;
 							gamePiece.moveToPosition(boardTransforms.get(index));
@@ -927,6 +928,7 @@ public class Game extends ApplicationAdapter{
 				{
 					index = ret;
 		//			if(index )
+					label.setText("You stepped on a portal...!!");
 					System.out.println("Portal ");
 					if(index > 98)
 					{
@@ -1015,6 +1017,7 @@ public class Game extends ApplicationAdapter{
 						timeMachine_counter2--;
 						if(timeMachine_counter2 == 0 && index2 <final_pos2)
 						{
+							label.setText("Oops..!!!, Time is Up. The pawn restarts.");
 							time_machine_flag2 = 0;
 							index2 = 0;
 							gamePiece2.moveToPosition(boardTransforms.get(index2));
@@ -1066,6 +1069,7 @@ public class Game extends ApplicationAdapter{
 				{
 					index2 = ret;
 		//			if(index )
+					label.setText("You stepped on a portal...!!");
 					System.out.println("Portal ");
 					if(index2 > 98)
 					{
@@ -1215,6 +1219,7 @@ public class Game extends ApplicationAdapter{
 						timeMachine_counter1--;
 						if(timeMachine_counter1 == 0 && index1 <final_pos1)
 						{
+							label.setText("Oops..!!!, Time is Up. The pawn restarts.");
 							time_machine_flag1 = 0;
 							index1 = 0;
 							gamePiece1.moveToPosition(boardTransforms.get(index1));
@@ -1264,6 +1269,7 @@ public class Game extends ApplicationAdapter{
 				int ret = obj.check_portal(index1);
 				if(ret != 0)
 				{
+					label.setText("You stepped on a portal...!!");
 					index1 = ret;
 		//			if(index )
 					System.out.println("Portal ");
@@ -1354,6 +1360,7 @@ public class Game extends ApplicationAdapter{
 						timeMachine_counter12--;
 						if(timeMachine_counter12 == 0 && index12 <final_pos12)
 						{
+							label.setText("Oops..!!!, Time is Up. The pawn restarts.");
 							time_machine_flag12 = 0;
 							index12 = 0;
 							gamePiece12.moveToPosition(boardTransforms.get(index12));
@@ -1405,6 +1412,7 @@ public class Game extends ApplicationAdapter{
 				{
 					index12 = ret;
 		//			if(index )
+					label.setText("You stepped on a portal...!!");
 					System.out.println("Portal ");
 					if(index12 > 98)
 					{
