@@ -361,23 +361,7 @@ public class Game extends ApplicationAdapter{
 				// TODO Put stuff here
 				if(cardkill1 == 1)
 				{
-					if(index1 < 99)
-					{
-						index1 = 0;
-						gamePiece1.moveToPosition(boardTransforms.get(index1));
-					}
-					
-					if(index12 < 99)
-					{
-						index12 = 0;
-						
-						gamePiece12.moveToPosition(boardTransforms.get(index12));
-					}
-					cardkill1 = 0;
-				}
-				else if(cardkill2 == 1)
-				{
-					
+					System.out.println("I am inside 23");
 					if(index < 99)
 					{
 						index = 0;
@@ -389,6 +373,24 @@ public class Game extends ApplicationAdapter{
 						index2 = 0;
 						
 						gamePiece2.moveToPosition(boardTransforms.get(index2));
+					}
+					
+					cardkill1 = 0;
+				}
+				else if(cardkill2 == 1)
+				{
+					
+					System.out.println("I am inside");
+					if(index1 < 99)
+					{
+						index1 = 0;
+						gamePiece1.moveToPosition(boardTransforms.get(index1));
+					}
+					
+					if(index12 < 99)
+					{
+						index12 = 0;
+						gamePiece12.moveToPosition(boardTransforms.get(index12));
 					}
 					cardkill2 = 0;
 				}
