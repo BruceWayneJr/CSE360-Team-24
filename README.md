@@ -62,7 +62,10 @@ Java - MySQL Database Connectivity
         Games_Played INT NOT NULL,
         Win_Rate FLOAT NOT NULL);
 
-
+    <h2>Note:</h2>
+        -   <h3>The game will not run without the jdbc library. So include the library to Portals-and-Timemachines-code folder in the     IDE and run the project as mentioned below.</h3>
+        -   <h3>The game will run without the mysql connection but the users cannot see or check with the scorecard.</h3>
+        
 Running the Project
 
 -	Right click the desktop project, Run As -> Java Application.
