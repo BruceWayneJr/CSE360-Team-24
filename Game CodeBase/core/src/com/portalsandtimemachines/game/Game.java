@@ -232,10 +232,10 @@ public class Game extends ApplicationAdapter{
 			--i;
 		}
 		
-		dbValues.put("pname",playerNames);
-		dbValues.put("gWon", false);
-		dbGame = new DBGameConnect();
-		dbGame.dbConnect(dbValues);
+//		dbValues.put("pname",playerNames);
+//		dbValues.put("gWon", false);
+//		dbGame = new DBGameConnect();
+//		dbGame.dbConnect(dbValues);
 	
 		batch = new SpriteBatch();
 		gamestage = new Stage();
