@@ -120,7 +120,7 @@ public class Game extends ApplicationAdapter{
 	
 
 	int cardkill2 = 0;
-	int cardswap2 = 1;
+	int cardswap2 = 0;
 	int cardrev2 = 0;
 	
 	
@@ -949,18 +949,14 @@ public class Game extends ApplicationAdapter{
 				else if(bounty_ret == 1)
 				{
 					label.setText("You stepped on the bounty square. You will receive a bounty card drawn at random!");
-					int common = rand.nextInt((3 - 1) + 1) + 1;
-					if(common % 3 == 0)
-					{
-						cardrev2 = 1;
-					}
-					else if(common % 3 == 1)
-					{
-						cardkill2 = 1;
-					}
-					else
+					int common = rand.nextInt((2 - 1) + 1) + 1;
+					if(common % 2 == 0)
 					{
 						cardswap2 = 1;
+					}
+					else if(common % 2 == 1)
+					{
+						cardkill2 = 1;
 					}
 				}
 				if(obj.check_timeMachine(index) != 0)
@@ -1088,19 +1084,16 @@ public class Game extends ApplicationAdapter{
 				else if(bounty_ret == 1)
 				{
 					label.setText("You stepped on the bounty square. You will receive a bounty card drawn at random!");
-					int common = rand.nextInt((3 - 1) + 1) + 1;
-					if(common % 3 == 0)
-					{
-						cardrev2 = 1;
-					}
-					else if(common % 3 == 1)
-					{
-						cardkill2 = 1;
-					}
-					else
+					int common = rand.nextInt((2 - 1) + 1) + 1;
+					if(common % 2 == 0)
 					{
 						cardswap2 = 1;
 					}
+					else if(common % 2 == 1)
+					{
+						cardkill2 = 1;
+					}
+
 				}
 				if(obj.check_timeMachine(index2) != 0)
 				{
@@ -1260,18 +1253,14 @@ public class Game extends ApplicationAdapter{
 				else if(bounty_ret == 1)
 				{
 					label.setText("You stepped on the bounty square. You will receive a bounty card drawn at random!");
-					int common = rand.nextInt((3 - 1) + 1) + 1;
-					if(common % 3 == 0)
-					{
-						cardrev1 = 1;
-					}
-					else if(common % 3 == 1)
-					{
-						cardkill1 = 1;
-					}
-					else
+					int common = rand.nextInt((2 - 1) + 1) + 1;
+					if(common % 2 == 0)
 					{
 						cardswap1 = 1;
+					}
+					else if(common % 2 == 1)
+					{
+						cardkill1 = 1;
 					}
 				}
 				if(obj.check_timeMachine(index1) != 0)
@@ -1399,18 +1388,14 @@ public class Game extends ApplicationAdapter{
 				else if(bounty_ret == 1)
 				{
 					label.setText("You stepped on the bounty square. You will receive a bounty card drawn at random!");
-					int common = rand.nextInt((3 - 1) + 1) + 1;
-					if(common % 3 == 0)
-					{
-						cardrev1 = 1;
-					}
-					else if(common % 3 == 1)
-					{
-						cardkill1 = 1;
-					}
-					else
+					int common = rand.nextInt((2 - 1) + 1) + 1;
+					if(common % 2 == 0)
 					{
 						cardswap1 = 1;
+					}
+					else if(common % 2 == 1)
+					{
+						cardkill1 = 1;
 					}
 				}
 				if(obj.check_timeMachine(index12) != 0)
