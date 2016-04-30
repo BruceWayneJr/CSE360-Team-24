@@ -365,6 +365,10 @@ public class Game extends ApplicationAdapter{
 		cardOne = new ImageButton(style);
 		cardOne.setSize(101, 153);
 		cardOne.setPosition(Gdx.graphics.getWidth()-100, 600);
+		
+		/**
+		 * Listener for Card kill.
+		 */
 		cardOne.addListener(new ChangeListener()
 		{
 			@Override
@@ -418,6 +422,10 @@ public class Game extends ApplicationAdapter{
 		cardTwo = new ImageButton(style1);
 		cardTwo.setSize(101, 153);
 		cardTwo.setPosition(Gdx.graphics.getWidth()-100, 400);
+		
+		/**
+		 * Listener for card swap.
+		 */
 		cardTwo.addListener(new ChangeListener()
 		{
 			@Override
@@ -480,11 +488,16 @@ public class Game extends ApplicationAdapter{
 				}
 			}	
 		});
+		
 		cardTwo.setVisible(false);
 		
 		cardThree = new ImageButton(style2);
 		cardThree.setSize(101, 153);
 		cardThree.setPosition(Gdx.graphics.getWidth()-100, 200);
+		
+		/**
+		 * Listener for card reverse.
+		 */
 		cardThree.addListener(new ChangeListener()
 		{
 			@Override
@@ -498,6 +511,10 @@ public class Game extends ApplicationAdapter{
 		cardFour = new ImageButton(style3);
 		cardFour.setSize(101,153);
 		cardFour.setPosition(Gdx.graphics.getWidth()-100, 0);
+		
+		/**
+		 * Listener for restart card.
+		 */
 		cardFour.addListener(new ChangeListener()
 		{
 			@Override
