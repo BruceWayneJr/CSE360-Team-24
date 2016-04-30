@@ -13,8 +13,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-//import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-//import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -81,6 +79,7 @@ public class Game extends ApplicationAdapter{
 	private Dice dice;
 	
 //	DB Connect
+	
 	@SuppressWarnings("rawtypes")
 	HashMap dbValues = new HashMap();
 	DBGameConnect dbGame;
@@ -266,7 +265,9 @@ public class Game extends ApplicationAdapter{
 		gamestage = new Stage();
 		gameskin = new Skin();
 		gameskinp = new Skin();
+		
 		// Checkered background texture
+		
 		boardBackground = new Texture("10x10_checkered_board.png");
 		gamePieceTexture = new Texture("Green2.png");
 		gamePieceTexture1 = new Texture("Green1.png");
@@ -286,7 +287,6 @@ public class Game extends ApplicationAdapter{
 		TextureRegion cFour = new TextureRegion(cardImgFour);
 		
 		BitmapFont bfont=new BitmapFont();
-//		bfont.scale(1);
 		gameskin.add("default",bfont);
 		
 		Pixmap pixmap = new Pixmap(100, 50, Format.RGBA8888);
@@ -298,7 +298,6 @@ public class Game extends ApplicationAdapter{
         
 		dice = new Dice();
 		dice.setVisible(false);
-//		gamestage.addActor(dice);
 		
         TextButtonStyle textButtonStyle = new TextButtonStyle();
         textButtonStyle.fontColor =  Color.BLACK;
@@ -360,7 +359,6 @@ public class Game extends ApplicationAdapter{
 		label.setPosition(10, 250);
 		label.setWrap(true);
 		label.setWidth(100);
-//		label.setHeight(250);
 		label.setText("Welcome to portals and time machines!");
 		label.setColor(Color.CYAN);
 		gamestage.addActor(label);
@@ -376,7 +374,6 @@ public class Game extends ApplicationAdapter{
 			public void changed(ChangeEvent event, Actor actor) 
 			{
 				System.out.println("Click cardOne");
-				// TODO Put stuff here
 				if(cardkill1 == 1)
 				{
 					System.out.println("I am inside 23");
@@ -435,7 +432,6 @@ public class Game extends ApplicationAdapter{
 				System.out.println("Click cardTwo");
 				int temp_move1;
 				int temp_move2;
-				// TODO Put stuff here
 				if(cardswap1 == 1)
 				{
 					if(index1 < 99 && index < 99)
@@ -501,8 +497,6 @@ public class Game extends ApplicationAdapter{
 			public void changed(ChangeEvent event, Actor actor) 
 			{
 				System.out.println("Click cardThree");
-				// TODO Put stuff here
-				
 			}	
 		});
 		cardThree.setVisible(false);
@@ -516,8 +510,6 @@ public class Game extends ApplicationAdapter{
 			public void changed(ChangeEvent event, Actor actor) 
 			{
 				System.out.println("Click cardFour");
-				// TODO Put stuff here
-				
 			}	
 		});
 		cardFour.setVisible(false);
@@ -526,12 +518,7 @@ public class Game extends ApplicationAdapter{
 		cardOneLabel.setPosition(cardOne.getX(), cardOne.getY());
 		cardTwoLabel = new Label("Swap", labelStyle);
 		cardTwoLabel.setPosition(cardTwo.getX(), cardTwo.getY());
-//		cardThreeLabel = new Label("OTHER", labelStyle);
-//		cardThreeLabel.setPosition(cardThree.getX(), cardThree.getY());
-//		cardFourLabel = new Label("OTHER2", labelStyle);
-//		cardFourLabel.setPosition(cardFour.getX(), cardFour.getY());
-		
-		
+
 		gamestage.addActor(rollDice);
 		gamestage.addActor(playerOne);
 		gamestage.addActor(playerTwo);
@@ -546,17 +533,25 @@ public class Game extends ApplicationAdapter{
 		
 		
 	    // Camera to manage viewport and  view matrices
+		
 		camera = new OrthographicCamera();
+		
 		// Initialize camera to window size
+		
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		
 		// Initialize viewport size to camera size
+		
 		viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+		
 		// helper variable for board size
+		
 		boardSize = camera.viewportHeight;
 		numberOfSpacesPerRow = 10;
 		windowWidth = camera.viewportWidth;
 
 		// Sprite to help with board texture transformation
+		
 		boardSprite = new Sprite(boardBackground);
 		boardSprite.setOriginCenter();
 		boardSprite.setSize(boardSize, boardSize);
@@ -621,10 +616,10 @@ public class Game extends ApplicationAdapter{
 		bountySprite3 = new Sprite(bountyTexture);
 		bountySprite3.setOriginCenter();
 		bountySprite3.setSize(32, 32);
-		// Used to draw shapes on screen 
-//		shapeRenderer = new ShapeRenderer();
 		
+		// Used to draw shapes on screen 	
 		// ArrayList to hold centers of the spaces
+		
 		boardTransforms = new Array<Vector2>(100);
 		boardTransforms = calculateTransforms(boardSize, numberOfSpacesPerRow, windowWidth);
 		
@@ -737,7 +732,6 @@ public class Game extends ApplicationAdapter{
 						dbValues.put("pname",tempArr);
 						dbValues.put("gWon", true);
 						dbGame.dbConnect(dbValues);
-//					rollDice.setText("Starting new game");
 						Gdx.app.exit();
 					}
 					else if(index1 > 98 && index12 > 98)
@@ -747,10 +741,8 @@ public class Game extends ApplicationAdapter{
 						dbValues.put("pname",tempArr);
 						dbValues.put("gWon", true);
 						dbGame.dbConnect(dbValues);
-//						rollDice.setText("Starting new game");
 						Gdx.app.exit();
 					}
-//					label.setText("");
 					rollDice.setText("End Turn");
 					turnInProgress = true;
 				}
@@ -779,7 +771,6 @@ public class Game extends ApplicationAdapter{
 				if(diceHasBeenRolled && !gamePiece.moving && !gamePiece2.moving && !gamePiece1.moving && !gamePiece12.moving){
 					diceHasBeenRolled = false;
 					moving_piece(temp, 1);
-//					label.setText("Press the Die for the next turn");
 					label.setText("Play a card or press end turn");
 				}
 			}
@@ -793,13 +784,12 @@ public class Game extends ApplicationAdapter{
 				if(diceHasBeenRolled && !gamePiece.moving && !gamePiece2.moving && !gamePiece1.moving && !gamePiece12.moving){
 					diceHasBeenRolled = false;
 					moving_piece(temp, 2);
-//					label.setText("Press the Die for the next turn");
 					label.setText("Play a card or press end turn");
 				}
 			}
 		});
 		
-		tutorialImage = new Texture("tutorial.png"); // TODO: Place tutorial image file here
+		tutorialImage = new Texture("tutorial.png"); 
 		tutorialImageRegion = new TextureRegion(tutorialImage);
 		tutorialImageStyle = new ImageButtonStyle();
 		tutorialImageStyle.imageUp = new TextureRegionDrawable(tutorialImageRegion);
@@ -813,11 +803,6 @@ public class Game extends ApplicationAdapter{
 			@Override
 			public void changed(ChangeEvent event, Actor actor) 
 			{
-//				tutorialImageButton.setVisible(false);
-//				tutorialImageButton.setTouchable(Touchable.disabled);
-//				tutorialImageButton.setDisabled(true);
-//				actor.remove();
-//				System.out.println("Clicked");
 				removeTutorialImage();
 			}
 		});
@@ -838,14 +823,12 @@ public class Game extends ApplicationAdapter{
 		for(int i = 0; i < 10; i++){ // Horizontal movement
 			if(i % 2 == 0){
 				for(int j = 0; j < 10; j++){ // Vertical movement
-					//Vector2 transform = new Vector2(768/10 * i, 768/10 * j);
 					temporaryArray.add(new Vector2(boardSize/numberOfSpacesPerRow * j + ((boardSize/numberOfSpacesPerRow)/2) + ((windowWidth - boardSize)/2), 
 							boardSize/numberOfSpacesPerRow * i + ((boardSize/numberOfSpacesPerRow)/2)));
 				}
 			}
 			else{
 				for(int j = 9; j >= 0; j--){ // Vertical movement
-					//Vector2 transform = new Vector2(768/10 * i, 768/10 * j);
 					temporaryArray.add(new Vector2(boardSize/numberOfSpacesPerRow * j + ((boardSize/numberOfSpacesPerRow)/2) + ((windowWidth - boardSize)/2), 
 							boardSize/numberOfSpacesPerRow * i + ((boardSize/numberOfSpacesPerRow)/2)));
 				}
@@ -900,28 +883,12 @@ public class Game extends ApplicationAdapter{
 		gamePiece12.draw(batch);
 		gamePiece2.draw(batch);
 		
-		
-//		cardOneLabel.draw(batch, 1);
-//		cardTwoLabel.draw(batch, 1);
-//		cardThreeLabel.draw(batch, 1);
-//		cardFourLabel.draw(batch, 1);
-//		tutorialImageButton.draw(batch, 1);
-		
-		
-		
 		label.draw(batch, 1);
 		if(dice.isVisible()){
 			dice.draw(batch);
 		}
-		
-//		gamestage.draw();
 		batch.end();
 		gamestage.draw();
-		
-		
-//		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
-//			removeTutorialImage();
-//		}
 	}
 	
 	public void removeTutorialImage()
@@ -929,13 +896,13 @@ public class Game extends ApplicationAdapter{
 		tutorialImageButton.setVisible(false);
 		tutorialImageButton.setTouchable(Touchable.disabled);
 		tutorialImageButton.setDisabled(true);
-//		System.out.println("Clicked");
 	}
 	
 	int playersel = 0;
 	int pawnsel;
 	int pawnsel1;
 	int flag;
+
 	/**
 	 * This function is used for moving the pawn on the board.
 	 * 
@@ -1047,19 +1014,14 @@ public class Game extends ApplicationAdapter{
 				int bounty_ret = obj.check_bounty(index);
 				if(ret != 0)
 				{
-//					index = ret;
-		//			if(index )
 					label.setText("You stepped on a portal...!!");
 					System.out.println("Portal ");
 					if(index > 98)
 					{
 						gamePiece.secondaryMove(boardTransforms.get(99));
-//						gamePiece.portalMovement(boardTransforms.get(index), boardTransforms.get(ret));
-						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 					}
 					else
 					{
-//						gamePiece.secondaryMove(boardTransforms.get(index));
 						gamePiece.portalMovement(boardTransforms.get(index), boardTransforms.get(ret));
 						index = ret;
 						
@@ -1069,13 +1031,10 @@ public class Game extends ApplicationAdapter{
 							System.out.println("Portal ");
 							if(index > 98)
 							{
-//								gamePiece.secondaryMove(boardTransforms.get(99));
 								gamePiece.portalMovement(boardTransforms.get(index), boardTransforms.get(99));
-								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 							}
 							else
 							{
-//								gamePiece.secondaryMove(boardTransforms.get(index));
 								gamePiece.portalMovement(boardTransforms.get(index), boardTransforms.get(ret));
 							}
 						}
@@ -1114,7 +1073,7 @@ public class Game extends ApplicationAdapter{
 					}
 					final_pos = obj.check_timeMachine(index);
 				}
-			}//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			}
 			else
 			{
 				if(time_machine_flag2 == 0)
@@ -1183,9 +1142,6 @@ public class Game extends ApplicationAdapter{
 				int bounty_ret = obj.check_bounty(index2);
 				if(ret != 0)
 				{
-//					index2 = ret;
-		//			if(index )
-
 					label.setText("You stepped on a portal...!!");
 					System.out.println("Portal ");
 					if(index2 > 98)
@@ -1194,7 +1150,6 @@ public class Game extends ApplicationAdapter{
 					}
 					else
 					{
-//						gamePiece2.secondaryMove(boardTransforms.get(index2));
 						gamePiece2.portalMovement(boardTransforms.get(index2), boardTransforms.get(ret));
 						index2 = ret;
 
@@ -1204,13 +1159,10 @@ public class Game extends ApplicationAdapter{
 							System.out.println("Portal ");
 							if(index2 > 98)
 							{
-//								gamePiece2.secondaryMove(boardTransforms.get(99));
 								gamePiece2.portalMovement(boardTransforms.get(index2), boardTransforms.get(99));
-								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 							}
 							else
 							{
-//								gamePiece2.secondaryMove(boardTransforms.get(index2));
 								gamePiece2.portalMovement(boardTransforms.get(index2), boardTransforms.get(ret));
 							}
 						}
@@ -1252,12 +1204,9 @@ public class Game extends ApplicationAdapter{
 				}
 				
 			}
-		}//********************************************************************************
+		}
 		else
 		{
-//			playerTwo.setDisabled(true);
-//			playerOne.setDisabled(false);
-			
 			if(cardkill1 == 1)
 			{
 				cardOne.setVisible(true);
@@ -1353,33 +1302,25 @@ public class Game extends ApplicationAdapter{
 				int ret = obj.check_portal(index1);
 				if(ret != 0)
 				{
-//					index1 = ret;
-		//			if(index )
 					label.setText("You stepped on a portal...!!");
-//					System.out.println("Portal ");
 					if(index1 > 98)
 					{
 						gamePiece1.secondaryMove(boardTransforms.get(99));
 					}
 					else
 					{
-//						gamePiece1.secondaryMove(boardTransforms.get(index1));
 						gamePiece1.portalMovement(boardTransforms.get(index1), boardTransforms.get(ret));
 						index1 = ret;
 						
 						if(obj.check_portal(index1) != 0)
 						{
 							index1 = index1 + obj.check_portal(index1);
-//							System.out.println("Portal ");
 							if(index1 > 98)
 							{
-//								gamePiece1.secondaryMove(boardTransforms.get(99));
 								gamePiece1.portalMovement(boardTransforms.get(index1), boardTransforms.get(99));
-								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 							}
 							else
 							{
-//								gamePiece1.secondaryMove(boardTransforms.get(index1));
 								gamePiece1.portalMovement(boardTransforms.get(index1), boardTransforms.get(ret));
 							}
 						}
@@ -1418,7 +1359,7 @@ public class Game extends ApplicationAdapter{
 					}
 					final_pos1 = obj.check_timeMachine(index1);
 				}
-			}//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+			}
 			else
 			{
 				if(time_machine_flag12 == 0)
@@ -1487,8 +1428,6 @@ public class Game extends ApplicationAdapter{
 				int ret = obj.check_portal(index12);
 				if(ret != 0)
 				{
-//					index12 = ret;
-		//			if(index )
 					label.setText("You stepped on a portal...!!");
 
 					System.out.println("Portal ");
@@ -1498,7 +1437,6 @@ public class Game extends ApplicationAdapter{
 					}
 					else
 					{
-//						gamePiece12.secondaryMove(boardTransforms.get(index12));
 						gamePiece12.portalMovement(boardTransforms.get(index12), boardTransforms.get(ret));
 						index12 = ret;
 						
@@ -1508,13 +1446,10 @@ public class Game extends ApplicationAdapter{
 							System.out.println("Portal ");
 							if(index1 > 98)
 							{
-//								gamePiece12.secondaryMove(boardTransforms.get(99));
 								gamePiece12.portalMovement(boardTransforms.get(index12), boardTransforms.get(99));
-								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 							}
 							else
 							{
-//								gamePiece12.secondaryMove(boardTransforms.get(index12));
 								gamePiece12.portalMovement(boardTransforms.get(index12), boardTransforms.get(ret));
 							}
 						}
@@ -1566,7 +1501,6 @@ public class Game extends ApplicationAdapter{
 	@Override
 	public void dispose(){
 		boardBackground.dispose();
-//		shapeRenderer.dispose();
 		batch.dispose();
 	}
 }
