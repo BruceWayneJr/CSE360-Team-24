@@ -257,9 +257,9 @@ public class Game extends ApplicationAdapter{
 			dbGame.dbConnect(dbValues);
 		}
 
-		dbValues.put("pname",playerNames);
-		dbValues.put("gWon", false);
-		dbGame.dbConnect(dbValues);
+//		dbValues.put("pname",playerNames);
+//		dbValues.put("gWon", false);
+//		dbGame.dbConnect(dbValues);
 
 	
 		batch = new SpriteBatch();
