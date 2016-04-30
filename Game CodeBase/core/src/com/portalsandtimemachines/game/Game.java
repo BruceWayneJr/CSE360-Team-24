@@ -81,6 +81,7 @@ public class Game extends ApplicationAdapter{
 	private Dice dice;
 	
 //	DB Connect
+	@SuppressWarnings("rawtypes")
 	HashMap dbValues = new HashMap();
 	DBGameConnect dbGame;
 
@@ -191,6 +192,7 @@ public class Game extends ApplicationAdapter{
 	 * 
 	 *  @param none
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void create () {
 		Object[] options = {"Start Game", "Show Highscores"};
