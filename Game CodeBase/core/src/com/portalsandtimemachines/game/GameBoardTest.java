@@ -138,8 +138,57 @@ public class GameBoardTest {
 			assertNotEquals(100,temp[i]);
 		}
 	}
-
-
+	
+	
+	/**
+	 * check whether the values in the bounty squares are not null.
+	 */
+	@Test
+	public void testTM_Bountypositionsnot_equal_to_zero() {
+//		fail("Not yet implemented");
+		GameBoard testobj = new GameBoard();
+		testobj.init_bounty();
+		int[] temp = testobj.bounty_positions();
+		for(int i = 0; i < temp.length;i++)
+		{
+			assertNotEquals(0,temp[i]);
+		}
+	}
+	
+	/**
+	 * check whether the values in the bounty squares are not placed at 100.
+	 */
+	@Test
+	public void testTM_Bountypositionsnot_equal_to_hundred() {
+//		fail("Not yet implemented");
+		GameBoard testobj = new GameBoard();
+		testobj.init_bounty();
+		int[] temp = testobj.bounty_positions();
+		for(int i = 0; i < temp.length;i++)
+		{
+			assertNotEquals(100,temp[i]);
+		}
+	}
+	
+	
+	/**
+	 * check whether the values in the bounty squares are not placed at 100.
+	 */
+	@Test
+	public void testTM_Bountypositionsnot_at_portalpositions() {
+//		fail("Not yet implemented");
+		GameBoard testobj = new GameBoard();
+		testobj.init_bounty();
+		int[] temp = testobj.bounty_positions();
+		for(int i = 0; i < temp.length;i++)
+		{
+			assertNotEquals(100,temp[i]);
+		}
+	}
+	
+	
+	
+	
 	/**
 	 * check whether the position of the time machine is not out of board range.
 	 */
