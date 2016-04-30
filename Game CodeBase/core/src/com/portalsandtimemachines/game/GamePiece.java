@@ -126,8 +126,8 @@ public class GamePiece {
 	}
 	
 	public void portalMovement(Vector2 firstPosition, Vector2 secondPosition){
-		destination = new Vector2(firstPosition.x, firstPosition.y);
-		secondDestination = new Vector2(secondPosition.x, secondPosition.y);
+		destination = new Vector2(firstPosition.x, firstPosition.y + offset);
+		secondDestination = new Vector2(secondPosition.x, secondPosition.y + offset);
 	}
 	
 	public void setPosition(Vector2 newPosition){

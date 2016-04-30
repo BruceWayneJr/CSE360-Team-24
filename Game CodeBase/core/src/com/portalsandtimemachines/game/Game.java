@@ -183,56 +183,6 @@ public class Game extends ApplicationAdapter{
 	 */
 	@Override
 	public void create () {
-//		gameStart = false;
-//		showWindow = true;
-//		
-//		final JFrame parent = new JFrame();
-//		JPanel panel = new JPanel();
-//        JButton start = new JButton();
-//        JButton scores = new JButton();
-//        JTextArea text = new JTextArea();
-//
-//        start.setText("Start the game");
-//        scores.setText("Show Highscores");
-//        text.setText("Portals and Time Machines");
-//        panel.add(text);
-//        panel.add(start);
-////        parent.pack();
-//        panel.add(scores);
-//        parent.add(panel);
-//        parent.pack();
-//        parent.setVisible(true);
-//
-//        start.addActionListener(new java.awt.event.ActionListener() {
-//            @Override
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                gameStart = true;
-//            }
-//        });
-//        
-//        scores.addActionListener(new java.awt.event.ActionListener() {
-//            @Override
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                gameStart = true;
-//            }
-//        });
-//        
-//        parent.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//        parent.setLocation(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-		
-//		int choice = JOptionPane.showOptionDialog(null, //Component parentComponent
-//		                               "Metric or Imperial?", //Object message,
-//		                               "Choose an option", //String title
-//		                               JOptionPane.YES_NO_OPTION, //int optionType
-//		                               JOptionPane.INFORMATION_MESSAGE, //int messageType
-//		                               null, //Icon icon,
-//		                               {"Metric","Imperial"}, //Object[] options,
-//		                               "Metric");//Object initialValue 
-//		if(choice == 0 ){
-//		   //Metric was chosen
-//		}else{
-//		   //Imperial was chosen
-//		}
 		Object[] options = {"Start Game", "Show Highscores"};
 		
 		int choice = JOptionPane.showOptionDialog(null, "Portals and Time Machines", "Start Menu", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options , options[0]);
@@ -252,56 +202,31 @@ public class Game extends ApplicationAdapter{
 //			showWindow = false;
 //		}
 		
-		int i = 0;
+		int i = 2;
 		
-		noofplayer = Integer.parseInt(JOptionPane.showInputDialog("Please enter the number of players"));
-
-		while(noofplayer > 4 || noofplayer < 1)
-		{
-			noofplayer = Integer.parseInt(JOptionPane.showInputDialog("Please enter the correct number of players"));
-		}
-		
-		i = noofplayer;
+		JOptionPane.showMessageDialog(null, "Enter the name of both the players" );
 
 		while(i > 0)
 		{
 			switch (i)
 			{
 				case 1:
-					playername = JOptionPane.showInputDialog("Please enter your usename for user "+i+" : ");
+					playername = JOptionPane.showInputDialog("Please enter your usename for user 2 : ");
 					while(playername.isEmpty())
 					{
-						playername = JOptionPane.showInputDialog("Please enter your username for user "+i+" : ");
+						playername = JOptionPane.showInputDialog("Please enter your username for user 2 : ");
 					}
 					playerNames.add(playername);
 					JOptionPane.showMessageDialog(null, "Hello " + playername + '!' + "\nWelcome to Portals & Time-Machines" );
 					break;
 				case 2:
-					playername1 = JOptionPane.showInputDialog("Please enter your usename for user "+i+" : ");
+					playername1 = JOptionPane.showInputDialog("Please enter your usename for user 1 : ");
 					while(playername1.isEmpty())
 					{
-						playername1 = JOptionPane.showInputDialog("Please enter your username for user "+i+" : ");
+						playername1 = JOptionPane.showInputDialog("Please enter your username for user 1 : ");
 					}
 					playerNames.add(playername1);
 					JOptionPane.showMessageDialog(null, "Hello " + playername1 + '!' + "\nWelcome to Portals & Time-Machines" );
-					break;
-				case 3:
-					playername2 = JOptionPane.showInputDialog("Please enter your usename for user "+i+" : ");
-					while(playername2.isEmpty())
-					{
-						playername2 = JOptionPane.showInputDialog("Please enter your username for user "+i+" : ");
-					}
-					playerNames.add(playername2);
-					JOptionPane.showMessageDialog(null, "Hello " + playername2 + '!' + "\nWelcome to Portals & Time-Machines" );
-					break;
-				case 4:
-					playername3 = JOptionPane.showInputDialog("Please enter your usename for user "+i+" : ");
-					while(playername3.isEmpty())
-					{
-						playername3 = JOptionPane.showInputDialog("Please enter your username for user "+i+" : ");
-					}
-					playerNames.add(playername3);
-					JOptionPane.showMessageDialog(null, "Hello " + playername3 + '!' + "\nWelcome to Portals & Time-Machines" );
 					break;
 			}
 			--i;
@@ -407,7 +332,7 @@ public class Game extends ApplicationAdapter{
 		label.setWrap(true);
 		label.setWidth(100);
 		label.setText("Welcome to portals and time machines!");
-		label.setColor(Color.RED);
+		label.setColor(Color.CYAN);
 		
 		diceHasBeenRolled = false;
 		
@@ -747,17 +672,14 @@ public class Game extends ApplicationAdapter{
 					}, delay);
 					
 					++flag;
-//					moving_piece(temp, flag);
 					diceHasBeenRolled = true;
 					if(index > 98 && index2 > 98) {
 						JOptionPane.showMessageDialog(null,"Congrats " + playername + "! You Won!!");
-//					rollDice.setText("Starting new game");
 						Gdx.app.exit();
 					}
 					else if(index1 > 98 && index12 > 98)
 					{
 						JOptionPane.showMessageDialog(null,"Congrats " + playername1 + "! You Won!!");
-//						rollDice.setText("Starting new game");
 							Gdx.app.exit();
 					}
 				}
@@ -904,7 +826,6 @@ public class Game extends ApplicationAdapter{
 			
 			if(cardswap2 == 1)
 			{
-//				System.out.println("Inside Player 2 - Swap Card");
 				cardTwo.setVisible(true);
 			}
 			else
@@ -929,7 +850,6 @@ public class Game extends ApplicationAdapter{
 					if(index > 98)
 					{
 						gamePiece.moveToPosition(boardTransforms.get(99));
-						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 					}
 					else
 					{
@@ -938,12 +858,14 @@ public class Game extends ApplicationAdapter{
 				}
 				else if( time_machine_flag == 1)
 				{
+					label.setText("Time machine is still active. Move away from it..!!!!");
 					index = index + value_tomove;
 					if(timeMachine_counter > 0 && index < final_pos )
 					{
 						timeMachine_counter--;
 						if(timeMachine_counter == 0 && index <final_pos)
 						{
+							label.setText("Oops..!!!, Time is Up. The pawn restarts.");
 							time_machine_flag = 0;
 							index = 0;
 							gamePiece.moveToPosition(boardTransforms.get(index));
@@ -953,7 +875,6 @@ public class Game extends ApplicationAdapter{
 							if(index > 98)
 							{
 								gamePiece.moveToPosition(boardTransforms.get(99));
-								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 							}
 							else
 							{
@@ -978,7 +899,6 @@ public class Game extends ApplicationAdapter{
 						if(index > 98)
 						{
 							gamePiece.moveToPosition(boardTransforms.get(99));
-							//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 						}
 						else
 						{
@@ -986,9 +906,6 @@ public class Game extends ApplicationAdapter{
 						}
 					}
 				}
-		//		index = index + value;
-		//		gamePiece.moveToPosition(boardTransforms.get(index));
-		//		System.out.println(index +" "+ value_tomove);
 	
 				int ret = obj.check_portal(index);
 				int bounty_ret = obj.check_bounty(index);
@@ -996,6 +913,7 @@ public class Game extends ApplicationAdapter{
 				{
 //					index = ret;
 		//			if(index )
+					label.setText("You stepped on a portal...!!");
 					System.out.println("Portal ");
 					if(index > 98)
 					{
@@ -1030,6 +948,7 @@ public class Game extends ApplicationAdapter{
 				}
 				else if(bounty_ret == 1)
 				{
+					label.setText("You stepped on the bounty square. You will receive a bounty card drawn at random!");
 					int common = rand.nextInt((3 - 1) + 1) + 1;
 					if(common % 3 == 0)
 					{
@@ -1044,10 +963,9 @@ public class Game extends ApplicationAdapter{
 						cardswap2 = 1;
 					}
 				}
-		//		
 				if(obj.check_timeMachine(index) != 0)
 				{
-		//			System.out.println(" time machine");
+					label.setText("Oops !! You stepped over a time machine. You will have to move 8 sqaures within 2 turns or you will pushed to the beginning..");
 					timeMachine_counter = 2;
 					time_machine_flag = 1;
 					if(index == temporary_TimeMachinePosition[0])
@@ -1073,7 +991,6 @@ public class Game extends ApplicationAdapter{
 					if(index2 > 98)
 					{
 						gamePiece2.moveToPosition(boardTransforms.get(99));
-						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 					}
 					else
 					{
@@ -1082,12 +999,14 @@ public class Game extends ApplicationAdapter{
 				}
 				else if( time_machine_flag2 == 1)
 				{
+					label.setText("Time machine is still active. Move away from it..!!!!");
 					index2 = index2 + value_tomove;
 					if(timeMachine_counter2 > 0 && index2 < final_pos2 )
 					{
 						timeMachine_counter2--;
 						if(timeMachine_counter2 == 0 && index2 <final_pos2)
 						{
+							label.setText("Oops..!!!, Time is Up. The pawn restarts.");
 							time_machine_flag2 = 0;
 							index2 = 0;
 							gamePiece2.moveToPosition(boardTransforms.get(index2));
@@ -1097,7 +1016,6 @@ public class Game extends ApplicationAdapter{
 							if(index2 > 98)
 							{
 								gamePiece2.moveToPosition(boardTransforms.get(99));
-								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 							}
 							else
 							{
@@ -1121,7 +1039,6 @@ public class Game extends ApplicationAdapter{
 						if(index2 > 98)
 						{
 							gamePiece2.moveToPosition(boardTransforms.get(99));
-							//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 						}
 						else
 						{
@@ -1129,9 +1046,6 @@ public class Game extends ApplicationAdapter{
 						}
 					}
 				}
-		//		index = index + value;
-		//		gamePiece.moveToPosition(boardTransforms.get(index));
-		//		System.out.println(index +" "+ value_tomove);
 	
 				int ret = obj.check_portal(index2);
 				int bounty_ret = obj.check_bounty(index2);
@@ -1139,18 +1053,19 @@ public class Game extends ApplicationAdapter{
 				{
 //					index2 = ret;
 		//			if(index )
+
+					label.setText("You stepped on a portal...!!");
 					System.out.println("Portal ");
 					if(index2 > 98)
 					{
 						gamePiece2.secondaryMove(boardTransforms.get(99));
-						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 					}
 					else
 					{
 //						gamePiece2.secondaryMove(boardTransforms.get(index2));
 						gamePiece2.portalMovement(boardTransforms.get(index2), boardTransforms.get(ret));
 						index2 = ret;
-						
+
 						if(obj.check_portal(index2) != 0)
 						{
 							index2 = index2 + obj.check_portal(index2);
@@ -1172,6 +1087,7 @@ public class Game extends ApplicationAdapter{
 				}
 				else if(bounty_ret == 1)
 				{
+					label.setText("You stepped on the bounty square. You will receive a bounty card drawn at random!");
 					int common = rand.nextInt((3 - 1) + 1) + 1;
 					if(common % 3 == 0)
 					{
@@ -1186,10 +1102,9 @@ public class Game extends ApplicationAdapter{
 						cardswap2 = 1;
 					}
 				}
-		//		
 				if(obj.check_timeMachine(index2) != 0)
 				{
-		//			System.out.println(" time machine");
+					label.setText("Oops !! You stepped over a time machine. You will have to move 8 sqaures within 2 turns or you will pushed to the beginning..");
 					timeMachine_counter2 = 2;
 					time_machine_flag2 = 1;
 					if(index2 == temporary_TimeMachinePosition[0])
@@ -1208,33 +1123,6 @@ public class Game extends ApplicationAdapter{
 				}
 				
 			}
-			
-
-			
-//			cardOne.addListener(new ChangeListener() 
-//			{	
-//				public void changed (ChangeEvent event, Actor actor) 
-//				{
-//					index = 0;
-//					index2 = 0;
-//					gamePiece.moveToPosition(boardTransforms.get(index));
-//					gamePiece2.moveToPosition(boardTransforms.get(index2));
-////							cardOne.setVisible(false);
-//				}
-//			});
-//			cardTwo.addListener(new ChangeListener() 
-//			{	
-//				public void changed (ChangeEvent event, Actor actor) 
-//				{
-//					index1 = index;
-//					index12 = index2;
-//					gamePiece1.moveToPosition(boardTransforms.get(index1));
-//					gamePiece12.moveToPosition(boardTransforms.get(index12));
-////							cardTwo.setVisible(false);
-//				}
-//			});
-			//if(index > 98)
-				//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 		}//********************************************************************************
 		else
 		{
@@ -1276,7 +1164,6 @@ public class Game extends ApplicationAdapter{
 					if(index1 > 98)
 					{
 						gamePiece1.moveToPosition(boardTransforms.get(99));
-						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 					}
 					else
 					{
@@ -1285,12 +1172,14 @@ public class Game extends ApplicationAdapter{
 				}
 				else if( time_machine_flag1 == 1)
 				{
+					label.setText("Time machine is still active. Move away from it..!!!!");
 					index1 = index1 + value_tomove;
 					if(timeMachine_counter1 > 0 && index1 < final_pos1 )
 					{
 						timeMachine_counter1--;
 						if(timeMachine_counter1 == 0 && index1 <final_pos1)
 						{
+							label.setText("Oops..!!!, Time is Up. The pawn restarts.");
 							time_machine_flag1 = 0;
 							index1 = 0;
 							gamePiece1.moveToPosition(boardTransforms.get(index1));
@@ -1300,7 +1189,6 @@ public class Game extends ApplicationAdapter{
 							if(index1 > 98)
 							{
 								gamePiece1.moveToPosition(boardTransforms.get(99));
-								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 							}
 							else
 							{
@@ -1325,7 +1213,6 @@ public class Game extends ApplicationAdapter{
 						if(index1 > 98)
 						{
 							gamePiece1.moveToPosition(boardTransforms.get(99));
-							//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 						}
 						else
 						{
@@ -1333,20 +1220,17 @@ public class Game extends ApplicationAdapter{
 						}
 					}
 				}
-		//		index = index + value;
-		//		gamePiece.moveToPosition(boardTransforms.get(index));
-		//		System.out.println(index +" "+ value_tomove);
 				int bounty_ret = obj.check_bounty(index);
 				int ret = obj.check_portal(index1);
 				if(ret != 0)
 				{
 //					index1 = ret;
 		//			if(index )
-					System.out.println("Portal ");
+					label.setText("You stepped on a portal...!!");
+//					System.out.println("Portal ");
 					if(index1 > 98)
 					{
 						gamePiece1.secondaryMove(boardTransforms.get(99));
-						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 					}
 					else
 					{
@@ -1357,7 +1241,7 @@ public class Game extends ApplicationAdapter{
 						if(obj.check_portal(index1) != 0)
 						{
 							index1 = index1 + obj.check_portal(index1);
-							System.out.println("Portal ");
+//							System.out.println("Portal ");
 							if(index1 > 98)
 							{
 //								gamePiece1.secondaryMove(boardTransforms.get(99));
@@ -1375,6 +1259,7 @@ public class Game extends ApplicationAdapter{
 				}
 				else if(bounty_ret == 1)
 				{
+					label.setText("You stepped on the bounty square. You will receive a bounty card drawn at random!");
 					int common = rand.nextInt((3 - 1) + 1) + 1;
 					if(common % 3 == 0)
 					{
@@ -1389,10 +1274,9 @@ public class Game extends ApplicationAdapter{
 						cardswap1 = 1;
 					}
 				}
-		//		
 				if(obj.check_timeMachine(index1) != 0)
 				{
-		//			System.out.println(" time machine");
+					label.setText("Oops !! You stepped over a time machine. You will have to move 8 sqaures within 2 turns or you will pushed to the beginning..");
 					timeMachine_counter1 = 2;
 					time_machine_flag1 = 1;
 					if(index1 == temporary_TimeMachinePosition[0])
@@ -1418,7 +1302,6 @@ public class Game extends ApplicationAdapter{
 					if(index12 > 98)
 					{
 						gamePiece12.moveToPosition(boardTransforms.get(99));
-						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 					}
 					else
 					{
@@ -1427,12 +1310,14 @@ public class Game extends ApplicationAdapter{
 				}
 				else if( time_machine_flag12 == 1)
 				{
+					label.setText("Time machine is still active. Move away from it..!!!!");
 					index12 = index12 + value_tomove;
 					if(timeMachine_counter12 > 0 && index12 < final_pos12 )
 					{
 						timeMachine_counter12--;
 						if(timeMachine_counter12 == 0 && index12 <final_pos12)
 						{
+							label.setText("Oops..!!!, Time is Up. The pawn restarts.");
 							time_machine_flag12 = 0;
 							index12 = 0;
 							gamePiece12.moveToPosition(boardTransforms.get(index12));
@@ -1442,7 +1327,6 @@ public class Game extends ApplicationAdapter{
 							if(index12 > 98)
 							{
 								gamePiece12.moveToPosition(boardTransforms.get(99));
-								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 							}
 							else
 							{
@@ -1467,7 +1351,6 @@ public class Game extends ApplicationAdapter{
 						if(index12 > 98)
 						{
 							gamePiece12.moveToPosition(boardTransforms.get(99));
-							//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 						}
 						else
 						{
@@ -1475,20 +1358,18 @@ public class Game extends ApplicationAdapter{
 						}
 					}
 				}
-		//		index = index + value;
-		//		gamePiece.moveToPosition(boardTransforms.get(index));
-		//		System.out.println(index +" "+ value_tomove);
 				int bounty_ret = obj.check_bounty(index12);
 				int ret = obj.check_portal(index12);
 				if(ret != 0)
 				{
 //					index12 = ret;
 		//			if(index )
+					label.setText("You stepped on a portal...!!");
+
 					System.out.println("Portal ");
 					if(index12 > 98)
 					{
 						gamePiece12.secondaryMove(boardTransforms.get(99));
-						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 					}
 					else
 					{
@@ -1517,6 +1398,7 @@ public class Game extends ApplicationAdapter{
 				}
 				else if(bounty_ret == 1)
 				{
+					label.setText("You stepped on the bounty square. You will receive a bounty card drawn at random!");
 					int common = rand.nextInt((3 - 1) + 1) + 1;
 					if(common % 3 == 0)
 					{
@@ -1531,10 +1413,9 @@ public class Game extends ApplicationAdapter{
 						cardswap1 = 1;
 					}
 				}
-		//		
 				if(obj.check_timeMachine(index12) != 0)
 				{
-		//			System.out.println(" time machine");
+					label.setText("Oops !! You stepped over a time machine. You will have to move 8 sqaures within 2 turns or you will pushed to the beginning..");
 					timeMachine_counter12 = 2;
 					time_machine_flag12 = 1;
 					if(index12 == temporary_TimeMachinePosition[0])
@@ -1553,32 +1434,6 @@ public class Game extends ApplicationAdapter{
 				}
 				
 			}
-			//if(index > 98)
-				//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
-
-			
-//			cardOne.addListener(new ChangeListener() 
-//			{	
-//				public void changed (ChangeEvent event, Actor actor) 
-//				{
-//					index = index1;
-//					index2 = index12;
-//					gamePiece.moveToPosition(boardTransforms.get(index));
-//					gamePiece2.moveToPosition(boardTransforms.get(index2));
-////					cardTwo.setVisible(false);
-//				}
-//			});
-//			cardOne.addListener(new ChangeListener() 
-//			{	
-//				public void changed (ChangeEvent event, Actor actor) 
-//				{
-//					index1 = 0;
-//					index12 = 0;
-//					gamePiece1.moveToPosition(boardTransforms.get(index1));
-//					gamePiece12.moveToPosition(boardTransforms.get(index12));
-////							cardOne.setVisible(false);
-//				}
-//			});
 			
 		}
 		
