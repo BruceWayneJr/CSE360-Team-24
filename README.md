@@ -53,7 +53,7 @@ Java - MySQL Database Connectivity
     or
 
     Use local server applications like xampp or wamp to access mySQL via phpMyadmin local server to create user and database.
-    Video link - https://www.youtube.com/watch?v=lVcTqkHtNMg
+    Video link - https://www.youtube.com/watch?v=ueWpNe0PG34
 
 
     grant usage on *.* to cse360@localhost identified by 'cse360'; 
