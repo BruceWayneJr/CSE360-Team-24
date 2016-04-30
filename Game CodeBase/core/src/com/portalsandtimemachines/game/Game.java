@@ -238,9 +238,9 @@ public class Game extends ApplicationAdapter{
 		}
 		
 		dbValues.put("pname",playerNames);
-		
-//		dbGame = new DBGameConnect();
-//		dbGame.dbConnect(dbValues);
+		dbValues.put("gWon", false);
+		dbGame = new DBGameConnect();
+		dbGame.dbConnect(dbValues);
 	
 		batch = new SpriteBatch();
 		gamestage = new Stage();
@@ -679,16 +679,26 @@ public class Game extends ApplicationAdapter{
 					++flag;
 //					moving_piece(temp, flag);
 					diceHasBeenRolled = true;
+					ArrayList<String> tempArr = new ArrayList<String>();
 					if(index > 98 && index2 > 98) {
 						JOptionPane.showMessageDialog(null,"Congrats " + playername + "! You Won!!");
+						tempArr.add(playername);
+						dbValues.put("pname",tempArr);
+						dbValues.put("gWon", true);
+						dbGame.dbConnect(dbValues);
 //					rollDice.setText("Starting new game");
+						
 						Gdx.app.exit();
 					}
 					else if(index1 > 98 && index12 > 98)
 					{
 						JOptionPane.showMessageDialog(null,"Congrats " + playername1 + "! You Won!!");
+						tempArr.add(playername1);
+						dbValues.put("pname",tempArr);
+						dbValues.put("gWon", true);
+						dbGame.dbConnect(dbValues);
 //						rollDice.setText("Starting new game");
-							Gdx.app.exit();
+						Gdx.app.exit();
 					}
 				}
 			}
