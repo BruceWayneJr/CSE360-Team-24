@@ -181,16 +181,9 @@ public class Game extends ApplicationAdapter{
 	@Override
 	public void create () {
 		// Sprite batch to store all sprites before sending to GPU
-		int i = 0;
+		int i = 2;
 		
-		noofplayer = Integer.parseInt(JOptionPane.showInputDialog("Please enter the number of players"));
-
-		while(noofplayer > 4 || noofplayer < 1)
-		{
-			noofplayer = Integer.parseInt(JOptionPane.showInputDialog("Please enter the correct number of players"));
-		}
-		
-		i = noofplayer;
+		JOptionPane.showMessageDialog(null, "Enter the name of both the players" );
 		
 
 		while(i > 0)
@@ -198,40 +191,22 @@ public class Game extends ApplicationAdapter{
 			switch (i)
 			{
 				case 1:
-					playername = JOptionPane.showInputDialog("Please enter your usename for user "+i+" : ");
+					playername = JOptionPane.showInputDialog("Please enter your usename for user 2 : ");
 					while(playername.isEmpty())
 					{
-						playername = JOptionPane.showInputDialog("Please enter your username for user "+i+" : ");
+						playername = JOptionPane.showInputDialog("Please enter your username for user 2 : ");
 					}
 					playerNames.add(playername);
 					JOptionPane.showMessageDialog(null, "Hello " + playername + '!' + "\nWelcome to Portals & Time-Machines" );
 					break;
 				case 2:
-					playername1 = JOptionPane.showInputDialog("Please enter your usename for user "+i+" : ");
+					playername1 = JOptionPane.showInputDialog("Please enter your usename for user 1 : ");
 					while(playername1.isEmpty())
 					{
-						playername1 = JOptionPane.showInputDialog("Please enter your username for user "+i+" : ");
+						playername1 = JOptionPane.showInputDialog("Please enter your username for user 1 : ");
 					}
 					playerNames.add(playername1);
 					JOptionPane.showMessageDialog(null, "Hello " + playername1 + '!' + "\nWelcome to Portals & Time-Machines" );
-					break;
-				case 3:
-					playername2 = JOptionPane.showInputDialog("Please enter your usename for user "+i+" : ");
-					while(playername2.isEmpty())
-					{
-						playername2 = JOptionPane.showInputDialog("Please enter your username for user "+i+" : ");
-					}
-					playerNames.add(playername2);
-					JOptionPane.showMessageDialog(null, "Hello " + playername2 + '!' + "\nWelcome to Portals & Time-Machines" );
-					break;
-				case 4:
-					playername3 = JOptionPane.showInputDialog("Please enter your usename for user "+i+" : ");
-					while(playername3.isEmpty())
-					{
-						playername3 = JOptionPane.showInputDialog("Please enter your username for user "+i+" : ");
-					}
-					playerNames.add(playername3);
-					JOptionPane.showMessageDialog(null, "Hello " + playername3 + '!' + "\nWelcome to Portals & Time-Machines" );
 					break;
 			}
 			--i;
