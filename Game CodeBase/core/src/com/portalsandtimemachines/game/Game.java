@@ -299,11 +299,11 @@ public class Game extends ApplicationAdapter{
 		Pawn_Two = new TextButton("Pawn 2", gameskin);
 		Pawn_Two.setPosition(0, 350);
 		
-		playerOne = new TextButton("Player 1", gameskin);
+		playerOne = new TextButton(playername, gameskin);
 		playerOne.setPosition(0, 700);
-		playerOne.setDisabled(true);
+		playerOne.setDisabled(false);
 		
-		playerTwo = new TextButton("Player 2", gameskin);
+		playerTwo = new TextButton(playername1, gameskin);
 		playerTwo.setPosition(0, 600);
 		playerTwo.setDisabled(true);
 		
@@ -682,7 +682,10 @@ public class Game extends ApplicationAdapter{
 			public void changed (ChangeEvent event, Actor actor) 
 			{
 				System.out.println("Click rollDice");
+				
 				if(!diceHasBeenRolled){
+					playerTwo.setDisabled(!playerTwo.isDisabled());
+					playerOne.setDisabled(!playerOne.isDisabled());
 					dice.changeAnimate();
 					float delay = 0.5f; // seconds
 					label.setText("Press either Paw 1 or Pawn 2");
@@ -896,9 +899,7 @@ public class Game extends ApplicationAdapter{
 		++playersel;
 		if(playersel % 2 == 0)
 		{
-			playerTwo.setDisabled(false);
-			playerOne.setDisabled(true);
-			
+
 			if(cardkill2 == 1)
 			{
 				cardOne.setVisible(true);
@@ -1203,8 +1204,8 @@ public class Game extends ApplicationAdapter{
 		}//********************************************************************************
 		else
 		{
-			playerTwo.setDisabled(true);
-			playerOne.setDisabled(false);
+//			playerTwo.setDisabled(true);
+//			playerOne.setDisabled(false);
 			
 			if(cardkill1 == 1)
 			{
