@@ -63,7 +63,7 @@ Java - MySQL Database Connectivity
         Win_Rate FLOAT NOT NULL);
 
     <h2>Note:</h2>
-        -   The game will not run without the jdbc library. So include the library to Portals-and-Timemachines-code folder in the         IDE and run the project as mentioned below.
+        -   The game will not run without the jdbc library. So include the library to Portals-and-Timemachines-code folder in the IDE and run the project as mentioned below.
         -   The game will run without the mysql connection but the users cannot see or check with the scorecard.
         
 Running the Project
@@ -80,6 +80,8 @@ Code files:
 -	Game.java
 -	GameBoard.java
 -	GamePiece.java
+-	DBGameConnect.java
+-	Dice.java
 -	DesktopLauncher.java
 
 <h3>Team - 24 - Members:</h3>    
