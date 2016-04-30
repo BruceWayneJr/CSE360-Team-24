@@ -282,6 +282,7 @@ public class Game extends ApplicationAdapter{
 		Gdx.input.setInputProcessor(gamestage);
         
 		dice = new Dice();
+		gamestage.addActor(dice);
 		
         TextButtonStyle textButtonStyle = new TextButtonStyle();
         textButtonStyle.fontColor =  Color.BLACK;
@@ -302,10 +303,10 @@ public class Game extends ApplicationAdapter{
 
 		
 		Pawn_One = new TextButton("Pawn 1", gameskin);
-		Pawn_One.setPosition(0, 350);
+		Pawn_One.setPosition(0, 450);
 		
 		Pawn_Two = new TextButton("Pawn 2", gameskin);
-		Pawn_Two.setPosition(0, 250);
+		Pawn_Two.setPosition(0, 350);
 		
 		playerOne = new TextButton("Player 1", gameskin);
 		playerOne.setPosition(0, 700);
@@ -338,11 +339,13 @@ public class Game extends ApplicationAdapter{
 		
 		LabelStyle labelStyle = new LabelStyle(bfont, Color.WHITE);
 		label = new Label("WELCOME!", labelStyle);
-		label.setPosition(10, 200);
+		label.setPosition(10, 250);
 		label.setWrap(true);
 		label.setWidth(100);
+//		label.setHeight(250);
 		label.setText("Welcome to portals and time machines!");
 		label.setColor(Color.CYAN);
+		gamestage.addActor(label);
 		
 		diceHasBeenRolled = false;
 		
@@ -827,8 +830,9 @@ public class Game extends ApplicationAdapter{
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		batch.begin();
 		
+		
+		batch.begin();
 		boardSprite.draw(batch);
 		timemachineSprite1.draw(batch);
 		timemachineSprite2.draw(batch);
@@ -850,15 +854,23 @@ public class Game extends ApplicationAdapter{
 		gamePiece1.draw(batch);
 		gamePiece12.draw(batch);
 		gamePiece2.draw(batch);
-		dice.draw(batch);
-		label.draw(batch, 1);
-		cardOneLabel.draw(batch, 1);
-		cardTwoLabel.draw(batch, 1);
+		
+		
+//		cardOneLabel.draw(batch, 1);
+//		cardTwoLabel.draw(batch, 1);
 //		cardThreeLabel.draw(batch, 1);
 //		cardFourLabel.draw(batch, 1);
 //		tutorialImageButton.draw(batch, 1);
-		gamestage.draw();
+		
+		
+		
+		label.draw(batch, 1);
+		dice.draw(batch);
+		
+//		gamestage.draw();
 		batch.end();
+		gamestage.draw();
+		
 		
 //		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
 //			removeTutorialImage();

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
  * 	This class contains the method for handling the dice its display etc.
@@ -15,7 +16,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  *  @version 1.1 April 15,2016
  *
  */
-public class Dice {
+public class Dice extends Actor {
 	private static final int FRAME_COLS = 6;
 	private static final int FRAME_ROWS = 1;
 	Animation rollAnimation;
