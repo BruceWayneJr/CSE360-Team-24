@@ -26,7 +26,7 @@ public class GameTest {
 	public void testgamepiececreation() {
 //		fail("Not yet implemented");
 		Game obj = new Game();
-		assertNull(obj.gamePiece);
+		assertNull(obj.gamePiecePlayer1Pawn1);
 	}
 	
 	/**
@@ -76,7 +76,7 @@ public class GameTest {
 	public void testgamePieceTexture() {
 //		fail("Not yet implemented");
 		Game obj = new Game();
-		assertNull(obj.gamePieceTexture);
+		assertNull(obj.gamePieceTexturePlayer1pawn1);
 	}
 	
 	/**
@@ -107,7 +107,7 @@ public class GameTest {
 	public void testgamePieceTexture11() {
 //		fail("Not yet implemented");
 		Game obj = new Game();
-		assertNull(obj.gamePieceTexture1);
+		assertNull(obj.gamePieceTexturePlayer1pawn2);
 	}
 	
 	
@@ -118,7 +118,7 @@ public class GameTest {
 	public void testgamePieceTexture21() {
 //		fail("Not yet implemented");
 		Game obj = new Game();
-		assertNull(obj.gamePieceTexture21);
+		assertNull(obj.gamePieceTexturePlayer2pawn1);
 	}
 	
 	

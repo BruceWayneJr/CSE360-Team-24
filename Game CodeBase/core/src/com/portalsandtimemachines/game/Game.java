@@ -46,10 +46,10 @@ import javax.swing.*;
 public class Game extends ApplicationAdapter{
 	SpriteBatch batch;
 	Texture boardBackground;
-	Texture gamePieceTexture;
-	Texture gamePieceTexture1;
-	Texture gamePieceTexture21;
-	Texture gamePieceTexture22;
+	Texture gamePieceTexturePlayer1pawn1;
+	Texture gamePieceTexturePlayer1pawn2;
+	Texture gamePieceTexturePlayer2pawn1;
+	Texture gamePieceTexturePlayer2pawn2;
 	Texture portalTexture;
 	Texture timemachineTexture;
 	Texture bountyTexture;
@@ -90,38 +90,32 @@ public class Game extends ApplicationAdapter{
 	private Array<Vector2> boardTransforms;
 	private Array<GamePiece> gamePieces;
 	
-	private int index = 0;
-	private int index2 = 0;
-	private int index1 = 0;
-	private int index12 = 0;
-	private int index3 = 0;
-	private int index31 = 0;
-	private int index4 = 0;
-	private int index41 = 0;
+	private int indexPlayer1Pawn1 = 0;
+	private int indexPlayer1Pawn2 = 0;
+	private int indexPlayer2Pawn1 = 0;
+	private int indexPlayer2Pawn2 = 0;
 	
 //	ShapeRenderer shapeRenderer;
 	
-	GamePiece gamePiece;
-	GamePiece gamePiece1;
-	GamePiece gamePiece2;
-	GamePiece gamePiece12;
+	GamePiece gamePiecePlayer1Pawn1;
+	GamePiece gamePiecePlayer1Pawn2;
+	GamePiece gamePiecePlayer2Pawn1;
+	GamePiece gamePiecePlayer2Pawn2;
 	
-	String playername;
-	String playername1;
-	String playername2;
-	String playername3;
+	String playernamePlayer1;
+	String playernamePlayer2;
 	
 	int noofplayer = 0;
 	
-	int cardkill1 = 1;
-	int cardswap1 = 0;
-	int cardrev1 = 0;
+	int cardkillPlayer1 = 0;
+	int cardswapPlayer1 = 0;
+	int cardrevPlayer1 = 0;
 	
 	
 
-	int cardkill2 = 0;
-	int cardswap2 = 1;
-	int cardrev2 = 0;
+	int cardkillPlayer2 = 0;
+	int cardswapPlayer2 = 0;
+	int cardrevPlayer2 = 0;
 	
 	
 	Stage gamestage; 	
@@ -157,21 +151,21 @@ public class Game extends ApplicationAdapter{
 	ArrayList<String> playerNames = new ArrayList<String>();
 	int temp;
 	
-	static int timeMachine_counter = 0;
-	static int time_machine_flag = 0;
-	static int final_pos = 0;
+	static int timeMachine_counter_Player1Pawn1 = 0;
+	static int timeMachine_flag_Player1Pawn1 = 0;
+	static int final_pos_Player1Pawn1 = 0;
 
-	static int timeMachine_counter1 = 0;
-	static int time_machine_flag1 = 0;
-	static int final_pos1 = 0;
+	static int timeMachine_counter_Player1Pawn2 = 0;
+	static int timeMachine_flag_Player1Pawn2 = 0;
+	static int final_pos_Player1Pawn2 = 0;
 	
-	static int timeMachine_counter2 = 0;
-	static int time_machine_flag2 = 0;
-	static int final_pos2 = 0;
+	static int timeMachine_counter_Player2Pawn1 = 0;
+	static int timeMachine_flag_Player2Pawn1 = 0;
+	static int final_pos_Player2Pawn1 = 0;
 	
-	static int timeMachine_counter12 = 0;
-	static int time_machine_flag12 = 0;
-	static int final_pos12 = 0;
+	static int timeMachine_counter_Player2Pawn2 = 0;
+	static int timeMachine_flag_Player2Pawn2 = 0;
+	static int final_pos_Player2Pawn2 = 0;
 	
 	Label cardOneLabel;
 	Label cardTwoLabel;
@@ -186,18 +180,24 @@ public class Game extends ApplicationAdapter{
 	private boolean turnInProgress;
 	private boolean firstClick;
 	
+
+	/**
+	 * This function for retrieving user selection on whether to play game first or see score first.
+	 * 
+	 * @return choice
+	 */
+	public int showPane() {
+		Object[] options = {"Start Game", "Show Highscores"};
+		int choice = JOptionPane.showOptionDialog(null, "Portals and Time Machines", "Start Menu", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options , options[0]);
+		return choice;
+	}
+	
 	/**
 	 * This function is used for the purpose of drawing the board and
 	 * setting up other board pieces initially.
 	 * 
 	 *  @param none
 	 */
-
-	public int showPane() {
-		Object[] options = {"Start Game", "Show Highscores"};
-		int choice = JOptionPane.showOptionDialog(null, "Portals and Time Machines", "Start Menu", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options , options[0]);
-		return choice;
-	}
 	@SuppressWarnings("unchecked")
 	@Override
 	public void create () {
@@ -215,50 +215,46 @@ public class Game extends ApplicationAdapter{
 			switch (i)
 			{
 				case 1:
-					playername = JOptionPane.showInputDialog("Please enter your usename for user 2 : ");
-					while(playername.isEmpty())
+					playernamePlayer1 = JOptionPane.showInputDialog("Please enter your usename for user 2 : ");
+					while(playernamePlayer1.isEmpty())
 					{
-						playername = JOptionPane.showInputDialog("Please enter your username for user 2 : ");
+						playernamePlayer1 = JOptionPane.showInputDialog("Please enter your username for user 2 : ");
 					}
-					playerNames.add(playername);
-					JOptionPane.showMessageDialog(null, "Hello " + playername + '!' + "\nWelcome to Portals & Time-Machines" );
+					playerNames.add(playernamePlayer1);
+					JOptionPane.showMessageDialog(null, "Hello " + playernamePlayer1 + '!' + "\nWelcome to Portals & Time-Machines" );
 					break;
 				case 2:
-					playername1 = JOptionPane.showInputDialog("Please enter your usename for user 1 : ");
-					while(playername1.isEmpty())
+					playernamePlayer2 = JOptionPane.showInputDialog("Please enter your usename for user 1 : ");
+					while(playernamePlayer2.isEmpty())
 					{
-						playername1 = JOptionPane.showInputDialog("Please enter your username for user 1 : ");
+						playernamePlayer2 = JOptionPane.showInputDialog("Please enter your username for user 1 : ");
 					}
-					playerNames.add(playername1);
-					JOptionPane.showMessageDialog(null, "Hello " + playername1 + '!' + "\nWelcome to Portals & Time-Machines" );
+					playerNames.add(playernamePlayer2);
+					JOptionPane.showMessageDialog(null, "Hello " + playernamePlayer2 + '!' + "\nWelcome to Portals & Time-Machines" );
 					break;
 			}
 			--i;
 		}
 		
-//		dbValues.put("pname",playerNames);
-//		dbValues.put("gWon", false);
-//		dbGame.dbConnect(dbValues);
+		dbValues.put("pname",playerNames);
+		dbValues.put("gWon", false);
+		dbGame.dbConnect(dbValues);
 
-		int flagVal = showPane();
-		int x=0;
-		int y=0;
-		if(flagVal == 0) {
-			x=1;
-			y=0;
+		int flagValue = showPane();
+		int xvalue = 0;
+		int yvalue = 0;
+		if(flagValue == 0) {
+			xvalue = 1;
+			yvalue = 0;
 		}
 		else {
-			x=1;
-			y=1;
+			xvalue = 1;
+			yvalue = 1;
 		}
-		if(y==1){
+		if(yvalue == 1){
 			dbValues.put("fetchFlag", true);
 			dbGame.dbConnect(dbValues);
 		}
-
-//		dbValues.put("pname",playerNames);
-//		dbValues.put("gWon", false);
-//		dbGame.dbConnect(dbValues);
 
 	
 		batch = new SpriteBatch();
@@ -269,10 +265,10 @@ public class Game extends ApplicationAdapter{
 		// Checkered background texture
 		
 		boardBackground = new Texture("10x10_checkered_board.png");
-		gamePieceTexture = new Texture("Green2.png");
-		gamePieceTexture1 = new Texture("Green1.png");
-		gamePieceTexture21 = new Texture("Blue_second.png");
-		gamePieceTexture22 = new Texture("Blue_first.png");
+		gamePieceTexturePlayer1pawn1 = new Texture("Green2.png");
+		gamePieceTexturePlayer1pawn2 = new Texture("Green1.png");
+		gamePieceTexturePlayer2pawn1 = new Texture("Blue_second.png");
+		gamePieceTexturePlayer2pawn2 = new Texture("Blue_first.png");
 		portalTexture = new Texture("brunswick-spiral-black-white.png");
 		timemachineTexture = new Texture("Time-Machine.png");
 		bountyTexture = new Texture("bounty.png");
@@ -281,6 +277,7 @@ public class Game extends ApplicationAdapter{
 		cardImgTwo = new Texture("Drag2.png");
 		cardImgThree = new Texture("reverse.png");
 		cardImgFour = new Texture("swap.png");
+		
 		TextureRegion cOne = new TextureRegion(cardImgOne);
 		TextureRegion cTwo = new TextureRegion(cardImgTwo);
 		TextureRegion cThree = new TextureRegion(cardImgThree);
@@ -323,12 +320,12 @@ public class Game extends ApplicationAdapter{
 		Pawn_Two = new TextButton("Pawn 2", gameskin);
 		Pawn_Two.setPosition(0, 350);
 		
-		playerOne = new TextButton(playername1, gameskin);
+		playerOne = new TextButton(playernamePlayer2, gameskin);
 		playerOne.setPosition(0, 700);
 		playerOne.setColor(Color.CYAN);
 		playerOne.setDisabled(true);
 		
-		playerTwo = new TextButton(playername, gameskin);
+		playerTwo = new TextButton(playernamePlayer1, gameskin);
 		playerTwo.setPosition(0, 600);
 		playerTwo.setColor(Color.GREEN);
 		playerTwo.setDisabled(true);
@@ -373,41 +370,38 @@ public class Game extends ApplicationAdapter{
 			@Override
 			public void changed(ChangeEvent event, Actor actor) 
 			{
-				System.out.println("Click cardOne");
-				if(cardkill1 == 1)
+				if(cardkillPlayer1 == 1)
 				{
-					System.out.println("I am inside 23");
-					if(index < 99)
+					if(indexPlayer1Pawn1 < 99)
 					{
-						index = 0;
-						gamePiece.moveToPosition(boardTransforms.get(index));
+						indexPlayer1Pawn1 = 0;
+						gamePiecePlayer1Pawn1.moveToPosition(boardTransforms.get(indexPlayer1Pawn1));
 					}
 					
-					if(index2 < 99)
+					if(indexPlayer1Pawn2 < 99)
 					{
-						index2 = 0;
+						indexPlayer1Pawn2 = 0;
 						
-						gamePiece2.moveToPosition(boardTransforms.get(index2));
+						gamePiecePlayer2Pawn1.moveToPosition(boardTransforms.get(indexPlayer1Pawn2));
 					}
 					
-					cardkill1 = 0;
+					cardkillPlayer1 = 0;
 				}
-				else if(cardkill2 == 1)
+				else if(cardkillPlayer2 == 1)
 				{
 					
-					System.out.println("I am inside");
-					if(index1 < 99)
+					if(indexPlayer2Pawn1 < 99)
 					{
-						index1 = 0;
-						gamePiece1.moveToPosition(boardTransforms.get(index1));
+						indexPlayer2Pawn1 = 0;
+						gamePiecePlayer1Pawn2.moveToPosition(boardTransforms.get(indexPlayer2Pawn1));
 					}
 					
-					if(index12 < 99)
+					if(indexPlayer2Pawn2 < 99)
 					{
-						index12 = 0;
-						gamePiece12.moveToPosition(boardTransforms.get(index12));
+						indexPlayer2Pawn2 = 0;
+						gamePiecePlayer2Pawn2.moveToPosition(boardTransforms.get(indexPlayer2Pawn2));
 					}
-					cardkill2 = 0;
+					cardkillPlayer2 = 0;
 				}
 				else
 				{
@@ -432,53 +426,53 @@ public class Game extends ApplicationAdapter{
 				System.out.println("Click cardTwo");
 				int temp_move1;
 				int temp_move2;
-				if(cardswap1 == 1)
+				if(cardswapPlayer1 == 1)
 				{
-					if(index1 < 99 && index < 99)
+					if(indexPlayer2Pawn1 < 99 && indexPlayer1Pawn1 < 99)
 					{
-						temp_move1 = index;
-						index = index1;
-						index1 = temp_move1;
-						gamePiece1.setPosition(boardTransforms.get(temp_move1));
-						gamePiece.setPosition(boardTransforms.get(index));
+						temp_move1 = indexPlayer1Pawn1;
+						indexPlayer1Pawn1 = indexPlayer2Pawn1;
+						indexPlayer2Pawn1 = temp_move1;
+						gamePiecePlayer1Pawn2.setPosition(boardTransforms.get(temp_move1));
+						gamePiecePlayer1Pawn1.setPosition(boardTransforms.get(indexPlayer1Pawn1));
 					}
 					
-					if(index2 < 99 && index12 < 99)
+					if(indexPlayer1Pawn2 < 99 && indexPlayer2Pawn2 < 99)
 					{
-						temp_move2 = index2;
-						index2 = index12;
-						index12 = temp_move2;
-						gamePiece12.setPosition(boardTransforms.get(temp_move2));
-						gamePiece2.setPosition(boardTransforms.get(index2));
+						temp_move2 = indexPlayer1Pawn2;
+						indexPlayer1Pawn2 = indexPlayer2Pawn2;
+						indexPlayer2Pawn2 = temp_move2;
+						gamePiecePlayer2Pawn2.setPosition(boardTransforms.get(temp_move2));
+						gamePiecePlayer2Pawn1.setPosition(boardTransforms.get(indexPlayer1Pawn2));
 						
 					}
 					
 					
-					cardswap1 = 0;
+					cardswapPlayer1 = 0;
 				}
-				else if(cardswap2 == 1)
+				else if(cardswapPlayer2 == 1)
 				{
 					
-					if(index1 < 99 && index < 99)
+					if(indexPlayer2Pawn1 < 99 && indexPlayer1Pawn1 < 99)
 					{
-						temp_move1 = index;
-						index = index1;
-						index1 = temp_move1;
-						gamePiece1.setPosition(boardTransforms.get(temp_move1));
-						gamePiece.setPosition(boardTransforms.get(index));
+						temp_move1 = indexPlayer1Pawn1;
+						indexPlayer1Pawn1 = indexPlayer2Pawn1;
+						indexPlayer2Pawn1 = temp_move1;
+						gamePiecePlayer1Pawn2.setPosition(boardTransforms.get(temp_move1));
+						gamePiecePlayer1Pawn1.setPosition(boardTransforms.get(indexPlayer1Pawn1));
 					}
 					
-					if(index2 < 99 && index12 < 99)
+					if(indexPlayer1Pawn2 < 99 && indexPlayer2Pawn2 < 99)
 					{
-						temp_move2 = index2;
-						index2 = index12;
-						index12 = temp_move2;
-						gamePiece12.setPosition(boardTransforms.get(temp_move2));
-						gamePiece2.setPosition(boardTransforms.get(index2));
+						temp_move2 = indexPlayer1Pawn2;
+						indexPlayer1Pawn2 = indexPlayer2Pawn2;
+						indexPlayer2Pawn2 = temp_move2;
+						gamePiecePlayer2Pawn2.setPosition(boardTransforms.get(temp_move2));
+						gamePiecePlayer2Pawn1.setPosition(boardTransforms.get(indexPlayer1Pawn2));
 						
 					}
 						
-					cardswap2 = 0;
+					cardswapPlayer2 = 0;
 				}
 				else
 				{
@@ -694,11 +688,14 @@ public class Game extends ApplicationAdapter{
 		k_index++;
 		
 		
-		gamePiece = new GamePiece(0, gamePieceTexture, boardTransforms.get(0), 0);
-		gamePiece2 = new GamePiece(0, gamePieceTexture1, boardTransforms.get(0), 0);
-		gamePiece1 = new GamePiece(1, gamePieceTexture21, boardTransforms.get(0), -15f);
-		gamePiece12 = new GamePiece(1, gamePieceTexture22, boardTransforms.get(0), -15f);
+		gamePiecePlayer1Pawn1 = new GamePiece(0, gamePieceTexturePlayer1pawn1, boardTransforms.get(0), 0);
+		gamePiecePlayer2Pawn1 = new GamePiece(0, gamePieceTexturePlayer1pawn2, boardTransforms.get(0), 0);
+		gamePiecePlayer1Pawn2 = new GamePiece(1, gamePieceTexturePlayer2pawn1, boardTransforms.get(0), -15f);
+		gamePiecePlayer2Pawn2 = new GamePiece(1, gamePieceTexturePlayer2pawn2, boardTransforms.get(0), -15f);
 		
+		/**
+		 * Listener Function for roll dice button.
+		 */
 		rollDice.addListener(new ChangeListener() 
 		{	
 			public void changed (ChangeEvent event, Actor actor) 
@@ -726,18 +723,18 @@ public class Game extends ApplicationAdapter{
 					++flag;
 					diceHasBeenRolled = true;
 					ArrayList<String> tempArr = new ArrayList<String>();
-					if(index > 98 && index2 > 98) {
-						JOptionPane.showMessageDialog(null,"Congrats " + playername + "! You Won!!");
-						tempArr.add(playername);
+					if(indexPlayer1Pawn1 > 98 && indexPlayer1Pawn2 > 98) {
+						JOptionPane.showMessageDialog(null,"Congrats " + playernamePlayer1 + "! You Won!!");
+						tempArr.add(playernamePlayer1);
 						dbValues.put("pname",tempArr);
 						dbValues.put("gWon", true);
 						dbGame.dbConnect(dbValues);
 						Gdx.app.exit();
 					}
-					else if(index1 > 98 && index12 > 98)
+					else if(indexPlayer2Pawn1 > 98 && indexPlayer2Pawn2 > 98)
 					{
-						JOptionPane.showMessageDialog(null,"Congrats " + playername1 + "! You Won!!");
-						tempArr.add(playername1);
+						JOptionPane.showMessageDialog(null,"Congrats " + playernamePlayer2 + "! You Won!!");
+						tempArr.add(playernamePlayer2);
 						dbValues.put("pname",tempArr);
 						dbValues.put("gWon", true);
 						dbGame.dbConnect(dbValues);
@@ -762,26 +759,33 @@ public class Game extends ApplicationAdapter{
 			}
 		});
 		
+		/**
+		 * Listener function for pawn one button
+		 */
 		Pawn_One.addListener(new ChangeListener()
 		{
 			@Override
 			public void changed(ChangeEvent event, Actor actor) 
 			{
 				System.out.println("Click Pawn_One");
-				if(diceHasBeenRolled && !gamePiece.moving && !gamePiece2.moving && !gamePiece1.moving && !gamePiece12.moving){
+				if(diceHasBeenRolled && !gamePiecePlayer1Pawn1.moving && !gamePiecePlayer2Pawn1.moving && !gamePiecePlayer1Pawn2.moving && !gamePiecePlayer2Pawn2.moving){
 					diceHasBeenRolled = false;
 					moving_piece(temp, 1);
 					label.setText("Play a card or press end turn");
 				}
 			}
 		});
+		
+		/**
+		 * Listener function for pawn two button
+		 */
 		Pawn_Two.addListener(new ChangeListener()
 		{
 			@Override
 			public void changed(ChangeEvent event, Actor actor) 
 			{
 				System.out.println("Click Pawn_Two");
-				if(diceHasBeenRolled && !gamePiece.moving && !gamePiece2.moving && !gamePiece1.moving && !gamePiece12.moving){
+				if(diceHasBeenRolled && !gamePiecePlayer1Pawn1.moving && !gamePiecePlayer2Pawn1.moving && !gamePiecePlayer1Pawn2.moving && !gamePiecePlayer2Pawn2.moving){
 					diceHasBeenRolled = false;
 					moving_piece(temp, 2);
 					label.setText("Play a card or press end turn");
@@ -878,10 +882,10 @@ public class Game extends ApplicationAdapter{
 		bountySprite2.draw(batch);
 		bountySprite3.draw(batch);
 		
-		gamePiece.draw(batch);
-		gamePiece1.draw(batch);
-		gamePiece12.draw(batch);
-		gamePiece2.draw(batch);
+		gamePiecePlayer1Pawn1.draw(batch);
+		gamePiecePlayer1Pawn2.draw(batch);
+		gamePiecePlayer2Pawn2.draw(batch);
+		gamePiecePlayer2Pawn1.draw(batch);
 		
 		label.draw(batch, 1);
 		if(dice.isVisible()){
@@ -891,6 +895,9 @@ public class Game extends ApplicationAdapter{
 		gamestage.draw();
 	}
 	
+	/**
+	 * 
+	 */
 	public void removeTutorialImage()
 	{
 		tutorialImageButton.setVisible(false);
@@ -918,7 +925,7 @@ public class Game extends ApplicationAdapter{
 		if(playersel % 2 == 0)
 		{
 
-			if(cardkill2 == 1)
+			if(cardkillPlayer2 == 1)
 			{
 				cardOne.setVisible(true);
 			}
@@ -927,7 +934,7 @@ public class Game extends ApplicationAdapter{
 				cardOne.setVisible(false);
 			}
 			
-			if(cardswap2 == 1)
+			if(cardswapPlayer2 == 1)
 			{
 				cardTwo.setVisible(true);
 			}
@@ -936,7 +943,7 @@ public class Game extends ApplicationAdapter{
 				cardTwo.setVisible(false);
 			}
 			
-			if(cardrev2 == 1)
+			if(cardrevPlayer2 == 1)
 			{
 				cardThree.setVisible(true);
 			}
@@ -947,95 +954,95 @@ public class Game extends ApplicationAdapter{
 			
 			if(pawnsel % 2 == 0)
 			{
-				if(time_machine_flag == 0)
+				if(timeMachine_flag_Player1Pawn1 == 0)
 				{
-					index = index + value_tomove;
-					if(index > 98)
+					indexPlayer1Pawn1 = indexPlayer1Pawn1 + value_tomove;
+					if(indexPlayer1Pawn1 > 98)
 					{
-						gamePiece.moveToPosition(boardTransforms.get(99));
+						gamePiecePlayer1Pawn1.moveToPosition(boardTransforms.get(99));
 					}
 					else
 					{
-						gamePiece.moveToPosition(boardTransforms.get(index));
+						gamePiecePlayer1Pawn1.moveToPosition(boardTransforms.get(indexPlayer1Pawn1));
 					}
 				}
-				else if( time_machine_flag == 1)
+				else if( timeMachine_flag_Player1Pawn1 == 1)
 				{
 					label.setText("Time machine is still active. Move away from it..!!!!");
-					index = index + value_tomove;
-					if(timeMachine_counter > 0 && index < final_pos )
+					indexPlayer1Pawn1 = indexPlayer1Pawn1 + value_tomove;
+					if(timeMachine_counter_Player1Pawn1 > 0 && indexPlayer1Pawn1 < final_pos_Player1Pawn1 )
 					{
-						timeMachine_counter--;
-						if(timeMachine_counter == 0 && index <final_pos)
+						timeMachine_counter_Player1Pawn1--;
+						if(timeMachine_counter_Player1Pawn1 == 0 && indexPlayer1Pawn1 <final_pos_Player1Pawn1)
 						{
 							label.setText("Oops..!!!, Time is Up. The pawn restarts.");
-							time_machine_flag = 0;
-							index = 0;
-							gamePiece.moveToPosition(boardTransforms.get(index));
+							timeMachine_flag_Player1Pawn1 = 0;
+							indexPlayer1Pawn1 = 0;
+							gamePiecePlayer1Pawn1.moveToPosition(boardTransforms.get(indexPlayer1Pawn1));
 						}
 						else
 						{
-							if(index > 98)
+							if(indexPlayer1Pawn1 > 98)
 							{
-								gamePiece.moveToPosition(boardTransforms.get(99));
+								gamePiecePlayer1Pawn1.moveToPosition(boardTransforms.get(99));
 							}
 							else
 							{
-								gamePiece.moveToPosition(boardTransforms.get(index));
+								gamePiecePlayer1Pawn1.moveToPosition(boardTransforms.get(indexPlayer1Pawn1));
 							}
 						}
 					}
-					else if(timeMachine_counter == 0 && index < final_pos)
+					else if(timeMachine_counter_Player1Pawn1 == 0 && indexPlayer1Pawn1 < final_pos_Player1Pawn1)
 					{
-						time_machine_flag = 0;
-						index = 0;
-						gamePiece.moveToPosition(boardTransforms.get(index));
+						timeMachine_flag_Player1Pawn1 = 0;
+						indexPlayer1Pawn1 = 0;
+						gamePiecePlayer1Pawn1.moveToPosition(boardTransforms.get(indexPlayer1Pawn1));
 					}
-					else if(timeMachine_counter >= 0 && index >= final_pos)
+					else if(timeMachine_counter_Player1Pawn1 >= 0 && indexPlayer1Pawn1 >= final_pos_Player1Pawn1)
 					{
 	
-						time_machine_flag = 0;
-						if(index > 98)
+						timeMachine_flag_Player1Pawn1 = 0;
+						if(indexPlayer1Pawn1 > 98)
 	
-							time_machine_flag = 0;
-						index = index + value_tomove;
-						if(index > 98)
+							timeMachine_flag_Player1Pawn1 = 0;
+						indexPlayer1Pawn1 = indexPlayer1Pawn1 + value_tomove;
+						if(indexPlayer1Pawn1 > 98)
 						{
-							gamePiece.moveToPosition(boardTransforms.get(99));
+							gamePiecePlayer1Pawn1.moveToPosition(boardTransforms.get(99));
 						}
 						else
 						{
-							gamePiece.moveToPosition(boardTransforms.get(index));
+							gamePiecePlayer1Pawn1.moveToPosition(boardTransforms.get(indexPlayer1Pawn1));
 						}
 					}
 				}
 	
-				int ret = obj.check_portal(index);
-				int bounty_ret = obj.check_bounty(index);
+				int ret = obj.check_portal(indexPlayer1Pawn1);
+				int bounty_ret = obj.check_bounty(indexPlayer1Pawn1);
 				if(ret != 0)
 				{
 					label.setText("You stepped on a portal...!!");
 					System.out.println("Portal ");
-					if(index > 98)
+					if(indexPlayer1Pawn1 > 98)
 					{
-						gamePiece.secondaryMove(boardTransforms.get(99));
+						gamePiecePlayer1Pawn1.secondaryMove(boardTransforms.get(99));
 					}
 					else
 					{
-						gamePiece.portalMovement(boardTransforms.get(index), boardTransforms.get(ret));
-						index = ret;
+						gamePiecePlayer1Pawn1.portalMovement(boardTransforms.get(indexPlayer1Pawn1), boardTransforms.get(ret));
+						indexPlayer1Pawn1 = ret;
 						
-						if(obj.check_portal(index) != 0)
+						if(obj.check_portal(indexPlayer1Pawn1) != 0)
 						{
-							index = index + obj.check_portal(index);
+							indexPlayer1Pawn1 = indexPlayer1Pawn1 + obj.check_portal(indexPlayer1Pawn1);
 							System.out.println("Portal ");
-							if(index > 98)
+							if(indexPlayer1Pawn1 > 98)
 							{
-								gamePiece.portalMovement(boardTransforms.get(index), boardTransforms.get(99));
+								gamePiecePlayer1Pawn1.portalMovement(boardTransforms.get(indexPlayer1Pawn1), boardTransforms.get(99));
 							}
 							else
 							{
-								gamePiece.portalMovement(boardTransforms.get(index), boardTransforms.get(ret));
+								gamePiecePlayer1Pawn1.portalMovement(boardTransforms.get(indexPlayer1Pawn1), boardTransforms.get(ret));
 							}
 						}
 					}
@@ -1047,23 +1054,23 @@ public class Game extends ApplicationAdapter{
 					int common = rand.nextInt((2 - 1) + 1) + 1;
 					if(common % 2 == 0)
 					{
-						cardswap2 = 1;
+						cardswapPlayer2 = 1;
 					}
 					else if(common % 2 == 1)
 					{
-						cardkill2 = 1;
+						cardkillPlayer2 = 1;
 					}
 				}
-				if(obj.check_timeMachine(index) != 0)
+				if(obj.check_timeMachine(indexPlayer1Pawn1) != 0)
 				{
 					label.setText("Oops !! You stepped over a time machine. You will have to move 8 sqaures within 2 turns or you will pushed to the beginning..");
-					timeMachine_counter = 2;
-					time_machine_flag = 1;
-					if(index == temporary_TimeMachinePosition[0])
+					timeMachine_counter_Player1Pawn1 = 2;
+					timeMachine_flag_Player1Pawn1 = 1;
+					if(indexPlayer1Pawn1 == temporary_TimeMachinePosition[0])
 					{
 						timemachineSprite1.setColor(1,1,1,1);
 					}
-					else if(index == temporary_TimeMachinePosition[1])
+					else if(indexPlayer1Pawn1 == temporary_TimeMachinePosition[1])
 					{
 						timemachineSprite2.setColor(1,1,1,1);
 					}
@@ -1071,99 +1078,99 @@ public class Game extends ApplicationAdapter{
 					{
 						timemachineSprite3.setColor(1,1,1,1);
 					}
-					final_pos = obj.check_timeMachine(index);
+					final_pos_Player1Pawn1 = obj.check_timeMachine(indexPlayer1Pawn1);
 				}
 			}
 			else
 			{
-				if(time_machine_flag2 == 0)
+				if(timeMachine_flag_Player2Pawn1 == 0)
 				{
-					index2 = index2 + value_tomove;
-					if(index2 > 98)
+					indexPlayer1Pawn2 = indexPlayer1Pawn2 + value_tomove;
+					if(indexPlayer1Pawn2 > 98)
 					{
-						gamePiece2.moveToPosition(boardTransforms.get(99));
+						gamePiecePlayer2Pawn1.moveToPosition(boardTransforms.get(99));
 					}
 					else
 					{
-						gamePiece2.moveToPosition(boardTransforms.get(index2));
+						gamePiecePlayer2Pawn1.moveToPosition(boardTransforms.get(indexPlayer1Pawn2));
 					}
 				}
-				else if( time_machine_flag2 == 1)
+				else if( timeMachine_flag_Player2Pawn1 == 1)
 				{
 					label.setText("Time machine is still active. Move away from it..!!!!");
-					index2 = index2 + value_tomove;
-					if(timeMachine_counter2 > 0 && index2 < final_pos2 )
+					indexPlayer1Pawn2 = indexPlayer1Pawn2 + value_tomove;
+					if(timeMachine_counter_Player2Pawn1 > 0 && indexPlayer1Pawn2 < final_pos_Player2Pawn1 )
 					{
-						timeMachine_counter2--;
-						if(timeMachine_counter2 == 0 && index2 <final_pos2)
+						timeMachine_counter_Player2Pawn1--;
+						if(timeMachine_counter_Player2Pawn1 == 0 && indexPlayer1Pawn2 <final_pos_Player2Pawn1)
 						{
 							label.setText("Oops..!!!, Time is Up. The pawn restarts.");
-							time_machine_flag2 = 0;
-							index2 = 0;
-							gamePiece2.moveToPosition(boardTransforms.get(index2));
+							timeMachine_flag_Player2Pawn1 = 0;
+							indexPlayer1Pawn2 = 0;
+							gamePiecePlayer2Pawn1.moveToPosition(boardTransforms.get(indexPlayer1Pawn2));
 						}
 						else
 						{
-							if(index2 > 98)
+							if(indexPlayer1Pawn2 > 98)
 							{
-								gamePiece2.moveToPosition(boardTransforms.get(99));
+								gamePiecePlayer2Pawn1.moveToPosition(boardTransforms.get(99));
 							}
 							else
 							{
-								gamePiece2.moveToPosition(boardTransforms.get(index2));
+								gamePiecePlayer2Pawn1.moveToPosition(boardTransforms.get(indexPlayer1Pawn2));
 							}
 						}
 					}
-					else if(timeMachine_counter2 == 0 && index2 < final_pos2)
+					else if(timeMachine_counter_Player2Pawn1 == 0 && indexPlayer1Pawn2 < final_pos_Player2Pawn1)
 					{
-						time_machine_flag2 = 0;
-						index2 = 0;
-						gamePiece2.moveToPosition(boardTransforms.get(index2));
+						timeMachine_flag_Player2Pawn1 = 0;
+						indexPlayer1Pawn2 = 0;
+						gamePiecePlayer2Pawn1.moveToPosition(boardTransforms.get(indexPlayer1Pawn2));
 					}
-					else if(timeMachine_counter2 >= 0 && index2 >= final_pos2)
+					else if(timeMachine_counter_Player2Pawn1 >= 0 && indexPlayer1Pawn2 >= final_pos_Player2Pawn1)
 					{
 	
-						time_machine_flag2 = 0;
-						if(index2 > 98)
-							time_machine_flag2 = 0;
-						index2 = index2 + value_tomove;
-						if(index2 > 98)
+						timeMachine_flag_Player2Pawn1 = 0;
+						if(indexPlayer1Pawn2 > 98)
+							timeMachine_flag_Player2Pawn1 = 0;
+						indexPlayer1Pawn2 = indexPlayer1Pawn2 + value_tomove;
+						if(indexPlayer1Pawn2 > 98)
 						{
-							gamePiece2.moveToPosition(boardTransforms.get(99));
+							gamePiecePlayer2Pawn1.moveToPosition(boardTransforms.get(99));
 						}
 						else
 						{
-							gamePiece2.moveToPosition(boardTransforms.get(index2));
+							gamePiecePlayer2Pawn1.moveToPosition(boardTransforms.get(indexPlayer1Pawn2));
 						}
 					}
 				}
 	
-				int ret = obj.check_portal(index2);
-				int bounty_ret = obj.check_bounty(index2);
+				int ret = obj.check_portal(indexPlayer1Pawn2);
+				int bounty_ret = obj.check_bounty(indexPlayer1Pawn2);
 				if(ret != 0)
 				{
 					label.setText("You stepped on a portal...!!");
 					System.out.println("Portal ");
-					if(index2 > 98)
+					if(indexPlayer1Pawn2 > 98)
 					{
-						gamePiece2.secondaryMove(boardTransforms.get(99));
+						gamePiecePlayer2Pawn1.secondaryMove(boardTransforms.get(99));
 					}
 					else
 					{
-						gamePiece2.portalMovement(boardTransforms.get(index2), boardTransforms.get(ret));
-						index2 = ret;
+						gamePiecePlayer2Pawn1.portalMovement(boardTransforms.get(indexPlayer1Pawn2), boardTransforms.get(ret));
+						indexPlayer1Pawn2 = ret;
 
-						if(obj.check_portal(index2) != 0)
+						if(obj.check_portal(indexPlayer1Pawn2) != 0)
 						{
-							index2 = index2 + obj.check_portal(index2);
+							indexPlayer1Pawn2 = indexPlayer1Pawn2 + obj.check_portal(indexPlayer1Pawn2);
 							System.out.println("Portal ");
-							if(index2 > 98)
+							if(indexPlayer1Pawn2 > 98)
 							{
-								gamePiece2.portalMovement(boardTransforms.get(index2), boardTransforms.get(99));
+								gamePiecePlayer2Pawn1.portalMovement(boardTransforms.get(indexPlayer1Pawn2), boardTransforms.get(99));
 							}
 							else
 							{
-								gamePiece2.portalMovement(boardTransforms.get(index2), boardTransforms.get(ret));
+								gamePiecePlayer2Pawn1.portalMovement(boardTransforms.get(indexPlayer1Pawn2), boardTransforms.get(ret));
 							}
 						}
 					}
@@ -1175,24 +1182,24 @@ public class Game extends ApplicationAdapter{
 					int common = rand.nextInt((2 - 1) + 1) + 1;
 					if(common % 2 == 0)
 					{
-						cardswap2 = 1;
+						cardswapPlayer2 = 1;
 					}
 					else if(common % 2 == 1)
 					{
-						cardkill2 = 1;
+						cardkillPlayer2 = 1;
 					}
 
 				}
-				if(obj.check_timeMachine(index2) != 0)
+				if(obj.check_timeMachine(indexPlayer1Pawn2) != 0)
 				{
 					label.setText("Oops !! You stepped over a time machine. You will have to move 8 sqaures within 2 turns or you will pushed to the beginning..");
-					timeMachine_counter2 = 2;
-					time_machine_flag2 = 1;
-					if(index2 == temporary_TimeMachinePosition[0])
+					timeMachine_counter_Player2Pawn1 = 2;
+					timeMachine_flag_Player2Pawn1 = 1;
+					if(indexPlayer1Pawn2 == temporary_TimeMachinePosition[0])
 					{
 						timemachineSprite1.setColor(1,1,1,1);
 					}
-					else if(index2 == temporary_TimeMachinePosition[1])
+					else if(indexPlayer1Pawn2 == temporary_TimeMachinePosition[1])
 					{
 						timemachineSprite2.setColor(1,1,1,1);
 					}
@@ -1200,14 +1207,14 @@ public class Game extends ApplicationAdapter{
 					{
 						timemachineSprite3.setColor(1,1,1,1);
 					}
-					final_pos2 = obj.check_timeMachine(index2);
+					final_pos_Player2Pawn1 = obj.check_timeMachine(indexPlayer1Pawn2);
 				}
 				
 			}
 		}
 		else
 		{
-			if(cardkill1 == 1)
+			if(cardkillPlayer1 == 1)
 			{
 				cardOne.setVisible(true);
 			}
@@ -1216,7 +1223,7 @@ public class Game extends ApplicationAdapter{
 				cardOne.setVisible(false);
 			}
 			
-			if(cardswap1 == 1)
+			if(cardswapPlayer1 == 1)
 			{
 				cardTwo.setVisible(true);
 			}
@@ -1225,7 +1232,7 @@ public class Game extends ApplicationAdapter{
 				cardTwo.setVisible(false);
 			}
 			
-			if(cardrev1 == 1)
+			if(cardrevPlayer1 == 1)
 			{
 				cardThree.setVisible(true);
 			}
@@ -1236,92 +1243,92 @@ public class Game extends ApplicationAdapter{
 			
 			if(pawnsel1 % 2 == 0)
 			{
-				if(time_machine_flag1 == 0)
+				if(timeMachine_flag_Player1Pawn2 == 0)
 				{
-					index1 = index1 + value_tomove;
-					if(index1 > 98)
+					indexPlayer2Pawn1 = indexPlayer2Pawn1 + value_tomove;
+					if(indexPlayer2Pawn1 > 98)
 					{
-						gamePiece1.moveToPosition(boardTransforms.get(99));
+						gamePiecePlayer1Pawn2.moveToPosition(boardTransforms.get(99));
 					}
 					else
 					{
-						gamePiece1.moveToPosition(boardTransforms.get(index1));
+						gamePiecePlayer1Pawn2.moveToPosition(boardTransforms.get(indexPlayer2Pawn1));
 					}
 				}
-				else if( time_machine_flag1 == 1)
+				else if( timeMachine_flag_Player1Pawn2 == 1)
 				{
 					label.setText("Time machine is still active. Move away from it..!!!!");
-					index1 = index1 + value_tomove;
-					if(timeMachine_counter1 > 0 && index1 < final_pos1 )
+					indexPlayer2Pawn1 = indexPlayer2Pawn1 + value_tomove;
+					if(timeMachine_counter_Player1Pawn2 > 0 && indexPlayer2Pawn1 < final_pos_Player1Pawn2 )
 					{
-						timeMachine_counter1--;
-						if(timeMachine_counter1 == 0 && index1 <final_pos1)
+						timeMachine_counter_Player1Pawn2--;
+						if(timeMachine_counter_Player1Pawn2 == 0 && indexPlayer2Pawn1 <final_pos_Player1Pawn2)
 						{
 							label.setText("Oops..!!!, Time is Up. The pawn restarts.");
-							time_machine_flag1 = 0;
-							index1 = 0;
-							gamePiece1.moveToPosition(boardTransforms.get(index1));
+							timeMachine_flag_Player1Pawn2 = 0;
+							indexPlayer2Pawn1 = 0;
+							gamePiecePlayer1Pawn2.moveToPosition(boardTransforms.get(indexPlayer2Pawn1));
 						}
 						else
 						{
-							if(index1 > 98)
+							if(indexPlayer2Pawn1 > 98)
 							{
-								gamePiece1.moveToPosition(boardTransforms.get(99));
+								gamePiecePlayer1Pawn2.moveToPosition(boardTransforms.get(99));
 							}
 							else
 							{
-								gamePiece1.moveToPosition(boardTransforms.get(index1));
+								gamePiecePlayer1Pawn2.moveToPosition(boardTransforms.get(indexPlayer2Pawn1));
 							}
 						}
 					}
-					else if(timeMachine_counter1 == 0 && index1 < final_pos1)
+					else if(timeMachine_counter_Player1Pawn2 == 0 && indexPlayer2Pawn1 < final_pos_Player1Pawn2)
 					{
-						time_machine_flag1 = 0;
-						index1 = 0;
-						gamePiece1.moveToPosition(boardTransforms.get(index1));
+						timeMachine_flag_Player1Pawn2 = 0;
+						indexPlayer2Pawn1 = 0;
+						gamePiecePlayer1Pawn2.moveToPosition(boardTransforms.get(indexPlayer2Pawn1));
 					}
-					else if(timeMachine_counter1 >= 0 && index1 >= final_pos1)
+					else if(timeMachine_counter_Player1Pawn2 >= 0 && indexPlayer2Pawn1 >= final_pos_Player1Pawn2)
 					{
 	
-						time_machine_flag1 = 0;
-						if(index1 > 98)
+						timeMachine_flag_Player1Pawn2 = 0;
+						if(indexPlayer2Pawn1 > 98)
 	
-							time_machine_flag1 = 0;
-						index1 = index1 + value_tomove;
-						if(index1 > 98)
+							timeMachine_flag_Player1Pawn2 = 0;
+						indexPlayer2Pawn1 = indexPlayer2Pawn1 + value_tomove;
+						if(indexPlayer2Pawn1 > 98)
 						{
-							gamePiece1.moveToPosition(boardTransforms.get(99));
+							gamePiecePlayer1Pawn2.moveToPosition(boardTransforms.get(99));
 						}
 						else
 						{
-							gamePiece1.moveToPosition(boardTransforms.get(index1));
+							gamePiecePlayer1Pawn2.moveToPosition(boardTransforms.get(indexPlayer2Pawn1));
 						}
 					}
 				}
-				int bounty_ret = obj.check_bounty(index);
-				int ret = obj.check_portal(index1);
+				int bounty_ret = obj.check_bounty(indexPlayer1Pawn1);
+				int ret = obj.check_portal(indexPlayer2Pawn1);
 				if(ret != 0)
 				{
 					label.setText("You stepped on a portal...!!");
-					if(index1 > 98)
+					if(indexPlayer2Pawn1 > 98)
 					{
-						gamePiece1.secondaryMove(boardTransforms.get(99));
+						gamePiecePlayer1Pawn2.secondaryMove(boardTransforms.get(99));
 					}
 					else
 					{
-						gamePiece1.portalMovement(boardTransforms.get(index1), boardTransforms.get(ret));
-						index1 = ret;
+						gamePiecePlayer1Pawn2.portalMovement(boardTransforms.get(indexPlayer2Pawn1), boardTransforms.get(ret));
+						indexPlayer2Pawn1 = ret;
 						
-						if(obj.check_portal(index1) != 0)
+						if(obj.check_portal(indexPlayer2Pawn1) != 0)
 						{
-							index1 = index1 + obj.check_portal(index1);
-							if(index1 > 98)
+							indexPlayer2Pawn1 = indexPlayer2Pawn1 + obj.check_portal(indexPlayer2Pawn1);
+							if(indexPlayer2Pawn1 > 98)
 							{
-								gamePiece1.portalMovement(boardTransforms.get(index1), boardTransforms.get(99));
+								gamePiecePlayer1Pawn2.portalMovement(boardTransforms.get(indexPlayer2Pawn1), boardTransforms.get(99));
 							}
 							else
 							{
-								gamePiece1.portalMovement(boardTransforms.get(index1), boardTransforms.get(ret));
+								gamePiecePlayer1Pawn2.portalMovement(boardTransforms.get(indexPlayer2Pawn1), boardTransforms.get(ret));
 							}
 						}
 					}
@@ -1333,23 +1340,23 @@ public class Game extends ApplicationAdapter{
 					int common = rand.nextInt((2 - 1) + 1) + 1;
 					if(common % 2 == 0)
 					{
-						cardswap1 = 1;
+						cardswapPlayer1 = 1;
 					}
 					else if(common % 2 == 1)
 					{
-						cardkill1 = 1;
+						cardkillPlayer1 = 1;
 					}
 				}
-				if(obj.check_timeMachine(index1) != 0)
+				if(obj.check_timeMachine(indexPlayer2Pawn1) != 0)
 				{
 					label.setText("Oops !! You stepped over a time machine. You will have to move 8 sqaures within 2 turns or you will pushed to the beginning..");
-					timeMachine_counter1 = 2;
-					time_machine_flag1 = 1;
-					if(index1 == temporary_TimeMachinePosition[0])
+					timeMachine_counter_Player1Pawn2 = 2;
+					timeMachine_flag_Player1Pawn2 = 1;
+					if(indexPlayer2Pawn1 == temporary_TimeMachinePosition[0])
 					{
 						timemachineSprite1.setColor(1,1,1,1);
 					}
-					else if(index1 == temporary_TimeMachinePosition[1])
+					else if(indexPlayer2Pawn1 == temporary_TimeMachinePosition[1])
 					{
 						timemachineSprite2.setColor(1,1,1,1);
 					}
@@ -1357,100 +1364,100 @@ public class Game extends ApplicationAdapter{
 					{
 						timemachineSprite3.setColor(1,1,1,1);
 					}
-					final_pos1 = obj.check_timeMachine(index1);
+					final_pos_Player1Pawn2 = obj.check_timeMachine(indexPlayer2Pawn1);
 				}
 			}
 			else
 			{
-				if(time_machine_flag12 == 0)
+				if(timeMachine_flag_Player2Pawn2 == 0)
 				{
-					index12 = index12 + value_tomove;
-					if(index12 > 98)
+					indexPlayer2Pawn2 = indexPlayer2Pawn2 + value_tomove;
+					if(indexPlayer2Pawn2 > 98)
 					{
-						gamePiece12.moveToPosition(boardTransforms.get(99));
+						gamePiecePlayer2Pawn2.moveToPosition(boardTransforms.get(99));
 					}
 					else
 					{
-						gamePiece12.moveToPosition(boardTransforms.get(index12));
+						gamePiecePlayer2Pawn2.moveToPosition(boardTransforms.get(indexPlayer2Pawn2));
 					}
 				}
-				else if( time_machine_flag12 == 1)
+				else if( timeMachine_flag_Player2Pawn2 == 1)
 				{
 					label.setText("Time machine is still active. Move away from it..!!!!");
-					index12 = index12 + value_tomove;
-					if(timeMachine_counter12 > 0 && index12 < final_pos12 )
+					indexPlayer2Pawn2 = indexPlayer2Pawn2 + value_tomove;
+					if(timeMachine_counter_Player2Pawn2 > 0 && indexPlayer2Pawn2 < final_pos_Player2Pawn2 )
 					{
-						timeMachine_counter12--;
-						if(timeMachine_counter12 == 0 && index12 <final_pos12)
+						timeMachine_counter_Player2Pawn2--;
+						if(timeMachine_counter_Player2Pawn2 == 0 && indexPlayer2Pawn2 <final_pos_Player2Pawn2)
 						{
 							label.setText("Oops..!!!, Time is Up. The pawn restarts.");
-							time_machine_flag12 = 0;
-							index12 = 0;
-							gamePiece12.moveToPosition(boardTransforms.get(index12));
+							timeMachine_flag_Player2Pawn2 = 0;
+							indexPlayer2Pawn2 = 0;
+							gamePiecePlayer2Pawn2.moveToPosition(boardTransforms.get(indexPlayer2Pawn2));
 						}
 						else
 						{
-							if(index12 > 98)
+							if(indexPlayer2Pawn2 > 98)
 							{
-								gamePiece12.moveToPosition(boardTransforms.get(99));
+								gamePiecePlayer2Pawn2.moveToPosition(boardTransforms.get(99));
 							}
 							else
 							{
-								gamePiece12.moveToPosition(boardTransforms.get(index12));
+								gamePiecePlayer2Pawn2.moveToPosition(boardTransforms.get(indexPlayer2Pawn2));
 							}
 						}
 					}
-					else if(timeMachine_counter12 == 0 && index12 < final_pos12)
+					else if(timeMachine_counter_Player2Pawn2 == 0 && indexPlayer2Pawn2 < final_pos_Player2Pawn2)
 					{
-						time_machine_flag12 = 0;
-						index12 = 0;
-						gamePiece12.moveToPosition(boardTransforms.get(index12));
+						timeMachine_flag_Player2Pawn2 = 0;
+						indexPlayer2Pawn2 = 0;
+						gamePiecePlayer2Pawn2.moveToPosition(boardTransforms.get(indexPlayer2Pawn2));
 					}
-					else if(timeMachine_counter12 >= 0 && index12 >= final_pos12)
+					else if(timeMachine_counter_Player2Pawn2 >= 0 && indexPlayer2Pawn2 >= final_pos_Player2Pawn2)
 					{
 	
-						time_machine_flag12 = 0;
-						if(index12 > 98)
+						timeMachine_flag_Player2Pawn2 = 0;
+						if(indexPlayer2Pawn2 > 98)
 	
-							time_machine_flag12 = 0;
-						index1 = index12 + value_tomove;
-						if(index12 > 98)
+							timeMachine_flag_Player2Pawn2 = 0;
+						indexPlayer2Pawn1 = indexPlayer2Pawn2 + value_tomove;
+						if(indexPlayer2Pawn2 > 98)
 						{
-							gamePiece12.moveToPosition(boardTransforms.get(99));
+							gamePiecePlayer2Pawn2.moveToPosition(boardTransforms.get(99));
 						}
 						else
 						{
-							gamePiece12.moveToPosition(boardTransforms.get(index12));
+							gamePiecePlayer2Pawn2.moveToPosition(boardTransforms.get(indexPlayer2Pawn2));
 						}
 					}
 				}
-				int bounty_ret = obj.check_bounty(index12);
-				int ret = obj.check_portal(index12);
+				int bounty_ret = obj.check_bounty(indexPlayer2Pawn2);
+				int ret = obj.check_portal(indexPlayer2Pawn2);
 				if(ret != 0)
 				{
 					label.setText("You stepped on a portal...!!");
 
 					System.out.println("Portal ");
-					if(index12 > 98)
+					if(indexPlayer2Pawn2 > 98)
 					{
-						gamePiece12.secondaryMove(boardTransforms.get(99));
+						gamePiecePlayer2Pawn2.secondaryMove(boardTransforms.get(99));
 					}
 					else
 					{
-						gamePiece12.portalMovement(boardTransforms.get(index12), boardTransforms.get(ret));
-						index12 = ret;
+						gamePiecePlayer2Pawn2.portalMovement(boardTransforms.get(indexPlayer2Pawn2), boardTransforms.get(ret));
+						indexPlayer2Pawn2 = ret;
 						
-						if(obj.check_portal(index12) != 0)
+						if(obj.check_portal(indexPlayer2Pawn2) != 0)
 						{
-							index12 = index12 + obj.check_portal(index12);
+							indexPlayer2Pawn2 = indexPlayer2Pawn2 + obj.check_portal(indexPlayer2Pawn2);
 							System.out.println("Portal ");
-							if(index1 > 98)
+							if(indexPlayer2Pawn1 > 98)
 							{
-								gamePiece12.portalMovement(boardTransforms.get(index12), boardTransforms.get(99));
+								gamePiecePlayer2Pawn2.portalMovement(boardTransforms.get(indexPlayer2Pawn2), boardTransforms.get(99));
 							}
 							else
 							{
-								gamePiece12.portalMovement(boardTransforms.get(index12), boardTransforms.get(ret));
+								gamePiecePlayer2Pawn2.portalMovement(boardTransforms.get(indexPlayer2Pawn2), boardTransforms.get(ret));
 							}
 						}
 					}
@@ -1462,23 +1469,23 @@ public class Game extends ApplicationAdapter{
 					int common = rand.nextInt((2 - 1) + 1) + 1;
 					if(common % 2 == 0)
 					{
-						cardswap1 = 1;
+						cardswapPlayer1 = 1;
 					}
 					else if(common % 2 == 1)
 					{
-						cardkill1 = 1;
+						cardkillPlayer1 = 1;
 					}
 				}
-				if(obj.check_timeMachine(index12) != 0)
+				if(obj.check_timeMachine(indexPlayer2Pawn2) != 0)
 				{
 					label.setText("Oops !! You stepped over a time machine. You will have to move 8 sqaures within 2 turns or you will pushed to the beginning..");
-					timeMachine_counter12 = 2;
-					time_machine_flag12 = 1;
-					if(index12 == temporary_TimeMachinePosition[0])
+					timeMachine_counter_Player2Pawn2 = 2;
+					timeMachine_flag_Player2Pawn2 = 1;
+					if(indexPlayer2Pawn2 == temporary_TimeMachinePosition[0])
 					{
 						timemachineSprite1.setColor(1,1,1,1);
 					}
-					else if(index12 == temporary_TimeMachinePosition[1])
+					else if(indexPlayer2Pawn2 == temporary_TimeMachinePosition[1])
 					{
 						timemachineSprite2.setColor(1,1,1,1);
 					}
@@ -1486,7 +1493,7 @@ public class Game extends ApplicationAdapter{
 					{
 						timemachineSprite3.setColor(1,1,1,1);
 					}
-					final_pos12 = obj.check_timeMachine(index12);
+					final_pos_Player2Pawn2 = obj.check_timeMachine(indexPlayer2Pawn2);
 				}
 				
 			}
