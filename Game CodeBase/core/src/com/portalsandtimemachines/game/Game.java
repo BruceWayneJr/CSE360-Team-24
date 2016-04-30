@@ -81,6 +81,7 @@ public class Game extends ApplicationAdapter{
 	private Dice dice;
 	
 //	DB Connect
+	@SuppressWarnings("rawtypes")
 	HashMap dbValues = new HashMap();
 	DBGameConnect dbGame;
 
@@ -192,20 +193,20 @@ public class Game extends ApplicationAdapter{
 	 * 
 	 *  @param none
 	 */
+
+	public int showPane() {
+		Object[] options = {"Start Game", "Show Highscores"};
+		int choice = JOptionPane.showOptionDialog(null, "Portals and Time Machines", "Start Menu", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options , options[0]);
+		return choice;
+	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public void create () {
 		turnInProgress = true;
 		firstClick = true;
 		Object[] options = {"Start Game", "Show Highscores"};
+
 		dbGame = new DBGameConnect();
-		int choice = JOptionPane.showOptionDialog(null, "Portals and Time Machines", "Start Menu", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options , options[0]);
-		
-		if(choice != 0){
-			// Start Game
-			dbValues.put("fetchFlag", true);
-			dbGame.dbConnect(dbValues);
-		}
-		
 		int i = 2;
 		
 		JOptionPane.showMessageDialog(null, "Enter the name of both the players" );
@@ -235,10 +236,25 @@ public class Game extends ApplicationAdapter{
 			}
 			--i;
 		}
-		
+		int flagVal = showPane();
+		int x=0;
+		int y=0;
+		if(flagVal == 0) {
+			x=1;
+			y=0;
+		}
+		else {
+			x=1;
+			y=1;
+		}
+		if(y==1){
+			dbValues.put("fetchFlag", true);
+			dbGame.dbConnect(dbValues);
+		}
+
 		dbValues.put("pname",playerNames);
 		dbValues.put("gWon", false);
-//		dbGame.dbConnect(dbValues);
+		dbGame.dbConnect(dbValues);
 
 	
 		batch = new SpriteBatch();
