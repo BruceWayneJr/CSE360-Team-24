@@ -236,6 +236,11 @@ public class Game extends ApplicationAdapter{
 			}
 			--i;
 		}
+		
+//		dbValues.put("pname",playerNames);
+//		dbValues.put("gWon", false);
+//		dbGame.dbConnect(dbValues);
+
 		int flagVal = showPane();
 		int x=0;
 		int y=0;
