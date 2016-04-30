@@ -113,14 +113,14 @@ public class Game extends ApplicationAdapter{
 	
 	int noofplayer = 0;
 	
-	int cardkill1 = 0;
+	int cardkill1 = 1;
 	int cardswap1 = 0;
 	int cardrev1 = 0;
 	
 	
 
 	int cardkill2 = 0;
-	int cardswap2 = 0;
+	int cardswap2 = 1;
 	int cardrev2 = 0;
 	
 	
@@ -173,6 +173,16 @@ public class Game extends ApplicationAdapter{
 	static int time_machine_flag12 = 0;
 	static int final_pos12 = 0;
 	
+	Label cardOneLabel;
+	Label cardTwoLabel;
+	Label cardThreeLabel;
+	Label cardFourLabel;
+	
+	Texture tutorialImage;
+	TextureRegion tutorialImageRegion;
+	ImageButtonStyle tutorialImageStyle;
+	ImageButton tutorialImageButton;
+	
 	private boolean gameStart;
 	private boolean showWindow;
 	/**
@@ -192,7 +202,6 @@ public class Game extends ApplicationAdapter{
 			dbValues.put("fetchFlag", true);
 			dbGame.dbConnect(dbValues);
 		}
-		
 		
 		int i = 2;
 		
@@ -227,6 +236,7 @@ public class Game extends ApplicationAdapter{
 		dbValues.put("pname",playerNames);
 		dbValues.put("gWon", false);
 		dbGame.dbConnect(dbValues);
+
 	
 		batch = new SpriteBatch();
 		gamestage = new Stage();
@@ -234,10 +244,10 @@ public class Game extends ApplicationAdapter{
 		gameskinp = new Skin();
 		// Checkered background texture
 		boardBackground = new Texture("10x10_checkered_board.png");
-		gamePieceTexture = new Texture("P1.png");
-		gamePieceTexture1 = new Texture("P2.png");
-		gamePieceTexture21 = new Texture("P3.png");
-		gamePieceTexture22 = new Texture("P4.png");
+		gamePieceTexture = new Texture("Green2.png");
+		gamePieceTexture1 = new Texture("Green1.png");
+		gamePieceTexture21 = new Texture("Blue_second.png");
+		gamePieceTexture22 = new Texture("Blue_first.png");
 		portalTexture = new Texture("brunswick-spiral-black-white.png");
 		timemachineTexture = new Texture("Time-Machine.png");
 		bountyTexture = new Texture("bounty.png");
@@ -263,6 +273,7 @@ public class Game extends ApplicationAdapter{
 		Gdx.input.setInputProcessor(gamestage);
         
 		dice = new Dice();
+		gamestage.addActor(dice);
 		
         TextButtonStyle textButtonStyle = new TextButtonStyle();
         textButtonStyle.fontColor =  Color.BLACK;
@@ -283,10 +294,10 @@ public class Game extends ApplicationAdapter{
 
 		
 		Pawn_One = new TextButton("Pawn 1", gameskin);
-		Pawn_One.setPosition(0, 350);
+		Pawn_One.setPosition(0, 450);
 		
 		Pawn_Two = new TextButton("Pawn 2", gameskin);
-		Pawn_Two.setPosition(0, 250);
+		Pawn_Two.setPosition(0, 350);
 		
 		playerOne = new TextButton("Player 1", gameskin);
 		playerOne.setPosition(0, 700);
@@ -319,11 +330,13 @@ public class Game extends ApplicationAdapter{
 		
 		LabelStyle labelStyle = new LabelStyle(bfont, Color.WHITE);
 		label = new Label("WELCOME!", labelStyle);
-		label.setPosition(10, 200);
+		label.setPosition(10, 250);
 		label.setWrap(true);
 		label.setWidth(100);
+//		label.setHeight(250);
 		label.setText("Welcome to portals and time machines!");
 		label.setColor(Color.CYAN);
+		gamestage.addActor(label);
 		
 		diceHasBeenRolled = false;
 		
@@ -339,18 +352,37 @@ public class Game extends ApplicationAdapter{
 				// TODO Put stuff here
 				if(cardkill1 == 1)
 				{
-					index1 = 0;
-					index12 = 0;
-					gamePiece1.moveToPosition(boardTransforms.get(index1));
-					gamePiece12.moveToPosition(boardTransforms.get(index12));
+					System.out.println("I am inside 23");
+					if(index < 99)
+					{
+						index = 0;
+						gamePiece.moveToPosition(boardTransforms.get(index));
+					}
+					
+					if(index2 < 99)
+					{
+						index2 = 0;
+						
+						gamePiece2.moveToPosition(boardTransforms.get(index2));
+					}
+					
 					cardkill1 = 0;
 				}
 				else if(cardkill2 == 1)
 				{
-					index = 0;
-					index2 = 0;
-					gamePiece.moveToPosition(boardTransforms.get(index));
-					gamePiece2.moveToPosition(boardTransforms.get(index2));
+					
+					System.out.println("I am inside");
+					if(index1 < 99)
+					{
+						index1 = 0;
+						gamePiece1.moveToPosition(boardTransforms.get(index1));
+					}
+					
+					if(index12 < 99)
+					{
+						index12 = 0;
+						gamePiece12.moveToPosition(boardTransforms.get(index12));
+					}
 					cardkill2 = 0;
 				}
 				else
@@ -379,60 +411,50 @@ public class Game extends ApplicationAdapter{
 				// TODO Put stuff here
 				if(cardswap1 == 1)
 				{
-//					temp_move1 = index;
-//					temp_move2 = index2;
-//					gamePiece1.moveToPosition(boardTransforms.get(temp_move1));
-//					gamePiece12.moveToPosition(boardTransforms.get(temp_move2));
-					index1 = index;
-					index12 = index2;
-					gamePiece.moveToPosition(boardTransforms.get(index));
-//					gamePiece.setPosition(boardTransforms.get(index));
-					gamePiece2.moveToPosition(boardTransforms.get(index2));
-//					gamePiece2.setPosition(boardTransforms.get(index2));
-//					index1 = temp_move1; 
-//					index12 = temp_move2;
+					if(index1 < 99 && index < 99)
+					{
+						temp_move1 = index;
+						index = index1;
+						index1 = temp_move1;
+						gamePiece1.setPosition(boardTransforms.get(temp_move1));
+						gamePiece.setPosition(boardTransforms.get(index));
+					}
+					
+					if(index2 < 99 && index12 < 99)
+					{
+						temp_move2 = index2;
+						index2 = index12;
+						index12 = temp_move2;
+						gamePiece12.setPosition(boardTransforms.get(temp_move2));
+						gamePiece2.setPosition(boardTransforms.get(index2));
+						
+					}
+					
+					
 					cardswap1 = 0;
 				}
 				else if(cardswap2 == 1)
 				{
-					System.out.println("index " + index);
-					System.out.println("bT[index]: " + boardTransforms.get(index));
-					System.out.println("index1 " + index1);
-					System.out.println("bT[index1]: " + boardTransforms.get(index1));
-					System.out.println("index2 " + index2);
-					System.out.println("bT[index2]: " + boardTransforms.get(index2));
-					System.out.println("index12 " + index12);
-					System.out.println("bT[index12]: " + boardTransforms.get(index12));
 					
-//					System.out.println("Inside the function");
-					temp_move1 = index1;
-					temp_move2 = index12;
+					if(index1 < 99 && index < 99)
+					{
+						temp_move1 = index;
+						index = index1;
+						index1 = temp_move1;
+						gamePiece1.setPosition(boardTransforms.get(temp_move1));
+						gamePiece.setPosition(boardTransforms.get(index));
+					}
 					
-					index1 = index;
-					index12 = index2;
-					
-					index = temp_move1; 
-					index2 = temp_move2;
-					
-//					gamePiece.moveToPosition(boardTransforms.get(temp_move1));
-//					gamePiece2.moveToPosition(boardTransforms.get(temp_move2));
-//					gamePiece1.moveToPosition(boardTransforms.get(index1));
-//					gamePiece12.moveToPosition(boardTransforms.get(index12));
-					
-					gamePiece.setPosition(boardTransforms.get(temp_move1));
-					gamePiece2.setPosition(boardTransforms.get(temp_move2));
-					gamePiece1.setPosition(boardTransforms.get(index1));
-					gamePiece12.setPosition(boardTransforms.get(index12));
-					
-					System.out.println("index " + index);
-					System.out.println("bT[index]: " + boardTransforms.get(index));
-					System.out.println("index1 " + index1);
-					System.out.println("bT[index1]: " + boardTransforms.get(index1));
-					System.out.println("index2 " + index2);
-					System.out.println("bT[index2]: " + boardTransforms.get(index2));
-					System.out.println("index12 " + index12);
-					System.out.println("bT[index12]: " + boardTransforms.get(index12));
-					
+					if(index2 < 99 && index12 < 99)
+					{
+						temp_move2 = index2;
+						index2 = index12;
+						index12 = temp_move2;
+						gamePiece12.setPosition(boardTransforms.get(temp_move2));
+						gamePiece2.setPosition(boardTransforms.get(index2));
+						
+					}
+						
 					cardswap2 = 0;
 				}
 				else
@@ -473,6 +495,16 @@ public class Game extends ApplicationAdapter{
 		});
 		cardFour.setVisible(false);
 		
+		cardOneLabel = new Label("Kill", labelStyle);
+		cardOneLabel.setPosition(cardOne.getX(), cardOne.getY());
+		cardTwoLabel = new Label("Swap", labelStyle);
+		cardTwoLabel.setPosition(cardTwo.getX(), cardTwo.getY());
+//		cardThreeLabel = new Label("OTHER", labelStyle);
+//		cardThreeLabel.setPosition(cardThree.getX(), cardThree.getY());
+//		cardFourLabel = new Label("OTHER2", labelStyle);
+//		cardFourLabel.setPosition(cardFour.getX(), cardFour.getY());
+		
+		
 		gamestage.addActor(rollDice);
 		gamestage.addActor(playerOne);
 		gamestage.addActor(playerTwo);
@@ -483,7 +515,7 @@ public class Game extends ApplicationAdapter{
 		gamestage.addActor(cardOne);
 		gamestage.addActor(cardTwo);
 		gamestage.addActor(cardThree);
-		gamestage.addActor(cardFour);		
+		gamestage.addActor(cardFour);	
 		
 		
 	    // Camera to manage viewport and  view matrices
@@ -714,6 +746,30 @@ public class Game extends ApplicationAdapter{
 				}
 			}
 		});
+		
+		tutorialImage = new Texture("tutorial.png"); // TODO: Place tutorial image file here
+		tutorialImageRegion = new TextureRegion(tutorialImage);
+		tutorialImageStyle = new ImageButtonStyle();
+		tutorialImageStyle.imageUp = new TextureRegionDrawable(tutorialImageRegion);
+		tutorialImageStyle.imageDown = new TextureRegionDrawable(tutorialImageRegion);
+		tutorialImageButton = new ImageButton(tutorialImageStyle);
+		tutorialImageButton.setSize(1024, 768);
+		tutorialImageButton.setPosition(0, 0);
+		tutorialImageButton.setVisible(true);
+		tutorialImageButton.addListener(new ChangeListener()
+		{
+			@Override
+			public void changed(ChangeEvent event, Actor actor) 
+			{
+//				tutorialImageButton.setVisible(false);
+//				tutorialImageButton.setTouchable(Touchable.disabled);
+//				tutorialImageButton.setDisabled(true);
+//				actor.remove();
+//				System.out.println("Clicked");
+				removeTutorialImage();
+			}
+		});
+		gamestage.addActor(tutorialImageButton);
 	}
 	
 	
@@ -767,7 +823,7 @@ public class Game extends ApplicationAdapter{
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		gamestage.draw();
+		
 		
 		batch.begin();
 		boardSprite.draw(batch);
@@ -791,9 +847,35 @@ public class Game extends ApplicationAdapter{
 		gamePiece1.draw(batch);
 		gamePiece12.draw(batch);
 		gamePiece2.draw(batch);
-		dice.draw(batch);
+		
+		
+//		cardOneLabel.draw(batch, 1);
+//		cardTwoLabel.draw(batch, 1);
+//		cardThreeLabel.draw(batch, 1);
+//		cardFourLabel.draw(batch, 1);
+//		tutorialImageButton.draw(batch, 1);
+		
+		
+		
 		label.draw(batch, 1);
+		dice.draw(batch);
+		
+//		gamestage.draw();
 		batch.end();
+		gamestage.draw();
+		
+		
+//		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
+//			removeTutorialImage();
+//		}
+	}
+	
+	public void removeTutorialImage()
+	{
+		tutorialImageButton.setVisible(false);
+		tutorialImageButton.setTouchable(Touchable.disabled);
+		tutorialImageButton.setDisabled(true);
+//		System.out.println("Clicked");
 	}
 	
 	int playersel = 0;
