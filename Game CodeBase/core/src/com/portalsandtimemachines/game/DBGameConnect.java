@@ -11,6 +11,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+
+/**
+ * This class holds all the functions that is used for back end database connectivity and for displaying the score card.
+ * 
+ *  @author Team24 for CSE 360 Spring 2016
+ *  @version 1.1 April 15,2016
+ *  
+ */
 public class DBGameConnect {
 	
 	public static DefaultTableModel buildTableModel(ResultSet rs)
@@ -19,6 +27,7 @@ public class DBGameConnect {
 	    ResultSetMetaData metaData = rs.getMetaData();
 
 	    // names of columns
+	    
 	    Vector<String> columnNames = new Vector<String>();
 	    int columnCount = metaData.getColumnCount();
 	    for (int column = 1; column <= columnCount; column++) {
@@ -26,6 +35,7 @@ public class DBGameConnect {
 	    }
 
 	    // data of the table
+	    
 	    Vector<Vector<Object>> data = new Vector<Vector<Object>>();
 	    while (rs.next()) {
 	        Vector<Object> vector = new Vector<Object>();
@@ -39,7 +49,7 @@ public class DBGameConnect {
 
 	}
 	
-	@SuppressWarnings("finally")
+	@SuppressWarnings({ "finally", "rawtypes", "unchecked" })
 	void dbConnect(HashMap dbInput) {
 		String url = "jdbc:mysql://localhost:3306/game";
 		String username = "cse360";
@@ -84,22 +94,10 @@ public class DBGameConnect {
 				String[] col = {"Player_Name","Games_Played","Games_Won","Win_Rate"};
 				rs = stmt.executeQuery(fetchQuery);
 				JTable table = new JTable(buildTableModel(rs));
-//				int columnsNumber = rsmd.getColumnCount();
-//				while (rs.next()) {
-//					//Print one row 
-//					String fetchedRows = "";
-//					ArrayList<String> tempList = new ArrayList<String>();
-//					for(int i = 1 ; i <= columnsNumber; i++){
-//					      tempList.add(rs.getString(i));
-//					}
-//					resultDisplay.add(tempList);
-//				}
-
 			    JOptionPane.showMessageDialog(null, new JScrollPane(table));
 			}
 			else{
 				rs = stmt.executeQuery(selectQuery);
-				// System.out.println("Boolean" + rs.getBoolean("Player_Name"));
 				while (rs.next()) {
 					pName = rs.getString("Player_Name");				
 					System.out.println(pName);
