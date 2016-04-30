@@ -46,10 +46,16 @@ Java - MySQL Database Connectivity
 
     create database game
 
--   Create a user with the following command.
+-   Create a user with the following command:
     
     CREATE USER cse360 IDENTIFIED BY 'cse360'; 
     
+    or
+
+    Use local server applications like xampp or wamp to access mySQL via phpMyadmin local server to create user and database.
+    Video link - https://www.youtube.com/watch?v=lVcTqkHtNMg
+
+
     grant usage on *.* to cse360@localhost identified by 'cse360'; 
     
     grant all privileges on feedback.* to cse360@localhost; 
