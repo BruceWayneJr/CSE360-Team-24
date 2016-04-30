@@ -1057,7 +1057,6 @@ public class Game extends ApplicationAdapter{
 							if(index2 > 98)
 							{
 								gamePiece2.secondaryMove(boardTransforms.get(99));
-								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 							}
 							else
 							{
@@ -1083,10 +1082,8 @@ public class Game extends ApplicationAdapter{
 						cardswap2 = 1;
 					}
 				}
-		//		
 				if(obj.check_timeMachine(index2) != 0)
 				{
-		//			System.out.println(" time machine");
 					label.setText("Oops !! You stepped over a time machine. You will have to move 8 sqaures within 2 turns or you will pushed to the beginning..");
 					timeMachine_counter2 = 2;
 					time_machine_flag2 = 1;
@@ -1147,7 +1144,6 @@ public class Game extends ApplicationAdapter{
 					if(index1 > 98)
 					{
 						gamePiece1.moveToPosition(boardTransforms.get(99));
-						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 					}
 					else
 					{
@@ -1173,7 +1169,6 @@ public class Game extends ApplicationAdapter{
 							if(index1 > 98)
 							{
 								gamePiece1.moveToPosition(boardTransforms.get(99));
-								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 							}
 							else
 							{
@@ -1198,7 +1193,6 @@ public class Game extends ApplicationAdapter{
 						if(index1 > 98)
 						{
 							gamePiece1.moveToPosition(boardTransforms.get(99));
-							//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 						}
 						else
 						{
@@ -1212,12 +1206,10 @@ public class Game extends ApplicationAdapter{
 				{
 					label.setText("You stepped on a portal...!!");
 					index1 = ret;
-		//			if(index )
 					System.out.println("Portal ");
 					if(index1 > 98)
 					{
 						gamePiece1.secondaryMove(boardTransforms.get(99));
-						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 					}
 					else
 					{
@@ -1230,7 +1222,6 @@ public class Game extends ApplicationAdapter{
 							if(index1 > 98)
 							{
 								gamePiece1.secondaryMove(boardTransforms.get(99));
-								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 							}
 							else
 							{
@@ -1256,10 +1247,8 @@ public class Game extends ApplicationAdapter{
 						cardswap1 = 1;
 					}
 				}
-		//		
 				if(obj.check_timeMachine(index1) != 0)
 				{
-		//			System.out.println(" time machine");
 					label.setText("Oops !! You stepped over a time machine. You will have to move 8 sqaures within 2 turns or you will pushed to the beginning..");
 					timeMachine_counter1 = 2;
 					time_machine_flag1 = 1;
@@ -1286,7 +1275,6 @@ public class Game extends ApplicationAdapter{
 					if(index12 > 98)
 					{
 						gamePiece12.moveToPosition(boardTransforms.get(99));
-						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 					}
 					else
 					{
@@ -1312,7 +1300,6 @@ public class Game extends ApplicationAdapter{
 							if(index12 > 98)
 							{
 								gamePiece12.moveToPosition(boardTransforms.get(99));
-								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 							}
 							else
 							{
@@ -1337,7 +1324,6 @@ public class Game extends ApplicationAdapter{
 						if(index12 > 98)
 						{
 							gamePiece12.moveToPosition(boardTransforms.get(99));
-							//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 						}
 						else
 						{
@@ -1350,13 +1336,11 @@ public class Game extends ApplicationAdapter{
 				if(ret != 0)
 				{
 					index12 = ret;
-		//			if(index )
 					label.setText("You stepped on a portal...!!");
 					System.out.println("Portal ");
 					if(index12 > 98)
 					{
 						gamePiece12.secondaryMove(boardTransforms.get(99));
-						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 					}
 					else
 					{
@@ -1369,7 +1353,6 @@ public class Game extends ApplicationAdapter{
 							if(index1 > 98)
 							{
 								gamePiece12.secondaryMove(boardTransforms.get(99));
-								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 							}
 							else
 							{
@@ -1395,10 +1378,8 @@ public class Game extends ApplicationAdapter{
 						cardswap1 = 1;
 					}
 				}
-		//		
 				if(obj.check_timeMachine(index12) != 0)
 				{
-		//			System.out.println(" time machine");
 					label.setText("Oops !! You stepped over a time machine. You will have to move 8 sqaures within 2 turns or you will pushed to the beginning..");
 					timeMachine_counter12 = 2;
 					time_machine_flag12 = 1;
