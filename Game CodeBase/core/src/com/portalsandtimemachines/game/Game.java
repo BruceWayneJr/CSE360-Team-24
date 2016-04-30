@@ -243,10 +243,10 @@ public class Game extends ApplicationAdapter{
 		gameskinp = new Skin();
 		// Checkered background texture
 		boardBackground = new Texture("10x10_checkered_board.png");
-		gamePieceTexture = new Texture("Chess-Game1.png");
-		gamePieceTexture1 = new Texture("Chess-Game2.png");
-		gamePieceTexture21 = new Texture("Chess-Game1.png");
-		gamePieceTexture22 = new Texture("Chess-Game2.png");
+		gamePieceTexture = new Texture("P1.png");
+		gamePieceTexture1 = new Texture("P2.png");
+		gamePieceTexture21 = new Texture("P3.png");
+		gamePieceTexture22 = new Texture("P4.png");
 		portalTexture = new Texture("brunswick-spiral-black-white.png");
 		timemachineTexture = new Texture("Time-Machine.png");
 		bountyTexture = new Texture("bounty.png");
