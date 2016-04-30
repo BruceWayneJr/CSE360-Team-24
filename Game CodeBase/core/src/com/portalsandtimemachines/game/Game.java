@@ -113,14 +113,14 @@ public class Game extends ApplicationAdapter{
 	
 	int noofplayer = 0;
 	
-	int cardkill1 = 0;
+	int cardkill1 = 1;
 	int cardswap1 = 0;
 	int cardrev1 = 0;
 	
 	
 
 	int cardkill2 = 0;
-	int cardswap2 = 0;
+	int cardswap2 = 1;
 	int cardrev2 = 0;
 	
 	
@@ -358,18 +358,35 @@ public class Game extends ApplicationAdapter{
 				// TODO Put stuff here
 				if(cardkill1 == 1)
 				{
-					index1 = 0;
-					index12 = 0;
-					gamePiece1.moveToPosition(boardTransforms.get(index1));
-					gamePiece12.moveToPosition(boardTransforms.get(index12));
+					if(index1 < 99)
+					{
+						index1 = 0;
+						gamePiece1.moveToPosition(boardTransforms.get(index1));
+					}
+					
+					if(index12 < 99)
+					{
+						index12 = 0;
+						
+						gamePiece12.moveToPosition(boardTransforms.get(index12));
+					}
 					cardkill1 = 0;
 				}
 				else if(cardkill2 == 1)
 				{
-					index = 0;
-					index2 = 0;
-					gamePiece.moveToPosition(boardTransforms.get(index));
-					gamePiece2.moveToPosition(boardTransforms.get(index2));
+					
+					if(index < 99)
+					{
+						index = 0;
+						gamePiece.moveToPosition(boardTransforms.get(index));
+					}
+					
+					if(index2 < 99)
+					{
+						index2 = 0;
+						
+						gamePiece2.moveToPosition(boardTransforms.get(index2));
+					}
 					cardkill2 = 0;
 				}
 				else
@@ -398,60 +415,50 @@ public class Game extends ApplicationAdapter{
 				// TODO Put stuff here
 				if(cardswap1 == 1)
 				{
-//					temp_move1 = index;
-//					temp_move2 = index2;
-//					gamePiece1.moveToPosition(boardTransforms.get(temp_move1));
-//					gamePiece12.moveToPosition(boardTransforms.get(temp_move2));
-					index1 = index;
-					index12 = index2;
-					gamePiece.moveToPosition(boardTransforms.get(index));
-//					gamePiece.setPosition(boardTransforms.get(index));
-					gamePiece2.moveToPosition(boardTransforms.get(index2));
-//					gamePiece2.setPosition(boardTransforms.get(index2));
-//					index1 = temp_move1; 
-//					index12 = temp_move2;
+					if(index1 < 99 && index < 99)
+					{
+						temp_move1 = index;
+						index = index1;
+						index1 = temp_move1;
+						gamePiece1.setPosition(boardTransforms.get(temp_move1));
+						gamePiece.setPosition(boardTransforms.get(index));
+					}
+					
+					if(index2 < 99 && index12 < 99)
+					{
+						temp_move2 = index2;
+						index2 = index12;
+						index12 = temp_move2;
+						gamePiece12.setPosition(boardTransforms.get(temp_move2));
+						gamePiece2.setPosition(boardTransforms.get(index2));
+						
+					}
+					
+					
 					cardswap1 = 0;
 				}
 				else if(cardswap2 == 1)
 				{
-					System.out.println("index " + index);
-					System.out.println("bT[index]: " + boardTransforms.get(index));
-					System.out.println("index1 " + index1);
-					System.out.println("bT[index1]: " + boardTransforms.get(index1));
-					System.out.println("index2 " + index2);
-					System.out.println("bT[index2]: " + boardTransforms.get(index2));
-					System.out.println("index12 " + index12);
-					System.out.println("bT[index12]: " + boardTransforms.get(index12));
 					
-//					System.out.println("Inside the function");
-					temp_move1 = index1;
-					temp_move2 = index12;
+					if(index1 < 99 && index < 99)
+					{
+						temp_move1 = index;
+						index = index1;
+						index1 = temp_move1;
+						gamePiece1.setPosition(boardTransforms.get(temp_move1));
+						gamePiece.setPosition(boardTransforms.get(index));
+					}
 					
-					index1 = index;
-					index12 = index2;
-					
-					index = temp_move1; 
-					index2 = temp_move2;
-					
-//					gamePiece.moveToPosition(boardTransforms.get(temp_move1));
-//					gamePiece2.moveToPosition(boardTransforms.get(temp_move2));
-//					gamePiece1.moveToPosition(boardTransforms.get(index1));
-//					gamePiece12.moveToPosition(boardTransforms.get(index12));
-					
-					gamePiece.setPosition(boardTransforms.get(temp_move1));
-					gamePiece2.setPosition(boardTransforms.get(temp_move2));
-					gamePiece1.setPosition(boardTransforms.get(index1));
-					gamePiece12.setPosition(boardTransforms.get(index12));
-					
-					System.out.println("index " + index);
-					System.out.println("bT[index]: " + boardTransforms.get(index));
-					System.out.println("index1 " + index1);
-					System.out.println("bT[index1]: " + boardTransforms.get(index1));
-					System.out.println("index2 " + index2);
-					System.out.println("bT[index2]: " + boardTransforms.get(index2));
-					System.out.println("index12 " + index12);
-					System.out.println("bT[index12]: " + boardTransforms.get(index12));
-					
+					if(index2 < 99 && index12 < 99)
+					{
+						temp_move2 = index2;
+						index2 = index12;
+						index12 = temp_move2;
+						gamePiece12.setPosition(boardTransforms.get(temp_move2));
+						gamePiece2.setPosition(boardTransforms.get(index2));
+						
+					}
+						
 					cardswap2 = 0;
 				}
 				else
