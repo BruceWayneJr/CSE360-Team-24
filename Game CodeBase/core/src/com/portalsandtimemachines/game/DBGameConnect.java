@@ -63,7 +63,7 @@ public class DBGameConnect {
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Driver loaded!");
 		} catch (ClassNotFoundException e) {
-			throw new IllegalStateException("Cannot find the driver in the classpath!", e);
+			throw new IllegalStateException("You have to install necessary drivers to run the program and connect with the database!!", e);
 		}
 
 		System.out.println("Connecting database...");
@@ -142,5 +142,6 @@ public class DBGameConnect {
 		} finally {
 			return;
 		}
+	
 	}
 }
