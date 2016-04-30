@@ -257,9 +257,9 @@ public class Game extends ApplicationAdapter{
 			dbGame.dbConnect(dbValues);
 		}
 
-		dbValues.put("pname",playerNames);
-		dbValues.put("gWon", false);
-		dbGame.dbConnect(dbValues);
+//		dbValues.put("pname",playerNames);
+//		dbValues.put("gWon", false);
+//		dbGame.dbConnect(dbValues);
 
 	
 		batch = new SpriteBatch();
@@ -719,7 +719,7 @@ public class Game extends ApplicationAdapter{
 				if(!turnInProgress && !diceHasBeenRolled){
 					dice.changeAnimate();
 					float delay = 0.5f; // seconds
-					label.setText("Press either Paw 1 or Pawn 2");
+					label.setText("Press either Pawn 1 or Pawn 2");
 					Timer.schedule(new Task(){
 					    @Override
 					    public void run() {
@@ -750,15 +750,22 @@ public class Game extends ApplicationAdapter{
 //						rollDice.setText("Starting new game");
 						Gdx.app.exit();
 					}
-					
+//					label.setText("");
 					rollDice.setText("End Turn");
 					turnInProgress = true;
 				}
 				else if(turnInProgress && !diceHasBeenRolled){
 					playerTwo.setDisabled(!playerTwo.isDisabled());
 					playerOne.setDisabled(!playerOne.isDisabled());
+					if(playerTwo.isDisabled()){
+						label.setColor(Color.CYAN);
+					}
+					else{
+						label.setColor(Color.GREEN);
+					}
 					turnInProgress = false;
 					rollDice.setText("Roll Dice");
+					label.setText("Roll the dice");
 				}
 			}
 		});
@@ -786,7 +793,8 @@ public class Game extends ApplicationAdapter{
 				if(diceHasBeenRolled && !gamePiece.moving && !gamePiece2.moving && !gamePiece1.moving && !gamePiece12.moving){
 					diceHasBeenRolled = false;
 					moving_piece(temp, 2);
-					label.setText("Press the Die for the next turn");
+//					label.setText("Press the Die for the next turn");
+					label.setText("Play a card or press end turn");
 				}
 			}
 		});
