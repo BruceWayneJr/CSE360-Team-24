@@ -31,6 +31,40 @@ Importing the Project
 -	Click Browse and navigate to the root folder of your project, then click Build Model.
 -	Select all the projects and click Finish. 
 
+Java - MySQL Database Connectivity
+
+1. Install Latest MySQL Database 
+
+To connect to MySQL from Java, you have to use the JDBC driver from MySQL. The MySQL JDBC driver is called MySQL Connector/J. You find the latest MySQL JDBC driver under the following URL: http://dev.mysql.com/downloads/connector/j.
+
+The download contains a JAR file which we require later.
+
+2. Create a lib folder and copy the JDBC driver into this folder. Add the JDBC driver to your classpath. 
+See Adding jars to the classpath for details.
+http://www.vogella.com/tutorials/Eclipse/article.html#classpath
+
+3. Create a new database called game and start using it with the following command.
+
+create database game
+
+Create a user with the following command.
+
+CREATE USER cse360 IDENTIFIED BY 'cse360'; 
+
+grant usage on *.* to cse360@localhost identified by 'cse360'; 
+
+grant all privileges on feedback.* to cse360@localhost; 
+
+Now create a table named 'scorecard' following SQL statement.
+
+CREATE TABLE scorecard (
+    Player_Name VARCHAR(30) NOT NULL,
+    Games_Won INT NOT NULL, 
+    Games_Played INT NOT NULL,
+    Win_Rate FLOAT NOT NULL);
+
+
+
 Running the Project
 
 -	Right click the desktop project, Run As -> Java Application.
