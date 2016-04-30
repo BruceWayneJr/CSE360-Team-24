@@ -893,9 +893,6 @@ public class Game extends ApplicationAdapter{
 						}
 					}
 				}
-		//		index = index + value;
-		//		gamePiece.moveToPosition(boardTransforms.get(index));
-		//		System.out.println(index +" "+ value_tomove);
 	
 				int ret = obj.check_portal(index);
 				int bounty_ret = obj.check_bounty(index);
@@ -1034,9 +1031,6 @@ public class Game extends ApplicationAdapter{
 						}
 					}
 				}
-		//		index = index + value;
-		//		gamePiece.moveToPosition(boardTransforms.get(index));
-		//		System.out.println(index +" "+ value_tomove);
 	
 				int ret = obj.check_portal(index2);
 				int bounty_ret = obj.check_bounty(index2);
@@ -1110,33 +1104,6 @@ public class Game extends ApplicationAdapter{
 				}
 				
 			}
-			
-
-			
-//			cardOne.addListener(new ChangeListener() 
-//			{	
-//				public void changed (ChangeEvent event, Actor actor) 
-//				{
-//					index = 0;
-//					index2 = 0;
-//					gamePiece.moveToPosition(boardTransforms.get(index));
-//					gamePiece2.moveToPosition(boardTransforms.get(index2));
-////							cardOne.setVisible(false);
-//				}
-//			});
-//			cardTwo.addListener(new ChangeListener() 
-//			{	
-//				public void changed (ChangeEvent event, Actor actor) 
-//				{
-//					index1 = index;
-//					index12 = index2;
-//					gamePiece1.moveToPosition(boardTransforms.get(index1));
-//					gamePiece12.moveToPosition(boardTransforms.get(index12));
-////							cardTwo.setVisible(false);
-//				}
-//			});
-			//if(index > 98)
-				//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 		}//********************************************************************************
 		else
 		{
@@ -1237,9 +1204,6 @@ public class Game extends ApplicationAdapter{
 						}
 					}
 				}
-		//		index = index + value;
-		//		gamePiece.moveToPosition(boardTransforms.get(index));
-		//		System.out.println(index +" "+ value_tomove);
 				int bounty_ret = obj.check_bounty(index);
 				int ret = obj.check_portal(index1);
 				if(ret != 0)
@@ -1378,9 +1342,6 @@ public class Game extends ApplicationAdapter{
 						}
 					}
 				}
-		//		index = index + value;
-		//		gamePiece.moveToPosition(boardTransforms.get(index));
-		//		System.out.println(index +" "+ value_tomove);
 				int bounty_ret = obj.check_bounty(index12);
 				int ret = obj.check_portal(index12);
 				if(ret != 0)
@@ -1453,32 +1414,6 @@ public class Game extends ApplicationAdapter{
 				}
 				
 			}
-			//if(index > 98)
-				//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
-
-			
-//			cardOne.addListener(new ChangeListener() 
-//			{	
-//				public void changed (ChangeEvent event, Actor actor) 
-//				{
-//					index = index1;
-//					index2 = index12;
-//					gamePiece.moveToPosition(boardTransforms.get(index));
-//					gamePiece2.moveToPosition(boardTransforms.get(index2));
-////					cardTwo.setVisible(false);
-//				}
-//			});
-//			cardOne.addListener(new ChangeListener() 
-//			{	
-//				public void changed (ChangeEvent event, Actor actor) 
-//				{
-//					index1 = 0;
-//					index12 = 0;
-//					gamePiece1.moveToPosition(boardTransforms.get(index1));
-//					gamePiece12.moveToPosition(boardTransforms.get(index12));
-////							cardOne.setVisible(false);
-//				}
-//			});
 			
 		}
 		
