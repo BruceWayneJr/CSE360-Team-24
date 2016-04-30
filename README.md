@@ -39,7 +39,7 @@ Java - MySQL Database Connectivity
     The download contains a JAR file which we require later.
 
 -   Create a lib folder and copy the JDBC driver into this folder. Add the JDBC driver to your classpath. 
-    See Adding jars to the classpath for details.
+    See below for Adding jars to the classpath.
     -   http://www.vogella.com/tutorials/Eclipse/article.html#classpath
 
 -   Create a new database called game and start using it with the following command.
@@ -80,6 +80,8 @@ Running the Project
   -or-
   
 - Right click DesktopLauncher.java from 'Portals-and-Timemachines-desktop' folder in package explorer, Run As -> Java Application.
+
+-NOTE: For running the game without setting up any database comment all the statements of the form "dbGame.dbConnect(dbValues);" in "Game.java" file, if you are running this way, see to that you dont click on scorecard card button.
 
 Code files:
 
