@@ -172,6 +172,9 @@ public class Game extends ApplicationAdapter{
 	static int timeMachine_counter12 = 0;
 	static int time_machine_flag12 = 0;
 	static int final_pos12 = 0;
+	
+	private boolean gameStart;
+	private boolean showWindow;
 	/**
 	 * This function is used for the purpose of drawing the board and
 	 * setting up other board pieces initially.
@@ -180,7 +183,75 @@ public class Game extends ApplicationAdapter{
 	 */
 	@Override
 	public void create () {
-		// Sprite batch to store all sprites before sending to GPU
+//		gameStart = false;
+//		showWindow = true;
+//		
+//		final JFrame parent = new JFrame();
+//		JPanel panel = new JPanel();
+//        JButton start = new JButton();
+//        JButton scores = new JButton();
+//        JTextArea text = new JTextArea();
+//
+//        start.setText("Start the game");
+//        scores.setText("Show Highscores");
+//        text.setText("Portals and Time Machines");
+//        panel.add(text);
+//        panel.add(start);
+////        parent.pack();
+//        panel.add(scores);
+//        parent.add(panel);
+//        parent.pack();
+//        parent.setVisible(true);
+//
+//        start.addActionListener(new java.awt.event.ActionListener() {
+//            @Override
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                gameStart = true;
+//            }
+//        });
+//        
+//        scores.addActionListener(new java.awt.event.ActionListener() {
+//            @Override
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                gameStart = true;
+//            }
+//        });
+//        
+//        parent.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        parent.setLocation(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+		
+//		int choice = JOptionPane.showOptionDialog(null, //Component parentComponent
+//		                               "Metric or Imperial?", //Object message,
+//		                               "Choose an option", //String title
+//		                               JOptionPane.YES_NO_OPTION, //int optionType
+//		                               JOptionPane.INFORMATION_MESSAGE, //int messageType
+//		                               null, //Icon icon,
+//		                               {"Metric","Imperial"}, //Object[] options,
+//		                               "Metric");//Object initialValue 
+//		if(choice == 0 ){
+//		   //Metric was chosen
+//		}else{
+//		   //Imperial was chosen
+//		}
+		Object[] options = {"Start Game", "Show Highscores"};
+		
+		int choice = JOptionPane.showOptionDialog(null, "Portals and Time Machines", "Start Menu", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options , options[0]);
+		
+		if(choice == 0){
+			// Start Game
+		}
+		else{
+			// Show Highscores
+		}
+		
+//		while(!gameStart){
+//			// Show menu
+//			if(showWindow){
+//				
+//			}
+//			showWindow = false;
+//		}
+		
 		int i = 0;
 		
 		noofplayer = Integer.parseInt(JOptionPane.showInputDialog("Please enter the number of players"));
@@ -191,7 +262,6 @@ public class Game extends ApplicationAdapter{
 		}
 		
 		i = noofplayer;
-		
 
 		while(i > 0)
 		{
@@ -700,7 +770,7 @@ public class Game extends ApplicationAdapter{
 			public void changed(ChangeEvent event, Actor actor) 
 			{
 				System.out.println("Click Pawn_One");
-				if(diceHasBeenRolled){
+				if(diceHasBeenRolled && !gamePiece.moving && !gamePiece2.moving && !gamePiece1.moving && !gamePiece12.moving){
 					diceHasBeenRolled = false;
 					moving_piece(temp, 1);
 					label.setText("Press the Die for the next turn");
@@ -713,7 +783,7 @@ public class Game extends ApplicationAdapter{
 			public void changed(ChangeEvent event, Actor actor) 
 			{
 				System.out.println("Click Pawn_Two");
-				if(diceHasBeenRolled){
+				if(diceHasBeenRolled && !gamePiece.moving && !gamePiece2.moving && !gamePiece1.moving && !gamePiece12.moving){
 					diceHasBeenRolled = false;
 					moving_piece(temp, 2);
 					label.setText("Press the Die for the next turn");
@@ -924,32 +994,39 @@ public class Game extends ApplicationAdapter{
 				int bounty_ret = obj.check_bounty(index);
 				if(ret != 0)
 				{
-					index = ret;
+//					index = ret;
 		//			if(index )
 					System.out.println("Portal ");
 					if(index > 98)
 					{
 						gamePiece.secondaryMove(boardTransforms.get(99));
+//						gamePiece.portalMovement(boardTransforms.get(index), boardTransforms.get(ret));
 						//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 					}
 					else
 					{
-						gamePiece.secondaryMove(boardTransforms.get(index));
+//						gamePiece.secondaryMove(boardTransforms.get(index));
+						gamePiece.portalMovement(boardTransforms.get(index), boardTransforms.get(ret));
+						index = ret;
+						
 						if(obj.check_portal(index) != 0)
 						{
 							index = index + obj.check_portal(index);
 							System.out.println("Portal ");
 							if(index > 98)
 							{
-								gamePiece.secondaryMove(boardTransforms.get(99));
+//								gamePiece.secondaryMove(boardTransforms.get(99));
+								gamePiece.portalMovement(boardTransforms.get(index), boardTransforms.get(99));
 								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 							}
 							else
 							{
-								gamePiece.secondaryMove(boardTransforms.get(index));
+//								gamePiece.secondaryMove(boardTransforms.get(index));
+								gamePiece.portalMovement(boardTransforms.get(index), boardTransforms.get(ret));
 							}
 						}
 					}
+					
 				}
 				else if(bounty_ret == 1)
 				{
@@ -1060,7 +1137,7 @@ public class Game extends ApplicationAdapter{
 				int bounty_ret = obj.check_bounty(index2);
 				if(ret != 0)
 				{
-					index2 = ret;
+//					index2 = ret;
 		//			if(index )
 					System.out.println("Portal ");
 					if(index2 > 98)
@@ -1070,22 +1147,28 @@ public class Game extends ApplicationAdapter{
 					}
 					else
 					{
-						gamePiece2.secondaryMove(boardTransforms.get(index2));
+//						gamePiece2.secondaryMove(boardTransforms.get(index2));
+						gamePiece2.portalMovement(boardTransforms.get(index2), boardTransforms.get(ret));
+						index2 = ret;
+						
 						if(obj.check_portal(index2) != 0)
 						{
 							index2 = index2 + obj.check_portal(index2);
 							System.out.println("Portal ");
 							if(index2 > 98)
 							{
-								gamePiece2.secondaryMove(boardTransforms.get(99));
+//								gamePiece2.secondaryMove(boardTransforms.get(99));
+								gamePiece2.portalMovement(boardTransforms.get(index2), boardTransforms.get(99));
 								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 							}
 							else
 							{
-								gamePiece2.secondaryMove(boardTransforms.get(index2));
+//								gamePiece2.secondaryMove(boardTransforms.get(index2));
+								gamePiece2.portalMovement(boardTransforms.get(index2), boardTransforms.get(ret));
 							}
 						}
 					}
+					
 				}
 				else if(bounty_ret == 1)
 				{
@@ -1257,7 +1340,7 @@ public class Game extends ApplicationAdapter{
 				int ret = obj.check_portal(index1);
 				if(ret != 0)
 				{
-					index1 = ret;
+//					index1 = ret;
 		//			if(index )
 					System.out.println("Portal ");
 					if(index1 > 98)
@@ -1267,22 +1350,28 @@ public class Game extends ApplicationAdapter{
 					}
 					else
 					{
-						gamePiece1.secondaryMove(boardTransforms.get(index1));
+//						gamePiece1.secondaryMove(boardTransforms.get(index1));
+						gamePiece1.portalMovement(boardTransforms.get(index1), boardTransforms.get(ret));
+						index1 = ret;
+						
 						if(obj.check_portal(index1) != 0)
 						{
 							index1 = index1 + obj.check_portal(index1);
 							System.out.println("Portal ");
 							if(index1 > 98)
 							{
-								gamePiece1.secondaryMove(boardTransforms.get(99));
+//								gamePiece1.secondaryMove(boardTransforms.get(99));
+								gamePiece1.portalMovement(boardTransforms.get(index1), boardTransforms.get(99));
 								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 							}
 							else
 							{
-								gamePiece1.secondaryMove(boardTransforms.get(index1));
+//								gamePiece1.secondaryMove(boardTransforms.get(index1));
+								gamePiece1.portalMovement(boardTransforms.get(index1), boardTransforms.get(ret));
 							}
 						}
 					}
+					
 				}
 				else if(bounty_ret == 1)
 				{
@@ -1393,7 +1482,7 @@ public class Game extends ApplicationAdapter{
 				int ret = obj.check_portal(index12);
 				if(ret != 0)
 				{
-					index12 = ret;
+//					index12 = ret;
 		//			if(index )
 					System.out.println("Portal ");
 					if(index12 > 98)
@@ -1403,22 +1492,28 @@ public class Game extends ApplicationAdapter{
 					}
 					else
 					{
-						gamePiece12.secondaryMove(boardTransforms.get(index12));
+//						gamePiece12.secondaryMove(boardTransforms.get(index12));
+						gamePiece12.portalMovement(boardTransforms.get(index12), boardTransforms.get(ret));
+						index12 = ret;
+						
 						if(obj.check_portal(index12) != 0)
 						{
 							index12 = index12 + obj.check_portal(index12);
 							System.out.println("Portal ");
 							if(index1 > 98)
 							{
-								gamePiece12.secondaryMove(boardTransforms.get(99));
+//								gamePiece12.secondaryMove(boardTransforms.get(99));
+								gamePiece12.portalMovement(boardTransforms.get(index12), boardTransforms.get(99));
 								//JOptionPane.showMessageDialog(null, "Congrats! You Won!!");
 							}
 							else
 							{
-								gamePiece12.secondaryMove(boardTransforms.get(index12));
+//								gamePiece12.secondaryMove(boardTransforms.get(index12));
+								gamePiece12.portalMovement(boardTransforms.get(index12), boardTransforms.get(ret));
 							}
 						}
 					}
+					
 				}
 				else if(bounty_ret == 1)
 				{

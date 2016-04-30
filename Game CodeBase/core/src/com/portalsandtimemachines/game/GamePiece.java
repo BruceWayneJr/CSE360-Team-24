@@ -79,6 +79,7 @@ public class GamePiece {
 	 * @param newPosition position to which to be moved.
 	 */
 	public void moveToPosition(Vector2 newPosition){
+		System.out.println("Move to postion: " + newPosition);
 		destination.x = newPosition.x;
 		destination.y = newPosition.y + offset;
 		moving = true;
@@ -117,10 +118,16 @@ public class GamePiece {
 	 * 
 	 * @param secondaryPosition function to be moved when condition not satisfied.
 	 */
-	public void secondaryMove(Vector2 secondaryPosition){                        // This function is used for moving the pawn when it hit a portal or in case of time machine fail.
+	public void secondaryMove(Vector2 secondaryPosition){  
+		System.out.println("secondaryMove to postion: " + secondaryPosition);// This function is used for moving the pawn when it hit a portal or in case of time machine fail.
 		secondDestination.x = secondaryPosition.x;
 		secondDestination.y = secondaryPosition.y + offset;
 //		secondDestination.y += offset;
+	}
+	
+	public void portalMovement(Vector2 firstPosition, Vector2 secondPosition){
+		destination = new Vector2(firstPosition.x, firstPosition.y);
+		secondDestination = new Vector2(secondPosition.x, secondPosition.y);
 	}
 	
 	public void setPosition(Vector2 newPosition){
