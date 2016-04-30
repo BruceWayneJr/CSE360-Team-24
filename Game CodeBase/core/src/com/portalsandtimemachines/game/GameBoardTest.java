@@ -124,6 +124,21 @@ public class GameBoardTest {
 		
 	}
 	
+	
+	/**
+	 * To check whether the bounty square function does not return null.
+	 */
+	@Test
+	public void testTM_bounty() {
+//		fail("Not yet implemented");
+		GameBoard testobj = new GameBoard();
+		testobj.init_bounty();
+		int[] temp = testobj.bounty_positions();
+		assertNotNull(temp);
+		
+	}
+
+	
 	/**
 	 * check whether the values in the time machine are not null.
 	 */
@@ -138,8 +153,82 @@ public class GameBoardTest {
 			assertNotEquals(100,temp[i]);
 		}
 	}
+	
+	
+	/**
+	 * check whether the values in the bounty squares are not null.
+	 */
+	@Test
+	public void testTM_Bountypositionsnot_equal_to_zero() {
+//		fail("Not yet implemented");
+		GameBoard testobj = new GameBoard();
+		testobj.init_bounty();
+		int[] temp = testobj.bounty_positions();
+		for(int i = 0; i < temp.length;i++)
+		{
+			assertNotEquals(0,temp[i]);
+		}
+	}
+	
+	/**
+	 * check whether the values in the bounty squares are not placed at 100.
+	 */
+	@Test
+	public void testTM_Bountypositionsnot_equal_to_hundred() {
+//		fail("Not yet implemented");
+		GameBoard testobj = new GameBoard();
+		testobj.init_bounty();
+		int[] temp = testobj.bounty_positions();
+		for(int i = 0; i < temp.length;i++)
+		{
+			assertNotEquals(100,temp[i]);
+		}
+	}
+	
+	
+	/**
+	 * check whether the values in the bounty squares are not placed at the portal positions.
+	 */
+	@Test
+	public void testTM_Bountypositionsnot_at_portalpositions() {
+//		fail("Not yet implemented");
+		GameBoard testobj = new GameBoard();
+		testobj.init_bounty();
+		int[] temp = testobj.bounty_positions();
+		int[] temp_portal = testobj.portal_positions();
+		for(int i = 0; i < temp.length;i++)
+		{
+			for(int j = 0;j < temp_portal.length; j++)
+			{
+				assertNotEquals(temp_portal[j],temp[i]);
+			}
+			
+		}
+	}
+	
+	
+	/**
+	 * check whether the values in the bounty squares are not placed at the portal positions.
+	 */
+	@Test
+	public void testTM_Bountypositionsnot_at_timemachinepositions() {
+//		fail("Not yet implemented");
+		GameBoard testobj = new GameBoard();
+		testobj.init_bounty();
+		int[] temp = testobj.bounty_positions();
+		int[] temp_portal = testobj.timeMachine_positions();
+		for(int i = 0; i < temp.length;i++)
+		{
+			for(int j = 0;j < temp_portal.length; j++)
+			{
+				assertNotEquals(temp_portal[j],temp[i]);
+			}
+			
+		}
+	}
 
-
+	
+	
 	/**
 	 * check whether the position of the time machine is not out of board range.
 	 */
