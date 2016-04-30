@@ -30,6 +30,10 @@ public class GameBoard {
 	        System.out.println("Initializing the portal values");
 	    }
 	    
+	    /**
+	     * This function is used for returning a random number of dice.
+	     * @return
+	     */
 	    int roll_die()
 	    {
 	    	Random rand = new Random();
@@ -150,22 +154,32 @@ public class GameBoard {
 	   
 	    int[] bounty_array = new int[3];
 	    int k_index;
+	    
+	    /**
+	     * This function is used for setting up the bounty card positions.
+	     */
 	    void init_bounty()
 	    {
 	    	for( int i_index = 0; i_index < 3; i_index++ )
 	    	{
 	    		set_bounty();
 	    	}
-	    	System.out.println("Initializing the Bounty Positions values");
 	    }
 	    
 	    
+	    /**
+	     * This function is for returning the bounty position.
+	     * @return int[] for bounty positions.
+	     */
 	    int[] bounty_positions()
 	    {
 	    	return bounty_array;
 	    }
 	    
-	    
+	    /**
+	     * This function is used to set bounty on the board.
+	     * 
+	     */
 	    void set_bounty()
 	    {
 	    	Random rand = new Random();
@@ -197,6 +211,13 @@ public class GameBoard {
 	    	k_index++;
 	    }
 	    
+	    /**
+	     * This function is used for returning 1 or 0 based on the 
+	     * given position whether these is a bounty card or not.
+	     * 
+	     * @param position position of bounty.
+	     * @return int value of whether there is a bounty or not.
+	     */
 	    int check_bounty(int position)
 	    {
 	    	for(int k_index = 0; k_index < 3; k_index++)
