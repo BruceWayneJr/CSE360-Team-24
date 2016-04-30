@@ -312,7 +312,7 @@ public class Game extends ApplicationAdapter{
 		label.setWrap(true);
 		label.setWidth(100);
 		label.setText("Welcome to portals and time machines!");
-		label.setColor(Color.RED);
+		label.setColor(Color.CYAN);
 		
 		diceHasBeenRolled = false;
 		
