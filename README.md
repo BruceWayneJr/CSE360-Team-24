@@ -81,7 +81,7 @@ Running the Project
   
 - Right click DesktopLauncher.java from 'Portals-and-Timemachines-desktop' folder in package explorer, Run As -> Java Application.
 
--   NOTE: For running the game without setting up any database comment all the statements of the form "dbGame.dbConnect(dbValues);" in     "Game.java" file, if you are running this way, see to that you dont click on scorecard card button.
+-   NOTE: For running the game without setting up any database or in case if you encounter any challenges in setting up the database      comment all the statements of the form "dbGame.dbConnect();" in "Game.java" file and run the game to check all the functionalities     of the game that have been implemented, if you are running this way see to that you dont click on scorecard card button.
 
 Code files:
 
