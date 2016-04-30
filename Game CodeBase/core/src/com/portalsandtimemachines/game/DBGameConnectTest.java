@@ -8,7 +8,8 @@ public class DBGameConnectTest {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		DBGameConnect obj = new DBGameConnect();
+		assertNotNull(obj);
 	}
 
 }
