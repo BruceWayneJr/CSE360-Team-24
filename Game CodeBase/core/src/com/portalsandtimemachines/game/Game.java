@@ -184,23 +184,15 @@ public class Game extends ApplicationAdapter{
 	@Override
 	public void create () {
 		Object[] options = {"Start Game", "Show Highscores"};
-		
+		dbGame = new DBGameConnect();
 		int choice = JOptionPane.showOptionDialog(null, "Portals and Time Machines", "Start Menu", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options , options[0]);
 		
-		if(choice == 0){
+		if(choice != 0){
 			// Start Game
-		}
-		else{
-			// Show Highscores
+			dbValues.put("fetchFlag", true);
+			dbGame.dbConnect(dbValues);
 		}
 		
-//		while(!gameStart){
-//			// Show menu
-//			if(showWindow){
-//				
-//			}
-//			showWindow = false;
-//		}
 		
 		int i = 2;
 		
@@ -234,7 +226,6 @@ public class Game extends ApplicationAdapter{
 		
 		dbValues.put("pname",playerNames);
 		dbValues.put("gWon", false);
-		dbGame = new DBGameConnect();
 		dbGame.dbConnect(dbValues);
 	
 		batch = new SpriteBatch();
