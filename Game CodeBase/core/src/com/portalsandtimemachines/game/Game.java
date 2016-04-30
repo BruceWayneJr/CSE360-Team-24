@@ -183,8 +183,9 @@ public class Game extends ApplicationAdapter{
 	ImageButtonStyle tutorialImageStyle;
 	ImageButton tutorialImageButton;
 	
-	private boolean gameStart;
-	private boolean showWindow;
+	private boolean turnInProgress;
+	private boolean firstClick;
+	
 	/**
 	 * This function is used for the purpose of drawing the board and
 	 * setting up other board pieces initially.
@@ -193,6 +194,8 @@ public class Game extends ApplicationAdapter{
 	 */
 	@Override
 	public void create () {
+		turnInProgress = true;
+		firstClick = true;
 		Object[] options = {"Start Game", "Show Highscores"};
 		dbGame = new DBGameConnect();
 		int choice = JOptionPane.showOptionDialog(null, "Portals and Time Machines", "Start Menu", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options , options[0]);
@@ -235,7 +238,7 @@ public class Game extends ApplicationAdapter{
 		
 		dbValues.put("pname",playerNames);
 		dbValues.put("gWon", false);
-		dbGame.dbConnect(dbValues);
+//		dbGame.dbConnect(dbValues);
 
 	
 		batch = new SpriteBatch();
@@ -273,7 +276,8 @@ public class Game extends ApplicationAdapter{
 		Gdx.input.setInputProcessor(gamestage);
         
 		dice = new Dice();
-		gamestage.addActor(dice);
+		dice.setVisible(false);
+//		gamestage.addActor(dice);
 		
         TextButtonStyle textButtonStyle = new TextButtonStyle();
         textButtonStyle.fontColor =  Color.BLACK;
@@ -288,7 +292,7 @@ public class Game extends ApplicationAdapter{
 
 		gameskin.add("default", textButtonStyle);
 		
-		rollDice = new TextButton("Roll Dice", gameskin);
+		rollDice = new TextButton("Start Game", gameskin);
 		rollDice.setPosition(0, 0);
 		
 
@@ -299,12 +303,14 @@ public class Game extends ApplicationAdapter{
 		Pawn_Two = new TextButton("Pawn 2", gameskin);
 		Pawn_Two.setPosition(0, 350);
 		
-		playerOne = new TextButton(playername, gameskin);
+		playerOne = new TextButton(playername1, gameskin);
 		playerOne.setPosition(0, 700);
-		playerOne.setDisabled(false);
+		playerOne.setColor(Color.CYAN);
+		playerOne.setDisabled(true);
 		
-		playerTwo = new TextButton(playername1, gameskin);
+		playerTwo = new TextButton(playername, gameskin);
 		playerTwo.setPosition(0, 600);
+		playerTwo.setColor(Color.GREEN);
 		playerTwo.setDisabled(true);
 		
 		useCard = new TextButton("Use Card",gameskin);
@@ -682,10 +688,14 @@ public class Game extends ApplicationAdapter{
 			public void changed (ChangeEvent event, Actor actor) 
 			{
 				System.out.println("Click rollDice");
+				dice.setVisible(true);
+				if(firstClick){
+					playerOne.setDisabled(true);
+					playerTwo.setDisabled(false);
+					firstClick = false;
+				}
 				
-				if(!diceHasBeenRolled){
-					playerTwo.setDisabled(!playerTwo.isDisabled());
-					playerOne.setDisabled(!playerOne.isDisabled());
+				if(!turnInProgress && !diceHasBeenRolled){
 					dice.changeAnimate();
 					float delay = 0.5f; // seconds
 					label.setText("Press either Paw 1 or Pawn 2");
@@ -719,6 +729,15 @@ public class Game extends ApplicationAdapter{
 //						rollDice.setText("Starting new game");
 						Gdx.app.exit();
 					}
+					
+					rollDice.setText("End Turn");
+					turnInProgress = true;
+				}
+				else if(turnInProgress && !diceHasBeenRolled){
+					playerTwo.setDisabled(!playerTwo.isDisabled());
+					playerOne.setDisabled(!playerOne.isDisabled());
+					turnInProgress = false;
+					rollDice.setText("Roll Dice");
 				}
 			}
 		});
@@ -732,7 +751,8 @@ public class Game extends ApplicationAdapter{
 				if(diceHasBeenRolled && !gamePiece.moving && !gamePiece2.moving && !gamePiece1.moving && !gamePiece12.moving){
 					diceHasBeenRolled = false;
 					moving_piece(temp, 1);
-					label.setText("Press the Die for the next turn");
+//					label.setText("Press the Die for the next turn");
+					label.setText("Play a card or press end turn");
 				}
 			}
 		});
@@ -861,7 +881,9 @@ public class Game extends ApplicationAdapter{
 		
 		
 		label.draw(batch, 1);
-		dice.draw(batch);
+		if(dice.isVisible()){
+			dice.draw(batch);
+		}
 		
 //		gamestage.draw();
 		batch.end();
