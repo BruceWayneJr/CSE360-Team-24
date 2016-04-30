@@ -173,6 +173,16 @@ public class Game extends ApplicationAdapter{
 	static int time_machine_flag12 = 0;
 	static int final_pos12 = 0;
 	
+	Label cardOneLabel;
+	Label cardTwoLabel;
+	Label cardThreeLabel;
+	Label cardFourLabel;
+	
+	Texture tutorialImage;
+	TextureRegion tutorialImageRegion;
+	ImageButtonStyle tutorialImageStyle;
+	ImageButton tutorialImageButton;
+	
 	private boolean gameStart;
 	private boolean showWindow;
 	/**
@@ -482,6 +492,16 @@ public class Game extends ApplicationAdapter{
 		});
 		cardFour.setVisible(false);
 		
+		cardOneLabel = new Label("Kill", labelStyle);
+		cardOneLabel.setPosition(cardOne.getX(), cardOne.getY());
+		cardTwoLabel = new Label("Swap", labelStyle);
+		cardTwoLabel.setPosition(cardTwo.getX(), cardTwo.getY());
+//		cardThreeLabel = new Label("OTHER", labelStyle);
+//		cardThreeLabel.setPosition(cardThree.getX(), cardThree.getY());
+//		cardFourLabel = new Label("OTHER2", labelStyle);
+//		cardFourLabel.setPosition(cardFour.getX(), cardFour.getY());
+		
+		
 		gamestage.addActor(rollDice);
 		gamestage.addActor(playerOne);
 		gamestage.addActor(playerTwo);
@@ -492,7 +512,7 @@ public class Game extends ApplicationAdapter{
 		gamestage.addActor(cardOne);
 		gamestage.addActor(cardTwo);
 		gamestage.addActor(cardThree);
-		gamestage.addActor(cardFour);		
+		gamestage.addActor(cardFour);	
 		
 		
 	    // Camera to manage viewport and  view matrices
@@ -712,6 +732,30 @@ public class Game extends ApplicationAdapter{
 				}
 			}
 		});
+		
+		tutorialImage = new Texture("tutorial.png"); // TODO: Place tutorial image file here
+		tutorialImageRegion = new TextureRegion(tutorialImage);
+		tutorialImageStyle = new ImageButtonStyle();
+		tutorialImageStyle.imageUp = new TextureRegionDrawable(tutorialImageRegion);
+		tutorialImageStyle.imageDown = new TextureRegionDrawable(tutorialImageRegion);
+		tutorialImageButton = new ImageButton(tutorialImageStyle);
+		tutorialImageButton.setSize(1024, 768);
+		tutorialImageButton.setPosition(0, 0);
+		tutorialImageButton.setVisible(true);
+		tutorialImageButton.addListener(new ChangeListener()
+		{
+			@Override
+			public void changed(ChangeEvent event, Actor actor) 
+			{
+//				tutorialImageButton.setVisible(false);
+//				tutorialImageButton.setTouchable(Touchable.disabled);
+//				tutorialImageButton.setDisabled(true);
+//				actor.remove();
+//				System.out.println("Clicked");
+				removeTutorialImage();
+			}
+		});
+		gamestage.addActor(tutorialImageButton);
 	}
 	
 	
@@ -765,9 +809,8 @@ public class Game extends ApplicationAdapter{
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		gamestage.draw();
-		
 		batch.begin();
+		
 		boardSprite.draw(batch);
 		timemachineSprite1.draw(batch);
 		timemachineSprite2.draw(batch);
@@ -791,7 +834,25 @@ public class Game extends ApplicationAdapter{
 		gamePiece2.draw(batch);
 		dice.draw(batch);
 		label.draw(batch, 1);
+		cardOneLabel.draw(batch, 1);
+		cardTwoLabel.draw(batch, 1);
+//		cardThreeLabel.draw(batch, 1);
+//		cardFourLabel.draw(batch, 1);
+//		tutorialImageButton.draw(batch, 1);
+		gamestage.draw();
 		batch.end();
+		
+//		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
+//			removeTutorialImage();
+//		}
+	}
+	
+	public void removeTutorialImage()
+	{
+		tutorialImageButton.setVisible(false);
+		tutorialImageButton.setTouchable(Touchable.disabled);
+		tutorialImageButton.setDisabled(true);
+//		System.out.println("Clicked");
 	}
 	
 	int playersel = 0;
