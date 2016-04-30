@@ -99,4 +99,70 @@ public class GameTest {
 		assertNull(obj.timemachineTexture);
 	}
 	
+	
+	/**
+	 * To check whether the pawn texture has been set for player 1's pawn
+	 */
+	@Test
+	public void testgamePieceTexture11() {
+//		fail("Not yet implemented");
+		Game obj = new Game();
+		assertNull(obj.gamePieceTexture1);
+	}
+	
+	
+	/**
+	 * To check whether the pawn texture has been set for player 2's pawn
+	 */
+	@Test
+	public void testgamePieceTexture21() {
+//		fail("Not yet implemented");
+		Game obj = new Game();
+		assertNull(obj.gamePieceTexture21);
+	}
+	
+	
+	/**
+	 * To check whether cardKill has been created
+	 */
+	@Test
+	public void test_cardKILL_created() {
+//		fail("Not yet implemented");
+		Game obj = new Game();
+		assertNull(obj.cardOne);
+	}
+	
+	/**
+	 * To check whether cardSwap has been created
+	 */
+	@Test
+	public void test_cardSWAP_created() {
+//		fail("Not yet implemented");
+		Game obj = new Game();
+		assertNull(obj.cardTwo);
+	}
+	
+	
+	/**
+	 * To check whether cardRev has been created
+	 */
+	@Test
+	public void test_cardrev_created() {
+//		fail("Not yet implemented");
+		Game obj = new Game();
+		assertNull(obj.cardThree);
+	}
+	
+	/**
+	 * To check whether cardDrag has been created
+	 */
+	@Test
+	public void test_cardDrag_created() {
+//		fail("Not yet implemented");
+		Game obj = new Game();
+		assertNull(obj.cardFour);
+	}
+	
+	
+	
 }
