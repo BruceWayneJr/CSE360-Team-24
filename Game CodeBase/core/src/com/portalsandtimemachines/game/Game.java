@@ -223,10 +223,10 @@ public class Game extends ApplicationAdapter{
 		gameskinp = new Skin();
 		// Checkered background texture
 		boardBackground = new Texture("10x10_checkered_board.png");
-		gamePieceTexture = new Texture("Chess-Game.png");
-		gamePieceTexture1 = new Texture("Green_piece.png");
-		gamePieceTexture21 = new Texture("Orange_piece.png");
-		gamePieceTexture22 = new Texture("Red_piece.png");
+		gamePieceTexture = new Texture("Chess-Game1.png");
+		gamePieceTexture1 = new Texture("Chess-Game2.png");
+		gamePieceTexture21 = new Texture("Chess-Game1.png");
+		gamePieceTexture22 = new Texture("Chess-Game2.png");
 		portalTexture = new Texture("brunswick-spiral-black-white.png");
 		timemachineTexture = new Texture("Time-Machine.png");
 		bountyTexture = new Texture("bounty.png");
@@ -630,9 +630,9 @@ public class Game extends ApplicationAdapter{
 		
 		
 		gamePiece = new GamePiece(0, gamePieceTexture, boardTransforms.get(0), 0);
-		gamePiece2 = new GamePiece(0, gamePieceTexture, boardTransforms.get(0), 0);
-		gamePiece1 = new GamePiece(1, gamePieceTexture1, boardTransforms.get(0), -15f);
-		gamePiece12 = new GamePiece(1, gamePieceTexture1, boardTransforms.get(0), -15f);
+		gamePiece2 = new GamePiece(0, gamePieceTexture1, boardTransforms.get(0), 0);
+		gamePiece1 = new GamePiece(1, gamePieceTexture21, boardTransforms.get(0), -15f);
+		gamePiece12 = new GamePiece(1, gamePieceTexture22, boardTransforms.get(0), -15f);
 		
 		rollDice.addListener(new ChangeListener() 
 		{	
