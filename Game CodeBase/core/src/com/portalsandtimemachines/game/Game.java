@@ -909,6 +909,7 @@ public class Game extends ApplicationAdapter{
 					}
 					else
 					{
+						System.out.println("We have a problem");
 						gamePiece.secondaryMove(boardTransforms.get(index));
 						if(obj.check_portal(index) != 0)
 						{
@@ -1047,6 +1048,7 @@ public class Game extends ApplicationAdapter{
 					}
 					else
 					{
+						System.out.println("We have a problem");
 						gamePiece2.secondaryMove(boardTransforms.get(index2));
 						if(obj.check_portal(index2) != 0)
 						{
@@ -1219,6 +1221,7 @@ public class Game extends ApplicationAdapter{
 					}
 					else
 					{
+						System.out.println("We have a problem");
 						gamePiece1.secondaryMove(boardTransforms.get(index1));
 						if(obj.check_portal(index1) != 0)
 						{
@@ -1357,6 +1360,7 @@ public class Game extends ApplicationAdapter{
 					}
 					else
 					{
+						System.out.println("We have a problem");
 						gamePiece12.secondaryMove(boardTransforms.get(index12));
 						if(obj.check_portal(index12) != 0)
 						{
